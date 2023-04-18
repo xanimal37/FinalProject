@@ -25,10 +25,10 @@ public class AuthServiceImpl implements AuthService{
 	@Override
 	public User register(User user) {
 		// FIX ME!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//		String encrypted = encoder.encode(user.getPassword());
-//		user.setPassword(encrypted);
-//		user.setEnabled(true);
-//		user.setRole("standard");
+		String encrypted = encoder.encode(user.getPassword());
+		user.setPassword(encrypted);
+		user.setEnabled(true);
+		user.setRole("user");
 		return userRepo.saveAndFlush(user);
 	}
 
