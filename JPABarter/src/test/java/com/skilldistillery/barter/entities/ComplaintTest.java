@@ -35,7 +35,7 @@ class ComplaintTest {
 		complaint = em.find(Complaint.class, 1);
 	}
 	
-
+ 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
@@ -48,10 +48,9 @@ class ComplaintTest {
 		assertEquals("Foul Behavior ", complaint.getName());
 	}
 	
-	//waiting for branch merge
-//	@Test
-//	void test_Complaint_User_Entity_Mapping() {
-//		assertNotNull(complaint.getUser());
-//		assertEquals(2, complaint.getUser().getId());
-//	}
+	@Test
+	void test_Complaint_User_Entity_Mapping() {
+		assertNotNull(complaint.getUser());
+		assertEquals(2, complaint.getUser().getId());
+	}
 }

@@ -1,8 +1,8 @@
 package com.skilldistillery.barter.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,9 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -40,11 +39,12 @@ public class Comment {
 	@JoinColumn(name="post_id")
 	private Post post;
 	
-	@ManyToMany
-	@JoinTable(name="in_reply_to_id", 
-	joinColumns=@JoinColumn(name="post_id"),
-	inverseJoinColumns=@JoinColumn(name="user_id"))
-	private Set<Comment> comments;
+	@OneToMany(mappedBy="inReplyTo")
+	private List<Comment> comments;
+	
+	@ManyToOne
+	@JoinColumn(name="in_reply_to_id")
+	private Comment inReplyTo;
 	
 	@ManyToOne
 	@JoinColumn(name="user_id")
@@ -52,6 +52,14 @@ public class Comment {
 	
 	
 	
+
+	public Comment getInReplyTo() {
+		return inReplyTo;
+	}
+
+	public void setInReplyTo(Comment inReplyTo) {
+		this.inReplyTo = inReplyTo;
+	}
 
 	public User getUser() {
 		return user;
@@ -69,11 +77,11 @@ public class Comment {
 		this.post = post;
 	}
 
-	public Set<Comment> getComments() {
+	public List<Comment> getComments() {
 		return comments;
 	}
 
-	public void setComments(Set<Comment> comments) {
+	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
 
@@ -129,7 +137,8 @@ public class Comment {
 	@Override
 	public String toString() {
 		return "Comment [id=" + id + ", content=" + content + ", createDate=" + createDate + ", updateDate="
-				+ updateDate + ", post=" + post + ", comments=" + comments + ", user=" + user + "]";
+				+ updateDate + ", post=" + post + ", comments=" + comments + ", inReplyTo=" + inReplyTo + ", user="
+				+ user + "]";
 	}
 	
 	

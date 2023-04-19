@@ -551,6 +551,7 @@ COMMIT;
 START TRANSACTION;
 USE `barterdb`;
 INSERT INTO `comment` (`id`, `content`, `post_id`, `user_id`, `in_reply_to_id`, `create_date`, `update_date`) VALUES (1, 'Make sure your pipe fitting matched and you used threading tape', 1, 3, NULL, '2020-01-01 01:00:00', NULL);
+INSERT INTO `comment` (`id`, `content`, `post_id`, `user_id`, `in_reply_to_id`, `create_date`, `update_date`) VALUES (2, 'Correct, this will ensure the fitting is secure', 1, 2, 1, '2020-01-02 01:00:00', NULL);
 
 COMMIT;
 
