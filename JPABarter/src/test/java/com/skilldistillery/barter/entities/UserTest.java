@@ -18,6 +18,7 @@ class UserTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 	private User user;
+	private User userTwo;
 	
 
 	@BeforeAll
@@ -34,6 +35,7 @@ class UserTest {
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
 		user = em.find(User.class, 1);
+		userTwo = em.find(User.class, 2);
 	}
 	
 
@@ -47,6 +49,41 @@ class UserTest {
 	void test_User_Entity_Mapping() {
 		assertNotNull(user);
 		assertEquals("admin", user.getUsername());
+		assertEquals("$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS", user.getPassword());
+		assertEquals(null, user.getAvailability());
+		assertEquals(null, user.getBiography());
+		assertEquals(2013, user.getCreatedDate().getYear());
+		assertEquals(null, user.getUpdatedDate());
+		assertEquals(null, user.getEmail());
+		assertEquals("George", user.getFirstName());
+		assertEquals("Washington", user.getLastName());
+		assertEquals(null, user.getPhone());
+		assertEquals("admin", user.getRole());
+		assertEquals(true, user.isEnabled());
+		
 	}
+	
+	@Test
+	void test_User_Ranking_Mapping() {
+		assertNotNull(user);
+		assertEquals("Poor", user.getRanking().getName());
+		
+	}
+	
+	@Test
+	void test_User_has_friends() {
+		assertNotNull(user);
+		assertEquals(true, userTwo.getFriends().size()>0);
+		assertEquals(false, user.getFriends().size()>0);
+		
+	}
+	@Test
+	void test_User_Address_Mapping() {
+		assertNotNull(user);
+		assertEquals("Denver", user.getAddress().getCity());
+		
+	}
+	
+	
 
 }
