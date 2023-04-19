@@ -19,6 +19,7 @@ class UserTest {
 	private EntityManager em;
 	private User user;
 	private User userTwo;
+	private User userThree;
 	
 
 	@BeforeAll
@@ -36,6 +37,7 @@ class UserTest {
 		em = emf.createEntityManager();
 		user = em.find(User.class, 1);
 		userTwo = em.find(User.class, 2);
+		userThree = em.find(User.class, 3);
 	}
 	
 
@@ -83,19 +85,18 @@ class UserTest {
 		assertEquals("Denver", user.getAddress().getCity());
 		
 	}
-//	@Test
-//	void test_User_Task_Mapping() {
-//		assertNotNull(user);
-//		assertEquals("", user.getTask().get(0));
-//		
-//	}
-//	
-//	@Test
-//	void test_User_Comment_Mapping() {
-//		assertNotNull(user);
-//		assertEquals("", user.getComment());
-//		
-//	}
+	@Test
+	void test_User_Task_Mapping() {
+		assertEquals("Bathroom Sink", userTwo.getTasks().get(0).getName());
+		
+	}
+	
+	@Test
+	void test_User_Comment_Mapping() {
+		assertNotNull(user);
+		assertEquals("Make sure your pipe fitting matched and you used threading tape", userThree.getComments().get(0).getContent());
+		
+	}
 	
 	
 

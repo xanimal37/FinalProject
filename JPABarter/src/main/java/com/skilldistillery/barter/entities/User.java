@@ -56,13 +56,13 @@ public class User {
 	private Address address;
 	
 	@OneToMany
-	@JoinColumn(name="user")
-	private List <Comment> comment;
+	@JoinColumn(name="user_id")
+	private List <Comment> comments;
 	
 	
 	@OneToMany
-	@JoinColumn(name="user")
-	private List <Task> task;
+	@JoinColumn(name="user_id")
+	private List <Task> tasks;
 	
 	private String firstName;
 
@@ -133,12 +133,12 @@ public class User {
 	}
 
 
-	public List<Task> getTask() {
-		return task;
+	public List<Task> getTasks() {
+		return tasks;
 	}
 
-	public void setTask(List<Task> task) {
-		this.task = task;
+	public void setTasks(List<Task> task) {
+		this.tasks = task;
 	}
 
 	public String getRole() {
@@ -247,12 +247,14 @@ public class User {
 		this.friends = friends;
 	}
 
-	public List<Comment> getComment() {
-		return comment;
+
+
+	public List<Comment> getComments() {
+		return comments;
 	}
 
-	public void setComment(List<Comment> comment) {
-		this.comment = comment;
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
 	@Override
