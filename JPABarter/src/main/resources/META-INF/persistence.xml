@@ -15,6 +15,7 @@
     <class>com.skilldistillery.barter.entities.Skill</class>
     <class>com.skilldistillery.barter.entities.SkillLevel</class>
     <class>com.skilldistillery.barter.entities.UserSkill</class>
+    <class>com.skilldistillery.barter.entities.UserSkillID</class>
     <class>com.skilldistillery.barter.entities.Task</class>
     <class>com.skilldistillery.barter.entities.Address</class>
     <class>com.skilldistillery.barter.entities.AcceptedTaskId</class>
