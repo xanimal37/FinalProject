@@ -13,11 +13,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class TaskTest {
+class AcceptedTaskTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Task task;
+	private AcceptedTask acceptedTask;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -32,43 +32,24 @@ class TaskTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		task = em.find(Task.class, 1);
+		AcceptedTaskId atId = new AcceptedTaskId();
+		atId.setAcceptorId(2);
+		atId.setTaskId(2);
+		acceptedTask = em.find(AcceptedTask.class, atId);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		task=null;
+		acceptedTask=null;
 		em.close();
 	}
 
 	@Test
-	void test_Task_mapping() {
-		assertNotNull(task);
-		assertEquals("Bathroom Sink",task.getName());
-	}
+	void test_AcceptedTask_mapping() {
+		assertNotNull(acceptedTask);
+		assertEquals(5,acceptedTask.getRatingByRequestor());
+		
 	
-	@Test
-	void test_Task_TaskStatus_mapping() {
-		assertNotNull(task);
-		assertEquals("Pending",task.getTaskStatus().getName());
-	}
-	
-	@Test 
-	void test_Task_TaskMessage_mapping() {
-		assertNotNull(task);
-		assertEquals(1,task.getTaskMessages().size());
-	}
-	
-	@Test
-	void test_Task_User_mapping() {
-		assertNotNull(task);
-		assertEquals("eflatto",task.getUser().getUsername());
-	}
-	
-	@Test
-	void test_Task_Address_mapping() {
-		assertNotNull(task);
-		assertEquals(1,task.getAddress().getId());
 	}
 
 }

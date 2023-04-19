@@ -1,7 +1,6 @@
 package com.skilldistillery.barter.entities;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,11 +12,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class TaskTest {
+class TaskStatusTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Task task;
+	private TaskStatus taskStatus;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -32,43 +31,19 @@ class TaskTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		task = em.find(Task.class, 1);
+		taskStatus = em.find(TaskStatus.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		task=null;
+		taskStatus=null;
 		em.close();
 	}
 
 	@Test
-	void test_Task_mapping() {
-		assertNotNull(task);
-		assertEquals("Bathroom Sink",task.getName());
-	}
-	
-	@Test
-	void test_Task_TaskStatus_mapping() {
-		assertNotNull(task);
-		assertEquals("Pending",task.getTaskStatus().getName());
-	}
-	
-	@Test 
-	void test_Task_TaskMessage_mapping() {
-		assertNotNull(task);
-		assertEquals(1,task.getTaskMessages().size());
-	}
-	
-	@Test
-	void test_Task_User_mapping() {
-		assertNotNull(task);
-		assertEquals("eflatto",task.getUser().getUsername());
-	}
-	
-	@Test
-	void test_Task_Address_mapping() {
-		assertNotNull(task);
-		assertEquals(1,task.getAddress().getId());
+	void test_TaskStatus_mapping() {
+		assertNotNull(taskStatus);
+		assertEquals("Pending",taskStatus.getName());
 	}
 
 }

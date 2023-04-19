@@ -1,6 +1,8 @@
 package com.skilldistillery.barter.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -8,6 +10,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Task {
@@ -33,7 +41,82 @@ public class Task {
 	private LocalDateTime createDate;
 	@Column(name="update_date")
 	private LocalDateTime updateDate;
+	
 	//relationships
+	@OneToOne
+	@JoinColumn(name="address_id")
+	private Address address;
+	
+	@ManyToOne
+	@JoinColumn(name="task_status_id")
+	private TaskStatus taskStatus;
+	
+	@OneToMany(mappedBy="task")
+	private List<TaskMessage> taskMessages;
+	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
+	
+	@ManyToMany
+	@JoinTable(name="task_has_skill",
+			joinColumns=@JoinColumn(name="task_id"),
+			inverseJoinColumns=@JoinColumn(name="skill_id")
+			)
+	//private List<Skill> skills;
+	
+	
+	//methods
+	
+	public User getUser() {
+		return user;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public List<TaskMessage> getTaskMessages() {
+		return taskMessages;
+	}
+	
+	public void setTaskMessages(List<TaskMessage> taskMessages) {
+		this.taskMessages = taskMessages;
+	}
+	
+	//add and remove messges
+	public void addTaskMessage(TaskMessage taskMessage) {
+		if(taskMessages==null) {
+			taskMessages=new ArrayList<>();
+			taskMessages.add(taskMessage);
+		}
+		if(taskMessage.getTask()!=null) {
+			taskMessage.getTask().removeTaskMessage(taskMessage);
+		}
+		taskMessage.setTask(this);
+	}
+	
+	public void removeTaskMessage(TaskMessage taskMessage) {
+		if(taskMessage!=null && taskMessages.contains(taskMessage)) {
+			taskMessages.remove(taskMessage);
+			taskMessage.setTask(null);
+		}
+	}
+	
+	public TaskStatus getTaskStatus() {
+		return taskStatus;
+	}
+	public void setTaskStatus(TaskStatus taskStatus) {
+		this.taskStatus = taskStatus;
+	}
 	public int getId() {
 		return id;
 	}

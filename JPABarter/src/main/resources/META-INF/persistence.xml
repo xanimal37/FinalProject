@@ -8,6 +8,10 @@
     <class>com.skilldistillery.barter.entities.User</class>
     <class>com.skilldistillery.barter.entities.Task</class>
     <class>com.skilldistillery.barter.entities.Address</class>
+    <class>com.skilldistillery.barter.entities.AcceptedTaskId</class>
+    <class>com.skilldistillery.barter.entities.AcceptedTask</class>
+    <class>com.skilldistillery.barter.entities.TaskStatus</class>
+    <class>com.skilldistillery.barter.entities.TaskMessage</class>
     <!-- end entities -->
     
     <properties>
