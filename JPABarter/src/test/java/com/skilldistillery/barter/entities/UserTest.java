@@ -77,6 +77,12 @@ class UserTest {
 		assertEquals(false, user.getFriends().size()>0);
 		
 	}
+	@Test
+	void test_User_Address_Mapping() {
+		assertNotNull(user);
+		assertEquals("Denver", user.getAddress().getCity());
+		
+	}
 	
 	
 
