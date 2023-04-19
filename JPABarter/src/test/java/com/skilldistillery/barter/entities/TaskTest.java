@@ -70,5 +70,11 @@ class TaskTest {
 		assertNotNull(task);
 		assertEquals(1,task.getAddress().getId());
 	}
+	
+	@Test
+	void test_Task_Skill_mapping() {
+		assertNotNull(task);
+		assertEquals(3,task.getSkills().size());
+	}
 
 }

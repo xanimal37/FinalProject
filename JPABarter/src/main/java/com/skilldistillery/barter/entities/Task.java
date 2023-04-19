@@ -63,11 +63,17 @@ public class Task {
 			joinColumns=@JoinColumn(name="task_id"),
 			inverseJoinColumns=@JoinColumn(name="skill_id")
 			)
-	//private List<Skill> skills;
-	
+	private List<Skill> skills;
 	
 	//methods
-	
+	public List<Skill> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(List<Skill> skills) {
+		this.skills = skills;
+	}
+
 	public User getUser() {
 		return user;
 	}
