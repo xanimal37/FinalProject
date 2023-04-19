@@ -6,6 +6,11 @@
 	
 	<!-- begin entities -->
     <class>com.skilldistillery.barter.entities.User</class>
+    <class>com.skilldistillery.barter.entities.Comment</class>
+    <class>com.skilldistillery.barter.entities.Post</class>
+    <class>com.skilldistillery.barter.entities.Complaint</class>
+    <class>com.skilldistillery.barter.entities.Notification</class>
+    <class>com.skilldistillery.barter.entities.NotificationType</class>
     <!-- end entities -->
     
     <properties>
