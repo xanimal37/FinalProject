@@ -1,6 +1,7 @@
 package com.skilldistillery.barter.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -39,6 +41,29 @@ public class User {
 	
 	private String email;
 
+	@OneToOne
+	@JoinColumn(name="ranking_id")
+	private Ranking ranking;
+	
+	@ManyToMany
+	@JoinTable(name = "user_has_friends", 
+	joinColumns = @JoinColumn(name = "user_id"),
+	inverseJoinColumns = @JoinColumn(name = "friend_id"))
+	private Set<User> friends; 
+	
+	@OneToOne
+	@JoinColumn(name="address_id")
+	private Address address;
+	
+	@OneToMany
+	@JoinColumn(name="user")
+	private List <Comment> comment;
+	
+	
+	@OneToMany
+	@JoinColumn(name="user")
+	private List <Task> task;
+	
 	private String firstName;
 
 	private String lastName;
@@ -57,23 +82,11 @@ public class User {
 	@Column(name="update_date")
 	private LocalDateTime updatedDate;
 	
-	@OneToOne
-	@JoinColumn(name="ranking_id")
-	private Ranking ranking;
-	
-	@ManyToMany
-	@JoinTable(name = "user_has_friends", 
-	joinColumns = @JoinColumn(name = "user_id"),
-	inverseJoinColumns = @JoinColumn(name = "friend_id"))
-	private Set<User> friends; 
-	
-	
 	
 	
 	
 	
 
-	
 	//CTOR
 	public User () {}
 	
@@ -120,6 +133,14 @@ public class User {
 	}
 
 
+	public List<Task> getTask() {
+		return task;
+	}
+
+	public void setTask(List<Task> task) {
+		this.task = task;
+	}
+
 	public String getRole() {
 		return role;
 	}
@@ -156,6 +177,14 @@ public class User {
 
 	public String getLastName() {
 		return lastName;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	public void setLastName(String lastName) {
@@ -216,6 +245,14 @@ public class User {
 
 	public void setFriends(Set<User> friends) {
 		this.friends = friends;
+	}
+
+	public List<Comment> getComment() {
+		return comment;
+	}
+
+	public void setComment(List<Comment> comment) {
+		this.comment = comment;
 	}
 
 	@Override
