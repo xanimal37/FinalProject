@@ -53,5 +53,11 @@ class NotificationTest {
 		assertNotNull(notification.getnType());
 		assertEquals(4, notification.getnType().getId());
 	}
+	
+	@Test
+	void test_Notification_User_Entity_Mapping() {
+		assertNotNull(notification.getUser());
+		assertEquals("Zeeb",notification.getUser().getLastName());
+	}
 
 }

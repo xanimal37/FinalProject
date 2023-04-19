@@ -1,8 +1,8 @@
 package com.skilldistillery.barter.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -19,6 +19,7 @@ class CommentTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 	private Comment comm;
+	private Comment comm2;
 	
 
 	@BeforeAll
@@ -35,6 +36,7 @@ class CommentTest {
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
 		comm = em.find(Comment.class, 1);
+		comm2 = em.find(Comment.class, 2);
 	}
 	
 
@@ -42,6 +44,7 @@ class CommentTest {
 	void tearDown() throws Exception {
 		em.close();
 		comm = null;
+		comm2 = null;
 	}
 
 	@Test
@@ -54,18 +57,23 @@ class CommentTest {
 	void test_Comm_Post() {
 		assertNotNull(comm.getPost());
 		assertEquals(1, comm.getPost().getId());
+
 	}
 	
 	@Test
 	void test_Comm_Comm_mapping() {
 		assertNotNull(comm.getComments());
-		assertFalse(comm.getComments() == null);
+		assertTrue(comm.getComments().size() > 0);
+	}
+	
+	@Test
+	void test_Comm_Comm_Reply_mapping() {
+		assertEquals("Make sure your pipe fitting matched and you used threading tape",comm2.getInReplyTo().getContent());
 	}
 
-	//test once updated user complete
-//	@Test
-//	void test_Comm_User_mapping() {
-//		assertNotNull(comm.getUser());
-//		assertEquals(3, comm.getUser().getId());
-//	}
+	@Test
+	void test_Comm_User_mapping() {
+		assertNotNull(comm.getUser());
+		assertEquals("Lisa", comm.getUser().getFirstName());
+	}
 }

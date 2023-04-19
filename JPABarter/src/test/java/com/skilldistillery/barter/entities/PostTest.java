@@ -54,8 +54,6 @@ class PostTest {
 		assertEquals(2, post.getUser().getId());
 	}
 	
-
-	
 	@Test
 	void test_Post_Coment() {
 		assertNotNull(post.getComments());
