@@ -64,6 +64,22 @@ public class User {
 	@JoinColumn(name="user_id")
 	private List <Task> tasks;
 	
+	@OneToMany
+	@JoinColumn(name="user_id")
+	private List <TaskMessage> taskMessages;
+	
+	@OneToMany
+	@JoinColumn(name="user_id")
+	private List <Notification> notifications;
+	
+	@OneToMany
+	@JoinColumn(name="user_id")
+	private List <Complaint> complaints;
+	
+	@OneToMany
+	@JoinColumn(name="user_id")
+	private List <Post> posts;
+	
 	private String firstName;
 
 	private String lastName;
@@ -102,6 +118,14 @@ public class User {
 		this.id = id;
 	}
 
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
 
 	public String getUsername() {
 		return username;
@@ -150,6 +174,30 @@ public class User {
 		this.role = role;
 	}
 
+
+	public List<TaskMessage> getTaskMessages() {
+		return taskMessages;
+	}
+
+	public void setTaskMessages(List<TaskMessage> taskMessages) {
+		this.taskMessages = taskMessages;
+	}
+
+	public List<Notification> getNotifications() {
+		return notifications;
+	}
+
+	public void setNotifications(List<Notification> notifications) {
+		this.notifications = notifications;
+	}
+
+	public List<Complaint> getComplaints() {
+		return complaints;
+	}
+
+	public void setComplaints(List<Complaint> complaints) {
+		this.complaints = complaints;
+	}
 
 	public String getImageURL() {
 		return imageURL;
