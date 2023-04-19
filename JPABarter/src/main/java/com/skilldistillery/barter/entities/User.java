@@ -67,13 +67,14 @@ public class User {
 	inverseJoinColumns = @JoinColumn(name = "friend_id"))
 	private Set<User> friends; 
 	
-	
+	@OneToOne
+	@JoinColumn(name="address_id")
+	private Address address;
 	
 	
 	
 	
 
-	
 	//CTOR
 	public User () {}
 	
@@ -156,6 +157,14 @@ public class User {
 
 	public String getLastName() {
 		return lastName;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	public void setLastName(String lastName) {
