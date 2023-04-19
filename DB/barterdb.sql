@@ -39,7 +39,7 @@ DROP TABLE IF EXISTS `ranking` ;
 CREATE TABLE IF NOT EXISTS `ranking` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
-  `description` VARCHAR(45) NULL,
+  `description` TEXT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -158,7 +158,7 @@ DROP TABLE IF EXISTS `skill_level` ;
 CREATE TABLE IF NOT EXISTS `skill_level` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
-  `description` VARCHAR(45) NULL,
+  `description` TEXT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -171,7 +171,7 @@ DROP TABLE IF EXISTS `complaint` ;
 CREATE TABLE IF NOT EXISTS `complaint` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
-  `description` VARCHAR(45) NULL,
+  `description` TEXT NULL,
   `create_date` DATETIME NULL,
   `update_date` DATETIME NULL,
   `closed_date` DATETIME NULL,
@@ -431,11 +431,195 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
+-- Data for table `address`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `barterdb`;
+INSERT INTO `address` (`id`, `street1`, `street2`, `city`, `state`, `zipcode`) VALUES (1, '123 Main St', NULL, 'Richmond', 'VA', 54321);
+INSERT INTO `address` (`id`, `street1`, `street2`, `city`, `state`, `zipcode`) VALUES (2, '37 SD St', NULL, 'Denver', 'CO', 12345);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `ranking`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `barterdb`;
+INSERT INTO `ranking` (`id`, `name`, `description`) VALUES (1, 'Super Star', NULL);
+INSERT INTO `ranking` (`id`, `name`, `description`) VALUES (2, 'Amazing', NULL);
+INSERT INTO `ranking` (`id`, `name`, `description`) VALUES (3, 'Sufficient', NULL);
+INSERT INTO `ranking` (`id`, `name`, `description`) VALUES (4, 'Sub-Par', NULL);
+INSERT INTO `ranking` (`id`, `name`, `description`) VALUES (5, 'Poor', NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
 -- Data for table `user`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `barterdb`;
-INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `image_url`, `email`, `phone`, `create_date`, `update_date`, `firstname`, `lastname`, `address_id`, `ranking_id`, `biography`, `availability`) VALUES (1, 'admin', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, 'admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `image_url`, `email`, `phone`, `create_date`, `update_date`, `firstname`, `lastname`, `address_id`, `ranking_id`, `biography`, `availability`) VALUES (1, 'admin', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, 'admin', NULL, NULL, NULL, '2013-07-03', NULL, 'George', 'Washington', 2, 5, NULL, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `image_url`, `email`, `phone`, `create_date`, `update_date`, `firstname`, `lastname`, `address_id`, `ranking_id`, `biography`, `availability`) VALUES (2, 'eflatto', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, 'user', NULL, NULL, NULL, '2015-07-04', NULL, 'Edwin', 'Flatto', 1, 3, NULL, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `image_url`, `email`, `phone`, `create_date`, `update_date`, `firstname`, `lastname`, `address_id`, `ranking_id`, `biography`, `availability`) VALUES (3, 'lzeeb', 'password', 1, 'user', NULL, NULL, NULL, '2020-01-23', NULL, 'Lisa', 'Zeeb', 2, 2, NULL, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `task_status`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `barterdb`;
+INSERT INTO `task_status` (`id`, `name`, `description`) VALUES (1, 'Pending', 'Task not yet accepted');
+INSERT INTO `task_status` (`id`, `name`, `description`) VALUES (2, 'Accepted', 'User has volunteered for task');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `task`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `barterdb`;
+INSERT INTO `task` (`id`, `name`, `description`, `estimated_hours`, `materials_provided`, `schedule_date`, `start_date`, `complete_date`, `create_date`, `update_date`, `task_status_id`, `address_id`, `user_id`) VALUES (1, 'Bathroom Sink', NULL, 4, 0, '2023-03-25', '2023-03-27', '2023-04-04', '2023-03-23', '2023-04-04', 1, 1, 2);
+INSERT INTO `task` (`id`, `name`, `description`, `estimated_hours`, `materials_provided`, `schedule_date`, `start_date`, `complete_date`, `create_date`, `update_date`, `task_status_id`, `address_id`, `user_id`) VALUES (2, 'Trim Trees', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, 3);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `skill`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `barterdb`;
+INSERT INTO `skill` (`id`, `name`, `description`) VALUES (1, 'Carpentry', NULL);
+INSERT INTO `skill` (`id`, `name`, `description`) VALUES (2, 'Plumbing', NULL);
+INSERT INTO `skill` (`id`, `name`, `description`) VALUES (3, 'Painting', NULL);
+INSERT INTO `skill` (`id`, `name`, `description`) VALUES (4, 'IT/Networking', NULL);
+INSERT INTO `skill` (`id`, `name`, `description`) VALUES (5, 'Electrical', NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `skill_level`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `barterdb`;
+INSERT INTO `skill_level` (`id`, `name`, `description`) VALUES (1, 'Expert', NULL);
+INSERT INTO `skill_level` (`id`, `name`, `description`) VALUES (2, 'Proficient', NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `complaint`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `barterdb`;
+INSERT INTO `complaint` (`id`, `name`, `description`, `create_date`, `update_date`, `closed_date`, `user_id`) VALUES (1, 'Foul Behavior ', 'Zeeb was supposed to trim my tree but instead stole my miniature Donald Trump commemorative dinner plates', '2022-12-29', '2023-01-14', '2023-04-01', 2);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `accepted_task`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `barterdb`;
+INSERT INTO `accepted_task` (`acceptor_id`, `task_id`, `rating_by_requester`, `rating_by_acceptor`, `remarks_by_requester`, `remarks_by_acceptor`, `accept_date`) VALUES (3, 1, 4.1, 3.5, NULL, NULL, '2023-02-11');
+INSERT INTO `accepted_task` (`acceptor_id`, `task_id`, `rating_by_requester`, `rating_by_acceptor`, `remarks_by_requester`, `remarks_by_acceptor`, `accept_date`) VALUES (2, 2, 5.0, 4.4, NULL, NULL, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `post`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `barterdb`;
+INSERT INTO `post` (`id`, `title`, `content`, `user_id`, `create_date`, `update_date`) VALUES (1, 'Plumbing Question', 'Whats the best way to install an L joint with a flex host on an existing sprinkler system', 2, '2023-02-23', '2023-02-24');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `comment`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `barterdb`;
+INSERT INTO `comment` (`id`, `content`, `post_id`, `user_id`, `in_reply_to_id`, `create_date`, `update_date`) VALUES (1, 'Make sure your pipe fitting matched and you used threading tape', 1, 3, NULL, '2020-01-01 01:00:00', NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `user_has_friends`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `barterdb`;
+INSERT INTO `user_has_friends` (`user_id`, `friend_id`) VALUES (2, 3);
+INSERT INTO `user_has_friends` (`user_id`, `friend_id`) VALUES (2, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `notification_type`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `barterdb`;
+INSERT INTO `notification_type` (`id`, `name`) VALUES (1, 'Informative');
+INSERT INTO `notification_type` (`id`, `name`) VALUES (2, 'Post');
+INSERT INTO `notification_type` (`id`, `name`) VALUES (3, 'Comment');
+INSERT INTO `notification_type` (`id`, `name`) VALUES (4, 'Account');
+INSERT INTO `notification_type` (`id`, `name`) VALUES (5, 'Administrative');
+INSERT INTO `notification_type` (`id`, `name`) VALUES (6, 'Message');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `notification`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `barterdb`;
+INSERT INTO `notification` (`id`, `message`, `user_id`, `create_date`, `notification_type_id`) VALUES (1, 'You have a new update to your account', 3, '2023-03-23', 4);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `user_skill`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `barterdb`;
+INSERT INTO `user_skill` (`user_id`, `skill_id`, `skill_level_id`, `certification`, `description`) VALUES (2, 2, 2, NULL, 'Apprentice Plumber with union');
+INSERT INTO `user_skill` (`user_id`, `skill_id`, `skill_level_id`, `certification`, `description`) VALUES (3, 3, 2, NULL, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `task_has_skill`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `barterdb`;
+INSERT INTO `task_has_skill` (`task_id`, `skill_id`) VALUES (1, 1);
+INSERT INTO `task_has_skill` (`task_id`, `skill_id`) VALUES (1, 2);
+INSERT INTO `task_has_skill` (`task_id`, `skill_id`) VALUES (1, 3);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `task_message`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `barterdb`;
+INSERT INTO `task_message` (`id`, `title`, `content`, `create_date`, `task_id`, `user_id`) VALUES (1, 'Meetup', 'Lets sync at xyz', '2023-04-12', 1, 2);
 
 COMMIT;
 
