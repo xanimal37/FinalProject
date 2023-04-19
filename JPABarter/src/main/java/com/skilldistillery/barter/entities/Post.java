@@ -38,11 +38,11 @@ public class Post {
 	private LocalDateTime updateDate;
 	
 	@OneToMany
-	public Set<Comment> comments;
+	private Set<Comment> comments;
 	
 	@ManyToOne
 	@JoinColumn(name="user_id")
-	public User user;
+	private User user;
 	
 
 	public Set<Comment> getComments() {
