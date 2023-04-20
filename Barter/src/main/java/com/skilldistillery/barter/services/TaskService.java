@@ -8,18 +8,16 @@ import com.skilldistillery.barter.entities.Task;
 public interface TaskService {
 	
 	//basic CRUD
-	Task createTask(Task task, String username);
-	
-	Task updateTask(Task task, int id);
-	
-	void deleteTask(int id);
+	Task getTaskById(int id);
 	
 	List<Task> getAllTasks();
 	
-	Task getTaskById(int id);
-
+	//authenticated
+	Task createTask(Task task, String username);
 	
-	//handling user owned tasks
+	Task updateTask(Task task, int id, String username);
+	
+	boolean deleteTask(int id);
 	
 	List<Task> getTasksOwnedByUser(String username);
 	

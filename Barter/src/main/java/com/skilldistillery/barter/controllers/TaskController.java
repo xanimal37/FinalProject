@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,7 +34,8 @@ public class TaskController {
 	}
 	
 	//add task
-	@PostMapping(path="users/tasks")
+	//only for logged in user
+	@PostMapping(path="tasks")
 	Task createTask(@RequestBody Task task,Principal principal ,HttpServletRequest req,HttpServletResponse res) {
 		try {
 			task = taskService.createTask(task, principal.getName());
@@ -50,7 +52,25 @@ public class TaskController {
 		return task;
 	}
 	
+	//update task
+	//only for logged in users task
+		@PutMapping(path = "tasks/{id}")
+		public Task updateTask(@PathVariable int id, Principal principal, @RequestBody Task task, HttpServletResponse res) {
+			try {
+				task = taskService.updateTask(task, id,principal.getName());
+				if (task == null) {
+					res.setStatus(404);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				res.setStatus(400);
+				task = null;
+			}
+			return task;
+		}
+	
 	//get all tasks owned by user
+	//only for logged in user
 	@GetMapping(path="users/tasks")
 	List<Task> getAllTasksOwnedByUser(Principal principal){
 		return taskService.getTasksOwnedByUser(principal.getName());
