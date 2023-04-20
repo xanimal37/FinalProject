@@ -122,6 +122,19 @@ class UserTest {
 		
 	}
 	
+	@Test
+	void test_User_User_Skill_Mapping() {
+		assertNotNull(user);
+		assertEquals("Apprentice Plumber with union", userTwo.getUserSkill().get(0).getDescription());
+		
+	}
+	@Test
+	void test_User_Skill_Mapping() {
+		assertNotNull(user);
+		assertEquals("Plumbing", userTwo.getSkills().get(0).getName());
+		
+	}
+	
 	
 
 }

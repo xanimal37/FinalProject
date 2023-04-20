@@ -25,6 +25,7 @@ import com.skilldistillery.barter.services.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
+	
 
 //  GET users
 	@GetMapping("users")
@@ -99,6 +100,10 @@ public class UserController {
 	    String message = userService.addFriend(user, friend);
 	    return message;
 	}
+	 @GetMapping("/skills/{skillName}")
+	    public List<User> getUsersBySkill(@PathVariable String skillName) {
+	        return userService.getUsersBySkill(skillName);
+	    }
 
 
 

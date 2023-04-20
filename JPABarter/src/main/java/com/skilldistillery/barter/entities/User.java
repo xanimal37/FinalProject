@@ -54,6 +54,15 @@ public class User {
 	inverseJoinColumns = @JoinColumn(name = "friend_id"))
 	private Set<User> friends; 
 	
+	@JsonIgnore
+	@ManyToMany
+	@JoinTable(name = "user_skill", 
+	joinColumns = @JoinColumn(name = "user_id"),
+	inverseJoinColumns = @JoinColumn(name = "skill_id"))
+	private List<Skill> skills; 
+	
+
+
 	@OneToOne
 	@JoinColumn(name="address_id")
 	private Address address;
@@ -62,6 +71,11 @@ public class User {
 	@OneToMany
 	@JoinColumn(name="user_id")
 	private List <Comment> comments;
+	
+	@JsonIgnore
+	@OneToMany
+	@JoinColumn(name="user_id")
+	private List <UserSkill> userSkill;
 	
 	@JsonIgnore
 	@OneToMany
@@ -135,6 +149,13 @@ public class User {
 		this.posts = posts;
 	}
 
+	public List<Skill> getSkills() {
+		return skills;
+	}
+	
+	public void setSkills(List<Skill> skills) {
+		this.skills = skills;
+	}
 	public String getUsername() {
 		return username;
 	}
@@ -144,6 +165,14 @@ public class User {
 		this.username = username;
 	}
 
+
+	public List<UserSkill> getUserSkill() {
+		return userSkill;
+	}
+
+	public void setUserSkill(List<UserSkill> userSkill) {
+		this.userSkill = userSkill;
+	}
 
 	public String getPassword() {
 		return password;
