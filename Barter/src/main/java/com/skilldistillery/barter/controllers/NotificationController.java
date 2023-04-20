@@ -27,43 +27,31 @@ public class NotificationController {
 	private NotificationService nService;
 	
 	@GetMapping("notifications")
-	public List<Notification> index(Principal principal, HttpServletRequest req, HttpServletResponse res) {
-		List<Notification> notes = null;
-		try {
-			nService.indexAll(principal.getName());
-			if (notes != null) {
-			res.setStatus(200);
-			return notes; 
-			}
-		} catch (Exception e) {
-
-			e.printStackTrace();
-			res.setStatus(400);
-		}
-		return nService.indexAll(principal.getName());
+	public List<Notification> index(HttpServletRequest req, HttpServletResponse res) {
+		return nService.indexAll();
 		
 	} 
 	
 	@GetMapping("notifications/user/{uId}")
-	public List<Notification> indexByUser(Principal principal,HttpServletRequest req, HttpServletResponse res, @PathVariable int uId) {
-		return nService.indexAllByUser(principal.getName(), uId);
+	public List<Notification> indexByUser(HttpServletRequest req, HttpServletResponse res, @PathVariable int uId) {
+		return nService.indexAllByUser( uId);
 	} 
 	
 	@GetMapping("notifications/type/{tId}")
-	public List<Notification> indexByType(Principal principal,HttpServletRequest req, HttpServletResponse res, @PathVariable int tId) {
-		return nService.findAllByTypeId(principal.getName(),tId);
+	public List<Notification> indexByType(HttpServletRequest req, HttpServletResponse res, @PathVariable int tId) {
+		return nService.findAllByTypeId(tId);
 	} 
 	
 	@GetMapping("notifications/type/")
-	public List<NotificationType> indexAllTypes(Principal principal,HttpServletRequest req, HttpServletResponse res, @PathVariable int tId) {
-		return nService.findAllTypes(principal.getName());
+	public List<NotificationType> indexAllTypes(HttpServletRequest req, HttpServletResponse res, @PathVariable int tId) {
+		return nService.findAllTypes();
 	} 
 	
 	@PostMapping("notifications/{uId}")
-	public Notification createNotification(Principal principal,HttpServletRequest req, HttpServletResponse res, @RequestBody Notification notification, @PathVariable int uId) {
+	public Notification createNotification(HttpServletRequest req, HttpServletResponse res, @RequestBody Notification notification, @PathVariable int uId) {
 		Notification newNotification = null;
 		try {
-			newNotification = nService.createNotification(principal.getName(), uId, notification);
+			newNotification = nService.createNotification( uId, notification);
 			res.setStatus(201);
 		} catch (Exception e) {
 			e.printStackTrace();

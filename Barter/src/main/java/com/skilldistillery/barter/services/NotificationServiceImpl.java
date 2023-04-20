@@ -23,37 +23,33 @@ public class NotificationServiceImpl implements NotificationService {
 	private NotificationTypeRepository typeRepo;
 	
 	@Override
-	public List<Notification> indexAll(String username) {
-		User admin = userRepo.findByUsername(username);
-		if (admin.getRole() == "admin") {
+	public List<Notification> indexAll() {
+//		User admin = userRepo.findByUsername(username);
+//		if (admin.getRole() == "admin") {
 		return nRepo.findAll();
-		} else {
-			return null;
-		}
+//		} else {
+//			return null;
+//		}
 	}
 	
 	@Override
-	public List<NotificationType> findAllTypes(String username) {
-		User admin = userRepo.findByUsername(username);
+	public List<NotificationType> findAllTypes() {
 		return typeRepo.findAll();
 	}
 
 	@Override
-	public List<Notification> indexAllByUser(String username, int userId) {
-		User admin = userRepo.findByUsername(username);
-		return nRepo.findAllById(null);
+	public List<Notification> indexAllByUser(int userId) {
+		return nRepo.findAllById(userId);
 	}
 	
 	@Override
-	public List<Notification> findAllByTypeId(String username, int typeId) {
-		User admin = userRepo.findByUsername(username);
+	public List<Notification> findAllByTypeId(int typeId) {
 		return nRepo.findAllBynType_Id(typeId);
 	}
 
 	@Override
-	public Notification createNotification(String username, int userId, Notification notification) {
+	public Notification createNotification(int userId, Notification notification) {
 		User user = userRepo.findById(userId);
-		User admin = userRepo.findByUsername(username);
 		if(user != null && notification != null) {
 			notification.setUser(user);
 			return nRepo.saveAndFlush(notification);
