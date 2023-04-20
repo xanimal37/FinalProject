@@ -57,7 +57,7 @@ class NotificationTest {
 	@Test
 	void test_Notification_User_Entity_Mapping() {
 		assertNotNull(notification.getUser());
-		assertEquals("Zeeb",notification.getUser().getLastName());
+		assertEquals("Zeeb",notification.getUser().getLastname());
 	}
 
 }

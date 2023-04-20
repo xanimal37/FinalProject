@@ -57,8 +57,8 @@ class UserTest {
 		assertEquals(2013, user.getCreatedDate().getYear());
 		assertEquals(null, user.getUpdatedDate());
 		assertEquals(null, user.getEmail());
-		assertEquals("George", user.getFirstName());
-		assertEquals("Washington", user.getLastName());
+		assertEquals("George", user.getFirstname());
+		assertEquals("Washington", user.getLastname());
 		assertEquals(null, user.getPhone());
 		assertEquals("admin", user.getRole());
 		assertEquals(true, user.isEnabled());

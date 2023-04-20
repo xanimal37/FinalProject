@@ -74,6 +74,6 @@ class CommentTest {
 	@Test
 	void test_Comm_User_mapping() {
 		assertNotNull(comm.getUser());
-		assertEquals("Lisa", comm.getUser().getFirstName());
+		assertEquals("Lisa", comm.getUser().getFirstname());
 	}
 }
