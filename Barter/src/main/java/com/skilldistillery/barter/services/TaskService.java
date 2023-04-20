@@ -2,32 +2,30 @@ package com.skilldistillery.barter.services;
 
 import java.util.List;
 
-import com.skilldistillery.barter.entities.Skill;
 import com.skilldistillery.barter.entities.Task;
-import com.skilldistillery.barter.entities.User;
+
 
 public interface TaskService {
 	
 	//basic CRUD
-	Task createTask(Task task, int id);
-	
-	Task updateTask(Task task, int id);
-	
-	void deleteTask(int id);
-	
-	List<Task> getAllTasks();
-	
 	Task getTaskById(int id);
 	
+<<<<<<< HEAD
 	//searching for task to do
 	
 	List<Task> getTasksNotOwnedByUser(User user);
+=======
+	List<Task> getAllTasks();
 	
-	List<Task> getTasksBySkillNotOwnedByUser(User user,Skill skill);
+	//authenticated
+	Task createTask(Task task, String username);
+>>>>>>> b4763422f500497db03912a85c25c9bd80ceca9e
 	
-	//handling user owned tasks
+	Task updateTask(Task task, int id, String username);
 	
-	List<Task> getTasksOwnedByUser(User user);
+	boolean deleteTask(int id);
+	
+	List<Task> getTasksOwnedByUser(String username);
 	
 
 }

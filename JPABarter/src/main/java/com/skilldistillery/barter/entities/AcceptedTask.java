@@ -12,8 +12,10 @@ import javax.persistence.Table;
 @Table(name="accepted_task")
 public class AcceptedTask {
 	
+	public AcceptedTask() {}
+	
 	@EmbeddedId
-	private AcceptedTaskId id;
+	private AcceptedTaskId acceptedTaskId;
 	
 	@Column(name="rating_by_requester")
 	private Integer ratingByRequestor;
@@ -31,11 +33,11 @@ public class AcceptedTask {
 	private LocalDateTime acceptDate;
 
 	public AcceptedTaskId getId() {
-		return id;
+		return acceptedTaskId;
 	}
 
 	public void setId(AcceptedTaskId id) {
-		this.id = id;
+		this.acceptedTaskId = id;
 	}
 
 	public Integer getRatingByRequestor() {
@@ -80,7 +82,7 @@ public class AcceptedTask {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		return Objects.hash(acceptedTaskId);
 	}
 
 	@Override
@@ -92,12 +94,12 @@ public class AcceptedTask {
 		if (getClass() != obj.getClass())
 			return false;
 		AcceptedTask other = (AcceptedTask) obj;
-		return Objects.equals(id, other.id);
+		return Objects.equals(acceptedTaskId, other.acceptedTaskId);
 	}
 
 	@Override
 	public String toString() {
-		return "AcceptedTask [id=" + id + ", ratingByRequestor=" + ratingByRequestor + ", ratingByAcceptor="
+		return "AcceptedTask [id=" + acceptedTaskId + ", ratingByRequestor=" + ratingByRequestor + ", ratingByAcceptor="
 				+ ratingByAcceptor + ", remarksByRequestor=" + remarksByRequestor + ", remarksByAcceptor="
 				+ remarksByAcceptor + ", acceptDate=" + acceptDate + "]";
 	}

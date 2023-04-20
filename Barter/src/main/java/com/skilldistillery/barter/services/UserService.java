@@ -6,10 +6,10 @@ import com.skilldistillery.barter.entities.User;
 
 public interface UserService {
 	public List <User> getAllUsers();
-	public User updateUser(User user,int userId);
-	public String changePassword(String username, String currentPassword, String newPassword);
-	public User archiveUser(int id);
+	public User updateUserByAdmin(User user,int userId);
+	public User updateAccount(User user,String username);
 	public boolean deleteUser(int userId);
-	public User unArchiveUser(int id);
 	public User findById(int userId);
+	public User findByUsername(String username);
+	public String addFriend(User user,User friend);
 }
