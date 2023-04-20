@@ -49,10 +49,9 @@ public class ComplaintController {
 	}
 	
 	@PostMapping("complaints/{uId}")
-	public Complaint create( HttpServletRequest req, HttpServletResponse res,@PathVariable int uId, @RequestBody Complaint complaint) {
-		Complaint newComplaint = null;
+	public Complaint create( Principal principal, HttpServletRequest req, HttpServletResponse res,@PathVariable int uId, @RequestBody Complaint newComplaint) {
 		try {
-			newComplaint = cService.createComplaint(uId, newComplaint);
+			newComplaint = cService.createComplaint(principal.getName(), newComplaint);
 			res.setStatus(201);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -62,9 +61,9 @@ public class ComplaintController {
 	}
 	
     @PutMapping("complaints/{cId}")
-	public Complaint update(HttpServletRequest req, HttpServletResponse res, @PathVariable int cId, @RequestBody Complaint complaint) {
+	public Complaint update(Principal principal, HttpServletRequest req, HttpServletResponse res, @PathVariable int cId, @RequestBody Complaint complaint) {
 		 try {
-			 complaint = cService.updateComplaint(cId, complaint);
+			 complaint = cService.updateComplaint(principal.getName(), cId, complaint);
 			 if (complaint == null) {
 				 res.setStatus(404);
 			 }else {
@@ -78,9 +77,9 @@ public class ComplaintController {
 	}
     
     @PutMapping("complaints/archive/{cId}")
-	public void archive(HttpServletRequest req, HttpServletResponse res, @PathVariable int cId) {
+	public void archive(Principal principal, HttpServletRequest req, HttpServletResponse res, @PathVariable int cId) {
 		 try {
-			if ( cService.archiveComplaint(cId) == false) {
+			if ( cService.archiveComplaint(principal.getName(), cId) == false) {
 				 res.setStatus(400);
 			 }else {
 				 res.setStatus(200);
@@ -92,12 +91,12 @@ public class ComplaintController {
     }
 		 
     @DeleteMapping("complaints/{cId}")
-	public void destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int cId) {
+	public void destroy(Principal principal, HttpServletRequest req, HttpServletResponse res, @PathVariable int cId) {
 		 try {
-			if ( cService.destroyComplaint(cId) == false) {
+			if ( cService.destroyComplaint(principal.getName(), cId) == false) {
 				 res.setStatus(400);
 			 }else {
-				 res.setStatus(201);
+				 res.setStatus(204);
 			 }
 		 } catch ( Exception e){
 			 e.printStackTrace();

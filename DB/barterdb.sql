@@ -316,7 +316,7 @@ DROP TABLE IF EXISTS `notification` ;
 
 CREATE TABLE IF NOT EXISTS `notification` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `message` VARCHAR(45) NULL,
+  `message` TEXT NULL,
   `user_id` INT NOT NULL,
   `create_date` DATETIME NULL,
   `notification_type_id` INT NOT NULL,
@@ -589,6 +589,8 @@ COMMIT;
 START TRANSACTION;
 USE `barterdb`;
 INSERT INTO `notification` (`id`, `message`, `user_id`, `create_date`, `notification_type_id`) VALUES (1, 'You have a new update to your account', 3, '2023-03-23', 4);
+INSERT INTO `notification` (`id`, `message`, `user_id`, `create_date`, `notification_type_id`) VALUES (2, 'You have a pending complaint under investigation pertaining to Task # 1232', 2, '2023-03-24', 5);
+INSERT INTO `notification` (`id`, `message`, `user_id`, `create_date`, `notification_type_id`) VALUES (3, 'Someone left a comment on your post', 2, '2023-03-23', 3);
 
 COMMIT;
 
@@ -599,7 +601,7 @@ COMMIT;
 START TRANSACTION;
 USE `barterdb`;
 INSERT INTO `user_skill` (`user_id`, `skill_id`, `skill_level_id`, `certification`, `description`) VALUES (2, 2, 2, NULL, 'Apprentice Plumber with union');
-INSERT INTO `user_skill` (`user_id`, `skill_id`, `skill_level_id`, `certification`, `description`) VALUES (3, 3, 2, NULL, NULL);
+INSERT INTO `user_skill` (`user_id`, `skill_id`, `skill_level_id`, `certification`, `description`) VALUES (3, 2, 2, NULL, NULL);
 
 COMMIT;
 

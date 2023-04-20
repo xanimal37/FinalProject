@@ -35,8 +35,8 @@ public class ComplaintServiceImpl implements ComplaintService{
 	}
 
 	@Override
-	public Complaint createComplaint(int uId, Complaint complaint) {
-		User user = userRepo.findById(uId);
+	public Complaint createComplaint(String username, Complaint complaint) {
+		User user = userRepo.findByUsername(username);
 		if (complaint != null) {
 			complaint.setUser(user);
 			return cRepo.saveAndFlush(complaint);
@@ -45,9 +45,10 @@ public class ComplaintServiceImpl implements ComplaintService{
 	}
 
 	@Override
-	public Complaint updateComplaint(int cId, Complaint complaint) {
+	public Complaint updateComplaint(String username, int cId, Complaint complaint) {
 		Complaint updateComplaint = cRepo.findById(cId);
-		if (updateComplaint != null) {
+		User user = userRepo.findByUsername(username);
+		if (user != null) {
 			updateComplaint.setId(cId);
 			updateComplaint.setName(complaint.getName());
 			updateComplaint.setDescription(complaint.getDescription());
@@ -58,10 +59,11 @@ public class ComplaintServiceImpl implements ComplaintService{
 	}
 
 	@Override
-	public boolean destroyComplaint(int cId) {
+	public boolean destroyComplaint(String username, int cId) {
 		boolean removed = true;
 		Complaint deleteComplaint = cRepo.findById(cId);
-		if (deleteComplaint != null) {
+		User user = userRepo.findByUsername(username);
+		if (user != null) {
 			cRepo.delete(deleteComplaint);
 			if (cRepo.findById(cId) == null) {
 				return removed;
@@ -71,11 +73,12 @@ public class ComplaintServiceImpl implements ComplaintService{
 	}
 
 	@Override
-	public boolean archiveComplaint(int cId) {
+	public boolean archiveComplaint(String username, int cId) {
 		boolean archived = false;
 		boolean active = false;
 		Complaint archiveComplaint = cRepo.findById(cId);
-		if (archiveComplaint != null) {
+		User user = userRepo.findByUsername(username);
+		if (user != null) {
 			archiveComplaint.setActive(active);
 			cRepo.saveAndFlush(archiveComplaint);
 			archived = true;
