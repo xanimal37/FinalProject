@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +25,7 @@ import com.skilldistillery.barter.services.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
+	
 
 //  GET users
 	@GetMapping("users")
@@ -52,45 +52,59 @@ public class UserController {
 
 
 //  PUT users/{userId}
+	@PutMapping("users")
+	public User update(HttpServletRequest req, HttpServletResponse res, Principal principal,@RequestBody User user) {
+
+	    User updatedUser = null;
+	    try {
+	        updatedUser = userService.updateAccount(user,principal.getName());
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    if (updatedUser == null) {
+	        res.setStatus(400);
+	    } else {
+	        res.setStatus(200);
+	    }
+	    return updatedUser;
+	}
+	
 	@PutMapping("users/{userId}")
-	public User update(HttpServletRequest req, HttpServletResponse res, @PathVariable int userId,@RequestBody User user) {
-		
-		User updatedUser =null;
+	public User adminUpdate(HttpServletRequest req, HttpServletResponse res, Principal principal, @PathVariable int userId,@RequestBody User user) {
+	    String username = principal.getName(); 
+	    User currentUser = userService.findByUsername(username);
+//	    must be admin or current user to update
+	    if (currentUser.getId() == userId || !currentUser.getRole().equals("admin")) { 
+	        res.setStatus(401);
+	        return null;
+	    }
+		User updatedUser = null;
 		try {
-			updatedUser = userService.updateUser(user,userId);
+			updatedUser = userService.updateUserByAdmin(user,userId);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		if(updatedUser==null) {
+		if (updatedUser == null) {
 			res.setStatus(400);
-		}else if(updatedUser!=null) {
+		} else {
 			res.setStatus(200);
 		}
 		return updatedUser;
 	}
-
-//  DELETE users/{userId}
-	@DeleteMapping("users/{userId}")
-	public void destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int userId) {
-		boolean delete = false;
-		try {
-			delete= userService.deleteUser( userId);
-			if(delete) {
-				res.setStatus(204);
-				
-			}else{
-				res.setStatus(404);
-				
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-			res.setStatus(500);
-		}
-		
-
-	}
 	
+	@PostMapping("/users/friends/{friendId}")
+	public String addFriend(HttpServletRequest req, HttpServletResponse res, Principal principal, @PathVariable int friendId) {
+	    String username = principal.getName(); // get authenticated user's username
+	    User user = userService.findByUsername(username); // find the User object for the authenticated user
+	    User friend = userService.findById(friendId); // find the User object for the friend to be added
+	    String message = userService.addFriend(user, friend);
+	    return message;
+	}
+	 @GetMapping("/skills/{skillName}")
+	    public List<User> getUsersBySkill(@PathVariable String skillName) {
+	        return userService.getUsersBySkill(skillName);
+	    }
+
+
 
 }

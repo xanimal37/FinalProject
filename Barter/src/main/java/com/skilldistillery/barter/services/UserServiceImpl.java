@@ -23,64 +23,37 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepo;
+	
 
 	@Override
-	public User updateUser(User user, int userId) {
+	public User updateUserByAdmin(User user,int userId) {
 		// TODO Auto-generated method stub
 		User originalUser = userRepo.findById(userId);
 		if (originalUser == null) {
 			throw new IllegalArgumentException("User does not exist");
 		}
-		String encrypted = encoder.encode(user.getPassword());
+		
 		originalUser.setFirstname(user.getFirstname());
 		originalUser.setLastname(user.getLastname());
 		originalUser.setEmail(user.getEmail());
+		originalUser.setImageURL(user.getImageURL());
 		originalUser.setBiography(user.getBiography());
-		originalUser.setPassword(encrypted);
+		if(user.getUsername()!=null) {
+		originalUser.setUsername(user.getUsername());
+		}
+		if(user.getRole()!=null) {
+		originalUser.setRole(user.getRole());
+		}
+		originalUser.setEnabled(user.isEnabled());
+		
+		if(user.getPassword()!=null) {
+			String encrypted = encoder.encode(user.getPassword());
+			originalUser.setPassword(encrypted);
+		}
 		return userRepo.saveAndFlush(originalUser);
 
 	}
 
-	@Override
-	public String changePassword(String username, String currentPassword, String newPassword) {
-		// TODO Auto-generated method stub
-		User user = userRepo.findByUsername(username);
-		if (user == null) {
-			throw new IllegalArgumentException("User does not exist");
-		}
-		String encryptedCurrentPassword = encoder.encode(currentPassword);
-		if (!user.getPassword().equals(encryptedCurrentPassword)) {
-			throw new IllegalArgumentException("Incorrect current password");
-		}
-		String encryptedNewPassword = encoder.encode(newPassword);
-		user.setPassword(encryptedNewPassword);
-		userRepo.save(user);
-
-		return encryptedNewPassword;
-	}
-
-	@Override
-	public User archiveUser(int userId) {
-		User user = userRepo.findById(userId);
-		if (user != null) {
-			user.setEnabled(false);
-			userRepo.saveAndFlush(user);
-
-		}
-		return user;
-
-	}
-	@Override
-	public User unArchiveUser(int userId) {
-		User user = userRepo.findById(userId);
-		if (user != null) {
-			user.setEnabled(true);
-			userRepo.saveAndFlush(user);
-
-		}
-		return user;
-		
-	}
 
 	@Override
 	public List<User> getAllUsers() {
@@ -113,5 +86,69 @@ public class UserServiceImpl implements UserService {
 		return user;
 
 	}
+
+
+	@Override
+	public String addFriend(User user, User friend) {
+		if (user.getFriends().contains(friend)) {
+	         return friend.getUsername() + " is already a friend of " + user.getUsername();
+	      }
+	      user.getFriends().add(friend);
+	      friend.getFriends().add(user);
+	      userRepo.saveAndFlush(user);
+	      userRepo.saveAndFlush(friend);
+	      return friend.getUsername() + " has been added as a friend of " + user.getUsername();
+		
+	}
+
+
+
+
+	@Override
+	public User findByUsername(String username) {
+		// TODO Auto-generated method stub
+		return userRepo.findByUsername(username);
+	}
+
+
+
+
+	@Override
+	public User updateAccount(User user, String username) {
+		// TODO Auto-generated method stub
+				User originalUser = userRepo.findByUsername(username);
+				if (originalUser == null) {
+					throw new IllegalArgumentException("User does not exist");
+				}
+				
+				originalUser.setFirstname(user.getFirstname());
+				originalUser.setLastname(user.getLastname());
+				originalUser.setEmail(user.getEmail());
+				originalUser.setImageURL(user.getImageURL());
+				originalUser.setBiography(user.getBiography());
+				if(user.getUsername()!=null) {
+				originalUser.setUsername(user.getUsername());
+				}
+			
+				originalUser.setEnabled(user.isEnabled());
+				
+				if(user.getPassword()!=null) {
+					String encrypted = encoder.encode(user.getPassword());
+					originalUser.setPassword(encrypted);
+				}
+				return userRepo.saveAndFlush(originalUser);
+
+	}
+	
+	 @Override
+	    public List<User> getUsersBySkill(String skillName) {
+	        return userRepo.findBySkillsName(skillName);
+	    }
+
+
+	
+	
+	
+	
 
 }
