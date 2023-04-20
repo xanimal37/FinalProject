@@ -176,6 +176,7 @@ CREATE TABLE IF NOT EXISTS `complaint` (
   `update_date` DATETIME NULL,
   `closed_date` DATETIME NULL,
   `user_id` INT NOT NULL,
+  `active` TINYINT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_complaint_user1_idx` (`user_id` ASC),
   CONSTRAINT `fk_complaint_user1`
@@ -462,7 +463,7 @@ START TRANSACTION;
 USE `barterdb`;
 INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `image_url`, `email`, `phone`, `create_date`, `update_date`, `firstname`, `lastname`, `address_id`, `ranking_id`, `biography`, `availability`) VALUES (1, 'admin', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, 'admin', NULL, NULL, NULL, '2013-07-03', NULL, 'George', 'Washington', 2, 5, NULL, NULL);
 INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `image_url`, `email`, `phone`, `create_date`, `update_date`, `firstname`, `lastname`, `address_id`, `ranking_id`, `biography`, `availability`) VALUES (2, 'eflatto', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, 'user', NULL, NULL, NULL, '2015-07-04', NULL, 'Edwin', 'Flatto', 1, 3, NULL, NULL);
-INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `image_url`, `email`, `phone`, `create_date`, `update_date`, `firstname`, `lastname`, `address_id`, `ranking_id`, `biography`, `availability`) VALUES (3, 'lzeeb', 'password', 1, 'user', NULL, NULL, NULL, '2020-01-23', NULL, 'Lisa', 'Zeeb', 2, 2, NULL, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `image_url`, `email`, `phone`, `create_date`, `update_date`, `firstname`, `lastname`, `address_id`, `ranking_id`, `biography`, `availability`) VALUES (3, 'lzeeb', '$2a$10$mYVa48FXtaD7zEGW7QCNtOCPe4vUFYKgx0CUpqJZjtuqnLhPzZjVi', 1, 'user', NULL, NULL, NULL, '2020-01-23', NULL, 'Lisa', 'Zeeb', 2, 2, NULL, NULL);
 
 COMMIT;
 
@@ -519,7 +520,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `barterdb`;
-INSERT INTO `complaint` (`id`, `name`, `description`, `create_date`, `update_date`, `closed_date`, `user_id`) VALUES (1, 'Foul Behavior ', 'Zeeb was supposed to trim my tree but instead stole my miniature Donald Trump commemorative dinner plates', '2022-12-29', '2023-01-14', '2023-04-01', 2);
+INSERT INTO `complaint` (`id`, `name`, `description`, `create_date`, `update_date`, `closed_date`, `user_id`, `active`) VALUES (1, 'Foul Behavior ', 'Zeeb was supposed to trim my tree but instead stole my miniature Donald Trump commemorative dinner plates', '2022-12-29', '2023-01-14', '2023-04-01', 2, 1);
 
 COMMIT;
 
