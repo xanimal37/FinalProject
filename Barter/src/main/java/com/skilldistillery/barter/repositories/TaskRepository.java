@@ -13,5 +13,7 @@ public interface TaskRepository extends JpaRepository<Task, Integer>{
 	//owner user
 	List<Task> findByUser_Username(String username);
 	
+	List<Task> findByTaskStatus_Name(String name);
+	
 	
 }

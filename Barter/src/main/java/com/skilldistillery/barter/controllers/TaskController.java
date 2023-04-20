@@ -72,8 +72,15 @@ public class TaskController {
 	//get all tasks owned by user
 	//only for logged in user
 	@GetMapping(path="users/tasks")
-	List<Task> getAllTasksOwnedByUser(Principal principal){
+	public List<Task> getAllTasksOwnedByUser(Principal principal){
 		return taskService.getTasksOwnedByUser(principal.getName());
 	}
+	
+	//get all tasks by status
+	@GetMapping(path="tasks/{statusname}")
+	public List<Task> getTasksOfStatus(@PathVariable String statusname){
+		return taskService.getAllTasksOfStatus(statusname);
+	}
+	
 	
 }

@@ -65,4 +65,9 @@ public class TaskServiceImpl implements TaskService {
 	public List<Task> getTasksOwnedByUser(String username) {
 		return taskRepo.findByUser_Username(username);
 	}
+
+	@Override
+	public List<Task> getAllTasksOfStatus(String name) {
+		return taskRepo.findByTaskStatus_Name(name);
+	}
 }
