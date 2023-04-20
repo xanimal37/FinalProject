@@ -25,23 +25,23 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public Task updateTask(Task task, int id, String username) {
+	public Task updateTask(Task task, int id,String username) {
 		Task original = taskRepo.findById(id);
-		if (original != null && task != null && original.getUser().getUsername().equals(username)) {
+		if(original!=null && task!=null && original.getUser().getUsername().equals(username)) {
 			original.setName(task.getName());
 			original.setDescription(task.getDescription());
-			original.setEstimatedHours(task.getEstimatedHours());
 			original.setMaterialsProvided(task.getMaterialsProvided());
+			original.setEstimatedHours(task.getEstimatedHours());
 			original.setScheduleDate(task.getScheduleDate());
-			original.setStartDate(task.getStartDate());
 			original.setCompleteDate(task.getCompleteDate());
-			original.setTaskStatus(task.getTaskStatus());
 			original.setAddress(task.getAddress());
+			original.setTaskStatus(task.getTaskStatus());
 			original.setSkills(task.getSkills());
-			// this method will see the id and know to update
+			//this method will see the id and know to update
 			return taskRepo.saveAndFlush(original);
 		}
 		return null;
+		
 	}
 
 	@Override
@@ -58,8 +58,7 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public Task getTaskById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return taskRepo.findById(id);
 	}
 
 	@Override

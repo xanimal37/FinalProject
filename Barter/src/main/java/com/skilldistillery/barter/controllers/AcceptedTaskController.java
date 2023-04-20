@@ -25,5 +25,10 @@ public class AcceptedTaskController {
 	public List<AcceptedTask> getAllAcceptedTasks(){
 		return acceptedTaskService.getAllAcceptedTasks();
 	}
+	
+	@GetMapping(path="users/acceptedTasks")
+	public List<AcceptedTask> getAllUsersAcceptedTasks(Principal principal){
+		return acceptedTaskService.getAllUsersAcceptedTasks(principal.getName());
+	}
 
 }
