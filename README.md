@@ -82,7 +82,7 @@ Front end was broken up into several sub-directories:
 ## Lessons Learned
 
 #### Edwin Flatto:
-
+1. Mapping a composite key in Hibernate requires creating a separate class for the key and The @EmbeddedId annotation can be used to map the composite key in the entity class.
 #### Lisa Zeeb
 
 #### Rob Tisdale:

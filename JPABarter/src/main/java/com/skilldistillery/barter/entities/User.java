@@ -64,9 +64,25 @@ public class User {
 	@JoinColumn(name="user_id")
 	private List <Task> tasks;
 	
-	private String firstName;
+	@OneToMany
+	@JoinColumn(name="user_id")
+	private List <TaskMessage> taskMessages;
+	
+	@OneToMany
+	@JoinColumn(name="user_id")
+	private List <Notification> notifications;
+	
+	@OneToMany
+	@JoinColumn(name="user_id")
+	private List <Complaint> complaints;
+	
+	@OneToMany
+	@JoinColumn(name="user_id")
+	private List <Post> posts;
+	
+	private String firstname;
 
-	private String lastName;
+	private String lastname;
 
 	private String availability;
 
@@ -102,6 +118,14 @@ public class User {
 		this.id = id;
 	}
 
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
 
 	public String getUsername() {
 		return username;
@@ -151,6 +175,30 @@ public class User {
 	}
 
 
+	public List<TaskMessage> getTaskMessages() {
+		return taskMessages;
+	}
+
+	public void setTaskMessages(List<TaskMessage> taskMessages) {
+		this.taskMessages = taskMessages;
+	}
+
+	public List<Notification> getNotifications() {
+		return notifications;
+	}
+
+	public void setNotifications(List<Notification> notifications) {
+		this.notifications = notifications;
+	}
+
+	public List<Complaint> getComplaints() {
+		return complaints;
+	}
+
+	public void setComplaints(List<Complaint> complaints) {
+		this.complaints = complaints;
+	}
+
 	public String getImageURL() {
 		return imageURL;
 	}
@@ -167,16 +215,16 @@ public class User {
 		this.email = email;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getFirstname() {
+		return firstname;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setFirstname(String firstName) {
+		this.firstname = firstName;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getLastname() {
+		return lastname;
 	}
 
 	public Address getAddress() {
@@ -187,8 +235,8 @@ public class User {
 		this.address = address;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setLastname(String lastName) {
+		this.lastname = lastName;
 	}
 
 	public String getAvailability() {

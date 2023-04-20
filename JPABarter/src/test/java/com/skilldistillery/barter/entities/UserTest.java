@@ -57,8 +57,8 @@ class UserTest {
 		assertEquals(2013, user.getCreatedDate().getYear());
 		assertEquals(null, user.getUpdatedDate());
 		assertEquals(null, user.getEmail());
-		assertEquals("George", user.getFirstName());
-		assertEquals("Washington", user.getLastName());
+		assertEquals("George", user.getFirstname());
+		assertEquals("Washington", user.getLastname());
 		assertEquals(null, user.getPhone());
 		assertEquals("admin", user.getRole());
 		assertEquals(true, user.isEnabled());
@@ -95,6 +95,30 @@ class UserTest {
 	void test_User_Comment_Mapping() {
 		assertNotNull(user);
 		assertEquals("Make sure your pipe fitting matched and you used threading tape", userThree.getComments().get(0).getContent());
+		
+	}
+	@Test
+	void test_User_TaskMessage_Mapping() {
+		assertNotNull(user);
+		assertEquals("Lets sync at xyz", userTwo.getTaskMessages().get(0).getContent());
+		
+	}
+	@Test
+	void test_User_Complaint_Mapping() {
+		assertNotNull(user);
+		assertEquals("Zeeb was supposed to trim my tree but instead stole my miniature Donald Trump commemorative dinner plates", userTwo.getComplaints().get(0).getDescription());
+		
+	}
+	@Test
+	void test_User_Notification_Mapping() {
+		assertNotNull(user);
+		assertEquals("You have a new update to your account", userThree.getNotifications().get(0).getMessage());
+		
+	}
+	@Test
+	void test_User_Post_Mapping() {
+		assertNotNull(user);
+		assertEquals("Whats the best way to install an L joint with a flex host on an existing sprinkler system", userTwo.getPosts().get(0).getContent());
 		
 	}
 	
