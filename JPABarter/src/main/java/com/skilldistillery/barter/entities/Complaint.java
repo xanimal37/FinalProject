@@ -27,6 +27,8 @@ public class Complaint {
 	
 	private String description;
 	
+	private boolean active;
+	
 	@CreationTimestamp
 	@Column(name="create_date")
 	private LocalDateTime createDate;
@@ -41,6 +43,16 @@ public class Complaint {
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
+	
+	
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 
 	public int getId() {
 		return id;
@@ -117,8 +129,9 @@ public class Complaint {
 
 	@Override
 	public String toString() {
-		return "Complaint [id=" + id + ", name=" + name + ", description=" + description + ", createDate=" + createDate
-				+ ", updateDate=" + updateDate + ", closedDate=" + closedDate + ", user=" + user + "]";
+		return "Complaint [id=" + id + ", name=" + name + ", description=" + description + ", active=" + active
+				+ ", createDate=" + createDate + ", updateDate=" + updateDate + ", closedDate=" + closedDate + ", user="
+				+ user + "]";
 	}
 	
 	

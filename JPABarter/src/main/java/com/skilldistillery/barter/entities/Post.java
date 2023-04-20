@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Post {
 	
@@ -37,6 +39,7 @@ public class Post {
 	@Column(name="update_date")
 	private LocalDateTime updateDate;
 	
+	@JsonIgnore
 	@OneToMany
 	private Set<Comment> comments;
 	
