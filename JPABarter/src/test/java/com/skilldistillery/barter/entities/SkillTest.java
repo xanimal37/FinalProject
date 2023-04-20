@@ -53,6 +53,6 @@ public class SkillTest {
 	@Test
 	void test_Skill_Task_Mapping() {
 		assertNotNull(skill);
-		assertEquals("Bathroom Sink", skill.getTask().get(0).getName());
+		assertEquals("Bathroom Sink", skill.getTasks().get(0).getName());
 	}
 }

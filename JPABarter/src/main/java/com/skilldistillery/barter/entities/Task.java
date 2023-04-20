@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Task {
 	
@@ -51,9 +53,11 @@ public class Task {
 	@JoinColumn(name="task_status_id")
 	private TaskStatus taskStatus;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="task")
 	private List<TaskMessage> taskMessages;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
