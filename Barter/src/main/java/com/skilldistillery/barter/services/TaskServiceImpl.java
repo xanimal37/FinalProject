@@ -15,11 +15,14 @@ public class TaskServiceImpl implements TaskService{
 
 	@Autowired
 	private TaskRepository taskRepo;
+	@Autowired
+	private UserRepository userRepo;
 
 	@Override
 	public Task createTask(Task task, int id) {
-		// TODO Auto-generated method stub
-		return null;
+		User user = userRepo.findById(id);
+		task.setUser(user);
+		return taskRepo.saveAndFlush(task);
 	}
 
 	@Override

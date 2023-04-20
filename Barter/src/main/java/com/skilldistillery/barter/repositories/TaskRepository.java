@@ -8,6 +8,7 @@ import com.skilldistillery.barter.entities.Task;
 
 public interface TaskRepository extends JpaRepository<Task, Integer>{
 	
+	Task findById(int id);
 	
 	
 
