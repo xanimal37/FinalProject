@@ -15,7 +15,7 @@ public class AcceptedTaskServiceImpl implements AcceptedTaskService{
 	private AcceptedTaskRepository acceptedTaskRepo;
 
 	@Override
-	public List<AcceptedTask> getAllAcceptedTasks(String username) {
-		return acceptedTaskRepo.findByTask_User_Username(username);
+	public List<AcceptedTask> getAllAcceptedTasks() {
+		return acceptedTaskRepo.findAll();
 	}
 }

@@ -2,11 +2,12 @@ package com.skilldistillery.barter.repositories;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import com.skilldistillery.barter.entities.AcceptedTask;
+import com.skilldistillery.barter.entities.AcceptedTaskId;
 
-public interface AcceptedTaskRepository {
+public interface AcceptedTaskRepository extends JpaRepository<AcceptedTask, AcceptedTaskId>{
 
-	List<AcceptedTask> findByUser_Id(int id);
-	
-	List<AcceptedTask> findByTask_User_Username(String username);
+	List<AcceptedTask> findByAcceptedTaskId(AcceptedTaskId id);
 }

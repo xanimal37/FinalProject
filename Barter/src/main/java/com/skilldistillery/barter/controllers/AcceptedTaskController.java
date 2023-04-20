@@ -20,11 +20,10 @@ public class AcceptedTaskController {
 	@Autowired
 	private AcceptedTaskService acceptedTaskService;
 	
-	//get all of a users accepted tasks
-	
-	@GetMapping(path="users/acceptedTasks")
-	public List<AcceptedTask> getAllAcceptedTasks(Principal principal){
-		return acceptedTaskService.getAllAcceptedTasks(principal.getName());
+	//test
+	@GetMapping(path="acceptedTasks")
+	public List<AcceptedTask> getAllAcceptedTasks(){
+		return acceptedTaskService.getAllAcceptedTasks();
 	}
 
 }
