@@ -602,6 +602,8 @@ START TRANSACTION;
 USE `barterdb`;
 INSERT INTO `user_skill` (`user_id`, `skill_id`, `skill_level_id`, `certification`, `description`) VALUES (2, 2, 2, NULL, 'Apprentice Plumber with union');
 INSERT INTO `user_skill` (`user_id`, `skill_id`, `skill_level_id`, `certification`, `description`) VALUES (3, 2, 2, NULL, NULL);
+INSERT INTO `user_skill` (`user_id`, `skill_id`, `skill_level_id`, `certification`, `description`) VALUES (2, 1, 1, NULL, 'GODDAMN RON SWANSON');
+INSERT INTO `user_skill` (`user_id`, `skill_id`, `skill_level_id`, `certification`, `description`) VALUES (3, 1, 2, NULL, 'Im kinda ok');
 
 COMMIT;
 
