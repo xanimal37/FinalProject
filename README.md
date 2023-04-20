@@ -86,6 +86,18 @@ Front end was broken up into several sub-directories:
 #### Lisa Zeeb
 
 #### Rob Tisdale:
+1. When doing entity mapping,for something such as comment (which can have sub-comments), you can reference the actual entity with an "inReplyTo" attribute inside the entity. 
+
+```java
+    @OneToMany(mappedBy="inReplyTo")
+	private List<Comment> comments;
+	
+	@ManyToOne
+	@JoinColumn(name="in_reply_to_id")
+	private Comment inReplyTo;
+	
+```
+In this case I am using the existing table column
 
 
 

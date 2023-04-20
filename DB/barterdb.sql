@@ -176,6 +176,7 @@ CREATE TABLE IF NOT EXISTS `complaint` (
   `update_date` DATETIME NULL,
   `closed_date` DATETIME NULL,
   `user_id` INT NOT NULL,
+  `active` TINYINT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_complaint_user1_idx` (`user_id` ASC),
   CONSTRAINT `fk_complaint_user1`
@@ -519,7 +520,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `barterdb`;
-INSERT INTO `complaint` (`id`, `name`, `description`, `create_date`, `update_date`, `closed_date`, `user_id`) VALUES (1, 'Foul Behavior ', 'Zeeb was supposed to trim my tree but instead stole my miniature Donald Trump commemorative dinner plates', '2022-12-29', '2023-01-14', '2023-04-01', 2);
+INSERT INTO `complaint` (`id`, `name`, `description`, `create_date`, `update_date`, `closed_date`, `user_id`, `active`) VALUES (1, 'Foul Behavior ', 'Zeeb was supposed to trim my tree but instead stole my miniature Donald Trump commemorative dinner plates', '2022-12-29', '2023-01-14', '2023-04-01', 2, 1);
 
 COMMIT;
 
