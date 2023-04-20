@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Skill {
 	
@@ -17,25 +19,24 @@ public class Skill {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-
 	private String name;
 	
 	private String description;
 	
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name="task_has_skill",
 	joinColumns = @JoinColumn(name="skill_id"),
 	inverseJoinColumns = @JoinColumn(name="task_id"))
-	private List <Task> task;
+	private List <Task> tasks;
 	
 	
-	
-	public List<Task> getTask() {
-		return task;
+	public List<Task> getTasks() {
+		return tasks;
 	}
 
-	public void setTask(List<Task> task) {
-		this.task = task;
+	public void setTasks(List<Task> task) {
+		this.tasks = task;
 	}
 
 	public int getId() {
