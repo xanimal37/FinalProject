@@ -9,6 +9,7 @@ import com.skilldistillery.barter.entities.Skill;
 import com.skilldistillery.barter.entities.Task;
 import com.skilldistillery.barter.entities.User;
 import com.skilldistillery.barter.repositories.TaskRepository;
+import com.skilldistillery.barter.repositories.UserRepository;
 
 @Service
 public class TaskServiceImpl implements TaskService{
