@@ -1,21 +1,23 @@
 package com.skilldistillery.barter.services;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.barter.entities.Complaint;
 import com.skilldistillery.barter.entities.User;
 import com.skilldistillery.barter.repositories.ComplaintRepository;
 import com.skilldistillery.barter.repositories.UserRepository;
 
-public abstract class ComplaintServiceImpl implements ComplaintService{
+@Service
+public class ComplaintServiceImpl implements ComplaintService{
 	
 	@Autowired
 	private ComplaintRepository cRepo;
 	
+	@Autowired
 	private UserRepository userRepo;
 
 	@Override
@@ -27,15 +29,15 @@ public abstract class ComplaintServiceImpl implements ComplaintService{
 	public Set<Complaint> complaintsByUser(int userId) {
 		return cRepo.findByUser_id(userId);
 	}
-	
+	@Override
 	public Complaint complaintById(int cId) {
 		return cRepo.findById(cId);
 	}
 
 	@Override
-	public Complaint createComplaint(String username, Complaint complaint) {
-		User user = userRepo.findByUsername(username);
-		if (user != null) {
+	public Complaint createComplaint(int uId, Complaint complaint) {
+		User user = userRepo.findById(uId);
+		if (complaint != null) {
 			complaint.setUser(user);
 			return cRepo.saveAndFlush(complaint);
 		}
@@ -43,10 +45,9 @@ public abstract class ComplaintServiceImpl implements ComplaintService{
 	}
 
 	@Override
-	public Complaint updateComplaint(String username, int cId, Complaint complaint) {
-		User user = userRepo.findByUsername(username);
+	public Complaint updateComplaint(int cId, Complaint complaint) {
 		Complaint updateComplaint = cRepo.findById(cId);
-		if (user != null && updateComplaint != null) {
+		if (updateComplaint != null) {
 			updateComplaint.setId(cId);
 			updateComplaint.setName(complaint.getName());
 			updateComplaint.setDescription(complaint.getDescription());
@@ -57,7 +58,7 @@ public abstract class ComplaintServiceImpl implements ComplaintService{
 	}
 
 	@Override
-	public boolean destroy(int cId) {
+	public boolean destroyComplaint(int cId) {
 		boolean removed = true;
 		Complaint deleteComplaint = cRepo.findById(cId);
 		if (deleteComplaint != null) {
@@ -70,7 +71,7 @@ public abstract class ComplaintServiceImpl implements ComplaintService{
 	}
 
 	@Override
-	public boolean archive(int cId) {
+	public boolean archiveComplaint(int cId) {
 		boolean archived = false;
 		boolean active = false;
 		Complaint archiveComplaint = cRepo.findById(cId);

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.skilldistillery.barter.entities.Complaint;
-import com.skilldistillery.barter.entities.User;
+
 
 public interface ComplaintService {
 	
@@ -14,12 +14,12 @@ public interface ComplaintService {
     
     Complaint complaintById(int cId); 
 
-    public Complaint createComplaint(String username, Complaint complaint);
+    public Complaint createComplaint(int uId, Complaint complaint);
 
-    public Complaint updateComplaint(String username, int cId, Complaint complaint);
+    public Complaint updateComplaint(int cId, Complaint complaint);
 
-    public boolean destroy(int cId);
+    public boolean destroyComplaint(int cId);
     
-    public boolean archive(int cId);
+    public boolean archiveComplaint(int cId);
 
 }

@@ -19,13 +19,15 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 	
 	// PARAMS
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private int id;
 	
 	private String username;
@@ -45,6 +47,7 @@ public class User {
 	@JoinColumn(name="ranking_id")
 	private Ranking ranking;
 	
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "user_has_friends", 
 	joinColumns = @JoinColumn(name = "user_id"),
@@ -55,27 +58,32 @@ public class User {
 	@JoinColumn(name="address_id")
 	private Address address;
 	
+	@JsonIgnore
 	@OneToMany
 	@JoinColumn(name="user_id")
 	private List <Comment> comments;
 	
-	
+	@JsonIgnore
 	@OneToMany
 	@JoinColumn(name="user_id")
 	private List <Task> tasks;
 	
+	@JsonIgnore
 	@OneToMany
 	@JoinColumn(name="user_id")
 	private List <TaskMessage> taskMessages;
 	
+	@JsonIgnore
 	@OneToMany
 	@JoinColumn(name="user_id")
 	private List <Notification> notifications;
 	
+	@JsonIgnore
 	@OneToMany
 	@JoinColumn(name="user_id")
 	private List <Complaint> complaints;
 	
+	@JsonIgnore
 	@OneToMany
 	@JoinColumn(name="user_id")
 	private List <Post> posts;
