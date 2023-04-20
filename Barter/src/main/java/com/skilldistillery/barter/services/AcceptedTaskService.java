@@ -8,5 +8,7 @@ public interface AcceptedTaskService {
 	
 	List<AcceptedTask> getAllAcceptedTasks();
 	
+	List<AcceptedTask> getAllUsersAcceptedTasks(String username);
+	
 
 }

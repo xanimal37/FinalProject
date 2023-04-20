@@ -25,10 +25,9 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-<<<<<<< HEAD
-	public Task updateTask(Task task, int id) {
+	public Task updateTask(Task task, int id,String username) {
 		Task original = taskRepo.findById(id);
-		if(original!=null && task!=null) {
+		if(original!=null && task!=null && original.getUser().getUsername().equals(username)) {
 			original.setName(task.getName());
 			original.setDescription(task.getDescription());
 			original.setMaterialsProvided(task.getMaterialsProvided());
@@ -39,22 +38,6 @@ public class TaskServiceImpl implements TaskService {
 			original.setTaskStatus(task.getTaskStatus());
 			original.setSkills(task.getSkills());
 			//this method will see the id and know to update
-=======
-	public Task updateTask(Task task, int id, String username) {
-		Task original = taskRepo.findById(id);
-		if (original != null && task != null && original.getUser().getUsername().equals(username)) {
-			original.setName(task.getName());
-			original.setDescription(task.getDescription());
-			original.setEstimatedHours(task.getEstimatedHours());
-			original.setMaterialsProvided(task.getMaterialsProvided());
-			original.setScheduleDate(task.getScheduleDate());
-			original.setStartDate(task.getStartDate());
-			original.setCompleteDate(task.getCompleteDate());
-			original.setTaskStatus(task.getTaskStatus());
-			original.setAddress(task.getAddress());
-			original.setSkills(task.getSkills());
-			// this method will see the id and know to update
->>>>>>> b4763422f500497db03912a85c25c9bd80ceca9e
 			return taskRepo.saveAndFlush(original);
 		}
 		return null;
@@ -75,8 +58,7 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public Task getTaskById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return taskRepo.findById(id);
 	}
 
 	@Override

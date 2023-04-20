@@ -10,4 +10,6 @@ import com.skilldistillery.barter.entities.AcceptedTaskId;
 public interface AcceptedTaskRepository extends JpaRepository<AcceptedTask, AcceptedTaskId>{
 
 	List<AcceptedTask> findByAcceptedTaskId(AcceptedTaskId id);
+	
+	List<AcceptedTask> findByAcceptedTaskId_AcceptorId(int id);
 }

@@ -34,14 +34,9 @@ public class TaskController {
 	}
 	
 	//add task
-<<<<<<< HEAD
-	@PostMapping(path="users/{id}/tasks")
-	Task createTask(@RequestBody Task task, @PathVariable int id,HttpServletRequest req,HttpServletResponse res) {
-=======
 	//only for logged in user
 	@PostMapping(path="tasks")
 	Task createTask(@RequestBody Task task,Principal principal ,HttpServletRequest req,HttpServletResponse res) {
->>>>>>> b4763422f500497db03912a85c25c9bd80ceca9e
 		try {
 			task = taskService.createTask(task, principal.getName());
 			res.setStatus(201);
@@ -58,21 +53,6 @@ public class TaskController {
 	}
 	
 	//update task
-<<<<<<< HEAD
-	@PutMapping(path="tasks/{id}")
-	Task updateTask(@PathVariable int id, @RequestBody Task task, HttpServletResponse res) {
-		try {
-			task = taskService.updateTask(task,id);
-			if (task == null) {
-				res.setStatus(404);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			res.setStatus(400);
-			task = null;
-		}
-		return task;
-=======
 	//only for logged in users task
 		@PutMapping(path = "tasks/{id}")
 		public Task updateTask(@PathVariable int id, Principal principal, @RequestBody Task task, HttpServletResponse res) {
@@ -94,7 +74,6 @@ public class TaskController {
 	@GetMapping(path="users/tasks")
 	List<Task> getAllTasksOwnedByUser(Principal principal){
 		return taskService.getTasksOwnedByUser(principal.getName());
->>>>>>> b4763422f500497db03912a85c25c9bd80ceca9e
 	}
 	
 }
