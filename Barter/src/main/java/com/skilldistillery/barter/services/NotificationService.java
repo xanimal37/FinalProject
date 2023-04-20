@@ -7,10 +7,10 @@ import com.skilldistillery.barter.entities.NotificationType;
 
 public interface NotificationService {
 	
-	List<Notification> indexAllByUser(String username, int userId);
-	List<Notification> indexAll(String username);
-	List<Notification> findAllByTypeId(String username,int typeId);
-	List<NotificationType> findAllTypes(String username);
-	Notification createNotification(String username, int userId, Notification notification);
+	List<Notification> indexAllByUser(int userId);
+	List<Notification> indexAll();
+	List<Notification> findAllByTypeId(int typeId);
+	List<NotificationType> findAllTypes();
+	Notification createNotification( int userId, Notification notification);
 
 }
