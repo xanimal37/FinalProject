@@ -19,7 +19,6 @@ public interface TaskService {
 	
 	Task getTaskById(int id);
 	
-	
 	//searching for task to do
 	
 	List<Task> getTasksNotOwnedByUser(User user);

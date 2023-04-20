@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,7 +33,7 @@ public class TaskController {
 	}
 	
 	//add task
-	@PostMapping(path="user/{id}/tasks")
+	@PostMapping(path="users/{id}/tasks")
 	Task createTask(@RequestBody Task task, @PathVariable int id,HttpServletRequest req,HttpServletResponse res) {
 		try {
 			task = taskService.createTask(task, id);
@@ -45,6 +46,22 @@ public class TaskController {
 			e.printStackTrace();
 			res.setStatus(404);
 			task=null;
+		}
+		return task;
+	}
+	
+	//update task
+	@PutMapping(path="tasks/{id}")
+	Task updateTask(@PathVariable int id, @RequestBody Task task, HttpServletResponse res) {
+		try {
+			task = taskService.updateTask(task,id);
+			if (task == null) {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			task = null;
 		}
 		return task;
 	}
