@@ -23,6 +23,7 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepo;
+	
 
 	@Override
 	public User updateUserByAdmin(User user,int userId) {
@@ -138,6 +139,14 @@ public class UserServiceImpl implements UserService {
 				return userRepo.saveAndFlush(originalUser);
 
 	}
+	
+	 @Override
+	    public List<User> getUsersBySkill(String skillName) {
+	        return userRepo.findBySkillsName(skillName);
+	    }
+
+
+	
 	
 	
 	
