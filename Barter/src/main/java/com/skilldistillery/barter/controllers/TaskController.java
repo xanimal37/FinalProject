@@ -1,5 +1,6 @@
 package com.skilldistillery.barter.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,17 +26,17 @@ public class TaskController {
 	@Autowired
 	private TaskService taskService;
 	
-	//all tasks (for admin purposes)
+	//all tasks 
 	@GetMapping(path="tasks")
 	List<Task> getAllTasks(){
 		return taskService.getAllTasks();
 	}
 	
 	//add task
-	@PostMapping(path="user/{id}/tasks")
-	Task createTask(@RequestBody Task task, @PathVariable int id,HttpServletRequest req,HttpServletResponse res) {
+	@PostMapping(path="users/tasks")
+	Task createTask(@RequestBody Task task,Principal principal ,HttpServletRequest req,HttpServletResponse res) {
 		try {
-			task = taskService.createTask(task, id);
+			task = taskService.createTask(task, principal.getName());
 			res.setStatus(201);
 			//StringBuffer url = req.getRequestURL(); // define as stringbuffer
 			//url.append("/").append(task.getId()); // append id to url so will show user the post url
@@ -47,6 +48,12 @@ public class TaskController {
 			task=null;
 		}
 		return task;
+	}
+	
+	//get all tasks owned by user
+	@GetMapping(path="users/tasks")
+	List<Task> getAllTasksOwnedByUser(Principal principal){
+		return taskService.getTasksOwnedByUser(principal.getName());
 	}
 	
 }
