@@ -1,5 +1,7 @@
 package com.skilldistillery.barter.services;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -11,14 +13,14 @@ import com.skilldistillery.barter.entities.User;
 import com.skilldistillery.barter.repositories.UserRepository;
 
 @Service
-public class AuthServiceImpl implements AuthService{
+public class AuthServiceImpl implements AuthService {
 
 	@PersistenceContext
 	private EntityManager em;
 
 	@Autowired
 	private PasswordEncoder encoder;
-	
+
 	@Autowired
 	private UserRepository userRepo;
 
@@ -36,4 +38,9 @@ public class AuthServiceImpl implements AuthService{
 	public User getUserByUsername(String username) {
 		return userRepo.findByUsername(username);
 	}
+
+	
+
+	
+
 }

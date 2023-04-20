@@ -40,4 +40,9 @@ import com.skilldistillery.barter.services.AuthService;
 		  }
 		  return authService.getUserByUsername(principal.getName());
 		}
+		
+		
+		
+		
+		
 }
