@@ -1,12 +1,16 @@
 package com.skilldistillery.barter.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Table(name="notification_type")
 @Entity
@@ -19,6 +23,10 @@ public class NotificationType {
 	private int id;
 	
 	private String name;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="nType")
+	private List<Notification> notification;
 
 
 	public int getId() {

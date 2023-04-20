@@ -14,12 +14,12 @@ public interface ComplaintService {
     
     Complaint complaintById(int cId); 
 
-    public Complaint createComplaint(int uId, Complaint complaint);
+    public Complaint createComplaint(String username, Complaint complaint);
 
-    public Complaint updateComplaint(int cId, Complaint complaint);
+    public Complaint updateComplaint(String username, int cId, Complaint complaint);
 
-    public boolean destroyComplaint(int cId);
+    public boolean destroyComplaint(String username, int cId);
     
-    public boolean archiveComplaint(int cId);
+    public boolean archiveComplaint(String username, int cId);
 
 }
