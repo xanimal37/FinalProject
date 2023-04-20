@@ -49,8 +49,7 @@ public class ComplaintController {
 	}
 	
 	@PostMapping("complaints/{uId}")
-	public Complaint create( HttpServletRequest req, HttpServletResponse res,@PathVariable int uId, @RequestBody Complaint complaint) {
-		Complaint newComplaint = null;
+	public Complaint create( HttpServletRequest req, HttpServletResponse res,@PathVariable int uId, @RequestBody Complaint newComplaint) {
 		try {
 			newComplaint = cService.createComplaint(uId, newComplaint);
 			res.setStatus(201);
@@ -97,7 +96,7 @@ public class ComplaintController {
 			if ( cService.destroyComplaint(cId) == false) {
 				 res.setStatus(400);
 			 }else {
-				 res.setStatus(201);
+				 res.setStatus(204);
 			 }
 		 } catch ( Exception e){
 			 e.printStackTrace();
