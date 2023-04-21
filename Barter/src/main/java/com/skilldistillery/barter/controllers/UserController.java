@@ -92,19 +92,34 @@ public class UserController {
 		return updatedUser;
 	}
 	
-	@PostMapping("/users/friends/{friendId}")
+	@PostMapping("users/friends/{friendId}")
 	public String addFriend(HttpServletRequest req, HttpServletResponse res, Principal principal, @PathVariable int friendId) {
-	    String username = principal.getName(); // get authenticated user's username
-	    User user = userService.findByUsername(username); // find the User object for the authenticated user
-	    User friend = userService.findById(friendId); // find the User object for the friend to be added
+	    String username = principal.getName(); 
+	    User user = userService.findByUsername(username); 
+	    User friend = userService.findById(friendId); 
 	    String message = userService.addFriend(user, friend);
 	    return message;
 	}
-	 @GetMapping("/skills/{skillName}")
+	 @GetMapping("users/skills/{skillName}")
 	    public List<User> getUsersBySkill(@PathVariable String skillName) {
 	        return userService.getUsersBySkill(skillName);
+	  }
+	 
+	 @GetMapping("users/count")
+	    public long getUserCount() {
+	        return userService.getUserCount();
 	    }
-
+	 
+	 @GetMapping("users/skillLevel/{skillLevel}")
+	 public List<User> getUsersBySkillLevel(@PathVariable String skillLevel) {
+		 return userService.getUsersBySkillLevel(skillLevel);
+	 }
+	 @GetMapping("users/skillName/{skillName}/skillLevel/{skillLevel}")
+	 public List<User> getUsersBySkillLevelAndSkillName(@PathVariable String skillLevel,@PathVariable String skillName) {
+		 return userService.getUsersBySkillLevelAndSkillName(skillLevel,skillName);
+	 }
+	 
+	 
 
 
 }

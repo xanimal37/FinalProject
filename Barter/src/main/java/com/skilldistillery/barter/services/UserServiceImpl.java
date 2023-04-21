@@ -146,6 +146,23 @@ public class UserServiceImpl implements UserService {
 	    }
 
 
+	@Override
+	public long getUserCount() {
+		// TODO Auto-generated method stub
+		return userRepo.count();
+	}
+	@Override
+	public List<User> getUsersBySkillLevel(String skillLevel) {
+		// TODO Auto-generated method stub
+		return userRepo.findBySkillLevel_Name(skillLevel);
+	}
+	@Override
+	public List<User> getUsersBySkillLevelAndSkillName(String skillLevel,String skillName) {
+		// TODO Auto-generated method stub
+		return userRepo.findDistinctBySkillsNameAndSkillLevel_Name(skillName,skillLevel);
+	}
+
+
 	
 	
 	
