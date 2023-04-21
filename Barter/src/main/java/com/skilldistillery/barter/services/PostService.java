@@ -18,11 +18,15 @@ public interface PostService {
 
     public Post updatePost(String username, int pId, Post post);
 
-    public boolean destroyPost(String username, int pId);
+    Post disablePost(String username, int pId);
     
     List<Post> postKeywordSearch(String username, String keyword);
     
     List<Comment> postComments(String username, int pId);
+    
+    Comment createComment(String username, int pId, Comment comment);
+    
+    Comment updateComment(String username, int cId, Comment comment) ;
 
 
 }
