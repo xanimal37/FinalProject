@@ -30,12 +30,13 @@ public class PostController {
 	@Autowired
 	private PostService postService;
 	
-	
+	//success in postman
 	@GetMapping("posts")
 	public List<Post> index(HttpServletRequest req, HttpServletResponse res) {
 		return postService.indexAll();
 	} 
 	
+	//success in postman
 	@GetMapping("posts/user/{uId}")
 	public Set<Post> indexByUser( HttpServletRequest req, HttpServletResponse res, @PathVariable int uId) {
 		return postService.postsByUser(uId);
@@ -46,9 +47,14 @@ public class PostController {
 		return postService.postById(pId, principal.getName());
 	} 
 	
-	@GetMapping("posts/{keyword}")
-	public List<Post> indexByPostId( HttpServletRequest req, HttpServletResponse res, @PathVariable String keyword) {
-		return postService.postKeywordSearch(keyword, keyword);
+	@GetMapping("posts/search/{keyword}")
+	public List<Post> indexByPostId( Principal principal, HttpServletRequest req, HttpServletResponse res, @PathVariable String keyword) {
+		List<Post> posts = postService.postKeywordSearch(principal.getName(), keyword);
+		if(posts == null) {
+			res.setStatus(401);
+		} 
+		return posts;
+		
 	} 
 	
 	@GetMapping("posts/comments/{pId}")
@@ -58,10 +64,9 @@ public class PostController {
 	
 	@PostMapping("posts")
 	public Post createPost(Principal principal, HttpServletRequest req, HttpServletResponse res, @RequestBody Post post) {
-		Post createPost = null;
 		try {
-			createPost = postService.createPost(principal.getName(), post);
-			if (createPost != null) {
+			post = postService.createPost(principal.getName(), post);
+			if (post != null) {
 				res.setStatus(201);
 			} else {
 				res.setStatus(400);
@@ -70,7 +75,7 @@ public class PostController {
 			e.printStackTrace();
 			res.setStatus(400);
 		}
-		return createPost;
+		return post;
 	} 
 	
 	@PutMapping("posts/{pId}")
@@ -89,20 +94,26 @@ public class PostController {
 		return post;
 	} 
 	
-    @DeleteMapping("posts/{pId}")
-	public void destroyPost(Principal principal, HttpServletRequest req, HttpServletResponse res, @PathVariable int pId) {
+    @PutMapping("posts/disabled/{pId}")
+	public Post disablePost(Principal principal, HttpServletRequest req, HttpServletResponse res, @PathVariable int pId) {
+    	Post disabledPost = null;
     	 try {
-    		 if (postService.destroyPost(principal.getName(), pId)) {
-    			 res.setStatus(204);
+    		 disabledPost = postService.disablePost(principal.getName(), pId);
+    		 if (disabledPost != null) {
+    			 res.setStatus(201);
+    			 return disabledPost;
     			 
     		 } else { 
     			 res.setStatus(404);
+    			 return null;
     		 }
     		} catch (Exception e) {
     			e.printStackTrace();
     			res.setStatus(400);
     		}
+    	 return null;
 	}
+    
 	
 	
 
