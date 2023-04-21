@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.barter.entities.Address;
 import com.skilldistillery.barter.entities.Task;
 import com.skilldistillery.barter.services.TaskService;
 
@@ -68,6 +69,25 @@ public class TaskController {
 			}
 			return task;
 		}
+		
+		//update task
+		//only for loggedin user
+		//adding an address
+		@PutMapping(path = "tasks/{id}/address")
+		public Task updateTask(@PathVariable int id, Principal principal, @RequestBody Address address, HttpServletResponse res) {
+			try {
+				task = taskService.updateTask(task, id,principal.getName());
+				if (task == null) {
+					res.setStatus(404);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				res.setStatus(400);
+				task = null;
+			}
+			return task;
+		}
+		
 	
 	//get all tasks owned by user
 	//only for logged in user

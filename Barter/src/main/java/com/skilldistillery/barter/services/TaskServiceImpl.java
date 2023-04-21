@@ -35,7 +35,9 @@ public class TaskServiceImpl implements TaskService {
 			original.setEstimatedHours(task.getEstimatedHours());
 			original.setScheduleDate(task.getScheduleDate());
 			original.setCompleteDate(task.getCompleteDate());
-			original.setAddress(task.getAddress());
+			if(task.getAddress!=null) {
+				original.setAddress(task.getAddress());
+			}
 			original.setTaskStatus(task.getTaskStatus());
 			original.setSkills(task.getSkills());
 			//this method will see the id and know to update
