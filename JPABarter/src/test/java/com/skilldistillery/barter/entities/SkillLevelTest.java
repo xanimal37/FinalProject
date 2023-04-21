@@ -55,6 +55,6 @@ public class SkillLevelTest {
 	@Test
 	void test_SkillLevel_UserSkill_Mapping() {
 		assertNotNull(skillLevelTwo);
-		assertEquals(true, skillLevelTwo.getUserSkill().size()>0);
+		assertEquals(true, skillLevelTwo.getUserSkills().size()>0);
 	}
 }
