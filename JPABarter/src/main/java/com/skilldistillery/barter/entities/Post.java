@@ -17,6 +17,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Post {
@@ -43,6 +44,7 @@ public class Post {
 	@OneToMany
 	private Set<Comment> comments;
 	
+	@JsonIgnoreProperties({"user"})
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
