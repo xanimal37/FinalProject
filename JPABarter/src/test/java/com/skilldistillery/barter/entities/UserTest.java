@@ -135,6 +135,13 @@ class UserTest {
 		
 	}
 	
+//	@Test
+//	void test_User_SkillLevel_Mapping() {
+//		assertNotNull(user);
+//		assertEquals("Plumbing", userTwo.getSkil);
+//		
+//	}
+	
 	
 
 }

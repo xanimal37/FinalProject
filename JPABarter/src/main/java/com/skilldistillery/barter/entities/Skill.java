@@ -29,6 +29,12 @@ public class Skill {
 	joinColumns = @JoinColumn(name="skill_id"),
 	inverseJoinColumns = @JoinColumn(name="task_id"))
 	private List <Task> tasks;
+	@JsonIgnore
+	@ManyToMany
+	@JoinTable(name="user_skill",
+	joinColumns = @JoinColumn(name="skill_id"),
+	inverseJoinColumns = @JoinColumn(name="skill_level_id"))
+	private List <SkillLevel> skillLevel;
 	
 	
 	public List<Task> getTasks() {
