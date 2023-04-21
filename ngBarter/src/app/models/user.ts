@@ -9,7 +9,7 @@ export class User {
   // ranking: Ranking | null;
   // friends: User[];
   // userSkills: UserSkill[] | null;
-  address: Address | null;
+  address: Address | null = null;
   // comments: Comment[] | null;
   // tasks: Task[] | null;
   // taskMessages: TaskMessage[] | null;

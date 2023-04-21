@@ -1,5 +1,11 @@
-<ul>
-  <li *ngFor="let user of users">
-    {{ user.username }}
-  </li>
-</ul>
+<div *ngIf="loggedInUser">
+  <button (click)="showList = true" *ngIf="!showList">Show User List</button>
+  <ul *ngIf="showList">
+    <li *ngFor="let user of users">
+      {{ user.username }}
+
+    </li>
+  </ul>
+</div>
+
+

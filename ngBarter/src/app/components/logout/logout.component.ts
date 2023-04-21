@@ -13,8 +13,14 @@ constructor(private auth:AuthService){
 
   logout(){
     this.auth.logout();
+
+    console.log("you are logged out");
+
+
     // this.router.navigateByUrl('/home')
 
   }
+
+
 
 }
