@@ -29,14 +29,14 @@ public class TaskController {
 	
 	//all tasks 
 	@GetMapping(path="tasks")
-	List<Task> getAllTasks(){
+	public List<Task> getAllTasks(){
 		return taskService.getAllTasks();
 	}
 	
 	//add task
 	//only for logged in user
 	@PostMapping(path="tasks")
-	Task createTask(@RequestBody Task task,Principal principal ,HttpServletRequest req,HttpServletResponse res) {
+	public Task createTask(@RequestBody Task task,Principal principal ,HttpServletRequest req,HttpServletResponse res) {
 		try {
 			task = taskService.createTask(task, principal.getName());
 			res.setStatus(201);
@@ -68,12 +68,19 @@ public class TaskController {
 			}
 			return task;
 		}
-	
+		
 	//get all tasks owned by user
 	//only for logged in user
 	@GetMapping(path="users/tasks")
-	List<Task> getAllTasksOwnedByUser(Principal principal){
+	public List<Task> getAllTasksOwnedByUser(Principal principal){
 		return taskService.getTasksOwnedByUser(principal.getName());
 	}
+	
+	//get all tasks by status
+	@GetMapping(path="tasks/{statusname}")
+	public List<Task> getTasksOfStatus(@PathVariable String statusname){
+		return taskService.getAllTasksOfStatus(statusname);
+	}
+	
 	
 }

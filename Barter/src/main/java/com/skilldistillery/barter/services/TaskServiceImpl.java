@@ -20,6 +20,7 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public Task createTask(Task task, String username) {
 		User user = userRepo.findByUsername(username);
+		task.setAddress(user.getAddress());
 		task.setUser(user);
 		return taskRepo.saveAndFlush(task);
 	}
@@ -46,9 +47,13 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public boolean deleteTask(int id) {
-		// TODO Auto-generated method stub
-		return false;
-
+		boolean wasDeleted = false;
+		Task task = taskRepo.findById(id);
+		if(task!=null) {
+			taskRepo.delete(task);
+			wasDeleted = true;
+		}
+		return wasDeleted;
 	}
 
 	@Override
@@ -64,5 +69,10 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public List<Task> getTasksOwnedByUser(String username) {
 		return taskRepo.findByUser_Username(username);
+	}
+
+	@Override
+	public List<Task> getAllTasksOfStatus(String name) {
+		return taskRepo.findByTaskStatus_Name(name);
 	}
 }

@@ -2,8 +2,8 @@ package com.skilldistillery.barter.services;
 
 import java.util.List;
 
+import com.skilldistillery.barter.entities.Address;
 import com.skilldistillery.barter.entities.User;
-import com.skilldistillery.barter.entities.UserSkill;
 
 public interface UserService {
 	public List <User> getAllUsers();
@@ -16,5 +16,11 @@ public interface UserService {
 	public List<User> getUsersBySkill(String skillName);
 	public long getUserCount();
 	public List<User> getUsersBySkillLevel(String skillLevel);
-	public List<User> getUsersBySkillLevelAndSkillName(String skillLevel,String skillName);
+	public List<User> getUsersBySkillNameAndSkillLevel(String skillLevel,String skillName);
+	public List<User> getUsersByRanking(String rankName);
+	
+
+	      
+	
 }
+

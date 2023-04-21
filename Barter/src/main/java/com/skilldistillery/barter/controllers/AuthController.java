@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.barter.entities.Address;
 import com.skilldistillery.barter.entities.User;
 import com.skilldistillery.barter.services.AuthService;
 
@@ -27,7 +28,9 @@ import com.skilldistillery.barter.services.AuthService;
 		     res.setStatus(400);
 		     return null;
 		  }
-		  user = authService.register(user);
+		  Address address = user.getAddress();
+		  
+		  user = authService.register(user,address);
 		  return user;
 		}
 		 

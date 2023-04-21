@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="skill_level")
 public class SkillLevel {
@@ -20,16 +22,17 @@ public class SkillLevel {
 	
 	String description;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="skillLevel")
-	private Set<UserSkill> userSkill;
+	private Set<UserSkill> userSkills;
 	
 
-	public Set<UserSkill> getUserSkill() {
-		return userSkill;
+	public Set<UserSkill> getUserSkills() {
+		return userSkills;
 	}
 
-	public void setUserSkill(Set<UserSkill> userSkill) {
-		this.userSkill = userSkill;
+	public void setUserSkills(Set<UserSkill> userSkill) {
+		this.userSkills = userSkill;
 	}
 
 	public int getId() {
