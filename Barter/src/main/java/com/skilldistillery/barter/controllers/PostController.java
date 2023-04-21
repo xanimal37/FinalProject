@@ -30,13 +30,11 @@ public class PostController {
 	@Autowired
 	private PostService postService;
 	
-	//success in postman
 	@GetMapping("posts")
 	public List<Post> index(HttpServletRequest req, HttpServletResponse res) {
 		return postService.indexAll();
 	} 
-	
-	//success in postman
+	 
 	@GetMapping("posts/user/{uId}")
 	public Set<Post> indexByUser( HttpServletRequest req, HttpServletResponse res, @PathVariable int uId) {
 		return postService.postsByUser(uId);

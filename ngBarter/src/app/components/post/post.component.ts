@@ -28,29 +28,9 @@ export class PostComponent {
     ) {
   }
 
-  // ngOnInit(): void {
-  //   let postIdString = this.route.snapshot.paramMap.get('id');
-  //   if (postIdString) {
-  //    console.log('ngOnInit: postId: ' + postIdString);
-  //    let postId = ~~postIdString;
-  //    console.log(postId);
-  //    if (isNaN(postId)) {
-  //      this.router.navigateByUrl('invalidId');
-  //    }
-  //    else {
-  //      this.postService.indexAll().subscribe({
-  //        next: (post) => {
-  //          this.selectedPosts = post;
-  //        },
-  //        error: (fail) => {
-  //          this.router.navigateByUrl('PostNotFound');
-  //        }
-  //      });
-  //    }
-
-  //   }
-  //   this.reload();
-  //    }
+  ngOnInit(): void {
+    this.reload();
+     }
 
      reload() {
       this.postService.indexAll().subscribe({
