@@ -20,6 +20,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class User {
@@ -46,7 +47,6 @@ public class User {
 	@OneToOne
 	@JoinColumn(name="ranking_id")
 	private Ranking ranking;
-	
 	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "user_has_friends", 
@@ -54,12 +54,18 @@ public class User {
 	inverseJoinColumns = @JoinColumn(name = "friend_id"))
 	private Set<User> friends; 
 	
-	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "user_skill", 
 	joinColumns = @JoinColumn(name = "user_id"),
 	inverseJoinColumns = @JoinColumn(name = "skill_id"))
 	private List<Skill> skills; 
+	
+	@JsonIgnore
+	@ManyToMany
+	@JoinTable(name = "user_skill", 
+	joinColumns = @JoinColumn(name = "user_id"),
+	inverseJoinColumns = @JoinColumn(name = "skill_level_id"))
+	private List<SkillLevel> skillLevel; 
 	
 
 
@@ -322,6 +328,14 @@ public class User {
 
 	public void setRanking(Ranking ranking) {
 		this.ranking = ranking;
+	}
+
+	public List<SkillLevel> getSkillLevel() {
+		return skillLevel;
+	}
+
+	public void setSkillLevel(List<SkillLevel> skillLevel) {
+		this.skillLevel = skillLevel;
 	}
 
 	public Set<User> getFriends() {

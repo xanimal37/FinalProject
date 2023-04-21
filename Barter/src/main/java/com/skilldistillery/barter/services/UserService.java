@@ -14,4 +14,7 @@ public interface UserService {
 	public User findByUsername(String username);
 	public String addFriend(User user,User friend);
 	public List<User> getUsersBySkill(String skillName);
+	public long getUserCount();
+	public List<User> getUsersBySkillLevel(String skillLevel);
+	public List<User> getUsersBySkillLevelAndSkillName(String skillLevel,String skillName);
 }
