@@ -13,6 +13,8 @@ export class TasklistComponent implements OnInit {
 
   title='Task List';
   tasks: Task[]=[];
+  newTask: Task = new Task();
+  addingTask:boolean = false;
 
   constructor(
   private taskService:TaskService,
@@ -38,4 +40,19 @@ export class TasklistComponent implements OnInit {
         }
       );
     }
+
+    addTask(task: Task){
+      this.taskService.create(task).subscribe({
+        next: (createdTask)=>{
+        //coming back from post method in controller
+        //anything depending on asynchronous operations (needs server response)
+        this.newTask=new Task();
+        this.reload();
+        },
+        error: (fail) => {
+          console.error('Error creating task.');
+          console.error(fail);
+        }
+      });
+      }
 }
