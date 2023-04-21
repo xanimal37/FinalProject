@@ -70,11 +70,11 @@ public class User {
 	@OneToMany
 	@JoinColumn(name="user_id")
 	private List <Comment> comments;
-	
-	@JsonIgnore
-	@OneToMany
-	@JoinColumn(name="user_id")
-	private List <UserSkill> userSkill;
+
+//	@JsonIgnore
+//	@OneToMany
+//	@JoinColumn(name="user_id")
+//	private List <UserSkill> userSkill;
 	
 	@JsonIgnore
 	@OneToMany
@@ -165,13 +165,13 @@ public class User {
 	}
 
 
-	public List<UserSkill> getUserSkill() {
-		return userSkill;
-	}
-
-	public void setUserSkill(List<UserSkill> userSkill) {
-		this.userSkill = userSkill;
-	}
+//	public List<UserSkill> getUserSkill() {
+//		return userSkill;
+//	}
+//
+//	public void setUserSkill(List<UserSkill> userSkill) {
+//		this.userSkill = userSkill;
+//	}
 
 	public String getPassword() {
 		return password;

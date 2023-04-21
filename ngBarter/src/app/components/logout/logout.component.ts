@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./logout.component.css']
 })
 export class LogoutComponent {
+constructor(private auth:AuthService){
+
+}
+
+  logout(){
+    this.auth.logout();
+    // this.router.navigateByUrl('/home')
+
+  }
 
 }

@@ -13,8 +13,12 @@ import { ComplaintComponent } from './components/complaint/complaint.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
+
+import { RegisterComponent } from './components/register/register.component';
+
 import { TasklistComponent } from './components/tasklist/tasklist.component';
 import { HomeComponent } from './components/home/home.component';
+
 
 @NgModule({
   declarations: [
@@ -26,6 +30,7 @@ import { HomeComponent } from './components/home/home.component';
     NotificationComponent,
     LoginComponent,
     LogoutComponent,
+    RegisterComponent,
     TasklistComponent,
     HomeComponent
   ],
