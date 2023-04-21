@@ -40,8 +40,10 @@ public class Post {
 	@Column(name="update_date")
 	private LocalDateTime updateDate;
 	
+	private boolean enabled;
+	
 	@JsonIgnore
-	@OneToMany
+	@OneToMany(mappedBy="post")
 	private Set<Comment> comments;
 	
 	@JsonIgnoreProperties({"user"})
@@ -49,6 +51,15 @@ public class Post {
 	@JoinColumn(name="user_id")
 	private User user;
 	
+	
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 
 	public Set<Comment> getComments() {
 		return comments;
@@ -126,7 +137,8 @@ public class Post {
 	@Override
 	public String toString() {
 		return "Post [id=" + id + ", title=" + title + ", content=" + content + ", createDate=" + createDate
-				+ ", updateDate=" + updateDate + ", comments=" + comments + ", user=" + user + "]";
+				+ ", updateDate=" + updateDate + ", enabled=" + enabled + ", comments=" + comments + ", user=" + user
+				+ "]";
 	}
 	
 	

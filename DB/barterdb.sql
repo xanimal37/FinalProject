@@ -228,6 +228,7 @@ CREATE TABLE IF NOT EXISTS `post` (
   `user_id` INT NOT NULL,
   `create_date` DATETIME NULL,
   `update_date` DATETIME NULL,
+  `enabled` TINYINT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_post_user1_idx` (`user_id` ASC),
   CONSTRAINT `fk_post_user1`
@@ -251,6 +252,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `in_reply_to_id` INT NULL,
   `create_date` DATETIME NULL,
   `update_date` DATETIME NULL,
+  `enabled` TINYINT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_comment_post1_idx` (`post_id` ASC),
   INDEX `fk_comment_user1_idx` (`user_id` ASC),
@@ -543,9 +545,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `barterdb`;
-INSERT INTO `post` (`id`, `title`, `content`, `user_id`, `create_date`, `update_date`) VALUES (1, 'Plumbing Question', 'Whats the best way to install an L joint with a flex host on an existing sprinkler system', 2, '2023-02-23', '2023-02-24');
-INSERT INTO `post` (`id`, `title`, `content`, `user_id`, `create_date`, `update_date`) VALUES (2, 'Sprinklers', 'How do I swap my Sprinkler head', 3, '2023-02-23', NULL);
-INSERT INTO `post` (`id`, `title`, `content`, `user_id`, `create_date`, `update_date`) VALUES (3, 'Fire Ant Treatment', 'What is the best home remedy without killing my grass', 3, '2023-02-24', NULL);
+INSERT INTO `post` (`id`, `title`, `content`, `user_id`, `create_date`, `update_date`, `enabled`) VALUES (1, 'Plumbing Question', 'Whats the best way to install an L joint with a flex host on an existing sprinkler system', 2, '2023-02-23', '2023-02-24', 1);
+INSERT INTO `post` (`id`, `title`, `content`, `user_id`, `create_date`, `update_date`, `enabled`) VALUES (2, 'Sprinklers', 'How do I swap my Sprinkler head', 3, '2023-02-23', NULL, 1);
+INSERT INTO `post` (`id`, `title`, `content`, `user_id`, `create_date`, `update_date`, `enabled`) VALUES (3, 'Fire Ant Treatment', 'What is the best home remedy without killing my grass', 3, '2023-02-24', NULL, 1);
 
 COMMIT;
 
@@ -555,10 +557,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `barterdb`;
-INSERT INTO `comment` (`id`, `content`, `post_id`, `user_id`, `in_reply_to_id`, `create_date`, `update_date`) VALUES (1, 'Make sure your pipe fitting matched and you used threading tape', 1, 3, NULL, '2020-01-01 01:00:00', NULL);
-INSERT INTO `comment` (`id`, `content`, `post_id`, `user_id`, `in_reply_to_id`, `create_date`, `update_date`) VALUES (2, 'Correct, this will ensure the fitting is secure', 1, 2, 1, '2020-01-02 01:00:00', NULL);
-INSERT INTO `comment` (`id`, `content`, `post_id`, `user_id`, `in_reply_to_id`, `create_date`, `update_date`) VALUES (3, 'Ensure the valve is properly seated..blah ', 2, 2, NULL, '2020-01-02', NULL);
-INSERT INTO `comment` (`id`, `content`, `post_id`, `user_id`, `in_reply_to_id`, `create_date`, `update_date`) VALUES (4, 'Just pee on them!', 3, 3, NULL, NULL, NULL);
+INSERT INTO `comment` (`id`, `content`, `post_id`, `user_id`, `in_reply_to_id`, `create_date`, `update_date`, `enabled`) VALUES (1, 'Make sure your pipe fitting matched and you used threading tape', 1, 3, NULL, '2020-01-01 01:00:00', NULL, NULL);
+INSERT INTO `comment` (`id`, `content`, `post_id`, `user_id`, `in_reply_to_id`, `create_date`, `update_date`, `enabled`) VALUES (2, 'Correct, this will ensure the fitting is secure', 1, 2, 1, '2020-01-02 01:00:00', NULL, NULL);
+INSERT INTO `comment` (`id`, `content`, `post_id`, `user_id`, `in_reply_to_id`, `create_date`, `update_date`, `enabled`) VALUES (3, 'Ensure the valve is properly seated..blah ', 2, 2, NULL, '2020-01-02', NULL, NULL);
+INSERT INTO `comment` (`id`, `content`, `post_id`, `user_id`, `in_reply_to_id`, `create_date`, `update_date`, `enabled`) VALUES (4, 'Just pee on them!', 3, 3, NULL, NULL, NULL, NULL);
 
 COMMIT;
 

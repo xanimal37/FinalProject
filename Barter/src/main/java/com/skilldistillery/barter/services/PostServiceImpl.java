@@ -14,19 +14,16 @@ import com.skilldistillery.barter.repositories.PostRepository;
 import com.skilldistillery.barter.repositories.UserRepository;
 
 @Service
-public class PostServiceImpl implements PostService{
-	
+public class PostServiceImpl implements PostService {
+
 	@Autowired
 	private PostRepository postRepo;
-	
+
 	@Autowired
 	private CommentRepository commentRepo;
-	
+
 	@Autowired
 	private UserRepository userRepo;
-	
-	
-	
 
 	@Override
 	public List<Post> indexAll() {
@@ -49,9 +46,21 @@ public class PostServiceImpl implements PostService{
 		if (user != null) {
 			post.setUser(user);
 			postRepo.saveAndFlush(post);
+			return post;
 		}
 		return null;
 	}
+
+//	@Override
+//	public Post createComment(String username, int pId, Comment comment) {
+//		User user = userRepo.findByUsername(username);
+//		if (user != null) {
+//			post.setUser(user);
+//			postRepo.saveAndFlush(post);
+//			return post;
+//		}
+//		return null;
+//	}
 
 	@Override
 	public Post updatePost(String username, int pId, Post post) {
@@ -66,36 +75,64 @@ public class PostServiceImpl implements PostService{
 		return null;
 	}
 
+//	@Override
+//	public Post updateComment(String username, int cId, Comment comment) {
+//		User user = userRepo.findByUsername(username);
+//		Post updatePost = postRepo.findById(pId);
+//		if (user != null) {
+//			updatePost.setUser(user);
+//			updatePost.setTitle(post.getTitle());
+//			updatePost.setContent(post.getContent());
+//			return postRepo.saveAndFlush(updatePost);
+//		}
+//		return null;
+//	}
+
 	@Override
-	public boolean destroyPost(String username, int pId) {
-		boolean removed = true;
+	public Post disablePost(String username, int pId) {
 		User user = userRepo.findByUsername(username);
-		Post deletePost = postRepo.findById(pId);
-		if(user != null) {
-			postRepo.delete(deletePost);
-			if(postRepo.findById(pId) == null)
-				return removed;
+		Post disablePost = postRepo.findById(pId);
+		if (user != null) {
+			disablePost.setEnabled(false);
+			
+			if (disablePost.isEnabled() == false) {
+				return disablePost;
+			}
 		}
-		return false;
+		return null;
 	}
-	
+
 	@Override
 	public List<Post> postKeywordSearch(String username, String keyword) {
+		System.out.println(keyword);
 		String newKeyword = "%" + keyword + "%";
+		System.out.println(newKeyword);
 		User user = userRepo.findByUsername(username);
-		if (user != null) {
-			return postRepo.findByContentAndComments_ContentLike(newKeyword, newKeyword);
+		if (user != null && (user.getRole().equals("user" )|| user.getRole().equals("admin"))) {
+			return postRepo.findByContentLikeOrComments_ContentLike(newKeyword, newKeyword);
 		} else {
-		return null;
+			return null;
 		}
 	}
-	
+
 	public List<Comment> postComments(String username, int pId) {
 		User user = userRepo.findByUsername(username);
-		if (user != null) {
+		if (user.getRole() == "user" || user.getRole() == "admin") {
 			return commentRepo.findByPost_Id(pId);
 		} else {
 			return null;
 		}
+	}
+
+	@Override
+	public Comment createComment(String username, int pId, Comment comment) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Comment updateComment(String username, int cId, Comment comment) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
