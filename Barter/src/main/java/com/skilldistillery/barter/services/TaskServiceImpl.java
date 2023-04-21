@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.skilldistillery.barter.entities.Task;
-import com.skilldistillery.barter.entities.TaskStatus;
 import com.skilldistillery.barter.entities.User;
 import com.skilldistillery.barter.repositories.TaskRepository;
 import com.skilldistillery.barter.repositories.UserRepository;
@@ -21,6 +20,7 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public Task createTask(Task task, String username) {
 		User user = userRepo.findByUsername(username);
+		task.setAddress(user.getAddress());
 		task.setUser(user);
 		return taskRepo.saveAndFlush(task);
 	}
