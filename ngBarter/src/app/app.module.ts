@@ -18,6 +18,8 @@ import { TasklistComponent } from './components/tasklist/tasklist.component';
 import { HomeComponent } from './components/home/home.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { OtherUserProfileComponent } from './components/other-user-profile/other-user-profile.component';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     TasklistComponent,
     HomeComponent,
     AdminComponent,
-    NavbarComponent
+    NavbarComponent,
+    OtherUserProfileComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
