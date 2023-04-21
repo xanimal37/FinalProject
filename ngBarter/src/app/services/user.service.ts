@@ -25,17 +25,6 @@ private url =environment.baseUrl;
   }
 
 
-  register(user: User): Observable<User> {
-    // Create POST request to register a new account
-    return this.http.post<User>(this.url + 'register', user).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError(
-          () => new Error('AuthService.register(): error registering user.')
-        );
-      })
-    );
-  }
 
 
   getUsers(): Observable<User[]> {
@@ -50,18 +39,6 @@ private url =environment.baseUrl;
     );
   }
 
-  // getUser(id: number): Observable<User> {
-  //   const url = `${this.apiUrl}/${id}`;
-  //   return this.http.get<User>(url);
-  // }
 
-  // addUser(user: User): Observable<User> {
-  //   return this.http.post<User>(this.apiUrl, user, this.httpOptions);
-  // }
-
-  // updateUser(user: User): Observable<any> {
-  //   const url = `${this.apiUrl}/${user.id}`;
-  //   return this.http.put(url, user, this.httpOptions);
-  // }
 
 }
