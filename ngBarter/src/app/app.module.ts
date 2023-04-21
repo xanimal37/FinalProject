@@ -13,11 +13,11 @@ import { ComplaintComponent } from './components/complaint/complaint.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
-
 import { RegisterComponent } from './components/register/register.component';
 import { DatePipe } from '@angular/common';
 import { TasklistComponent } from './components/tasklist/tasklist.component';
 import { HomeComponent } from './components/home/home.component';
+import { AdminComponent } from './components/admin/admin.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { OtherUserProfileComponent } from './components/other-user-profile/other-user-profile.component';
 import { UserListComponent } from './components/user-list/user-list.component';
@@ -36,6 +36,7 @@ import { UserListComponent } from './components/user-list/user-list.component';
     RegisterComponent,
     TasklistComponent,
     HomeComponent,
+    AdminComponent,
     NavbarComponent,
     OtherUserProfileComponent,
     UserListComponent
