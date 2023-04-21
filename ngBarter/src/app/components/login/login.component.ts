@@ -22,7 +22,7 @@ export class LoginComponent {
       next: (loggedInUser) => {
         console.log(loggedInUser);
 
-        // this.router.navigateByUrl('/todo');
+         this.router.navigateByUrl('/usersList');
       },
       error: (problem) => {
         console.error('RegisterComponent.register(): Error logging in user:');
