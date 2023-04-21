@@ -28,7 +28,7 @@ import com.skilldistillery.barter.services.AuthService;
 		     res.setStatus(400);
 		     return null;
 		  }
-		  Address address = user.getAddress();
+//		  Address address = user.getAddress();
 		  user.setEnabled(true);
 		  user.setRole("user");
 		  user = authService.register(user);
