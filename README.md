@@ -83,6 +83,14 @@ Front end was broken up into several sub-directories:
 
 #### Edwin Flatto:
 1. Mapping a composite key in Hibernate requires creating a separate class for the key and The @EmbeddedId annotation can be used to map the composite key in the entity class.
+
+2. Learned how to work with a many-to-many relationship between four tables, where three of the tables are connected through a join table that has a composite key. This required understanding the use of the @ManyToMany annotation in Spring, along with the @JoinTable annotation to define the join table and its columns. It also required creating separate entities for the join table and the primary tables involved in the relationship, along with the appropriate mappings and methods to access the data.
+
+3. When working with a four-way join table, it's important to specify all necessary join columns in the query with an And in the Jpa Repository query to find all necessary properties.
+
+
+
+
 #### Lisa Zeeb
 
 #### Rob Tisdale:
