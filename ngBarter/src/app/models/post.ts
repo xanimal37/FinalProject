@@ -18,8 +18,8 @@ export class Post {
     createDate: string = '',
     updateDate: string = '',
     enabled: boolean = true,
-    comments: Comment[] | null,
-    user: User  | null
+    comments: Comment[] | null = null,
+    user: User  | null = null
   ){
     this.id = id;
     this.title = title;
