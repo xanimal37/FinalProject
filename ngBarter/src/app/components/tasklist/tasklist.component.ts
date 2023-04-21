@@ -30,7 +30,7 @@ export class TasklistComponent implements OnInit {
             this.tasks = tasks;
           },
           error: (problem) => {
-            console.error('TaskListHttpComponent.loadTodos(): error retreiving tasks:');
+            console.error('TaskListHttpComponent.loadTasks(): error retreiving tasks:');
             console.error(problem);
           }
         }

@@ -21,7 +21,7 @@ import com.skilldistillery.barter.services.TaskService;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin({"*", "http://localhost/"})
+@CrossOrigin({"*", "http://localhost:4200"})
 public class TaskController {
 
 	@Autowired
