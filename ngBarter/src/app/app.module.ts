@@ -39,7 +39,8 @@ import { UserListComponent } from './components/user-list/user-list.component';
     AdminComponent,
     NavbarComponent,
     OtherUserProfileComponent,
-    UserListComponent
+    UserListComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
