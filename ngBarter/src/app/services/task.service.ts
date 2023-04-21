@@ -14,7 +14,7 @@ export class TaskService {
 
   constructor(private http: HttpClient) { }
 
-
+  //GET api/tasks
   index(): Observable<Task[]> {
     return this.http.get<Task[]>(this.url).pipe(
       catchError((err:any)=>{
@@ -25,4 +25,16 @@ export class TaskService {
       })
     );
   };
+
+  //POST api/tasks
+  create(task: Task): Observable<Task> {
+    return this.http.post<Task>(environment.baseUrl+"api/tasks", task).pipe(
+      catchError((err:any)=>{
+        console.log(err);
+        return throwError(
+          ()=>new Error('TaskService.create(): error creating task: '+err)
+        );
+      })
+    );
+    };
 }
