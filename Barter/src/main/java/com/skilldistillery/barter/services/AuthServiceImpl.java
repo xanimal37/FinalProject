@@ -29,13 +29,13 @@ public class AuthServiceImpl implements AuthService {
 	
 	@Override
 	public User register(User user) {
-		Address address = user.getAddress();
+//		Address address = user.getAddress();
 		String encrypted = encoder.encode(user.getPassword());
 		user.setPassword(encrypted);
 		user.setEnabled(true);
 		user.setRole("user");
-		addressRepo.saveAndFlush(address);
-		user.setAddress(address);
+//		addressRepo.saveAndFlush(address);
+//		user.setAddress(address);
 		return userRepo.saveAndFlush(user);
 	}
 
