@@ -18,6 +18,7 @@ import { RegisterComponent } from './components/register/register.component';
 
 import { TasklistComponent } from './components/tasklist/tasklist.component';
 import { HomeComponent } from './components/home/home.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { HomeComponent } from './components/home/home.component';
     LogoutComponent,
     RegisterComponent,
     TasklistComponent,
-    HomeComponent
+    HomeComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
