@@ -21,5 +21,7 @@ public interface TaskService {
 	
 	List<Task> getTasksOwnedByUser(String username);
 	
+	List<Task> getAllTasksOfStatus(String name);
+	
 
 }

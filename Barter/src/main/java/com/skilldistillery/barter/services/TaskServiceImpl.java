@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.skilldistillery.barter.entities.Task;
+import com.skilldistillery.barter.entities.TaskStatus;
 import com.skilldistillery.barter.entities.User;
 import com.skilldistillery.barter.repositories.TaskRepository;
 import com.skilldistillery.barter.repositories.UserRepository;
@@ -46,9 +47,13 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public boolean deleteTask(int id) {
-		// TODO Auto-generated method stub
-		return false;
-
+		boolean wasDeleted = false;
+		Task task = taskRepo.findById(id);
+		if(task!=null) {
+			taskRepo.delete(task);
+			wasDeleted = true;
+		}
+		return wasDeleted;
 	}
 
 	@Override
@@ -64,5 +69,10 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public List<Task> getTasksOwnedByUser(String username) {
 		return taskRepo.findByUser_Username(username);
+	}
+
+	@Override
+	public List<Task> getAllTasksOfStatus(String name) {
+		return taskRepo.findByTaskStatus_Name(name);
 	}
 }
