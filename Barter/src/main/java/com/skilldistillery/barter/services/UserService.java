@@ -17,4 +17,10 @@ public interface UserService {
 	public long getUserCount();
 	public List<User> getUsersBySkillLevel(String skillLevel);
 	public List<User> getUsersBySkillLevelAndSkillName(String skillLevel,String skillName);
+	public List<User> getUsersByRanking(String rankName);
+	
+
+	      
+	
 }
+

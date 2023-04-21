@@ -118,6 +118,11 @@ public class UserController {
 	 public List<User> getUsersBySkillLevelAndSkillName(@PathVariable String skillLevel,@PathVariable String skillName) {
 		 return userService.getUsersBySkillLevelAndSkillName(skillLevel,skillName);
 	 }
+	 @GetMapping("users/ranking/{rankName}")
+	 public List<User> getUsersByRanking(@PathVariable String rankName) {
+		 return userService.getUsersByRanking(rankName);
+	 }
+	
 	 
 	 
 

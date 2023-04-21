@@ -35,6 +35,12 @@ public class Skill {
 	joinColumns = @JoinColumn(name="skill_id"),
 	inverseJoinColumns = @JoinColumn(name="skill_level_id"))
 	private List <SkillLevel> skillLevel;
+	@JsonIgnore
+	@ManyToMany
+	@JoinTable(name="user_skill",
+	joinColumns = @JoinColumn(name="skill_id"),
+	inverseJoinColumns = @JoinColumn(name="user_id"))
+	private List <User> user;
 	
 	
 	public List<Task> getTasks() {
@@ -61,6 +67,14 @@ public class Skill {
 		this.name = name;
 	}
 	
+	public List<SkillLevel> getSkillLevel() {
+		return skillLevel;
+	}
+
+	public void setSkillLevel(List<SkillLevel> skillLevel) {
+		this.skillLevel = skillLevel;
+	}
+
 	public String getDescription() {
 		return description;
 	}

@@ -18,6 +18,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	List<User> findDistinctBySkillsNameAndSkillLevel_Name(String skillLevel,String skillName);
 	
+	List<User> findByRankingName(String name);
 	
 	
 	
