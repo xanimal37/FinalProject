@@ -28,8 +28,8 @@ public class AuthServiceImpl implements AuthService {
 	private AddressRepository addressRepo;
 	
 	@Override
-	public User register(User user,Address address) {
-
+	public User register(User user) {
+		Address address = user.getAddress();
 		String encrypted = encoder.encode(user.getPassword());
 		user.setPassword(encrypted);
 		user.setEnabled(true);
