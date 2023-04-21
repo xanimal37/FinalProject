@@ -15,15 +15,18 @@ export class UserListComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.userService.getUsers().subscribe(
-      (users: User[]) => {
-        this.users = users;
-      },
-      (error: any) => {
-        console.log(error);
-      }
-    );
+    this.getAllUsers();
   }
-
+  getAllUsers(){
+  this.userService.getUsers().subscribe({
+   next:(users: User[]) => {
+      this.users = users;
+    },
+    error:(nojoy) => {
+      console.log(nojoy);
+    }
+    }
+   );
+  }
 
 }
