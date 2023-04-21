@@ -438,6 +438,7 @@ START TRANSACTION;
 USE `barterdb`;
 INSERT INTO `address` (`id`, `street1`, `street2`, `city`, `state`, `zipcode`) VALUES (1, '123 Main St', NULL, 'Richmond', 'VA', 54321);
 INSERT INTO `address` (`id`, `street1`, `street2`, `city`, `state`, `zipcode`) VALUES (2, '37 SD St', NULL, 'Denver', 'CO', 12345);
+INSERT INTO `address` (`id`, `street1`, `street2`, `city`, `state`, `zipcode`) VALUES (3, '2132 First St.', NULL, 'Navarre', 'FL', 32566);
 
 COMMIT;
 
@@ -464,6 +465,7 @@ USE `barterdb`;
 INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `image_url`, `email`, `phone`, `create_date`, `update_date`, `firstname`, `lastname`, `address_id`, `ranking_id`, `biography`, `availability`) VALUES (1, 'admin', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, 'admin', NULL, NULL, NULL, '2013-07-03', NULL, 'George', 'Washington', 2, 5, NULL, NULL);
 INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `image_url`, `email`, `phone`, `create_date`, `update_date`, `firstname`, `lastname`, `address_id`, `ranking_id`, `biography`, `availability`) VALUES (2, 'eflatto', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, 'user', NULL, NULL, NULL, '2015-07-04', NULL, 'Edwin', 'Flatto', 1, 3, NULL, NULL);
 INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `image_url`, `email`, `phone`, `create_date`, `update_date`, `firstname`, `lastname`, `address_id`, `ranking_id`, `biography`, `availability`) VALUES (3, 'lzeeb', '$2a$10$mYVa48FXtaD7zEGW7QCNtOCPe4vUFYKgx0CUpqJZjtuqnLhPzZjVi', 1, 'user', NULL, NULL, NULL, '2020-01-23', NULL, 'Lisa', 'Zeeb', 2, 2, NULL, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `image_url`, `email`, `phone`, `create_date`, `update_date`, `firstname`, `lastname`, `address_id`, `ranking_id`, `biography`, `availability`) VALUES (4, 'rtisdale', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, 'user', NULL, NULL, NULL, '2020-01-23', NULL, 'Rob', 'Tisdale', 3, 3, NULL, NULL);
 
 COMMIT;
 
@@ -542,6 +544,8 @@ COMMIT;
 START TRANSACTION;
 USE `barterdb`;
 INSERT INTO `post` (`id`, `title`, `content`, `user_id`, `create_date`, `update_date`) VALUES (1, 'Plumbing Question', 'Whats the best way to install an L joint with a flex host on an existing sprinkler system', 2, '2023-02-23', '2023-02-24');
+INSERT INTO `post` (`id`, `title`, `content`, `user_id`, `create_date`, `update_date`) VALUES (2, 'Sprinklers', 'How do I swap my Sprinkler head', 3, '2023-02-23', NULL);
+INSERT INTO `post` (`id`, `title`, `content`, `user_id`, `create_date`, `update_date`) VALUES (3, 'Fire Ant Treatment', 'What is the best home remedy without killing my grass', 3, '2023-02-24', NULL);
 
 COMMIT;
 
@@ -553,6 +557,8 @@ START TRANSACTION;
 USE `barterdb`;
 INSERT INTO `comment` (`id`, `content`, `post_id`, `user_id`, `in_reply_to_id`, `create_date`, `update_date`) VALUES (1, 'Make sure your pipe fitting matched and you used threading tape', 1, 3, NULL, '2020-01-01 01:00:00', NULL);
 INSERT INTO `comment` (`id`, `content`, `post_id`, `user_id`, `in_reply_to_id`, `create_date`, `update_date`) VALUES (2, 'Correct, this will ensure the fitting is secure', 1, 2, 1, '2020-01-02 01:00:00', NULL);
+INSERT INTO `comment` (`id`, `content`, `post_id`, `user_id`, `in_reply_to_id`, `create_date`, `update_date`) VALUES (3, 'Ensure the valve is properly seated..blah ', 2, 2, NULL, '2020-01-02', NULL);
+INSERT INTO `comment` (`id`, `content`, `post_id`, `user_id`, `in_reply_to_id`, `create_date`, `update_date`) VALUES (4, 'Just pee on them!', 3, 3, NULL, NULL, NULL);
 
 COMMIT;
 
