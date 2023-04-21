@@ -1,1 +1,14 @@
 <p>tasklist works!</p>
+
+<div>
+<div *ngFor="let task of tasks">
+  <h3>{{task.name}}</h3>
+  <p>{{task.description}}</p>
+  <p>estimated hours: {{task.estimatedHours}}</p>
+<p>materials provided? {{task.materialsProvided}}</p>
+<p>scheduled for: {{task.scheduleDate | date:'shortDate'}}</p>
+	<p>started on: {{task.startDate | date:'shortDate'}}</p>
+	<p>completed: {{task.completeDate | date:'shortDate'}}</p>
+
+</div>
+  </div>

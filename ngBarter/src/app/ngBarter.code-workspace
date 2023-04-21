@@ -4,10 +4,10 @@
 			"path": "../.."
 		},
 		{
-			"path": "../../../../../Angular/ngToDo"
+			"path": "../../../../EventTracker/ngWildLife"
 		},
 		{
-			"path": "../../../../EventTracker/ngWildLife"
+			"path": "../../../../../Angular/ngToDo"
 		}
 	],
 	"settings": {}

@@ -21,66 +21,66 @@ import com.skilldistillery.barter.services.TaskService;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin({"*", "http://localhost/"})
+@CrossOrigin({ "*", "http://localhost/" })
 public class TaskController {
 
 	@Autowired
 	private TaskService taskService;
-	
-	//all tasks 
-	@GetMapping(path="tasks")
-	public List<Task> getAllTasks(){
+
+	// all tasks
+	@GetMapping(path = "tasks")
+	public List<Task> getAllTasks() {
 		return taskService.getAllTasks();
 	}
-	
-	//add task
-	//only for logged in user
-	@PostMapping(path="tasks")
-	public Task createTask(@RequestBody Task task,Principal principal ,HttpServletRequest req,HttpServletResponse res) {
+
+	// add task
+	// only for logged in user
+	@PostMapping(path = "tasks")
+	public Task createTask(@RequestBody Task task, Principal principal, HttpServletRequest req,
+			HttpServletResponse res) {
 		try {
 			task = taskService.createTask(task, principal.getName());
 			res.setStatus(201);
-			//StringBuffer url = req.getRequestURL(); // define as stringbuffer
-			//url.append("/").append(task.getId()); // append id to url so will show user the post url
-			//res.setHeader("Location", "http://localhost:8083"); // location
-		}
-		catch(Exception e) {
+			// StringBuffer url = req.getRequestURL(); // define as stringbuffer
+			// url.append("/").append(task.getId()); // append id to url so will show user
+			// the post url
+			// res.setHeader("Location", "http://localhost:8083"); // location
+		} catch (Exception e) {
 			e.printStackTrace();
 			res.setStatus(404);
-			task=null;
+			task = null;
 		}
 		return task;
 	}
-	
-	//update task
-	//only for logged in users task
-		@PutMapping(path = "tasks/{id}")
-		public Task updateTask(@PathVariable int id, Principal principal, @RequestBody Task task, HttpServletResponse res) {
-			try {
-				task = taskService.updateTask(task, id,principal.getName());
-				if (task == null) {
-					res.setStatus(404);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				res.setStatus(400);
-				task = null;
+
+	// update task
+	// only for logged in users task
+	@PutMapping(path = "tasks/{id}")
+	public Task updateTask(@PathVariable int id, Principal principal, @RequestBody Task task, HttpServletResponse res) {
+		try {
+			task = taskService.updateTask(task, id, principal.getName());
+			if (task == null) {
+				res.setStatus(404);
 			}
-			return task;
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			task = null;
 		}
-		
-	//get all tasks owned by user
-	//only for logged in user
-	@GetMapping(path="users/tasks")
-	public List<Task> getAllTasksOwnedByUser(Principal principal){
+		return task;
+	}
+
+	// get all tasks owned by user
+	// only for logged in user
+	@GetMapping(path = "users/tasks")
+	public List<Task> getAllTasksOwnedByUser(Principal principal) {
 		return taskService.getTasksOwnedByUser(principal.getName());
 	}
-	
-	//get all tasks by status
-	@GetMapping(path="tasks/{statusname}")
-	public List<Task> getTasksOfStatus(@PathVariable String statusname){
+
+	// get all tasks by status
+	@GetMapping(path = "tasks/{statusname}")
+	public List<Task> getTasksOfStatus(@PathVariable String statusname) {
 		return taskService.getAllTasksOfStatus(statusname);
 	}
-	
-	
+
 }

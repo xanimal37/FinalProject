@@ -1,8 +1,8 @@
-import { DatePipe } from '@angular/common';
 import { TaskService } from './../../services/task.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Task } from 'src/app/models/task';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-tasklist',
@@ -16,8 +16,8 @@ export class TasklistComponent implements OnInit {
 
   constructor(
   private taskService:TaskService,
-  private route: ActivatedRoute,
   private datePipe: DatePipe,
+  private route: ActivatedRoute,
   private router: Router)
   {}
 
@@ -32,7 +32,7 @@ export class TasklistComponent implements OnInit {
             this.tasks = tasks;
           },
           error: (problem) => {
-            console.error('TaskListHttpComponent.loadTodos(): error retreiving tasks:');
+            console.error('TaskListHttpComponent.reload(): error retreiving tasks:');
             console.error(problem);
           }
         }
