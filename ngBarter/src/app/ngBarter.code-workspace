@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../../../Angular/ngToDo"
+		},
+		{
+			"path": "../../../../EventTracker/ngWildLife"
+		}
+	],
+	"settings": {}
+}
