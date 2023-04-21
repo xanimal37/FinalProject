@@ -37,8 +37,8 @@ public class PostServiceImpl implements PostService{
 	}
 
 	@Override
-	public Post postById(int pId) {
-		return postRepo.findById(pId);
+	public Post postById(int pId, String username) {
+		return postRepo.findByIdAndUser_Username(pId, username);
 	}
 
 	@Override
@@ -46,6 +46,7 @@ public class PostServiceImpl implements PostService{
 		User user = userRepo.findByUsername(username);
 		if (user != null) {
 			post.setUser(user);
+			postRepo.saveAndFlush(post);
 		}
 		return null;
 	}
@@ -81,7 +82,7 @@ public class PostServiceImpl implements PostService{
 		String newKeyword = "%" + keyword + "%";
 		User user = userRepo.findByUsername(username);
 		if (user != null) {
-			return postRepo.findByContentAndComment_ContentLike(newKeyword, newKeyword);
+			return postRepo.findByContentAndComments_ContentLike(newKeyword, newKeyword);
 		} else {
 		return null;
 		}
