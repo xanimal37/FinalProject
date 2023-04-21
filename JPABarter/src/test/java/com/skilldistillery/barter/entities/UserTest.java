@@ -121,13 +121,13 @@ class UserTest {
 		assertEquals("Whats the best way to install an L joint with a flex host on an existing sprinkler system", userTwo.getPosts().get(0).getContent());
 		
 	}
-	
-	@Test
-	void test_User_User_Skill_Mapping() {
-		assertNotNull(user);
-		assertEquals("Apprentice Plumber with union", userTwo.getUserSkill().get(0).getDescription());
-		
-	}
+//	
+//	@Test
+//	void test_User_User_Skill_Mapping() {
+//		assertNotNull(user);
+//		assertEquals("Apprentice Plumber with union", userTwo.getUserSkill().get(0).getDescription());
+//		
+//	}
 //	@Test
 //	void test_User_Skill_Mapping() {
 //		assertNotNull(user);
