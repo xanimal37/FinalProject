@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { TaskService } from './../../services/task.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,7 +16,6 @@ export class TasklistComponent implements OnInit {
   constructor(
   private taskService:TaskService,
   private route: ActivatedRoute,
-  private datePipe: DatePipe,
   private router: Router)
   {}
 
