@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { PostComponent } from './components/post/post.component';
-import { UserAccountComponent } from './components/user-account/user-account.component';
+import { TasklistComponent } from './components/tasklist/tasklist.component';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
-   { path: 'userAccount', component: UserAccountComponent },
-   { path: 'post', component: PostComponent},
-   { path: '**', component: PageNotFoundComponent}
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
+  { path: 'home', component: HomeComponent },
+  {path: 'tasks',component: TasklistComponent},
+  //goes at the end
+  //{path:'**',component:NotfoundComponent}
 ];
 
 @NgModule({
