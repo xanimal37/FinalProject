@@ -7,6 +7,9 @@ import { PostComponent } from './components/post/post.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { ComplaintComponent } from './components/complaint/complaint.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -17,6 +20,10 @@ const routes: Routes = [
   { path: 'notifications',component: NotificationComponent},
   { path: 'complaints',component: ComplaintComponent},
   { path: 'admin',component: AdminComponent},
+  {path: 'tasks',component: TasklistComponent},
+  { path: 'login', component: LoginComponent },
+  { path: 'logout', component: LogoutComponent },
+  { path: 'register', component: RegisterComponent }
 
   //goes at the end
   //{path:'**',component:NotfoundComponent}
