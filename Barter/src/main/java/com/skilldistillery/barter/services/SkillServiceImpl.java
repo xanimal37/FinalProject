@@ -31,13 +31,13 @@ public class SkillServiceImpl implements SkillService {
 	@Override
 	public List<Skill> getSkillByUser(String username) {
 		// TODO Auto-generated method stub
-		return skillRepo.findByUser_Username(username);
+		return skillRepo.findByUserSkills_User_Username(username);
 	}
 
 	@Override
 	public List<Skill> getSkillBySkillLevelName(String level) {
 		// TODO Auto-generated method stub
-		return skillRepo.findBySkillLevelName(level);
+		return skillRepo.findByUserSkills_SkillLevelName(level);
 	}
 
 	

@@ -9,9 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.skilldistillery.barter.entities.Skill;
-import com.skilldistillery.barter.entities.SkillLevel;
 import com.skilldistillery.barter.entities.User;
+import com.skilldistillery.barter.repositories.AddressRepository;
 import com.skilldistillery.barter.repositories.SkillRepository;
 import com.skilldistillery.barter.repositories.UserRepository;
 
@@ -29,6 +28,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private SkillRepository skillRepo;
+	
+	@Autowired
+	private AddressRepository addressRepo;
 	
 	@Override
 	public User updateUserByAdmin(User user, int userId) {
@@ -116,7 +118,9 @@ public class UserServiceImpl implements UserService {
 		if (originalUser == null) {
 			throw new IllegalArgumentException("User does not exist");
 		}
-
+		if(user.getAddress() != null) {
+		originalUser.setAddress(addressRepo.saveAndFlush(user.getAddress()));
+		}
 		originalUser.setFirstname(user.getFirstname());
 		originalUser.setLastname(user.getLastname());
 		originalUser.setEmail(user.getEmail());
@@ -138,7 +142,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> getUsersBySkill(String skillName) {
-		return userRepo.findBySkillsName(skillName);
+		return userRepo.findByUserSkills_Skill_Name(skillName);
 	}
 
 	@Override
@@ -150,13 +154,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getUsersBySkillLevel(String skillLevel) {
 		// TODO Auto-generated method stub
-		return userRepo.findBySkillLevel_Name(skillLevel);
+		return userRepo.findByUserSkills_SkillLevel_Name(skillLevel);
 	}
 
 	@Override
-	public List<User> getUsersBySkillLevelAndSkillName(String skillLevel, String skillName) {
+	public List<User> getUsersBySkillNameAndSkillLevel(String skillLevel, String skillName) {
 		// TODO Auto-generated method stub
-		return userRepo.findDistinctBySkillsNameAndSkillLevel_Name(skillName, skillLevel);
+		return userRepo.findByUserSkills_Skill_NameAndUserSkills_SkillLevel_Name(skillName, skillLevel);
 	}
 
 	@Override

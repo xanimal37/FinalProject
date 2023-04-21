@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -30,17 +31,8 @@ public class Skill {
 	inverseJoinColumns = @JoinColumn(name="task_id"))
 	private List <Task> tasks;
 	@JsonIgnore
-	@ManyToMany
-	@JoinTable(name="user_skill",
-	joinColumns = @JoinColumn(name="skill_id"),
-	inverseJoinColumns = @JoinColumn(name="skill_level_id"))
-	private List <SkillLevel> skillLevel;
-	@JsonIgnore
-	@ManyToMany
-	@JoinTable(name="user_skill",
-	joinColumns = @JoinColumn(name="skill_id"),
-	inverseJoinColumns = @JoinColumn(name="user_id"))
-	private List <User> user;
+	@OneToMany(mappedBy="skill")
+	private List <UserSkill> userSkills;
 	
 	
 	public List<Task> getTasks() {
@@ -67,12 +59,12 @@ public class Skill {
 		this.name = name;
 	}
 	
-	public List<SkillLevel> getSkillLevel() {
-		return skillLevel;
+	public List<UserSkill> getUserSkills() {
+		return userSkills;
 	}
 
-	public void setSkillLevel(List<SkillLevel> skillLevel) {
-		this.skillLevel = skillLevel;
+	public void setUserSkills(List<UserSkill>userSkills) {
+		this.userSkills = userSkills;
 	}
 
 	public String getDescription() {

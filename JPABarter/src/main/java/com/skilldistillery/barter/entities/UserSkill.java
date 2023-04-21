@@ -1,15 +1,17 @@
 package com.skilldistillery.barter.entities;
 
-import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
-import javax.xml.ws.soap.MTOM;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Table(name="user_skill")
 @Entity
+
 public class UserSkill {
 	
 	@EmbeddedId
@@ -19,10 +21,33 @@ public class UserSkill {
 	
 	private String description;
 	
+	@JsonIgnoreProperties({"userSkills"})
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	@MapsId(value="userId")
+	private User user;
+	
+	@JsonIgnoreProperties({"userSkills"})
+	@ManyToOne
+	@JoinColumn(name="skill_id")
+	@MapsId(value="skillId")
+	private Skill skill;
 
+	@JsonIgnoreProperties({"userSkills"})
 	@ManyToOne
 	@JoinColumn(name= "skill_level_id")
 	private SkillLevel skillLevel;
+	
+	
+	public Skill getSkill() {
+		return skill;
+	}
+
+
+	public void setSkill(Skill skill) {
+		this.skill = skill;
+	}
+
 	
 	public SkillLevel getSkillLevel() {
 		return skillLevel;
@@ -51,6 +76,16 @@ public class UserSkill {
 
 	public void setId(UserSkillID id) {
 		this.id = id;
+	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 
