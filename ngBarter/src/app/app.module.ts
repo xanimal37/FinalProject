@@ -21,6 +21,8 @@ import { AdminComponent } from './components/admin/admin.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { OtherUserProfileComponent } from './components/other-user-profile/other-user-profile.component';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { TaskbyskillPipe } from './pipes/taskbyskill.pipe';
+import { AcceptedTaskComponent } from './components/accepted-task/accepted-task.component';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { UserListComponent } from './components/user-list/user-list.component';
     AdminComponent,
     NavbarComponent,
     OtherUserProfileComponent,
-    UserListComponent
+    UserListComponent,
+    TaskbyskillPipe,
+    AcceptedTaskComponent
   ],
   imports: [
     BrowserModule,
