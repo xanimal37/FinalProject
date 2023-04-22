@@ -10,14 +10,16 @@ import { PostService } from 'src/app/services/post.service';
   styleUrls: ['./post.component.css']
 })
 export class PostComponent {
+[x: string]: any;
 
   title: String = "ngTodo";
   selected: Post | null =  null;
   selectedPosts: Post[] | null = null;
-  newPost: Post = new Post();
+  newPost: Post = new Post;
   editPost: Post | null = null;
   posts: Post[] = []
   showEnabled: boolean = false;
+
 
 
   constructor(
@@ -44,4 +46,45 @@ export class PostComponent {
       });
     }
 
+    createPost(post: Post) {
+      this.postService.create(post).subscribe( {
+        next: (createdPost) => {
+          this.newPost = new Post();
+          this.reload();
+        },
+        error: (fail) => {
+          console.error('Error creating post');
+          console.error(fail);
+        }
+      });
+
+      this.reload();
+    }
+
+    updatePost(post: Post, pId: number) {
+      this.postService.update(post,pId).subscribe( {
+        next: (updatedPost) => {
+          this.editPost = new Post();
+          this.reload();
+        },
+        error: (fail) => {
+          console.error('Error editing post');
+          console.error(fail);
+        }
+      });
+
+      this.reload();
+    }
+
+    displayPost(post: Post) {
+      this.selected = post;
+    }
+
+    displayTable():void {
+      this.selected = null;
+    }
+
+    disablePost(id: number) {
+      this.postService.disable
+    }
 }
