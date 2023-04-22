@@ -46,7 +46,7 @@ public class PostController {
 	} 
 	
 	@GetMapping("posts/search/{keyword}")
-	public List<Post> indexByPostId( Principal principal, HttpServletRequest req, HttpServletResponse res, @PathVariable String keyword) {
+	public List<Post> postSearch( Principal principal, HttpServletRequest req, HttpServletResponse res, @PathVariable String keyword) {
 		List<Post> posts = postService.postKeywordSearch(principal.getName(), keyword);
 		if(posts == null) {
 			res.setStatus(401);
@@ -70,7 +70,7 @@ public class PostController {
 				res.setStatus(400);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.printStackTrace(); 
 			res.setStatus(400);
 		}
 		return post;
