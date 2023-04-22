@@ -1,4 +1,17 @@
-<p>post works!</p>
+<h1>POSTS</h1>
+<p>Currently enabled to display only enabled posts</p>
+
+<div id="editPost" *ngIf="editPost">
+  <h3>Edit Post</h3>
+  <form>
+      Topic: <input type="text" name="topic" placeholder="" [(ngModel)]="editPost.title"/><br />
+      <textarea type="text" name="description" placeholder="Post Content" [(ngModel)]="editPost.content"></textarea><br>
+
+      <input class="btn btn-dark m-1" type="submit" value="update" (click)="updatePost(editPost,editPost.id)"/>
+      <input class="btn btn-danger" type="submit" value="cancel" (click)="cancelEditPost()"/>
+
+    </form>
+</div>
 
 <div id="posts" *ngFor="let post of posts" >
   <div *ngIf="post.enabled">
@@ -6,12 +19,13 @@
     <p>{{post.createDate}}</p>
     <p>{{post.content}}</p>
     <p>{{post.user?.username}}</p>
-    <p>{{post.enabled}}</p>
+    <button class = "btn btn-success" (click)="setEditPost()">Edit</button>
+
   </div>
 </div>
 
 <div id="createPost" >
-  <h3>add task</h3>
+  <h3>Create Post</h3>
   <form>
       Topic: <input type="text" name="topic" placeholder="" [(ngModel)]="newPost.title"/><br />
       <textarea type="text" name="description" placeholder="Post Content" [(ngModel)]="newPost.content"></textarea><br>
@@ -20,4 +34,26 @@
       <input class="btn btn-dark m-1" type="submit" value="cancel"/>
 
     </form>
+</div>
+
+
+<div id="keywordSearch">
+  <h3>Search Posts</h3>
+  <p>Query through all posts content</p>
+  <form>
+      <input type="text" name="keyword" placeholder=""/><br>
+      <input class="btn btn-primary" type="submit" value="Search" (click)="postSearch(keyword)"/>
+    </form>
+</div>
+
+<div id="postSearchResults" *ngIf="keywordPosts">
+  <div id="posts" *ngFor="let post of keywordPosts" >
+    <div *ngIf="post.enabled">
+      <h4>{{post.title}}</h4>
+      <p>{{post.createDate}}</p>
+      <p>{{post.content}}</p>
+      <p>{{post.user?.username}}</p>
+    </div>
+  </div>
+
 </div>
