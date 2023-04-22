@@ -19,6 +19,7 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -47,12 +48,14 @@ public class User {
 	@OneToOne
 	@JoinColumn(name="ranking_id")
 	private Ranking ranking;
-	@JsonIgnore
+//	@JsonIgnore
+//	@JsonBackReference
+	@JsonIgnoreProperties("friends")
 	@ManyToMany
 	@JoinTable(name = "user_has_friends", 
 	joinColumns = @JoinColumn(name = "user_id"),
 	inverseJoinColumns = @JoinColumn(name = "friend_id"))
-	private Set<User> friends; 
+	private List<User> friends; 
 	
 	@JsonIgnoreProperties({"user"})
 	@OneToMany(mappedBy="user")
@@ -324,11 +327,11 @@ public class User {
 	}
 
 
-	public Set<User> getFriends() {
+	public List<User> getFriends() {
 		return friends;
 	}
 
-	public void setFriends(Set<User> friends) {
+	public void setFriends(List<User> friends) {
 		this.friends = friends;
 	}
 
