@@ -9,6 +9,7 @@ import { Task } from 'src/app/models/task';
 import { DatePipe } from '@angular/common';
 import { Skill } from 'src/app/models/skill';
 import { User } from 'src/app/models/user';
+import { AcceptedTaskService } from 'src/app/services/accepted-task.service';
 
 
 @Component({
@@ -38,6 +39,7 @@ export class TasklistComponent implements OnInit {
   private taskService:TaskService,
   private skillService:SkillService,
   private taskStatusService: TaskStatusService,
+  private acceptedTaskService: AcceptedTaskService,
   private authService: AuthService,
   private datePipe: DatePipe,
   private route: ActivatedRoute,
