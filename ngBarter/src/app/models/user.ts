@@ -6,8 +6,13 @@ export class User {
   password:string;
   role: string;
   email: string;
+  availability:string;
+  biography:string;
   // ranking: Ranking | null;
-  // friends: User[];
+  // friends:User[];
+  friends: any[] | undefined;
+
+
   // userSkills: UserSkill[] | null;
   address: Address | null = null;
   // comments: Comment[] | null;
@@ -24,7 +29,10 @@ export class User {
     password:string = '',
     role: string = '',
     email:string = '',
-    // friends: User[]
+    availability ='',
+    biography ='',
+    friends:User[] | undefined = [],
+
     // userSkills: UserSkill[] ,
     // address: Address,
     // comments: Comment[],
@@ -42,9 +50,11 @@ export class User {
     this.password = password ;
     this.role = role ;
     this.email =email;
-    // this.friends=friends;
+    this.friends=friends;
     // userSkills: UserSkill[] | null = null,
     this.address = Address;
+    this.availability = availability;
+    this.biography = biography;
     // comments: Comment[],
     // tasks: Task[],
     // taskMessages: TaskMessage[],
@@ -53,3 +63,39 @@ export class User {
     // posts: Post[]
     }
 }
+
+
+
+
+
+
+
+// biography
+
+// createdDate
+
+// email
+
+// enabled
+
+// firstname
+
+// imageURL
+
+// lastname
+
+// password
+
+// phone
+// :
+
+// ranking
+
+// role
+
+// updatedDate
+
+// userSkills
+
+
+// username

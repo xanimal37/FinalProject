@@ -30,6 +30,7 @@ public class SkillServiceImpl implements SkillService {
 	@Autowired
 	private SkillRepository skillRepo;
 	
+	
 	@Override
 	public List<Skill> getSkillByUser(String username) {
 		// TODO Auto-generated method stub

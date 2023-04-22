@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class UserListComponent implements OnInit {
 
 
-  users:User[] = [];
+users:User[] = [];
 showList: boolean = false;
 loggedInUser: User| null = null;
 

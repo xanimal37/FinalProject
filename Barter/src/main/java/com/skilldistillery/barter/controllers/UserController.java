@@ -51,12 +51,12 @@ public class UserController {
 	}
 
 //  PUT users/{userId}
-	@PutMapping("users")
-	public User update(HttpServletRequest req, HttpServletResponse res, Principal principal, @RequestBody User user) {
+	@PutMapping("users/{userId}")
+	public User update(HttpServletRequest req, HttpServletResponse res, Principal principal, @RequestBody User user,@PathVariable int userId) {
 		
 		User updatedUser = null;
 		try {
-			updatedUser = userService.updateAccount(user, principal.getName());
+			updatedUser = userService.updateAccount(user, userId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -68,7 +68,7 @@ public class UserController {
 		return updatedUser;
 	}
 
-	@PutMapping("users/{userId}")
+	@PutMapping("users/admin/{userId}")
 	public User adminUpdate(HttpServletRequest req, HttpServletResponse res, Principal principal,
 			@PathVariable int userId, @RequestBody User user) {
 		String username = principal.getName();
@@ -89,16 +89,21 @@ public class UserController {
 		} else {
 			res.setStatus(200);
 		}
-		return updatedUser;
+		return updatedUser;	 
 	}
 
 	@PostMapping("users/friends/{friendId}")
 	public String addFriend(HttpServletRequest req, HttpServletResponse res, Principal principal,
 			@PathVariable int friendId) {
+		System.out.println("**********************************************");
+		System.out.println("*************************************************");
 		String username = principal.getName();
 		User user = userService.findByUsername(username);
 		User friend = userService.findById(friendId);
 		String message = userService.addFriend(user, friend);
+		
+		System.out.println(user+"**********************************************");
+		System.out.println(friend+"*************************************************");
 		return message;
 	}
 
@@ -127,5 +132,10 @@ public class UserController {
 	public List<User> getUsersByRanking(@PathVariable String rankName) {
 		return userService.getUsersByRanking(rankName);
 	}
+	@GetMapping("users/friends/{id}")
+	public List<User> getUsersFriends(@PathVariable String rankName) {
+		return userService.getUsersByRanking(rankName);
+	}
+	
 
 }
