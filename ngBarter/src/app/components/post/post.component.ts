@@ -1,7 +1,7 @@
+import { Post } from './../../models/post';
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Post } from 'src/app/models/post';
 import { PostService } from 'src/app/services/post.service';
 
 @Component({
@@ -13,6 +13,7 @@ export class PostComponent {
 [x: string]: any;
 
   title: string = "Posts";
+  post: Post | null = null;
   selected: Post | null =  null;
   selectedPosts: Post[] | null = null;
   newPost: Post = new Post;
@@ -42,8 +43,8 @@ export class PostComponent {
       this.selected = null;
     }
 
-    setEditPost(): void {
-      this.editPost = Object.assign({}, this.selected);
+    setEditPost(post: Post): void {
+      this.editPost = post;
     }
     cancelEditPost(): void {
       this.editPost = null;
@@ -83,7 +84,7 @@ export class PostComponent {
     updatePost(post: Post, pId: number) {
       this.postService.update(post,pId).subscribe( {
         next: (updatedPost) => {
-          this.editPost = new Post();
+          this.post = updatedPost;
           this.reload();
         },
         error: (fail) => {

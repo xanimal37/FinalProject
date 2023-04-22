@@ -26,21 +26,6 @@ loggedInUser: User| null = null;
   }
   ngOnInit() {
 
-    this.getAllUsers();
-  }
-  getAllUsers(){
-  this.userService.getUsers().subscribe({
-   next:(users: User[]) => {
-      this.users = users;
-    },
-    error:(nojoy) => {
-      console.log(nojoy);
-    }
-    }
-   );
-  }
-
-
     this.authService.getLoggedInUser().subscribe({
       next: (user: User) => {
         this.loggedInUser = user;
@@ -68,6 +53,5 @@ loggedInUser: User| null = null;
     });
 
   }
-
 
 }
