@@ -69,7 +69,7 @@ export class ComplaintService {
         catchError((err: any) => {
           console.log(err);
           return throwError(
-            () => new Error('ComplaintService.create: error creating complaint: ' + err)
+            () => new Error('ComplaintService.createComplaint(): error creating complaint: ' + err)
           );
         })
       );
