@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 import { Component } from '@angular/core';
 
@@ -7,7 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./logout.component.css']
 })
 export class LogoutComponent {
-constructor(private auth:AuthService){
+constructor(private router: Router,private auth:AuthService
+
+  ){
 
 }
 
@@ -17,7 +20,7 @@ constructor(private auth:AuthService){
     console.log("you are logged out");
 
 
-    // this.router.navigateByUrl('/home')
+     this.router.navigateByUrl('/home')
 
   }
 

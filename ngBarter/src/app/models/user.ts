@@ -24,7 +24,7 @@ export class User {
     password:string = '',
     role: string = '',
     email:string = '',
-    // friends: User[],
+    // friends: User[]
     // userSkills: UserSkill[] ,
     // address: Address,
     // comments: Comment[],
@@ -42,6 +42,7 @@ export class User {
     this.password = password ;
     this.role = role ;
     this.email =email;
+    // this.friends=friends;
     // userSkills: UserSkill[] | null = null,
     this.address = Address;
     // comments: Comment[],
