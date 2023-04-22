@@ -1,7 +1,6 @@
 <h1>{{title}}</h1>
 
 <div id="complaintList" *ngIf="loggedInUser?.role === admin">
-  <div ">
     <Table>
       <thead>
         <tr>
@@ -22,19 +21,26 @@
           <td>{{comp.description}}</td>
           <td >
             <ul>
-              <li>Name: {{comp.user.}}</li>
-              <li>Name: {{}}</li>
-              <li>Name: {{}}</li>
-              <li>Name: {{}}</li>
+              <li>ID: {{comp.user?.id}}</li>
+              <li>Name: </li>
+              <li>UserName: {{comp.user?.username}}</li>
+              <li>Contact Information:
+                <ul>
+                  <li>Email: {{comp.user?.email}}</li>
+                  <li>Phone:</li>
+                </ul>
+              </li>
+              <li>Ranking: </li>
             </ul>
           </td>
           <td>{{comp.createDate}}</td>
           <td>{{comp.updateDate}}</td>
           <td>{{comp.closedDate}}</td>
-          <td>{{comp.active}}</td>
+          <td *ngIf="comp.active">
+            Active
+          </td>
+          <td *ngIf="!comp.active">Closed</td>
         </tr>
       </tbody>
     </Table>
-  </div>
-
 </div>

@@ -22,7 +22,9 @@ export class ComplaintComponent {
   complaints: Complaint[] = []
   showEnabled: boolean = false;
   loggedInUser: User | undefined;
-  admin: string = "admin"
+  admin: string = "admin";
+  active: string = "active";
+  closed: string = "closed";
 
 
   constructor(
@@ -34,7 +36,7 @@ export class ComplaintComponent {
     ) {
     }
 
-  displayPost(complaint: Complaint) {
+  displayComplaint(complaint: Complaint) {
     this.selected = complaint;
   }
 
@@ -98,7 +100,7 @@ export class ComplaintComponent {
     });
   }
 
-  createPost(complaint: Complaint) {
+  createComplaint(complaint: Complaint) {
     this.complaintService.createComplaint(complaint).subscribe( {
       next: (createdComplaint) => {
         this.newComplaint = createdComplaint;
@@ -113,14 +115,14 @@ export class ComplaintComponent {
     this.reload();
   }
 
-  updatePost(complaint: Complaint, cId: number) {
+  updateComplaint(complaint: Complaint, cId: number) {
     this.complaintService.updateComplaint(complaint,cId).subscribe( {
-      next: (updatedPost) => {
-        this.editComplaint = updatedPost;
+      next: (updateComplaint) => {
+        this.editComplaint = updateComplaint;
         this.reload();
       },
       error: (fail) => {
-        console.error('Error editing post');
+        console.error('Error editing complaint');
         console.error(fail);
       }
     });
