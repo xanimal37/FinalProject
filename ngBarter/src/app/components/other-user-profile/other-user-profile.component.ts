@@ -59,7 +59,7 @@ this.userService.addFriend( this.user.id,this.user).subscribe({
           console.log(nojoy);
 
         }
-      });
+ });
 
 
 

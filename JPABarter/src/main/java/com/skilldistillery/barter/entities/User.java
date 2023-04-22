@@ -79,7 +79,7 @@ public class User {
 //	@JoinColumn(name="user_id")
 //	private List <UserSkill> userSkill;
 	
-	@JsonIgnore
+//	@JsonIgnoreProperties()
 	@OneToMany
 	@JoinColumn(name="user_id")
 	private List <Task> tasks;
