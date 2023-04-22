@@ -14,6 +14,7 @@ export class OtherUserProfileComponent implements OnInit {
   user: User = new User();
   loggedInUser: User = new User();
   words:string[]=[];
+  currentUser: any;
   constructor(private route: ActivatedRoute, private userService: UserService,private authService :AuthService) { }
 
 
@@ -43,12 +44,11 @@ getLoggedInUser(){
   })
 }
 
+isFriend(): boolean {
+  return this.loggedInUser.friends.some(friend => friend.id == this.user.id);
+}
+
 addFriend() {
-
-
-
-  let edwin = new User();
-
 
 this.userService.addFriend( this.user.id,this.user).subscribe({
     next: (response) => {
@@ -60,8 +60,6 @@ this.userService.addFriend( this.user.id,this.user).subscribe({
 
         }
  });
-
-
 
 
 
