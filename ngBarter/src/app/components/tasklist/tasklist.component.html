@@ -1,14 +1,39 @@
-<p>tasklist works!</p>
+<h2>available tasks</h2>
 
+<!-- LIST OF ALL TASKS ** no authorization required -->
+<!-- may add authorization later for a detail view and/or user info -->
 <div>
 <div *ngFor="let task of tasks">
   <h3>{{task.name}}</h3>
   <p>{{task.description}}</p>
+  <h4>skills</h4>
+  <ul>
+    <li *ngFor="let skill of task.skills">{{skill.name}}</li>
+  </ul>
+  <h4>info</h4>
   <p>estimated hours: {{task.estimatedHours}}</p>
 <p>materials provided? {{task.materialsProvided}}</p>
+<h4>scheduling</h4>
 <p>scheduled for: {{task.scheduleDate | date:'shortDate'}}</p>
 	<p>started on: {{task.startDate | date:'shortDate'}}</p>
 	<p>completed: {{task.completeDate | date:'shortDate'}}</p>
 
 </div>
-  </div>
+
+  <!-- SINGLE TASK DETAIL VIEW ** must be authorized -->
+  <!-- includes general address info and button to user profile? -->
+
+  <!-- ADD A TASK VIEW ** must be authorized -->
+  <!-- make conditional upon *ngIf="addingTask" -->
+  <div id="add_task">
+    <h3>add task</h3>
+<form>
+    name: <input type="text" name="name" placeholder="name" [(ngModel)]="newTask.name"/><br />
+    description: <input type="text" name="description" placeholder="description" [(ngModel)]="newTask.description"/><br />
+    skills: --[create checkbox for each possible skill and add all to skills[]--<br>
+    <input class="btn btn-dark m-1" type="submit" value="add task" (click)="addTask(newTask)"/>
+    <input class="btn btn-dark m-1" type="submit" value="cancel" (click)="addingTask=false"/>
+
+  </form>
+</div>
+</div>

@@ -12,6 +12,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { RegisterComponent } from './components/register/register.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { OtherUserProfileComponent } from './components/other-user-profile/other-user-profile.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'logout', component: LogoutComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'usersList', component: UserListComponent },
+  { path: 'user-profile/:id', component: OtherUserProfileComponent },
 
   //goes at the end
   {path:'**',component:PageNotFoundComponent}

@@ -10,14 +10,18 @@ import { PostService } from 'src/app/services/post.service';
   styleUrls: ['./post.component.css']
 })
 export class PostComponent {
+[x: string]: any;
 
-  title: String = "ngTodo";
+  title: string = "Posts";
   selected: Post | null =  null;
   selectedPosts: Post[] | null = null;
-  newPost: Post = new Post();
+  newPost: Post = new Post;
   editPost: Post | null = null;
   posts: Post[] = []
   showEnabled: boolean = false;
+  keywordPosts: Post[] | null = null;
+  keyword: string = "";
+
 
 
   constructor(
@@ -26,30 +30,27 @@ export class PostComponent {
     private route: ActivatedRoute,
     private router: Router
     ) {
-  }
-
-  ngOnInit(): void {
-    let postIdString = this.route.snapshot.paramMap.get('id');
-    if (postIdString) {
-     console.log('ngOnInit: postId: ' + postIdString);
-     let postId = ~~postIdString;
-     console.log(postId);
-     if (isNaN(postId)) {
-       this.router.navigateByUrl('invalidId');
-     }
-     else {
-       this.postService.indexAll().subscribe({
-         next: (post) => {
-           this.selectedPosts = post;
-         },
-         error: (fail) => {
-           this.router.navigateByUrl('PostNotFound');
-         }
-       });
-     }
-
     }
-    this.reload();
+
+
+
+    displayPost(post: Post) {
+      this.selected = post;
+    }
+
+    displayTable():void {
+      this.selected = null;
+    }
+
+    setEditPost(): void {
+      this.editPost = Object.assign({}, this.selected);
+    }
+    cancelEditPost(): void {
+      this.editPost = null;
+    }
+
+    ngOnInit(): void {
+      this.reload();
      }
 
      reload() {
@@ -64,4 +65,52 @@ export class PostComponent {
       });
     }
 
+    createPost(post: Post) {
+      this.postService.create(post).subscribe( {
+        next: (createdPost) => {
+          this.newPost = new Post();
+          this.reload();
+        },
+        error: (fail) => {
+          console.error('Error creating post');
+          console.error(fail);
+        }
+      });
+
+      this.reload();
+    }
+
+    updatePost(post: Post, pId: number) {
+      this.postService.update(post,pId).subscribe( {
+        next: (updatedPost) => {
+          this.editPost = new Post();
+          this.reload();
+        },
+        error: (fail) => {
+          console.error('Error editing post');
+          console.error(fail);
+        }
+      });
+      this.reload();
+    }
+
+    postSearch(keyword: string) {
+      this.postService.postKeywordSearch(keyword).subscribe( {
+        next: (postList) => {
+          this.keywordPosts = postList;
+          this.reload();
+        },
+        error: (fail) => {
+          console.error('Error retrieving search post');
+          console.error(fail);
+        }
+      });
+      this.reload();
+    }
+
+
+
+    disablePost(id: number) {
+      this.postService.disable
+    }
 }

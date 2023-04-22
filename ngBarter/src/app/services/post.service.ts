@@ -33,7 +33,7 @@ export class PostService {
       catchError((err: any) => {
         console.log(err);
         return throwError(
-          () => new Error('PostService.index(): error retrieving Posts: ' + err)
+          () => new Error('PostService.indexAll(): error retrieving Posts: ' + err)
         );
       })
     );
@@ -64,12 +64,12 @@ export class PostService {
   };
 
   //Keyword Search
-  postKeywordSearch(keyword: number): Observable<Post[]> {
+  postKeywordSearch(keyword: string): Observable<Post[]> {
     return this.http.get<Post[]>(this.url + "/search/" + keyword, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
-          () => new Error('PostService.index(): error retrieving Keyword Search: ' + err)
+          () => new Error('PostService.postKeywordSearch(): error retrieving Keyword Search: ' + err)
         );
       })
     );

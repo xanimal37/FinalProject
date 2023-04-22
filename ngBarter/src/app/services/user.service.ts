@@ -41,6 +41,33 @@ private url =environment.baseUrl;
     );
   }
 
+  getUserById(userId:number): Observable<User> {
+
+    return this.http.get<User>(this.url + "api/users/"+userId,  this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error('TodoService.index(): error retrieving Todos: ' + err)
+        );
+      })
+    );
+  }
+
+  addFriend(userId:number): Observable<User> {
+
+    return this.http.post<User>(this.url + "api/users/friends/"+userId,  this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error( err)
+        );
+      })
+    );
+  }
+
+
+
+
 
 
 }
