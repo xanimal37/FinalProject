@@ -11,16 +11,27 @@
       <input class="btn btn-danger" type="submit" value="cancel" (click)="cancelEditPost()"/>
 
     </form>
-</div>
-
+</div >
+<div >
 <div id="posts" *ngFor="let post of posts" >
   <div *ngIf="post.enabled">
     <h4>{{post.title}}</h4>
     <p>{{post.createDate}}</p>
     <p>{{post.content}}</p>
     <p>{{post.user?.username}}</p>
-    <button class = "btn btn-success" (click)="setEditPost(post)">Edit</button>
+    <button class = "btn btn-success" *ngIf="post?.user?.id === loggedInUser?.id" (click)="setEditPost(post)">Edit</button>
+    <!-- <button class = "btn btn-success" *ngIf="loggedInUser" (click)="postComment">Comment</button>
+    <div id="postComment">
+      <form>
+        <textarea type="text" id="commnet" name="comment" placeholder="Reply Here" ></textarea><br>
+
+        <input class="btn btn-dark m-1" type="submit" value="submit-WIP"/>
+        <input class="btn btn-danger" type="submit" value="cancel" (click)="cancelEditPost()"/>
+
+      </form>
+    </div> -->
   </div>
+</div>
 </div>
 
 <div id="createPost" >
@@ -40,7 +51,7 @@
   <h3>Search Posts</h3>
   <p>Query through all posts content</p>
   <form>
-      <input type="text" name="keyword" placeholder=""/><br>
+      <input type="text" id="keyword" name="keyword"[(ngModel)]="keyword"/><br>
       <input class="btn btn-primary" type="submit" value="Search" (click)="postSearch(keyword)"/>
     </form>
 </div>

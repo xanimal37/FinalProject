@@ -18,7 +18,7 @@ export class Post {
     createDate: string = '',
     updateDate: string = '',
     enabled: boolean = true,
-    comments: Comment[] | null = null,
+    comments: Comment[] = [],
     user: User  | null = null
   ){
     this.id = id;

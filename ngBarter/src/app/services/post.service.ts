@@ -89,7 +89,7 @@ export class PostService {
 
   create(post: Post):Observable<Post> {
     post.enabled = true;
-    return this.http.post<Post>(this.url, this.getHttpOptions()).pipe(
+    return this.http.post<Post>(this.url, post, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -102,7 +102,7 @@ export class PostService {
 
   update(post: Post, id: number):Observable<Post> {
     post.enabled = true;
-    return this.http.put<Post>(this.url + "/" + id, this.getHttpOptions()).pipe(
+    return this.http.put<Post>(this.url + "/" + id, post, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
