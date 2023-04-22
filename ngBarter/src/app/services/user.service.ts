@@ -1,6 +1,6 @@
+import { User } from 'src/app/models/user';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
-import { User } from '../models/user';
 import { environment } from 'src/environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
@@ -15,6 +15,8 @@ private url =environment.baseUrl;
 
   constructor(private http: HttpClient, private auth:AuthService) { }
   getHttpOptions() {
+    console.log(this.auth.getCredentials());
+
     let options = {
       headers: {
         Authorization: 'Basic ' + this.auth.getCredentials(),
@@ -23,10 +25,6 @@ private url =environment.baseUrl;
     };
     return options;
   }
-
-
-
-
 
 
   getUsers(): Observable<User[]> {
@@ -53,9 +51,10 @@ private url =environment.baseUrl;
     );
   }
 
-  addFriend(userId:number): Observable<User> {
+  addFriend(userId:number,user: User): Observable<User> {
+    console.log(this.getHttpOptions());
 
-    return this.http.post<User>(this.url + "api/users/friends/"+userId,  this.getHttpOptions()).pipe(
+    return this.http.post<User>(this.url + "api/users/friends/"+userId, user , this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -65,9 +64,16 @@ private url =environment.baseUrl;
     );
   }
 
-
-
-
-
+  updateUser(user:User): Observable<User> {
+    return this.http.put<User>("http://localhost:8088/api/users/"+ user.id, user, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.error(err);
+        return throwError(
+          () =>
+            new Error('TodoService.create(): error creating Product: ' + err)
+        );
+      })
+    );
+    }
 
 }
