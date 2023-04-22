@@ -2,30 +2,46 @@
 
 <!-- LIST OF ALL TASKS ** no authorization required -->
 <!-- may add authorization later for a detail view and/or user info -->
-<div>
-<div *ngFor="let task of tasks">
-  <h3>{{task.name}}</h3>
-  <p>{{task.description}}</p>
-  <h4>skills</h4>
-  <ul>
-    <li *ngFor="let skill of task.skills">{{skill.name}}</li>
-  </ul>
-  <h4>info</h4>
-  <p>estimated hours: {{task.estimatedHours}}</p>
-<p>materials provided? {{task.materialsProvided}}</p>
-<h4>scheduling</h4>
-<p>scheduled for: {{task.scheduleDate | date:'shortDate'}}</p>
-	<p>started on: {{task.startDate | date:'shortDate'}}</p>
-	<p>completed: {{task.completeDate | date:'shortDate'}}</p>
+<nav id="taskMenu">
+  <button class="btn btn-dark m-1" (click)="setView('default')">view all</button>
+  <button *ngIf="loggedInUser" class="btn btn-dark m-1"(click)="setView('adding')">create task</button>
+</nav>
+<div id="Tasks" *ngIf="!selectedTask">
+  <nav>
+    <button (click)= "selectedSkillName = 'all'" class="btn btn-outline-dark m-1" name="all" value="all">all skills</button>
+        <button class="btn btn-outline-dark m-1" *ngFor="let skill of skills" name="skill.name" value="skill.name" (click)= "selectedSkillName = skill.name">{{skill.name}}</button>
+  </nav>
 
+  <div *ngFor="let task of tasks | taskbyskill:selectedSkillName">
+    <h3>{{task.name}}</h3>
+    <p>{{task.description}}</p>
+    <h4>skills required</h4>
+    <ul>
+      <li *ngFor="let skill of task.skills">{{skill.name}}</li>
+    </ul>
+    <button class="btn btn-dark m-1" (click)="selectedTask=task" name="select_task">view details</button>
+</div>
 </div>
 
-  <!-- SINGLE TASK DETAIL VIEW ** must be authorized -->
-  <!-- includes general address info and button to user profile? -->
+<!-- detail view -->
+<!-- must be authorized to accept -->
+<div *ngIf="selectedTask">
+  <h3>{{selectedTask.name | titlecase}}</h3>
+  <p>{{selectedTask.description}}</p>
+  <p>estimated hours: {{selectedTask.estimatedHours}}</p>
+  <p>posted by: {{selectedTask.user?.username}}</p>
+  <p>posted on: {{selectedTask.startDate | date:'shortDate'}}</p>
+  <p>requested start date: </p>
+  <h4>skills required</h4>
+    <ul>
+      <li *ngFor="let skill of selectedTask.skills">{{skill.name}}</li>
+    </ul>
+<button class="btn btn-dark m-1" (click) = "selectedTask=null">close</button>
+<button class="btn btn-dark m-1" *ngIf="loggedInUser" (click)="acceptTask()">accept task</button>
+</div>
 
   <!-- ADD A TASK VIEW ** must be authorized -->
-  <!-- make conditional upon *ngIf="addingTask" -->
-  <div id="add_task">
+  <div id="add_task" *ngIf="views[1].visible">
     <h3>add task</h3>
 <form>
     name: <input type="text" name="name" placeholder="name" [(ngModel)]="newTask.name"/><br />
@@ -38,10 +54,8 @@
     requested start date: <input type="date" name="name" [(ngModel)]="newTask.startDate"/>
 
 
-    <input class="btn btn-dark m-1" type="submit" value="test" (click)="addTask(newTask)"/>
-    <!--<input class="btn btn-dark m-1" type="submit" value="add task" (click)="addTask(newTask)"/>
-    <input class="btn btn-dark m-1" type="submit" value="cancel" (click)="addingTask=false"/>-->
+    <input class="btn btn-dark m-1" type="submit" value="create task!" (click)="addTask(newTask)"/>
+    <input class="btn btn-dark m-1" type="submit" value="cancel" (click)="setView('default')"/>
 
   </form>
-</div>
 </div>

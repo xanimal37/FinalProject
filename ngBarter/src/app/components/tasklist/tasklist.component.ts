@@ -22,13 +22,17 @@ export class TasklistComponent implements OnInit {
   title='Task List';
   tasks: Task[]=[];
   newTask: Task = new Task();
-  addingTask:boolean = false;
+  selectedSkillName:string='all';
+  selectedTask: Task | null = null;
   //properties of task
   skills: Skill[] =[];
   taskStatuses: TaskStatus[] =[];
   skillsCheckBoxes:CheckBoxItem[] =[];
   requestedSkills: Skill[]=[];
   loggedInUser: User | undefined;
+  //what the user is looking at
+  //see TaskView class below
+  views:TaskView[]=[];
 
   constructor(
   private taskService:TaskService,
@@ -41,9 +45,35 @@ export class TasklistComponent implements OnInit {
   {}
 
   ngOnInit(): void {
+    this.initializeViews();
+    this.checkUserLoggedIn();
+    this.loadTasks();
+    this.loadSkills();
+    this.loadTaskStatuses();
+  }
+
+  setView(viewname:string){
+    for(let view of this.views){
+      view.visible=false;
+      if(view.name == viewname){
+        view.visible=true;
+      }
+    }
+  }
+
+  //set up the views and which are active
+  //will toggle these
+  initializeViews():void {
+    this.views.push(new TaskView('default',true));
+    this.views.push(new TaskView('adding',false));
+    this.views.push(new TaskView('updating',false));
+  }
+
+  checkUserLoggedIn(){
     this.authService.getLoggedInUser().subscribe({
       next: (user: User) => {
         this.loggedInUser = user;
+        console.log(user);
       },
       error: (nojoy) => {
         console.log(nojoy);
@@ -51,9 +81,6 @@ export class TasklistComponent implements OnInit {
 
      });
 
-    this.loadTasks();
-    this.loadSkills();
-    this.loadTaskStatuses();
   }
 
   loadTasks():void {
@@ -61,6 +88,7 @@ export class TasklistComponent implements OnInit {
         {
           next: (tasks) => {
             this.tasks = tasks;
+            this.setView('default');
           },
           error: (problem) => {
             console.error('TaskListHttpComponent.loadTasks(): error retreiving tasks:');
@@ -142,6 +170,10 @@ export class TasklistComponent implements OnInit {
       this.skillsCheckBoxes.push(checkbox);
     }
   }
+
+  acceptTask(){
+    console.log("not implemented yet");
+  }
 }
 
 //anything can use this class
@@ -160,6 +192,18 @@ class CheckBoxItem {
     this.name = name;
     this.checked=checked;
   }
+}
 
+//classes for view types (easier to turn on and off at once)
+class TaskView {
+  name:string;
+  visible?:boolean;
 
+  constructor(
+    name='',
+    visible=false
+  ){
+    this.name=name;
+    this.visible=false;
+  }
 }
