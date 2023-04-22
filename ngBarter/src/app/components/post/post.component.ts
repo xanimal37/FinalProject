@@ -12,7 +12,7 @@ import { PostService } from 'src/app/services/post.service';
   styleUrls: ['./post.component.css']
 })
 export class PostComponent {
-[x: string]: any;
+// [x: string]: any;
 
   title: string = "Posts";
   post: Post | null = null;
@@ -82,7 +82,7 @@ export class PostComponent {
     createPost(post: Post) {
       this.postService.create(post).subscribe( {
         next: (createdPost) => {
-          this.newPost = new Post();
+          this.newPost = createdPost;
           this.reload();
         },
         error: (fail) => {
