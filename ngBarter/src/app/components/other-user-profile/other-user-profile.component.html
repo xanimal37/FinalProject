@@ -15,9 +15,17 @@
     <li *ngFor="let task of user.tasks">{{ task.name }}</li>
   </ul>
 
+  <h3>Certifications:</h3>
+  <ul>
+    <li *ngFor="let userSkill of user.userSkills">{{ userSkill.certification }}</li>
+  </ul>
   <h3>Skills:</h3>
   <ul>
-    <li *ngFor="let skill of user.skills">{{ skill.name }}</li>
+    <li *ngFor="let userSkill of user.userSkills">{{ userSkill.skill?.name}}</li>
+  </ul>
+  <h3>Friends:</h3>
+  <ul>
+    <li *ngFor="let userFriend of user.friends">{{ userFriend.firstname}}</li>
   </ul>
 
   <button (click)="addFriend()">Add as Friend</button>
