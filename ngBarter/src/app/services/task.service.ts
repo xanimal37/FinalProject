@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Task } from '../models/task';
 import { Observable, catchError, throwError } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,19 @@ export class TaskService {
 
   tasks: Task[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService) { }
+
+  getHttpOptions() {
+    let options = {
+      headers: {
+        Authorization: 'Basic ' + this.authService.getCredentials(),
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+    };
+    return options;
+  }
 
   //GET api/tasks
   index(): Observable<Task[]> {
@@ -28,7 +41,7 @@ export class TaskService {
 
   //POST api/tasks
   create(task: Task): Observable<Task> {
-    return this.http.post<Task>(environment.baseUrl+"api/tasks", task).pipe(
+    return this.http.post<Task>(environment.baseUrl+"api/tasks", task, this.getHttpOptions()).pipe(
       catchError((err:any)=>{
         console.log(err);
         return throwError(
