@@ -16,8 +16,6 @@ export class LoginComponent {
 
   login(user:User){
 
-
-
     this.auth.login(user.username, user.password).subscribe({
       next: (loggedInUser) => {
         console.log(loggedInUser);

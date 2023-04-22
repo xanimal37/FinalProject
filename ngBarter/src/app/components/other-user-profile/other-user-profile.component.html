@@ -1,9 +1,25 @@
-
 <h2>User Profile</h2>
 <div>
-  <p>Name: {{ user.username}}</p>
+  <p>Name: {{ user.username }}</p>
   <p>Email: {{ user.email }}</p>
   <p>Role: {{ user.role }}</p>
+  <p>Availability: {{ user.availability }}</p>
+  <p>Bio: {{ user.biography }}</p>
+  <p>First Name: {{ user.firstname }}</p>
+  <p>Last Name: {{ user.lastname }}</p>
+  <p>Address: {{ user.address }}</p>
+  <p>Phone: {{ user.phone }}</p>
+
+  <h3>Tasks:</h3>
+  <ul>
+    <li *ngFor="let task of user.tasks">{{ task.name }}</li>
+  </ul>
+
+  <h3>Skills:</h3>
+  <ul>
+    <li *ngFor="let skill of user.skills">{{ skill.name }}</li>
+  </ul>
 
   <button (click)="addFriend()">Add as Friend</button>
 </div>
+

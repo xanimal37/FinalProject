@@ -1,42 +1,57 @@
 import { Address } from "./address";
+import { Skill } from "./skill";
+import { Task } from "./task";
 
 export class User {
-  id:number;
+  id: number;
   username: string;
-  password:string;
+  password: string;
+  enabled: boolean;
   role: string;
+  imageURL: string;
   email: string;
-  availability:string;
-  biography:string;
-  // ranking: Ranking | null;
-  // friends:User[];
-  friends: any[] | undefined;
+  // ranking: Ranking;
+  // friends: User[];
+  // userSkills: UserSkill[];
+  // address: Address;
+  // comments: Comment[];
+  tasks: Task[] | null;
+  // taskMessages: TaskMessage[];
+  // notifications: Notification[];
+  // complaints: Complaint[];
+  // posts: Post[];
+  firstname: string;
+  lastname: string;
+  availability: string;
+  phone: string;
+  biography: string;
+  address: Address | null;
+  skills:Skill[]|null;
+  // userSkills:UserSkill
 
 
-  // userSkills: UserSkill[] | null;
-  address: Address | null = null;
-  // comments: Comment[] | null;
-  // tasks: Task[] | null;
-  // taskMessages: TaskMessage[] | null;
-  // notifications: Notification[] | null;
-  // complaints: Complaint[] | null;
-  // posts: Post[] | null;
-
-
+  //   }
   constructor(
     id:number = 0,
     username: string = '',
     password:string = '',
     role: string = '',
     email:string = '',
-    availability ='',
-    biography ='',
-    friends:User[] | undefined = [],
+    availability:string ='',
+    biography:string ='',
+    enabled:boolean= false,
+    imageUrl:string= '',
+    firstname:string='',
+    lastname:string='',
+    phone:string='',
+    address:Address | null = null,
+    tasks: Task[]=[],
+    skills: Skill[]=[],
+
+
 
     // userSkills: UserSkill[] ,
-    // address: Address,
     // comments: Comment[],
-    // tasks: Task[],
     // taskMessages: TaskMessage[],
     // notifications: Notification[],
     // complaints: Complaint[],
@@ -49,14 +64,20 @@ export class User {
     this.username  = username ;
     this.password = password ;
     this.role = role ;
+    this.enabled=enabled;
     this.email =email;
-    this.friends=friends;
+    this.imageURL = imageUrl;
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.phone=phone;
+    this.address = address;
+    this.skills = skills;
     // userSkills: UserSkill[] | null = null,
-    this.address = Address;
+    // this.address = Address;
     this.availability = availability;
     this.biography = biography;
     // comments: Comment[],
-    // tasks: Task[],
+    this.tasks = tasks;
     // taskMessages: TaskMessage[],
     // notifications: Notification[],
     // complaints: Complaint[],
