@@ -29,7 +29,8 @@ public class UserController {
 
 //  GET users
 	@GetMapping("users")
-	public List<User> index(HttpServletRequest req, HttpServletResponse res) {
+	public List<User> index(HttpServletRequest req, HttpServletResponse res,Principal principal) {
+		
 		List<User> users = userService.getAllUsers();
 		if (users == null) {
 			res.setStatus(404);
