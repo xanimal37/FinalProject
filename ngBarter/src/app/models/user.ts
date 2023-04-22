@@ -1,6 +1,7 @@
 import { Address } from "./address";
 import { Skill } from "./skill";
 import { Task } from "./task";
+import { Userskill } from "./userskill";
 
 export class User {
   id: number;
@@ -11,7 +12,7 @@ export class User {
   imageURL: string;
   email: string;
   // ranking: Ranking;
-  // friends: User[];
+  friends: User[];
   // userSkills: UserSkill[];
   // address: Address;
   // comments: Comment[];
@@ -27,7 +28,9 @@ export class User {
   biography: string;
   address: Address | null;
   skills:Skill[]|null;
-  // userSkills:UserSkill
+  userSkills:Userskill[];
+
+
 
 
   //   }
@@ -47,6 +50,9 @@ export class User {
     address:Address | null = null,
     tasks: Task[]=[],
     skills: Skill[]=[],
+    friends: User[]=[],
+    userSkills: Userskill[]=[],
+
 
 
 
@@ -72,12 +78,14 @@ export class User {
     this.phone=phone;
     this.address = address;
     this.skills = skills;
+    this.friends = friends;
     // userSkills: UserSkill[] | null = null,
     // this.address = Address;
     this.availability = availability;
     this.biography = biography;
     // comments: Comment[],
     this.tasks = tasks;
+    this.userSkills = userSkills;
     // taskMessages: TaskMessage[],
     // notifications: Notification[],
     // complaints: Complaint[],
