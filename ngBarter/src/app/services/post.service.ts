@@ -33,7 +33,7 @@ export class PostService {
       catchError((err: any) => {
         console.log(err);
         return throwError(
-          () => new Error('PostService.index(): error retrieving Posts: ' + err)
+          () => new Error('PostService.indexAll(): error retrieving Posts: ' + err)
         );
       })
     );

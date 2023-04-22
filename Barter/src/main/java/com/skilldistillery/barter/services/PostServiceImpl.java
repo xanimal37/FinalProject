@@ -89,7 +89,7 @@ public class PostServiceImpl implements PostService {
 //	}
 
 	@Override
-	public Post disablePost(String username, int pId) {
+	public Post disablePost(String username, int pId) { 
 		User user = userRepo.findByUsername(username);
 		Post disablePost = postRepo.findById(pId);
 		if (user != null) {
