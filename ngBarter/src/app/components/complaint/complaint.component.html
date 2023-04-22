@@ -1,1 +1,46 @@
-<p>complaint works!</p>
+<h1>{{title}}</h1>
+
+<div id="complaintList" *ngIf="loggedInUser?.role === admin">
+    <Table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Subject</th>
+          <th>Description</th>
+          <th>User</th>
+          <th>Submittal Date</th>
+          <th>Update Date</th>
+          <th>ClosedDate</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let comp of complaints">
+          <td>{{comp.id}}</td>
+          <td>{{comp.name}}</td>
+          <td>{{comp.description}}</td>
+          <td >
+            <ul>
+              <li>ID: {{comp.user?.id}}</li>
+              <li>Name: </li>
+              <li>UserName: {{comp.user?.username}}</li>
+              <li>Contact Information:
+                <ul>
+                  <li>Email: {{comp.user?.email}}</li>
+                  <li>Phone:</li>
+                </ul>
+              </li>
+              <li>Ranking: </li>
+            </ul>
+          </td>
+          <td>{{comp.createDate}}</td>
+          <td>{{comp.updateDate}}</td>
+          <td>{{comp.closedDate}}</td>
+          <td *ngIf="comp.active">
+            Active
+          </td>
+          <td *ngIf="!comp.active">Closed</td>
+        </tr>
+      </tbody>
+    </Table>
+</div>
