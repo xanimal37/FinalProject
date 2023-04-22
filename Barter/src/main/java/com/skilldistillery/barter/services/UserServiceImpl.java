@@ -112,9 +112,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User updateAccount(User user, String username) {
+	public User updateAccount(User user,int id) {
 		// TODO Auto-generated method stub
-		User originalUser = userRepo.findByUsername(username);
+		User originalUser = userRepo.findById(id);
 		if (originalUser == null) {
 			throw new IllegalArgumentException("User does not exist");
 		}
