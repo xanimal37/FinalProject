@@ -1,11 +1,23 @@
 <p>post works!</p>
 
-<div>
-  <div *ngFor="let post of posts">
+<div id="posts" *ngFor="let post of posts" >
+  <div *ngIf="post.enabled">
     <h4>{{post.title}}</h4>
     <p>{{post.createDate}}</p>
     <p>{{post.content}}</p>
     <p>{{post.user?.username}}</p>
-
+    <p>{{post.enabled}}</p>
   </div>
+</div>
+
+<div id="createPost" >
+  <h3>add task</h3>
+  <form>
+      Topic: <input type="text" name="topic" placeholder="" [(ngModel)]="newPost.title"/><br />
+      <textarea type="text" name="description" placeholder="Post Content" [(ngModel)]="newPost.content"></textarea><br>
+
+      <input class="btn btn-dark m-1" type="submit" value="add task" (click)="createPost(newPost)"/>
+      <input class="btn btn-dark m-1" type="submit" value="cancel"/>
+
+    </form>
 </div>
