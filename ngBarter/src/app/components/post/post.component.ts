@@ -12,13 +12,15 @@ import { PostService } from 'src/app/services/post.service';
 export class PostComponent {
 [x: string]: any;
 
-  title: String = "ngTodo";
+  title: string = "Posts";
   selected: Post | null =  null;
   selectedPosts: Post[] | null = null;
   newPost: Post = new Post;
   editPost: Post | null = null;
   posts: Post[] = []
   showEnabled: boolean = false;
+  keywordPosts: Post[] | null = null;
+  keyword: string = "";
 
 
 
@@ -28,10 +30,27 @@ export class PostComponent {
     private route: ActivatedRoute,
     private router: Router
     ) {
-  }
+    }
 
-  ngOnInit(): void {
-    this.reload();
+
+
+    displayPost(post: Post) {
+      this.selected = post;
+    }
+
+    displayTable():void {
+      this.selected = null;
+    }
+
+    setEditPost(): void {
+      this.editPost = Object.assign({}, this.selected);
+    }
+    cancelEditPost(): void {
+      this.editPost = null;
+    }
+
+    ngOnInit(): void {
+      this.reload();
      }
 
      reload() {
@@ -72,17 +91,24 @@ export class PostComponent {
           console.error(fail);
         }
       });
-
       this.reload();
     }
 
-    displayPost(post: Post) {
-      this.selected = post;
+    postSearch(keyword: string) {
+      this.postService.postKeywordSearch(keyword).subscribe( {
+        next: (postList) => {
+          this.keywordPosts = postList;
+          this.reload();
+        },
+        error: (fail) => {
+          console.error('Error retrieving search post');
+          console.error(fail);
+        }
+      });
+      this.reload();
     }
 
-    displayTable():void {
-      this.selected = null;
-    }
+
 
     disablePost(id: number) {
       this.postService.disable
