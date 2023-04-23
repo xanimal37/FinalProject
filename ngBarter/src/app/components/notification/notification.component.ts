@@ -1,26 +1,27 @@
 import { DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { Notification } from './../../models/notification';
 
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.css']
 })
-export class NotificationComponent {
+export class NotificationComponent implements OnInit{
 
   title: string = "Notifications";
   notification: Notification | null = null;
   selected: Notification | null =  null;
-  selectedNotification: Notification[] | null = null;
+  selectedNotification: Notification [] = [];
   newNotification: Notification | null = null;
   editNotification: Notification | null = null;
-  notifications: Notification[] = []
+  notifications: Notification [] = [];
   showEnabled: boolean = false;
-  loggedInUser: User = new User();
+  loggedInUser: User | undefined;
   admin: string = "admin";
   active: string = "active";
   closed: string = "closed";
@@ -51,40 +52,45 @@ export class NotificationComponent {
   }
 
   ngOnInit(): void {
+    this.verifyUser();
+    // this.loadNotificationsByUser(4)
+   }
+
+   verifyUser(): void{
     this.authService.getLoggedInUser().subscribe({
       next: (user: User) => {
         this.loggedInUser = user;
+        console.log(this.loggedInUser.id)
       },
       error: (nojoy) => {
         console.log(nojoy);
       }
 
      });
-     this.reloadNotificationsByUser(this.loggedInUser.id);
-   }
+    }
 
-   reloadNotificationsByUser(uId: number) {
-    this.notificationService.indexNotificationsByUser(uId).subscribe({
-      next: (notificationtList) => {
-        this.notifications = notificationtList;
-      },
-      error: (err) => {
-        console.error('Error getting complaints list');
-        console.error(err);
-      }
-    });
-  }
+  //  loadNotificationsByUser(uId: number) {
+  //   this.notificationService.indexNotificationsByUser(uId).subscribe({
+  //     next: (notificationList) => {
+  //       this.notifications = notificationList;
+  //     },
+  //     error: (err) => {
+  //       console.error('Error getting complaints list');
+  //       console.error(err);
+  //     }
+  //   });
+  // }
 
-  createNotification(notification: Notification) {
-    this.notificationService.createNotification(notification).subscribe( {
-      next: (createdNotification) => {
-        this.newNotification = createdNotification;
-      },
-      error: (fail) => {
-        console.error('Error creating complaint');
-        console.error(fail);
-      }
-    });
-  }
+  // createNotification(notification: Notification) {
+  //   this.notificationService.createNotification(notification).subscribe( {
+  //     next: (createdNotification) => {
+  //       this.newNotification = createdNotification;
+  //     },
+  //     error: (fail) => {
+  //       console.error('Error creating complaint');
+  //       console.error(fail);
+  //     }
+  //   });
+  // }
 
 }
