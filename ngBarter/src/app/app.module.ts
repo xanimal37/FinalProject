@@ -24,6 +24,8 @@ import { UserListComponent } from './components/user-list/user-list.component';
 import { TaskbyskillPipe } from './pipes/taskbyskill.pipe';
 import { AcceptedTaskComponent } from './components/accepted-task/accepted-task.component';
 import { TaskdashComponent } from './components/taskdash/taskdash.component';
+import { NewtaskComponent } from './components/newtask/newtask.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -45,7 +47,9 @@ import { TaskdashComponent } from './components/taskdash/taskdash.component';
     UserListComponent,
     TaskbyskillPipe,
     AcceptedTaskComponent,
-    TaskdashComponent
+    TaskdashComponent,
+    NewtaskComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -53,7 +57,7 @@ import { TaskdashComponent } from './components/taskdash/taskdash.component';
     FormsModule,
     HttpClientModule,
     NgbModule,
-
+    ReactiveFormsModule
   ],
   providers: [ DatePipe],
   bootstrap: [AppComponent]

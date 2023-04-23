@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.skilldistillery.barter.entities.Task;
 import com.skilldistillery.barter.entities.User;
 import com.skilldistillery.barter.repositories.TaskRepository;
+import com.skilldistillery.barter.repositories.TaskStatusRepository;
 import com.skilldistillery.barter.repositories.UserRepository;
 
 @Service
@@ -16,10 +18,13 @@ public class TaskServiceImpl implements TaskService {
 	private TaskRepository taskRepo;
 	@Autowired
 	private UserRepository userRepo;
+	@Autowired
+	private TaskStatusRepository taskStatusRepo;
 
 	@Override
 	public Task createTask(Task task, String username) {
 		User user = userRepo.findByUsername(username);
+		task.setTaskStatus(taskStatusRepo.findById(1));
 		task.setAddress(user.getAddress());
 		task.setUser(user);
 		return taskRepo.saveAndFlush(task);
