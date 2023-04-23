@@ -50,6 +50,16 @@ private url =environment.baseUrl;
       })
     );
   }
+  getUserCount(): Observable<number> {
+    return this.http.get<number>(this.url + "api/users/count",  this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error('TodoService.index(): error retrieving Todos: ' + err)
+        );
+      })
+    );
+  }
 
   addFriend(userId:number,user: User): Observable<User> {
     console.log(this.getHttpOptions());

@@ -31,26 +31,28 @@ Password:
 ### Backend
 #### JPABarter - Provides initial persistence architecture and entities required<br>
 Entities: and mapping<br>
-1. Address: Mapped to Household(1:1) and Neighborhood (1:1)
-3. 
-4. 
-5. 
-6. 
-7. 
-8. 
-9.
-10. 
-11. 
+
 
 #### Barter - Provides java logic classes, relationship mapping, test classes and frontend jsps
 Repos, Service/Impl, Controllers<br>
 
-1. 
-2. 
-3. 
-4. 
-5. 
-6. 
+### Project
+| HTTP Verb | URI                  | Request Body | Response Body |
+|-----------|----------------------|--------------|---------------|
+| GET       | `/api/projects`      |              | Collection of representations of all _locations_ resources |collection** endpoint |
+| GET       | `/api/projects/2`   |              | Representation of _locations_ `2` |
+| POST      | `/api/projects`      | Representation of a new _location_ resource | Description of the result of the operation | **
+| PUT       | `/api/projects/#`   | Representation of a new version of _location_ `#` |
+| DELETE    | `/api/projects/#`   |              | |
+
+### Location 
+| HTTP Verb | URI                  | Request Body | Response Body |
+|-----------|----------------------|--------------|---------------|
+| GET       | `/api/locations`      |              | Collection of representations of all _locations_ resources |collection** endpoint |
+| GET       | `/api/locations/16`   |              | Representation of _locations_ `16` |
+| POST      | `/api/locations`      | Representation of a new _location_ resource | Description of the result of the operation | **
+| PUT       | `/api/locations/#`   | Representation of a new version of _location_ `#` |
+| DELETE    | `/api/locations/#`   |              | |
 
 Particular code notes:
 
