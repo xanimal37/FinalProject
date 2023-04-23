@@ -1,5 +1,6 @@
 import { NotificationType } from './notification-type';
 import { User } from './user';
+
 export class Notification {
   id: number;
   message: string;

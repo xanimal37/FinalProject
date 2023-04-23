@@ -1,6 +1,6 @@
 import { Post } from './../../models/post';
 import { DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
@@ -11,7 +11,7 @@ import { PostService } from 'src/app/services/post.service';
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css']
 })
-export class PostComponent {
+export class PostComponent implements OnInit{
 // [x: string]: any;
 
   title: string = "Posts";
@@ -55,6 +55,10 @@ export class PostComponent {
     }
 
     ngOnInit(): void {
+      this.verifyUser();
+     }
+
+     verifyUser(): void{
       this.authService.getLoggedInUser().subscribe({
         next: (user: User) => {
           this.loggedInUser = user;
@@ -64,8 +68,7 @@ export class PostComponent {
         }
 
        });
-      this.reload();
-     }
+      }
 
      reload() {
       this.postService.indexAll().subscribe({

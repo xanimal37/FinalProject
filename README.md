@@ -36,23 +36,37 @@ Entities: and mapping<br>
 #### Barter - Provides java logic classes, relationship mapping, test classes and frontend jsps
 Repos, Service/Impl, Controllers<br>
 
-### Project
-| HTTP Verb | URI                  | Request Body | Response Body |
-|-----------|----------------------|--------------|---------------|
-| GET       | `/api/projects`      |              | Collection of representations of all _locations_ resources |collection** endpoint |
-| GET       | `/api/projects/2`   |              | Representation of _locations_ `2` |
-| POST      | `/api/projects`      | Representation of a new _location_ resource | Description of the result of the operation | **
-| PUT       | `/api/projects/#`   | Representation of a new version of _location_ `#` |
-| DELETE    | `/api/projects/#`   |              | |
+There are a lot of intertwining REST end point. The following are the most prominent of the project
 
-### Location 
+### User
 | HTTP Verb | URI                  | Request Body | Response Body |
 |-----------|----------------------|--------------|---------------|
-| GET       | `/api/locations`      |              | Collection of representations of all _locations_ resources |collection** endpoint |
-| GET       | `/api/locations/16`   |              | Representation of _locations_ `16` |
-| POST      | `/api/locations`      | Representation of a new _location_ resource | Description of the result of the operation | **
-| PUT       | `/api/locations/#`   | Representation of a new version of _location_ `#` |
-| DELETE    | `/api/locations/#`   |              | |
+| GET       | `/api/users`      |              | Collection of all users|
+| GET       | `/api/users/{id}`   |   Representation of a userId resource    | Single user based on Id |
+| POST      | `/api/register`     | Representation of a new User | Creates new user | 
+| PUT       | `/api/user/{userId}`   | User object, Id | Updated User based on id
+| DELETE    | `/api/locations/#`   |      ***FINISHc       
+
+### Task 
+| HTTP Verb | URI                  | Request Body | Response Body |
+|-----------|----------------------|--------------|---------------|
+| GET       | `/api/tasks`      |              | Collection of all tasks in the database |
+| GET       | `/api/users/tasks`   |      Principal        | Collection of all tasks for logged in users |
+| GET       | `/api/tasks/{statusname}`   |      Principal        | Collection of all tasks for based on status |
+| POST      | `/api/tasks`      | Principal, Representation of an new Task| New Task Object 
+| PUT       | `/api/tasks/{id}`   | Principal, Representation of an new Task and {id}| Updated Task based on id
+
+### Post 
+| HTTP Verb | URI                  | Request Body | Response Body |
+|-----------|----------------------|--------------|---------------|
+| GET       | `/api/posts`      |              | Collection of all posts in the database |
+| GET       | `/api/users/{Id}`   |      Principal        | Collection of all posts for user |
+| GET       | `/api/search/{keyword}`   |      Principal, keyword string        | Search results based on keyword |
+| POST      | `/api/post`      | Principal, Representation of an new Post| New Task Object 
+| PUT       | `/api/tasks/{id}`   | Principal, Representation of an new Post and {id}| Updated Post based on id
+| PUT       | `/api/disabled/{id}`   | Principal, Post Id| Turns Comment to false for archive purposes. 
+
+
 
 Particular code notes:
 

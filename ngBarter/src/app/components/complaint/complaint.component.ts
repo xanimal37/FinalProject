@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Complaint } from 'src/app/models/complaint';
 import { User } from 'src/app/models/user';
@@ -11,7 +11,7 @@ import { ComplaintService } from 'src/app/services/complaint.service';
   templateUrl: './complaint.component.html',
   styleUrls: ['./complaint.component.css']
 })
-export class ComplaintComponent {
+export class ComplaintComponent implements OnInit {
 
   title: string = "Complaints";
   complaint: Complaint | null = null;
