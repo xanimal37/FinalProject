@@ -90,10 +90,8 @@ Front end was broken up into several sub-directories:
 
 3. When working with a four-way join table, it's important to specify all necessary join columns in the query with an And in the Jpa Repository query to find all necessary properties.
 
-
-
-
 #### Lisa Zeeb
+1. to use dynamic checkboxes in angular, generate from database using `*ngFor`. Two-way binding can be accomplished by creating a class called clickable, binding each checkbox property to that class (checked?:boolean) and then grabbing the objects from a list by name. This could probably be done better using an interface.
 
 #### Rob Tisdale:
 1. When doing entity mapping,for something such as comment (which can have sub-comments), you can reference the actual entity with an "inReplyTo" attribute inside the entity. 

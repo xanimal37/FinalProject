@@ -10,5 +10,7 @@ public interface AcceptedTaskService {
 	
 	List<AcceptedTask> getAllUsersAcceptedTasks(String username);
 	
+	AcceptedTask createAcceptedTask(AcceptedTask acceptedTask);
+	
 
 }
