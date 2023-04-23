@@ -1,4 +1,4 @@
 
 <p>There are {{ userCount }} users  .</p>
 
-<app-taskdash></app-taskdash>
+<app-taskdash *ngIf="loggedInUser"></app-taskdash>

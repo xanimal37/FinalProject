@@ -1,2 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
+
+/*colors*/
+/*BACKGROUND darkgray, #33333*/
+/*TEXT #222222*/
+/*LINK #D2691E*/
+
+html {
+  line-height: 1.6;
+  background-image: linear-gradient( #333333, #555555);
+}
+
+body {
+  background-color: #333333;
+  padding:1em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Mochiy Pop P One',sans-serif;
+}
+
+a {
+  color: #D2691E;
+}
+
+/*default stying for boxes in components*/
+div {
+  background-color: #ffffff;
+  color:#222222;
+  border-radius: 4px;
+  padding:1em;
+  margin:.6em;
+}
+
+/* TESTING STYLES */
+.test {
+  font-weight: bold;
+  border:1px dotted red;
+}
+
