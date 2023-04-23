@@ -10,6 +10,8 @@ import { DatePipe } from '@angular/common';
 import { Skill } from 'src/app/models/skill';
 import { User } from 'src/app/models/user';
 import { AcceptedTaskService } from 'src/app/services/accepted-task.service';
+import { AcceptedTask } from 'src/app/models/accepted-task';
+import { AcceptedTaskId } from 'src/app/models/accepted-task-id';
 
 
 @Component({
@@ -133,7 +135,6 @@ export class TasklistComponent implements OnInit {
         //methods and extra class for adding a checklist
 
     addTask(task: Task){
-    //  task.user = this.getLoggedInUser();
       this.setSelectedSkillsList(task);
       task.taskStatus=this.taskStatuses[0]; //pending
       console.log(task);
@@ -173,11 +174,27 @@ export class TasklistComponent implements OnInit {
     }
   }
 
-  acceptTask(){
-    console.log("not implemented yet");
+  acceptTask(task: Task){
+    let aTaskId = new AcceptedTaskId();
+    if(this.loggedInUser && this.selectedTask){
+      aTaskId.acceptorId=this.loggedInUser.id;
+      aTaskId.taskId=this.selectedTask.id;
+
+      let aTask=new AcceptedTask();
+      aTask.id = aTaskId;
+
+      this.acceptedTaskService.create(aTask).subscribe({
+        next: (createdATask)=>{
+          this.selectedTask=null;
+        },
+        error: (fail)=>{
+          console.error('Error creating accepted task.');
+          console.error(fail);
+        }
+      });
+    }
   }
 }
-
 //anything can use this class
 //probably should be refactored to an interface
 class CheckBoxItem {

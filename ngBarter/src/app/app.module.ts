@@ -23,6 +23,7 @@ import { OtherUserProfileComponent } from './components/other-user-profile/other
 import { UserListComponent } from './components/user-list/user-list.component';
 import { TaskbyskillPipe } from './pipes/taskbyskill.pipe';
 import { AcceptedTaskComponent } from './components/accepted-task/accepted-task.component';
+import { TaskdashComponent } from './components/taskdash/taskdash.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { AcceptedTaskComponent } from './components/accepted-task/accepted-task.
     OtherUserProfileComponent,
     UserListComponent,
     TaskbyskillPipe,
-    AcceptedTaskComponent
+    AcceptedTaskComponent,
+    TaskdashComponent
   ],
   imports: [
     BrowserModule,

@@ -29,7 +29,7 @@ export class AcceptedTaskService {
     return options;
   }
 
-  //GET api/tasks
+  //GET api/users/acceptedTasks
   index(): Observable<AcceptedTask[]> {
     return this.http.get<AcceptedTask[]>(environment.baseUrl+"api/users/acceptedTasks", this.getHttpOptions()).pipe(
       catchError((err:any)=>{
@@ -40,6 +40,18 @@ export class AcceptedTaskService {
       })
     );
   };
+
+  //POST api/users/acceptedTasks
+  create(acceptedTask: AcceptedTask): Observable<AcceptedTask> {
+    return this.http.post<AcceptedTask>(environment.baseUrl+"api/users/acceptedTasks", acceptedTask, this.getHttpOptions()).pipe(
+      catchError((err:any)=>{
+        console.log(err);
+        return throwError(
+          ()=>new Error('TaskService.create(): error creating accepted task: '+err)
+        );
+      })
+    );
+    };
 
 
 }

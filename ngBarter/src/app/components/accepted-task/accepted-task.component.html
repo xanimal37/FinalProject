@@ -1,7 +1,10 @@
 <h1>ACCEPTED TASKS TEST</h1>
 
-<ul>
-<li *ngFor="let at of acceptedTasks">{{at.name}}</li>
+<div *ngFor="let aTask of acceptedTasks">
+  <h3>{{aTask.id?.taskId}}</h3>
+  <p>rating by requestor: {{aTask.ratingByRequestor}}</p>
+  <p>rating by acceptor: {{aTask.ratingByAcceptor}}</p>
+  <p>remarks by requestor: {{aTask.remarksByRequestor}}</p>
+  <p>remarks by acceptor: {{aTask.remarksByAcceptor}}</p>
+</div>
 
-
-</ul>
