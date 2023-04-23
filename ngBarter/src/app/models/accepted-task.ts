@@ -1,10 +1,26 @@
+import { AcceptedTaskId } from "./accepted-task-id";
+
 export class AcceptedTask {
 
-  name: string;
+  //composite key
+  id: AcceptedTaskId | null;
+
+  ratingByRequestor: number;
+  ratingByAcceptor: number;
+  remarksByRequestor: string;
+  remarksByAcceptor: string;
 
   constructor(
-    name:string=''
+    id: AcceptedTaskId | null =null,
+    ratingByRequestor: number=0,
+    ratingByAcceptor: number=0,
+    remarksByRequestor: string='',
+    remarksByAcceptor: string=''
   ){
-    this.name = name;
+    this.id = id;
+    this.ratingByRequestor = ratingByRequestor;
+    this.ratingByAcceptor = ratingByAcceptor;
+    this.remarksByAcceptor = remarksByAcceptor;
+    this.remarksByRequestor = remarksByRequestor;
   }
 }

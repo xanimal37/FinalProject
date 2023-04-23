@@ -19,7 +19,6 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public Task createTask(Task task, String username) {
-		System.out.println(username);
 		User user = userRepo.findByUsername(username);
 		task.setAddress(user.getAddress());
 		task.setUser(user);

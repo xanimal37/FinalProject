@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.barter.entities.AcceptedTask;
+import com.skilldistillery.barter.entities.Task;
 import com.skilldistillery.barter.entities.User;
 import com.skilldistillery.barter.repositories.AcceptedTaskRepository;
 import com.skilldistillery.barter.repositories.UserRepository;
@@ -34,5 +35,10 @@ public class AcceptedTaskServiceImpl implements AcceptedTaskService{
 			return null;
 		}
 		
+	}
+
+	@Override
+	public AcceptedTask createAcceptedTask(AcceptedTask acceptedTask) {
+		return acceptedTaskRepo.saveAndFlush(acceptedTask);
 	}
 }
