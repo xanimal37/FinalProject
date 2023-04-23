@@ -1,13 +1,14 @@
 import { Skill } from "./skill";
+import { Userskillid } from "./userskillid";
 
 export class Userskill {
-  id: number;
+  id: Userskillid;
   certification:string;
   description:string;
   skill:Skill | null;
 
   constructor(
-    id:number=0,
+    id:Userskillid,
     certification:string='',
     description:string='',
     skill:Skill|null = null,

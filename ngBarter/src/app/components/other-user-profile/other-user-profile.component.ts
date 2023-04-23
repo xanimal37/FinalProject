@@ -15,7 +15,7 @@ export class OtherUserProfileComponent implements OnInit {
   loggedInUser: User = new User();
   words:string[]=[];
   currentUser: any;
-  constructor(private route: ActivatedRoute, private userService: UserService,private authService :AuthService) { }
+  constructor(private route: ActivatedRoute, private userService: UserService,private authService :AuthService,private router: Router) { }
 
 
 
@@ -31,6 +31,22 @@ ngOnInit() {
       console.log(nojoy);
     }
   });
+  this.reload();
+}
+
+reload() {
+  const userId = this.route.snapshot.params['id'];
+  this.userService.getUserById(userId).subscribe({
+    next: (user: User) => {
+      this.user = user;
+      this.getLoggedInUser();
+
+    },
+    error: (nojoy) => {
+      console.log(nojoy);
+    }
+  });
+
 }
 
 getLoggedInUser(){
@@ -45,20 +61,32 @@ getLoggedInUser(){
 }
 
 isFriend(): boolean {
-  return this.loggedInUser.friends.some(friend => friend.id == this.user.id);
+  if (!this.loggedInUser.friends || !this.user) {
+    return false;
+  }
+
+  const friendIds = this.loggedInUser.friends.map(friend => friend.id);
+  return friendIds.includes(this.user.id);
 }
 
+goBack() {
+  this.router.navigate(['/usersList']);
+}
 addFriend() {
 
 this.userService.addFriend( this.user.id,this.user).subscribe({
+
     next: (response) => {
         console.log(response);
+        this.reload();
 
       },
       error: (nojoy) => {
-          console.log(nojoy);
+        console.log(nojoy);
 
+        this.reload();
         }
+
  });
 
 
