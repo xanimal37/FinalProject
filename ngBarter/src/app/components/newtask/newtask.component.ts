@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Skill } from 'src/app/models/skill';
 import { Task } from 'src/app/models/task';
 import { SkillService } from 'src/app/services/skill.service';
 import { TaskService } from 'src/app/services/task.service';
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-newtask',
   templateUrl: './newtask.component.html',
   styleUrls: ['./newtask.component.css']
 })
+
 export class NewtaskComponent implements OnInit {
+
   newTaskForm:FormGroup | any;
   skills: Skill[] = [];
   materialsProvided: string[] = ['yes','no'];
@@ -25,6 +28,12 @@ export class NewtaskComponent implements OnInit {
     this.loadSkills();
     this.buildForm();
   }
+
+  close() {
+
+  }
+
+  @Output('closeChild') closeChild: EventEmitter<any> = new EventEmitter();
 
   loadSkills():void{
     this.skillService.index().subscribe(
@@ -93,6 +102,7 @@ export class NewtaskComponent implements OnInit {
       this.taskService.create(this.newTask).subscribe( {
         next: (createdTask) => {
           this.newTask = new Task();
+          this.closeChild.emit();
         },
         error: (fail) => {
           console.error('Error creating task');

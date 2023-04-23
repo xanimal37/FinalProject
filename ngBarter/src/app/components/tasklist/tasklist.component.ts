@@ -3,7 +3,7 @@ import { TaskStatus } from './../../models/task-status';
 import { TaskService } from './../../services/task.service';
 import { SkillService } from 'src/app/services/skill.service';
 import { TaskStatusService } from 'src/app/services/task-status.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Task } from 'src/app/models/task';
 import { DatePipe } from '@angular/common';
@@ -13,12 +13,14 @@ import { AcceptedTaskService } from 'src/app/services/accepted-task.service';
 import { AcceptedTask } from 'src/app/models/accepted-task';
 import { AcceptedTaskId } from 'src/app/models/accepted-task-id';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { NewtaskComponent } from '../newtask/newtask.component';
 
 
 @Component({
   selector: 'app-tasklist',
   templateUrl: './tasklist.component.html',
   styleUrls: ['./tasklist.component.css']
+
 })
 
 export class TasklistComponent implements OnInit {
@@ -62,6 +64,11 @@ export class TasklistComponent implements OnInit {
         view.visible=true;
       }
     }
+  }
+
+  closeChild(){
+    this.loadTasks();
+    this.setView('default');
   }
 
   //set up the views and which are active

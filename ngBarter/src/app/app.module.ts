@@ -26,6 +26,7 @@ import { AcceptedTaskComponent } from './components/accepted-task/accepted-task.
 import { TaskdashComponent } from './components/taskdash/taskdash.component';
 import { NewtaskComponent } from './components/newtask/newtask.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NewTaskMessageComponent } from './components/new-task-message/new-task-message.component';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AcceptedTaskComponent,
     TaskdashComponent,
     NewtaskComponent,
+    NewTaskMessageComponent,
 
   ],
   imports: [
