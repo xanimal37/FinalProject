@@ -1,9 +1,83 @@
 <h1>Register</h1>
 <form >
-  Username:<input type="text" name="username" id="username" [(ngModel)]="newUser.username"><br>
-  Password:<input type="password" name="password" id="password" [(ngModel)]="newUser.password"><br>
-  Email: <input type="email" name="email" id="email" [(ngModel)]="newUser.email"><br>
-  <!-- Address: <input type="address" name="address" id="address" [(ngModel)]="newUser.address"><br> -->
 
-  <button (click)="register(newUser)">Submit</button>
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" name="username" id="username" [(ngModel)]="newUser.username">
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" [(ngModel)]="newUser.password">
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email" [(ngModel)]="newUser.email">
+    </div>
+    <div>
+      <label for="bio">Bio:</label>
+      <input type="text" name="bio" id="bio" [(ngModel)]="newUser.biography">
+    </div>
+    <div>
+      <label for="fname">First Name:</label>
+      <input type="text" name="fname" id="fname" [(ngModel)]="newUser.firstname">
+    </div>
+    <div>
+      <label for="lname">Last Name:</label>
+      <input type="text" name="lname" id="lname" [(ngModel)]="newUser.lastname">
+    </div>
+
+    <!-- <div>
+      <label for="street">Street:</label>
+      <input type="text" name="street" id="street" [(ngModel)]="newUser.address.street">
+    </div>
+    <div>
+      <label for="city">City:</label>
+      <input type="text" name="city" id="city" [(ngModel)]="newUser.address.city">
+    </div>
+    <div>
+      <label for="state">State:</label>
+      <input type="text" name="state" id="state" [(ngModel)]="newUser.address.state">
+    </div>
+    <div>
+      <label for="zip">Zip:</label>
+      <input type="text" name="zip" id="zip" [(ngModel)]="newUser.address.zip">
+    </div> -->
+    <h3>Skills:</h3>
+    <h4>select required skills</h4>
+
+    <li *ngFor="let box of skillsCheckBoxes">
+      <input type="checkbox" value="box.name" name="box.name" [(ngModel)]="newUser.userSkills"/>
+      <label>{{box.name}}</label>
+    </li>
+  <div>
+
+
+      <!-- name: <input type="text" name="name" placeholder="name" [(ngModel)]="newTask.name"/><br />
+      description: <input type="text" name="description" placeholder="description" [(ngModel)]="newTask.description"/><br />
+      <h4>select required skills</h4>
+      <li *ngFor="let box of skillsCheckBoxes">
+        <input type="checkbox" value="box.name" name="box.name" [(ngModel)]="box.checked"/>
+        <label>{{box.name}}</label>
+      </li>
+      requested start date: <input type="date" name="name" [(ngModel)]="newTask.startDate"/>
+
+
+      <input class="btn btn-dark m-1" type="submit" value="create task!" (click)="addTask(newTask)"/>
+      <input class="btn btn-dark m-1" type="submit" value="cancel" (click)="setView('default')"/>
+   -->
+
+
+    <ul>
+      <li *ngFor="let userSkill of newUser.userSkills">
+        {{ userSkill.certification }}
+        <span *ngIf="userSkill.skill"> - {{ userSkill.skill.name }}</span>
+      </li>
+    </ul>
+  </div>
+
+
+
+    <button (click)="register(newUser)">Submit</button>
+
+
 </form>

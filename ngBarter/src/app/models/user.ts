@@ -27,7 +27,7 @@ export class User {
   phone: string;
   biography: string;
   address: Address | null;
-  skills:Skill[]|null;
+  // skills:Skill[]|null;
   userSkills:Userskill[];
 
 
@@ -49,7 +49,7 @@ export class User {
     phone:string='',
     address:Address | null = null,
     tasks: Task[]=[],
-    skills: Skill[]=[],
+    // skills: Skill[]=[],
     friends: User[]=[],
     userSkills: Userskill[]=[],
 
@@ -77,7 +77,7 @@ export class User {
     this.lastname = lastname;
     this.phone=phone;
     this.address = address;
-    this.skills = skills;
+    // this.skills = skills;
     this.friends = friends;
     // userSkills: UserSkill[] | null = null,
     // this.address = Address;
