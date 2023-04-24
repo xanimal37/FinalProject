@@ -71,6 +71,7 @@ export class PostComponent implements OnInit{
         }
 
        });
+       this.reload();
       }
 
      reload() {
