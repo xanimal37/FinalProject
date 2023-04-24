@@ -6,7 +6,7 @@
   <button class="btn btn-dark m-1">view all</button>
   <button *ngIf="loggedInUser" class="btn btn-dark m-1" (click)="setView('adding')">create task</button>
 </nav>
-<div id="Tasks" *ngIf="!selectedTask">
+<div id="Tasks" *ngIf="!selectedTask && views[0].visible">
   <nav>
     <button (click)= "selectedSkillName = 'all'" class="btn btn-outline-dark m-1" name="all" value="all">all skills</button>
         <button class="btn btn-outline-dark m-1" *ngFor="let skill of skills" name="skill.name" value="skill.name" (click)= "selectedSkillName = skill.name">{{skill.name}}</button>
@@ -15,6 +15,7 @@
   <div *ngFor="let task of tasks | taskbyskill:selectedSkillName">
     <h3>{{task.name}}</h3>
     <p>{{task.description}}</p>
+    <p>requested start date: {{task.startDate |date:'shortDate'}}</p>
     <h4>skills required</h4>
     <ul>
       <li *ngFor="let skill of task.skills">{{skill.name}}</li>
@@ -44,5 +45,5 @@
   <div id="add_task" *ngIf="views[1].visible && loggedInUser">
     <h3>add task</h3>
 
-    <app-newtask></app-newtask>
+    <app-newtask (closeChild)=closeChild()></app-newtask>
 </div>
