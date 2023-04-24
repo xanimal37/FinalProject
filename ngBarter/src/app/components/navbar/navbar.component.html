@@ -1,82 +1,39 @@
 <!-- menu items in BOLD and red outline are there for testing purposes only -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="loggedInUser && loggedInUser?.role === 'user'">
-  <a class="navbar-brand" [routerLink]="['/home']">barterBee</a>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" >
+  <a class="navbar-brand" *ngIf="loggedInUser && loggedInUser?.role === 'user'" [routerLink]="['/home']">barterBee</a>
+  <a class="navbar-brand" *ngIf="loggedInUser && loggedInUser?.role === 'admin'" [routerLink]="['/home']">barterBee-ADMIN</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNav" >
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/tasks']">tasks</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/posts']">posts</a>
-      </li>
-      <li class="nav-item test">
-        <a class="nav-link" [routerLink]="['/complaints']">complaints</a>
-      </li>
-      <li class="nav-item test">
-        <a class="nav-link" [routerLink]="['/notifications']">notification</a>
-      </li>
-      <li class="nav-item" *ngIf="!loggedIn()">
-        <a class="nav-link" [routerLink]="['/register']">register</a>
-      </li>
-      <li class="nav-item" *ngIf="!loggedIn()">
-        <a class="nav-link" [routerLink]="['/login']">login</a>
-      </li>
-      <li class="nav-item" *ngIf="loggedIn()"><app-logout></app-logout>
-      </li>
-    </ul>
-  </div>
-
-</nav>
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="loggedInUser && loggedInUser?.role === 'admin'">
-  <a class="navbar-brand" [routerLink]="['/home']">barterBee_Admin</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
   <div class="collapse navbar-collapse" id="navbarNav" >
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/usersList']">users</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/posts']">posts</a>
+        <a class="nav-link" *ngIf="loggedInUser && loggedInUser?.role === 'user'" [routerLink]="['/tasks']">tasks</a>
       </li>
-      <li class="nav-item ">
-        <a class="nav-link" [routerLink]="['/tasks']">tasks</a>
-      </li>
-      <li class="nav-item test">
-        <a class="nav-link" [routerLink]="['/complaints']">complaints</a>
-      </li>
-      <li class="nav-item" *ngIf="!loggedIn()">
-        <a class="nav-link" [routerLink]="['/register']">register</a>
-      </li>
-      <li class="nav-item" *ngIf="!loggedIn()">
-        <a class="nav-link" [routerLink]="['/login']">login</a>
-      </li>
-      <li class="nav-item" *ngIf="loggedIn()"><app-logout></app-logout>
-      </li>
-    </ul>
-  </div>
-
-</nav>
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="!loggedInUser">
-  <a class="navbar-brand" [routerLink]="['/home']">barterBee</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarNav" >
-    <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/posts']">posts</a>
+        <a class="nav-link" *ngIf="loggedInUser && loggedInUser?.role === 'user'" [routerLink]="['/posts']">posts</a>
       </li>
       <li class="nav-item test">
-        <a class="nav-link" [routerLink]="['/tasks']">tasks</a>
+        <a class="nav-link" *ngIf="loggedInUser && loggedInUser?.role === 'admin'" [routerLink]="['/complaints']">complaints</a>
+      </li>
+      <li class="nav-item test">
+        <a class="nav-link" *ngIf="loggedInUser && loggedInUser?.role === 'user'" [routerLink]="['/notifications']">notification</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown link
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
       <li class="nav-item" *ngIf="!loggedIn()">
         <a class="nav-link" [routerLink]="['/register']">register</a>
       </li>
@@ -88,5 +45,6 @@
     </ul>
   </div>
 
-
 </nav>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>

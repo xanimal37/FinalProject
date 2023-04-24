@@ -100,20 +100,20 @@ export class PostComponent implements OnInit{
       this.reload();
     }
 
-    // createComment(pId: number, comment: Comment) {
-    //   this.postService.createComment(pId, comment).subscribe( {
-    //     next: (createdComment) => {
-    //       this.newComment = createdComment;
-    //       this.reload();
-    //     },
-    //     error: (fail) => {
-    //       console.error('Error creating post');
-    //       console.error(fail);
-    //     }
-    //   });
+    createComment(pId: number, comment: Comment) {
+      this.postService.createComment(pId, comment).subscribe( {
+        next: (createdComment) => {
+          this.newComment = createdComment;
+          this.reload();
+        },
+        error: (fail) => {
+          console.error('Error creating post');
+          console.error(fail);
+        }
+      });
 
-    //   this.reload();
-    // }
+      this.reload();
+    }
 
     updatePost(post: Post, pId: number) {
       this.postService.update(post,pId).subscribe( {
