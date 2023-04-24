@@ -1,1 +1,22 @@
 <H1>USER ACCOUNT</H1>
+
+<h3>Skills:</h3>
+
+  <select [(ngModel)]="newUserSkill.id.skillId" name="skills" id="skills" >
+
+
+    <option  *ngFor="let skill of skills" value="{{skill.id}}">{{skill.name}}</option>
+
+  </select >
+
+  <select [(ngModel)]="newUserSkill.skillLevel.id" name="skills" id="skills" >
+
+
+    <option  *ngFor="let skillLevel of skillLevels" value="{{skillLevel.id}}">{{skillLevel.name}}</option>
+
+  </select >
+
+  <input type="text" name="description" [(ngModel)]="newUserSkill.description" >
+  <input type="text" name="certification" [(ngModel)]="newUserSkill.certification" >
+  <button name="create" (click)="createUserSkill(newUserSkill)" > Create </button>
+

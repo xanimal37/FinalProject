@@ -14,7 +14,6 @@ export class LoginComponent {
   constructor(
     private auth:AuthService,
     private router: Router,
-    //private nav: NavbarComponent
 
 
     ){}
@@ -26,8 +25,7 @@ export class LoginComponent {
     this.auth.login(user.username, user.password).subscribe({
       next: (loggedInUser) => {
         console.log(loggedInUser);
-
-        this.router.navigateByUrl('/home');
+         this.router.navigateByUrl('/userAccount');
       },
       error: (problem) => {
         console.error('RegisterComponent.register(): Error logging in user:');
