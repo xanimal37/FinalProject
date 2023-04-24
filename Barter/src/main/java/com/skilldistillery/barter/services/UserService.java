@@ -7,7 +7,6 @@ import com.skilldistillery.barter.entities.User;
 
 public interface UserService {
 	public List <User> getAllUsers();
-	public User updateUserByAdmin(User user,int userId);
 	public boolean deleteUser(int userId);
 	public User findById(int userId);
 	public User findByUsername(String username);
@@ -18,6 +17,15 @@ public interface UserService {
 	public List<User> getUsersBySkillNameAndSkillLevel(String skillLevel,String skillName);
 	public List<User> getUsersByRanking(String rankName);
 	User updateAccount(User user, int id);
+	User archiveUser( int id);
+	User unarchiveUser( int id);
+	public User updateUserByAdmin(User user,int userId);
+	
+	public User updateUserEmail(User user,int userId);
+//	public User updateUserByAdmin(User user,int userId);
+//	public User updateUserByAdmin(User user,int userId);
+//	User updateEmail(User user, int userId);
+	
 	
 
 	      

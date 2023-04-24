@@ -10,7 +10,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.barter.entities.Skill;
+import com.skilldistillery.barter.entities.SkillLevel;
 import com.skilldistillery.barter.entities.Task;
+import com.skilldistillery.barter.repositories.SkillLevelRepository;
 import com.skilldistillery.barter.repositories.SkillRepository;
 import com.skilldistillery.barter.repositories.TaskRepository;
 import com.skilldistillery.barter.repositories.UserRepository;
@@ -29,6 +31,9 @@ public class SkillServiceImpl implements SkillService {
 
 	@Autowired
 	private SkillRepository skillRepo;
+	
+	@Autowired
+	private SkillLevelRepository skillLevelRepo;
 	
 	
 	@Override
@@ -81,6 +86,12 @@ public class SkillServiceImpl implements SkillService {
         Skill skill = skillRepo.findById(skillId);
         return skill;
     }
+
+	@Override
+	public List<SkillLevel> getAllSkillLevels() {
+		// TODO Auto-generated method stub
+		return skillLevelRepo.findAll();
+	}
 	
 
 	

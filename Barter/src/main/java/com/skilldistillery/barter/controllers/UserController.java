@@ -137,5 +137,33 @@ public class UserController {
 		return userService.getUsersByRanking(rankName);
 	}
 	
+	@PutMapping("users/{id}/archive")
+	public User archiveUser(@PathVariable int id) {
+		User archivedUser = userService.archiveUser(id);
+		return archivedUser;
+	
+	}
+	@PutMapping("users/{id}/unarchive")
+	public User unarchiveUser(@PathVariable int id) {
+		User archivedUser = userService.unarchiveUser(id);
+		return archivedUser;
+		
+	}
+	@PutMapping("users/{id}/email")
+	public User updateEmail(@PathVariable int id,Principal principal, @RequestBody User user) {
+		User updatedUser = null;
+		try {
+			updatedUser = userService.updateUserEmail(user, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return updatedUser;
+		
+	}
+	
+	
+	
+	
 
 }

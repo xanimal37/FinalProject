@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.barter.entities.Skill;
+import com.skilldistillery.barter.entities.SkillLevel;
 import com.skilldistillery.barter.services.SkillService;
 
 @RestController
@@ -39,6 +40,10 @@ public class SkillController {
 	public List<Skill> getAllSkills() {
 		return skillService.getAllSkills();
 	}
+	@GetMapping("skills/skillLevel")
+	public List<SkillLevel> getAllSkillLevels() {
+		return skillService.getAllSkillLevels();
+	}
 	@PutMapping("skills/{skillId}")
 	public Skill updateSkill(@PathVariable int skillId, @RequestBody Skill skillDetails) {
 		return skillService.updateSkill(skillId, skillDetails);
@@ -59,5 +64,6 @@ public class SkillController {
 	public Skill createSkill(@RequestBody Skill skill) {
 		return skillService.createSkill(skill);
 	}
+	
 	
 }
