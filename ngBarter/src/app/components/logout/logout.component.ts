@@ -12,7 +12,6 @@ export class LogoutComponent {
 constructor(
   private router: Router,
   private auth:AuthService,
-  private nav: NavbarComponent
 
   ){
 
@@ -23,7 +22,6 @@ constructor(
 
     console.log("you are logged out");
     this.router.navigateByUrl('/home')
-    this.nav.verifyUser();
 
   }
 

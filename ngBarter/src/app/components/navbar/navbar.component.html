@@ -18,6 +18,9 @@
         <a class="nav-link" [routerLink]="['/posts']">posts</a>
       </li>
       <li class="nav-item test">
+        <a class="nav-link" [routerLink]="['/test']">404Test</a>
+      </li>
+      <li class="nav-item test">
         <a class="nav-link" *ngIf="loggedInUser && loggedInUser?.role === 'admin'" [routerLink]="['/complaints']">complaints</a>
       </li>
       <li class="nav-item test">

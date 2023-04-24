@@ -13,13 +13,15 @@ export class NavbarComponent implements OnInit{
   admin: string = "admin";
 
   constructor(
-    private auth: AuthService){
+    private auth: AuthService,
 
-  }
-  isCollapsed: boolean = false;
+    ){
+    }
+    isCollapsed: boolean = false;
 
   ngOnInit(): void {
     this.verifyUser();
+    this.auth.getLoggedIn.subscribe(user => this.loggedInUser = user)
    }
 
   loggedIn():boolean{

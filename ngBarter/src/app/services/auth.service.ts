@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Observable, catchError, throwError, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
@@ -13,7 +13,11 @@ export class AuthService {
 //  private baseUrl = 'http://localhost:8087/';
 private url =environment.baseUrl;
 
-constructor(private http: HttpClient) {}
+@Output() getLoggedIn: EventEmitter<any> = new EventEmitter();
+// loggedInUser: User | null = null;
+
+constructor(
+  private http: HttpClient) {}
 
 register(user: User): Observable<User> {
   // Create POST request to register a new account
@@ -43,6 +47,7 @@ login(username: string, password: string): Observable<User> {
     tap((newUser) => {
       // While credentials are stored in browser localStorage, we consider
       // ourselves logged in.
+      this.getLoggedIn.emit(newUser);
       localStorage.setItem('credentials', credentials);
       return newUser;
     }),
@@ -57,6 +62,7 @@ login(username: string, password: string): Observable<User> {
 
 logout(): void {
   localStorage.removeItem('credentials');
+  this.getLoggedIn.emit(null);
 }
 
 getLoggedInUser(): Observable<User> {
