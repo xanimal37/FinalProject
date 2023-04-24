@@ -14,7 +14,6 @@ export class LoginComponent {
   constructor(
     private auth:AuthService,
     private router: Router,
-    //private nav: NavbarComponent
 
 
     ){}

@@ -1,0 +1,9 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+
+
+
+h1 {
+  font-weight: bold;
+  color: rgb(222, 212, 19);
+  font-size: 95px;
+}

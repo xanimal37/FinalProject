@@ -17,7 +17,8 @@
       <h4>{{post.title}}</h4>
       <p>{{post.createDate}}</p>
       <p>{{post.content}}</p>
-      <p><img src="{{post.user?.imageURL}}" alt="">{{post.user?.username}}</p>
+      <p><img src="{{post.user?.imageURL}}" width="30"
+        height="30" alt="Profile Pic" style="border-radius: 50%;" alt="">{{post.user?.username}}</p>
     </div>
   </div>
 
@@ -40,7 +41,8 @@
     <h4>{{post.title}}</h4>
     <p>{{post.createDate}}</p>
     <p>{{post.content}}</p>
-    <p>{{post.user?.username}}</p>
+    <p><img src="{{post.user?.imageURL}}" width="30"
+      height="30" alt="Profile Pic" style="border-radius: 50%;" alt="">{{post.user?.username}}</p>
     <button class = "btn btn-success" *ngIf="post?.user?.id === loggedInUser?.id" (click)="setEditPost(post)">Edit</button>
     <!-- <button class = "btn btn-success" *ngIf="loggedInUser" (click)="postComment">Comment</button>
     <div id="postComment">
