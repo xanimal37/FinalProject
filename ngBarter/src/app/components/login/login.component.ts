@@ -28,10 +28,7 @@ export class LoginComponent {
           this.router.navigateByUrl('/admin');
         }
         console.log(loggedInUser);
-
-
          this.router.navigateByUrl('/userAccount');
-
       },
       error: (problem) => {
         console.error('RegisterComponent.register(): Error logging in user:');

@@ -82,6 +82,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.verifyUser();
     this.getCountOfUser();
+    console.log(this.loggedInUser.role);
   }
 
   getCountOfUser():void {
