@@ -1,1 +1,40 @@
-<h2>my tasks</h2>
+<div class="container-fluid">
+  <h2>my tasks</h2>
+  <div class="row" *ngIf="!selectedTask">
+    <div *ngFor='let task of myTasks' class="col-4 borderBox p-3">
+      <h3>{{task.name}}</h3>
+      <p>{{task.description}}</p>
+      <p>requested start: {{task.startDate | date: 'shortDate'}}</p>
+      <h4>skills required</h4>
+      <ul>
+        <li *ngFor="let skill of task.skills">
+          {{skill.name}}
+        </li>
+
+      </ul>
+      <p [ngClass]="task.taskStatus?.name"> {{task.taskStatus?.name}}</p>
+      <div class="row">
+        <div class="col-12">
+          <button (click)='selectedTask=task' class="btn btn-dark m-1" type="button">update</button>
+          <button (click)='delete(task.id)' class="btn btn-dark m-1" type="button">delete</button>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+  <div class="row" *ngIf="selectedTask">
+    <div class="col-12">
+      <h3>update task: {{selectedTask.name}}</h3>
+      <form>
+
+
+
+      </form>
+    </div>
+  </div>
+
+</div>
+
+

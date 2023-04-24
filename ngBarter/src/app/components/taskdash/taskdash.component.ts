@@ -15,7 +15,7 @@ import { TaskService } from 'src/app/services/task.service';
 })
 export class TaskdashComponent implements OnInit {
 
-  loggedInUser : User | undefined;
+  loggedInUser : User | null =null;
   dashboard : string = 'all';
 
 

@@ -14,7 +14,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class AcceptedTaskComponent implements OnInit {
 
   acceptedTasks: AcceptedTask[]=[];
-  @Input() loggedInUser: User | undefined;
+  @Input() loggedInUser: User | null =null;
 
   constructor(
     private acceptedTaskService: AcceptedTaskService,
