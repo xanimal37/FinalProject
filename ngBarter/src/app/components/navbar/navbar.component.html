@@ -1,5 +1,5 @@
 <!-- menu items in BOLD and red outline are there for testing purposes only -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="loggedInUser && loggedInUser?.role === 'user'">
+<nav class="navbar navbar-expand-lg" *ngIf="loggedInUser && loggedInUser?.role === 'user'">
   <a class="navbar-brand" [routerLink]="['/home']">barterBee</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>

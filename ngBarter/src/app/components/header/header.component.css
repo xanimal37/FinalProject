@@ -1,16 +1,18 @@
 #mainHeader {
-  min-height:280px;
+  border-radius: 0px;
   background-image: url('../../../assets/images/barterheader.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-.headerDiv {
+#mainHeader div {
   background-color: transparent;
 }
 
-.headerDiv div {
-  background-color: transparent;
+#mainHeader h1 {
+  font-size: 4em;
+  color: #fbc912;
+  text-shadow:2px 2px #222222;
 }
 
 img {
