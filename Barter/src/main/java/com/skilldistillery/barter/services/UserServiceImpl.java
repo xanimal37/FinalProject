@@ -132,10 +132,10 @@ public class UserServiceImpl implements UserService {
 
 		originalUser.setEnabled(user.isEnabled());
 
-		if (user.getPassword() != null) {
-			String encrypted = encoder.encode(user.getPassword());
-			originalUser.setPassword(encrypted);
-		}
+//		if (user.getPassword() != null) {
+//			String encrypted = encoder.encode(user.getPassword());
+//			originalUser.setPassword(encrypted);
+//		}
 		return userRepo.saveAndFlush(originalUser);
 
 	}
@@ -168,7 +168,39 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return userRepo.findByRankingName(rankName);
 	}
+	
+	@Override
+	public User archiveUser(int id) {
+		User user = userRepo.findById(id);
+		if (user!=null) {
+			user.setEnabled(false);
+
+		}
+		userRepo.saveAndFlush(user);
+		return user;
+
+	}
+	@Override
+	public User unarchiveUser(int id) {
+		User user = userRepo.findById(id);
+		if (user!=null) {
+			user.setEnabled(true);
+
+		}
+		userRepo.saveAndFlush(user);
+		return user;
+		
+	}
 
 	
 	
+
+
+	public User updateUserEmail(User user, int userId) {
+		// TODO Auto-generated method stub
+		User originalUser = userRepo.findById(userId);
+		originalUser.setEmail(user.getEmail());
+		return null;
+	}
+
 }

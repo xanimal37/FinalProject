@@ -2,9 +2,8 @@ package com.skilldistillery.barter.services;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import com.skilldistillery.barter.entities.Skill;
+import com.skilldistillery.barter.entities.SkillLevel;
 
 public interface SkillService {
 
@@ -24,5 +23,7 @@ public interface SkillService {
 	public void deleteSkill(int skillId);
 
 	Skill SkillbyId(int skillId);
+	
+	List<SkillLevel> getAllSkillLevels();
 }
     
