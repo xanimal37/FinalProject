@@ -10,7 +10,19 @@
 
       <h5>Contact Information</h5>
       <p>{{ user.phone }}</p>
-      <p>Email: {{ user.email }}</p>
+      <p>Email: {{ user.email }} <button type="button" class="btn btn-link" (click)="editEmail()">Edit</button></p>
+      <div *ngIf="isEditEmail === true">
+        <form>
+          <div class="form-group">
+            <label for="firstName">Email:</label>
+            <input type="text" class="form-control" name="firstName" [(ngModel)]="user.email">
+            <button (click)="saveEmail()">Save</button>
+      </div>
+
+
+        </form>
+      </div>
+
       <p>Availability: {{ user.availability }}</p>
 
       <h3>Tasks:</h3>
@@ -31,7 +43,6 @@
           {{ userSkill.skill.name }} ({{ userSkill.skillLevel.name }})
         </li>
       </ul>
-
 
 
       <h3>Followers:</h3>
