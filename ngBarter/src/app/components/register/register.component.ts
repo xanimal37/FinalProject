@@ -22,7 +22,7 @@ export class RegisterComponent {
   selectedSkillName:string='all';
   newUser: User = new User();
   skills: Skill[] =[];
-  skillsCheckBoxes:CheckBoxItem[] =[];
+  // skillsCheckBoxes:CheckBoxItem[] =[];
 register(user: User): void {
 
   console.log('Registering user:');
@@ -50,29 +50,28 @@ register(user: User): void {
   });
 
 }
-setSelectedSkillsList(user: User) {
-  let selectedBoxes = this.skillsCheckBoxes.filter(item => item.checked);
-  for (let box of selectedBoxes) {
-    let skill = this.skills.find(s => s.id === box.id);
-    if (skill) {
-      let userSkill: Userskill = {
-        certification: '',
-        skill: skill,
-        id: { userId: user.id, skillId: skill.id },
-        description: ''
-      };
-      user.userSkills?.push(userSkill);
-    }
-  }
+// setSelectedSkillsList(user: User) {
+//   let selectedBoxes = this.skillsCheckBoxes.filter(item => item.checked);
+//   for (let box of selectedBoxes) {
+//     let skill = this.skills.find(s => s.id === box.id);
+//     if (skill) {
+//       let userSkill: Userskill = {
+//         certification: '',
+//         skill: skill,
+//         id: { userId: user.id, skillId: skill.id },
+//         description: ''
+//       };
+//       user.userSkills?.push(userSkill);
+//     }
+//   }
 
-}
+// }
 
 loadSkills():void {
   this.skillService.index().subscribe(
       {
         next: (skills) => {
           this.skills = skills;
-          this.createSkillsCheckboxes();
         },
         error: (problem) => {
           console.error('TaskListHttpComponent.loadSkills(): error retreiving skills:');
@@ -82,32 +81,31 @@ loadSkills():void {
     );
   }
 
-createSkillsCheckboxes(){
-  for(let skill of this.skills){
-  let checkbox = new CheckBoxItem();
-  checkbox.id = skill.id;
-  checkbox.name = skill.name;
-  this.skillsCheckBoxes.push(checkbox);
-}
-}
+// createSkillsCheckboxes(){
+//   for(let skill of this.skills){
+//   let checkbox = new CheckBoxItem();
+//   checkbox.id = skill.id;
+//   checkbox.name = skill.name;
+//   this.skillsCheckBoxes.push(checkbox);
+// }
 }
 
 
-class CheckBoxItem {
-  id:number;
-  name:string;
-  checked?:boolean;
+// class CheckBoxItem {
+//   id:number;
+//   name:string;
+//   checked?:boolean;
 
-  constructor(
-    id:number = 0,
-    name:string='',
-    checked:boolean = false
-    ){
-    this.id=id;
-    this.name = name;
-    this.checked=checked;
-  }
-}
+//   constructor(
+//     id:number = 0,
+//     name:string='',
+//     checked:boolean = false
+//     ){
+//     this.id=id;
+//     this.name = name;
+//     this.checked=checked;
+//   }
+// }
 
 
 
