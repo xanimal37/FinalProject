@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/services/user.service';
 import { SkillLevelService } from './../../services/skill-level.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
@@ -15,11 +16,13 @@ import { UserSkillService } from 'src/app/services/user-skill.service';
   styleUrls: ['./user-account.component.css']
 })
 export class UserAccountComponent {
-  constructor(private auth:AuthService ,
+  constructor(
+    private auth:AuthService ,
     private router:Router ,
     private skillService:SkillService,
     private userSkillService:UserSkillService,
-    private skillLevelService : SkillLevelService
+    private skillLevelService : SkillLevelService,
+    private userService : UserService,
     ){
 
     }
@@ -30,6 +33,7 @@ export class UserAccountComponent {
     newUserSkill: Userskill = new Userskill();
 
     ngOnInit(): void {
+      this.getLoggedInUser()
       this.loadSkills();
       this.loadSkillLevels();
     }
@@ -64,6 +68,7 @@ export class UserAccountComponent {
       this.userSkillService.createUserSkill(userSkill).subscribe( {
         next: (createdUserSkill) => {
           this.newUserSkill = new Userskill();
+          this.reload();
           // this.reload();
         },
         error: (fail) => {
@@ -74,6 +79,24 @@ export class UserAccountComponent {
 
       // this.reload();
     }
+
+    getLoggedInUser(){
+      this.auth.getLoggedInUser().subscribe({
+        next:(user:User)=>{
+          this.user = user;
+        },
+        error: (nojoy) => {
+          console.log(nojoy);
+        }
+      })
+    }
+
+    reload() {
+      this.getLoggedInUser();
+    }
+
+
+
 
 
 }
