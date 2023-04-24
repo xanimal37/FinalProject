@@ -1,38 +1,36 @@
-<button (click)="goBack()">Go Back</button>
-
-<h2>User Profile</h2>
-
-  <button (click)="addFriend()">Add as Friend</button>
-<div>
-  <img class="profilePic" src="{{user.imageURL}}" alt="profile picture">
-
-  <h2>{{ user.username }} <img class="ranking" src="../../../assets/images/platinum.png" alt="ranking"></h2>
-  <p>{{user.firstname}} {{user.lastname}}</p>
-  <p>Bio: {{ user.biography }}</p>
-  <h5>Contact Information</h5>
-  <p>{{user.phone}}</p>
-  <p>Email: {{ user.email }}</p>
-  <p>Availability: {{ user.availability }}</p>
-
-
-  <h3>Tasks:</h3>
-  <ul>
-    <li *ngFor="let task of user.tasks">{{ task.name }}</li>
-  </ul>
-<div *ngIf="user.userSkills">
-  <h3 *ngIf="user.userSkills">Certifications:</h3>
-  <ul>
-    <li *ngFor="let userSkill of user.userSkills">{{ userSkill.certification }}</li>
-  </ul>
-</div>
-
-  <h3>Skills:</h3>
-  <ul>
-    <li *ngFor="let userSkill of user.userSkills">{{ userSkill.skill.name}}</li>
-  </ul>
-
-  <h3>Friends:</h3>
-  <ul>
-    <li *ngFor="let userFriend of user.friends">{{ userFriend.username }}</li>
-  </ul>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <img class="profilePic" src="{{ user.imageURL }}" alt="profile picture">
+      <h2 class="mb-2">{{ user.username }} <img class="ranking" src="../../../assets/images/platinum.png" alt="ranking"></h2>
+      <p class="mb-0">{{ user.firstname }} {{ user.lastname }}</p><br>
+      <p class="mb-3"><strong>Biography:</strong><br>{{ user.biography }}</p>
+      <h5 class="mb-2">Contact Information</h5>
+      <p class="mb-2">Phone:{{ user.phone }}</p>
+      <p class="mb-3">Email: {{ user.email }}</p>
+      <p class="mb-3">Availability: {{ user.availability }}</p>
+      <button class="btn btn-primary" (click)="addFriend()">Follow</button>
+    </div>
+    <div class="col-md-8">
+      <h3 class="mb-3">Tasks:</h3>
+      <ul class="list-group mb-3">
+        <li class="list-group-item" *ngFor="let task of user.tasks">{{ task.name }}</li>
+      </ul>
+      <div *ngIf="user.userSkills">
+        <h3 class="mb-3" *ngIf="user.userSkills">Certifications:</h3>
+        <ul class="list-group mb-3">
+          <li class="list-group-item" *ngFor="let userSkill of user.userSkills">{{ userSkill.certification }}</li>
+        </ul>
+      </div>
+      <h3 class="mb-3">Skills:</h3>
+      <ul class="list-group mb-3">
+        <li class="list-group-item" *ngFor="let userSkill of user.userSkills">{{ userSkill.skill.name }}</li>
+      </ul>
+      <h3 class="mb-3">Followers:</h3>
+      <ul class="list-group mb-3">
+        <li class="list-group-item" *ngFor="let userFriend of user.friends">{{ userFriend.username }}</li>
+      </ul>
+    </div>
+  </div>
+  <button class="btn btn-secondary" (click)="goBack()">Go Back</button>
 </div>
