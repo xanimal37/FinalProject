@@ -4,6 +4,8 @@ import { AuthService } from './auth.service';
 import { environment } from 'src/environments/environment.development';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Post } from '../models/post';
+import { Comment} from '../models/comment';
+
 
 @Injectable({
   providedIn: 'root'

@@ -32,14 +32,19 @@ td {
 div {
   background-color: #ffffff;
   color:#222222;
-  border-radius: 4px;
-  padding:1em;
-  margin:.6em;
 }
 
+.borderBox {
+  border:1px solid #666666;
+}
+
+.notifyBell {
+  width: 30px;
+  height: 30px;
+}
 
 /* TESTING STYLES */
-.test {
+ .test {
   font-weight: bold;
   border:1px dotted red;
 }
@@ -62,7 +67,11 @@ div {
 
 }
 
+
+
 .ranking {
   width: 50px;
   height: 50px;
 }
+
+

@@ -1,9 +1,10 @@
 <h1>Notifications</h1>
 
 <div id="notifs" *ngIf="loggedInUser != null">
-<div *ngFor="let notes of notifications">
-<ul>
-  <li>{{loggedInUser.id}}</li>
+<div >
+<ul *ngFor="let notes of notifications">
+  <li >
+    {{notes.message}}</li>
 </ul>
 </div>
 </div>

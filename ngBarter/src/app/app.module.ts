@@ -29,6 +29,8 @@ var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 import { NewtaskComponent } from './components/newtask/newtask.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NewTaskMessageComponent } from './components/new-task-message/new-task-message.component';
+import { HeaderComponent } from './components/header/header.component';
+import { MytasksComponent } from './components/mytasks/mytasks.component';
 
 
 @NgModule({
@@ -54,6 +56,8 @@ import { NewTaskMessageComponent } from './components/new-task-message/new-task-
     CanvasJSChart,
     NewtaskComponent,
     NewTaskMessageComponent,
+    HeaderComponent,
+    MytasksComponent,
 
   ],
   imports: [

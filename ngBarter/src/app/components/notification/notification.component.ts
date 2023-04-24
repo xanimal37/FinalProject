@@ -5,6 +5,7 @@ import { NotificationType } from 'src/app/models/notification-type';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { Notification } from 'src/app/models/notification';
 
 
 @Component({
@@ -54,7 +55,6 @@ export class NotificationComponent implements OnInit{
 
   ngOnInit(): void {
     this.verifyUser();
-    // this.loadNotificationsByUser(4)
    }
 
    verifyUser(): void{
@@ -62,6 +62,7 @@ export class NotificationComponent implements OnInit{
       next: (user: User) => {
         this.loggedInUser = user;
         console.log(this.loggedInUser.id)
+        this.loadNotificationsByUser(this.loggedInUser.id)
       },
       error: (nojoy) => {
         console.log(nojoy);

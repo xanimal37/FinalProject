@@ -14,7 +14,7 @@ export class LoginComponent {
   constructor(
     private auth:AuthService,
     private router: Router,
-    // private nav: NavbarComponent
+    //private nav: NavbarComponent
 
 
     ){}
@@ -28,6 +28,7 @@ export class LoginComponent {
         console.log(loggedInUser);
 
          this.router.navigateByUrl('/userAccount');
+
       },
       error: (problem) => {
         console.error('RegisterComponent.register(): Error logging in user:');
