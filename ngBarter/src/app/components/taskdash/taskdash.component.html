@@ -1,2 +1,22 @@
-<p>taskdash works!</p>
-<app-accepted-task></app-accepted-task>
+<h1>my task dashboard</h1>
+<div class="container-fluid">
+  <nav class="row">
+    <div class="col">
+      <button (click)= "dashboard = 'all'" class="btn btn-outline-dark m-1">view all</button>
+      <button (click)= "dashboard = 'accepted'" class="btn btn-outline-dark m-1">view accepted tasks</button>
+      <button (click)= "dashboard = 'offered'" class="btn btn-outline-dark m-1">view offered tasks</button>
+    </div>
+   </nav>
+  <div class="row">
+    <div class="col">
+      <!-- accpeted task list -->
+      <app-accepted-task *ngIf="dashboard==='all' || dashboard==='accepted'"></app-accepted-task>
+      <!-- offered task list -->
+      <app-mytasks *ngIf="dashboard==='all' || dashboard==='offered'"></app-mytasks>
+    </div>
+
+  </div>
+
+  </div>
+
+

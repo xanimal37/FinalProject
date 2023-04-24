@@ -12,7 +12,7 @@
         <button class="btn btn-outline-dark m-1" *ngFor="let skill of skills" name="skill.name" value="skill.name" (click)= "selectedSkillName = skill.name">{{skill.name}}</button>
   </nav>
 
-  <div *ngFor="let task of tasks | taskbyskill:selectedSkillName">
+  <div *ngFor="let task of tasks | taskbyskill:selectedSkillName" class="borderBox">
     <h3>{{task.name}}</h3>
     <p>{{task.description}}</p>
     <p>requested start date: {{task.startDate |date:'shortDate'}}</p>
@@ -26,7 +26,7 @@
 
 <!-- detail view -->
 <!-- must be authorized to accept -->
-<div *ngIf="selectedTask">
+<div *ngIf="selectedTask" class="borderBox">
   <h3>{{selectedTask.name | titlecase}}</h3>
   <p>{{selectedTask.description}}</p>
   <p>estimated hours: {{selectedTask.estimatedHours}}</p>
