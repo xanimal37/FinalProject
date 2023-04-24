@@ -3,7 +3,7 @@
 <div id="notifs" *ngIf="loggedInUser != null">
 <div *ngFor="let notes of notifications">
 <ul>
-  <li>{{notes.id}}</li>
+  <li>{{loggedInUser.id}}</li>
 </ul>
 </div>
 </div>

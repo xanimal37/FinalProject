@@ -2,3 +2,7 @@
 <p>There are {{ userCount }} users  .</p>
 
 <app-taskdash *ngIf="loggedInUser"></app-taskdash>
+
+<div>
+  <canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>
+</div>

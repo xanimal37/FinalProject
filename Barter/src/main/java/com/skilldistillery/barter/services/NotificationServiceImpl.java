@@ -39,7 +39,7 @@ public class NotificationServiceImpl implements NotificationService {
 
 	@Override
 	public List<Notification> indexAllByUser(int userId) {
-		return nRepo.findAllById(userId);
+		return nRepo.findAllByUser_Id(userId);
 	}
 	
 	@Override

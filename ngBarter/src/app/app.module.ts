@@ -24,6 +24,8 @@ import { UserListComponent } from './components/user-list/user-list.component';
 import { TaskbyskillPipe } from './pipes/taskbyskill.pipe';
 import { AcceptedTaskComponent } from './components/accepted-task/accepted-task.component';
 import { TaskdashComponent } from './components/taskdash/taskdash.component';
+import * as CanvasJSAngularChart from '../assets/canvasjs.angular.component';
+var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 
 
 @NgModule({
@@ -45,7 +47,8 @@ import { TaskdashComponent } from './components/taskdash/taskdash.component';
     UserListComponent,
     TaskbyskillPipe,
     AcceptedTaskComponent,
-    TaskdashComponent
+    TaskdashComponent,
+    CanvasJSChart
   ],
   imports: [
     BrowserModule,

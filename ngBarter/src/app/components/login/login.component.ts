@@ -1,3 +1,4 @@
+import { NavbarComponent } from './../navbar/navbar.component';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
@@ -10,7 +11,13 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent {
 
-  constructor(private auth:AuthService,private router: Router){}
+  constructor(
+    private auth:AuthService,
+    private router: Router,
+    // private nav: NavbarComponent
+
+
+    ){}
 
   loginUser : User = new User;
 
@@ -27,6 +34,6 @@ export class LoginComponent {
         console.error(problem);
       }
     });
-  }
+   }
 
 }

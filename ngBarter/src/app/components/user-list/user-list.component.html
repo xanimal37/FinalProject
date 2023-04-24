@@ -1,12 +1,20 @@
 <div *ngIf="loggedInUser">
   <button (click)="showList = true" *ngIf="!showList">Show User List</button>
-  <ul *ngIf="showList">
-    <li *ngFor="let user of users">
-      {{ user.username }}
-      <button (click)="viewUserProfile(user)">View Profile</button>
+  <div *ngIf="showList">
+    <div *ngFor="let user of users">
+      <table>
+        <tr id="userList">
+          <td class="miniProfilePic" ><img src="{{user.imageURL}}" width="50"
+            height="50" alt="Profile Pic" style="border-radius: 50%;"></td>
+          <td>{{ user.username }}</td>
+          <td><button class="btn btn-dark m-1" (click)="viewUserProfile(user)">View Profile</button></td>
+        </tr>
+      </table>
 
-    </li>
-  </ul>
+
+
+    </div>
+  </div>
 </div>
 
 
