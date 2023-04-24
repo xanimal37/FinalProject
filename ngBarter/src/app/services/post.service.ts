@@ -93,12 +93,22 @@ export class PostService {
       catchError((err: any) => {
         console.log(err);
         return throwError(
-          () => new Error('PostService.index(): error retrieving Post: ' + err)
+          () => new Error('PostService.create(): error creating Post: ' + err)
         );
       })
     );
   };
 
+  createComment(pId: number, comment: Comment):Observable<Comment> {
+    return this.http.post<Comment>(this.url + "/" + {pId} + "/comments", comment, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error('PostService.createComment(): error creating comment: ' + err)
+        );
+      })
+    );
+  };
 
   update(post: Post, id: number):Observable<Post> {
     post.enabled = true;

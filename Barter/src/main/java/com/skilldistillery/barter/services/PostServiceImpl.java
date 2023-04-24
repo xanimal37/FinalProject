@@ -51,16 +51,20 @@ public class PostServiceImpl implements PostService {
 		return null;
 	}
 
-//	@Override
-//	public Post createComment(String username, int pId, Comment comment) {
-//		User user = userRepo.findByUsername(username);
-//		if (user != null) {
-//			post.setUser(user);
-//			postRepo.saveAndFlush(post);
-//			return post;
-//		}
-//		return null;
-//	}
+	@Override
+	public Comment createComment(String username, int pId, Comment comment) {
+		User user = userRepo.findByUsername(username);
+		Post post = postRepo.findById(pId);
+		if (user != null) {
+			if (post != null) {
+			comment.setUser(user);
+			comment.setPost(post);
+			commentRepo.saveAndFlush(comment);
+			return comment;
+		}
+		}
+		return comment;
+	}
 
 	@Override
 	public Post updatePost(String username, int pId, Post post) {
@@ -75,18 +79,17 @@ public class PostServiceImpl implements PostService {
 		return null;
 	}
 
-//	@Override
-//	public Post updateComment(String username, int cId, Comment comment) {
-//		User user = userRepo.findByUsername(username);
-//		Post updatePost = postRepo.findById(pId);
-//		if (user != null) {
-//			updatePost.setUser(user);
-//			updatePost.setTitle(post.getTitle());
-//			updatePost.setContent(post.getContent());
-//			return postRepo.saveAndFlush(updatePost);
-//		}
-//		return null;
-//	}
+	@Override
+	public Comment updateComment(String username, int cId, Comment comment) {
+		User user = userRepo.findByUsername(username);
+		Comment updatePost = commentRepo.findById(cId);
+		if (user != null) {
+			updatePost.setUser(user);
+			updatePost.setContent(comment.getContent());
+			return commentRepo.saveAndFlush(updatePost);
+		}
+		return null;
+	}
 
 	@Override
 	public Post disablePost(String username, int pId) { 
@@ -124,15 +127,4 @@ public class PostServiceImpl implements PostService {
 		}
 	}
 
-	@Override
-	public Comment createComment(String username, int pId, Comment comment) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Comment updateComment(String username, int cId, Comment comment) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

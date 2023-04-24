@@ -1,10 +1,11 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NotificationType } from 'src/app/models/notification-type';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationService } from 'src/app/services/notification.service';
-import { Notification } from './../../models/notification';
+
 
 @Component({
   selector: 'app-notification',
@@ -69,28 +70,28 @@ export class NotificationComponent implements OnInit{
      });
     }
 
-  //  loadNotificationsByUser(uId: number) {
-  //   this.notificationService.indexNotificationsByUser(uId).subscribe({
-  //     next: (notificationList) => {
-  //       this.notifications = notificationList;
-  //     },
-  //     error: (err) => {
-  //       console.error('Error getting complaints list');
-  //       console.error(err);
-  //     }
-  //   });
-  // }
+   loadNotificationsByUser(uId: number) {
+    this.notificationService.indexNotificationsByUser(uId).subscribe({
+      next: (notificationList) => {
+        this.notifications = notificationList;
+      },
+      error: (err) => {
+        console.error('Error getting complaints list');
+        console.error(err);
+      }
+    });
+  }
 
-  // createNotification(notification: Notification) {
-  //   this.notificationService.createNotification(notification).subscribe( {
-  //     next: (createdNotification) => {
-  //       this.newNotification = createdNotification;
-  //     },
-  //     error: (fail) => {
-  //       console.error('Error creating complaint');
-  //       console.error(fail);
-  //     }
-  //   });
-  // }
+  createNotification(notification: Notification) {
+    this.notificationService.createNotification(notification).subscribe( {
+      next: (createdNotification) => {
+        this.newNotification = createdNotification;
+      },
+      error: (fail) => {
+        console.error('Error creating complaint');
+        console.error(fail);
+      }
+    });
+  }
 
 }

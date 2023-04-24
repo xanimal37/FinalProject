@@ -9,7 +9,7 @@ import { Observable, catchError, throwError } from 'rxjs';
 })
 export class NotificationService {
 
-  private url = environment.baseUrl + 'api/complaints';
+  private url = environment.baseUrl + 'api/notifications';
 
   constructor(
     private http: HttpClient,

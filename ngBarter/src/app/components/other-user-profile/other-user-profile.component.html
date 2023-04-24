@@ -4,15 +4,16 @@
 
   <button (click)="addFriend()">Add as Friend</button>
 <div>
-  <p>Name: {{ user.username }}</p>
-  <p>Email: {{ user.email }}</p>
-  <p>Role: {{ user.role }}</p>
-  <p>Availability: {{ user.availability }}</p>
+  <img class="profilePic" src="{{user.imageURL}}" alt="profile picture">
+
+  <h2>{{ user.username }} <img class="ranking" src="../../../assets/images/platinum.png" alt="ranking"></h2>
+  <p>{{user.firstname}} {{user.lastname}}</p>
   <p>Bio: {{ user.biography }}</p>
-  <p>First Name: {{ user.firstname }}</p>
-  <p>Last Name: {{ user.lastname }}</p>
-  <p>Address: {{ user.address }}</p>
-  <p>Phone: {{ user.phone }}</p>
+  <h5>Contact Information</h5>
+  <p>{{user.phone}}</p>
+  <p>Email: {{ user.email }}</p>
+  <p>Availability: {{ user.availability }}</p>
+
 
   <h3>Tasks:</h3>
   <ul>

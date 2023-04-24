@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
+import { Comment } from 'src/app/models/comment';
 
 @Component({
   selector: 'app-post',
@@ -25,6 +26,8 @@ export class PostComponent implements OnInit{
   keywordPosts: Post[] | null = null;
   keyword: string = "";
   loggedInUser: User | undefined;
+  comment: Comment | null = null;
+  newComment: Comment = new Comment;
 
 
 
@@ -96,6 +99,21 @@ export class PostComponent implements OnInit{
 
       this.reload();
     }
+
+    // createComment(pId: number, comment: Comment) {
+    //   this.postService.createComment(pId, comment).subscribe( {
+    //     next: (createdComment) => {
+    //       this.newComment = createdComment;
+    //       this.reload();
+    //     },
+    //     error: (fail) => {
+    //       console.error('Error creating post');
+    //       console.error(fail);
+    //     }
+    //   });
+
+    //   this.reload();
+    // }
 
     updatePost(post: Post, pId: number) {
       this.postService.update(post,pId).subscribe( {

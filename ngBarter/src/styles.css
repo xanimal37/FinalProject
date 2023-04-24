@@ -24,6 +24,10 @@ a {
   color: #D2691E;
 }
 
+td {
+  padding-left: 1.5em;
+}
+
 /*default stying for boxes in components*/
 div {
   background-color: #ffffff;
@@ -33,9 +37,32 @@ div {
   margin:.6em;
 }
 
+
 /* TESTING STYLES */
 .test {
   font-weight: bold;
   border:1px dotted red;
 }
 
+.profilePic {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  padding:.5em;
+  background-color: rgb(222, 212, 19);
+
+}
+
+.miniProfilePic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  padding:.25em;
+  background-color: rgb(222, 212, 19);
+
+}
+
+.ranking {
+  width: 50px;
+  height: 50px;
+}

@@ -8,7 +8,7 @@ import com.skilldistillery.barter.entities.Notification;
 
 public interface NotificationRepository extends JpaRepository<Notification, Integer>{
 	
-	List<Notification> findAllById(int userId);
+	List<Notification> findAllByUser_Id(int userId);
 	List<Notification> findAllBynType_Id(int typeId);
 	
 

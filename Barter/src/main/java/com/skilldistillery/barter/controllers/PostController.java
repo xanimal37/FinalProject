@@ -76,6 +76,23 @@ public class PostController {
 		return post;
 	} 
 	
+	@PostMapping("posts/{pId}/comments")
+	public Comment createCommentForPost(Principal principal, HttpServletRequest req, HttpServletResponse res, @PathVariable int pId, @RequestBody Comment comment) {
+		try {
+			comment = postService.createComment(principal.getName(), pId, comment);
+			if (comment != null) {
+				res.setStatus(201);
+			} else {
+				res.setStatus(400);
+			}
+		} catch (Exception e) {
+			e.printStackTrace(); 
+			res.setStatus(400);
+		}
+		return comment;
+	} 
+	
+	
 	@PutMapping("posts/{pId}")
 	public Post updatePost(Principal principal, HttpServletRequest req, HttpServletResponse res, @PathVariable int pId, @RequestBody Post post) {
 		try {

@@ -24,6 +24,8 @@ import { UserListComponent } from './components/user-list/user-list.component';
 import { TaskbyskillPipe } from './pipes/taskbyskill.pipe';
 import { AcceptedTaskComponent } from './components/accepted-task/accepted-task.component';
 import { TaskdashComponent } from './components/taskdash/taskdash.component';
+import * as CanvasJSAngularChart from '../assets/canvasjs.angular.component';
+var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 import { NewtaskComponent } from './components/newtask/newtask.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NewTaskMessageComponent } from './components/new-task-message/new-task-message.component';
@@ -49,6 +51,7 @@ import { NewTaskMessageComponent } from './components/new-task-message/new-task-
     TaskbyskillPipe,
     AcceptedTaskComponent,
     TaskdashComponent,
+    CanvasJSChart,
     NewtaskComponent,
     NewTaskMessageComponent,
 
