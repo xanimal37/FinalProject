@@ -1,10 +1,11 @@
-<h1>ACCEPTED TASKS -- TEST</h1>
+<h2>accepted tasks</h2>
 
-<div *ngFor="let aTask of acceptedTasks">
+<div *ngFor="let aTask of acceptedTasks" class="borderBox">
   <h3>{{aTask.id?.taskId}}</h3>
   <p>rating by requestor: {{aTask.ratingByRequestor}}</p>
   <p>rating by acceptor: {{aTask.ratingByAcceptor}}</p>
   <p>remarks by requestor: {{aTask.remarksByRequestor}}</p>
   <p>remarks by acceptor: {{aTask.remarksByAcceptor}}</p>
+
 </div>
 

@@ -34,6 +34,10 @@ div {
   color:#222222;
 }
 
+.borderBox {
+  border:1px solid #666666;
+}
+
 .notifyBell {
   width: 30px;
   height: 30px;
