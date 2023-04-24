@@ -7,7 +7,9 @@ import { SkillService } from 'src/app/services/skill.service';
 import { TaskStatusService } from 'src/app/services/task-status.service';
 import { TaskService } from 'src/app/services/task.service';
 import { Task } from 'src/app/models/task';
-import { FormGroup,FormControl } from '@angular/forms';
+import { FormArray,FormControl,FormGroup } from '@angular/forms';
+import { Skill } from 'src/app/models/skill';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-mytasks',
@@ -19,7 +21,8 @@ export class MytasksComponent implements OnInit{
   @Input() loggedInUser: User | null = null;
   myTasks : Task[] =[];
   selectedTask : Task | null = null;
-  updateTaskForm : FormGroup | null=null;
+  updateTaskForm : FormGroup | any;
+  skills: Skill[] = [];
 
   constructor(
     private taskService:TaskService,
@@ -33,12 +36,12 @@ export class MytasksComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.loadTasks();
-    this.buildForm();
+    this.loadUserTasks();
+    this.loadSkills();
 
   }
 
-  loadTasks():void {
+  loadUserTasks():void {
     this.taskService.getAllUsersTasks().subscribe(
         {
           next: (tasks) => {
@@ -52,11 +55,25 @@ export class MytasksComponent implements OnInit{
       );
     }
 
+    loadSkills():void {
+      this.skillService.index().subscribe(
+          {
+            next: (skills) => {
+                this.createForm(skills);
+            },
+            error: (problem) => {
+              console.error('TaskListHttpComponent.loadSkills(): error retreiving skills:');
+              console.error(problem);
+            }
+          }
+        );
+      }
+
     delete(id: number){
       this.taskService.delete(id).subscribe({
         next:(updatedTask)=>{
           //things we want to do on success
-          this.loadTasks();
+          this.loadUserTasks();
         },
         error: (fail) => {
           console.error('Error deleting task.');
@@ -71,7 +88,7 @@ export class MytasksComponent implements OnInit{
         next:(updatedTodo)=>{
           //things we want to do on success
           this.selectedTask=null;
-          this.loadTasks();
+          this.loadUserTasks();
         },
         error: (fail) => {
           console.error('Error updating task.');
@@ -80,10 +97,14 @@ export class MytasksComponent implements OnInit{
       });
     }
 
+    createForm(skills: Skill[]){
+      this.skills=skills;
+      this.buildForm();
+    }
+
     buildForm(){
       this.updateTaskForm = new FormGroup({
-        'name': new FormControl(null),
-        'description': new FormControl(null),
+        'description': new FormControl(),
         'estimatedHours': new FormControl(0),
         'materialsProvided':new FormControl(false),
         'startDate':new FormControl('2023-04-01'),
@@ -92,10 +113,68 @@ export class MytasksComponent implements OnInit{
       });
 
       for(let skill of this.skills){
-        this.newTaskForm.controls['skills'].push(new FormControl());
+        this.updateTaskForm.controls['skills'].push(new FormControl());
       }
     }
 
+    fillForm(task:Task){
+      this.updateTaskForm.controls['description'].setValue(task.description);
+      this.updateTaskForm.controls['estimatedHours'].setValue(task.estimatedHours);
+      if(task.materialsProvided===true){
+        this.updateTaskForm.controls['materialsProvided'].setValue(true);
+      }
 
+      this.updateTaskForm.controls['startDate'].setValue(formatDate(task.startDate, 'yyyy-MM-dd', 'en'));
+
+      if(task.skills!=null){
+      for(let i=0;i<this.updateTaskForm.controls['skills'].controls.length;i++){
+        for(let skill of task.skills){
+          if(skill.id === this.skills[i].id){
+            this.updateTaskForm.controls['skills'].controls[i].setValue(true);
+          }
+        }
+      }
+
+      }
+
+
+    }
+
+    selectTask(task:Task){
+      this.selectedTask=task;
+      this.fillForm(task);
+    }
+
+    updateTask(task:Task){
+
+      task.description=this.updateTaskForm.controls['description'].value;
+      task.estimatedHours=this.updateTaskForm.controls['estimatedHours'].value;
+      task.materialsProvided=this.updateTaskForm.controls['materialsProvided'].value;
+
+      let dateString = this.updateTaskForm.controls['startDate'].value;
+      dateString+='T01:00:00';
+      task.startDate=dateString;
+
+      task.skills=[]; //clear tasks
+
+      //re-add
+      for(let i=0; i<this.updateTaskForm.controls['skills'].controls.length;i++){
+        if(this.updateTaskForm.controls['skills'].controls[i].value==true){
+          task.skills?.push(this.skills[i]);
+        }
+
+
+      }
+
+      this.taskService.update(task).subscribe( {
+        next: (task) => {
+          this.selectedTask=null;
+        },
+        error: (fail) => {
+          console.error('Error creating task');
+          console.error(fail);
+        }
+      });
+    }
 
 }
