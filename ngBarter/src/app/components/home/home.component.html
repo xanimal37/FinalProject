@@ -1,8 +1,14 @@
 
 <p>There are {{ userCount }} users  .</p>
 
-<app-taskdash *ngIf="loggedInUser"></app-taskdash>
 
-<div>
-  <canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>
+<div class="row">
+    <div class="col-5">
+      <canvasjs-chart [options]="skillsAvailable" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>
+    </div>
+    <div class="col-5">
+      <canvasjs-chart [options]="numberOfTasks" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>
+    </div>
 </div>
+
+<app-taskdash *ngIf="loggedInUser"></app-taskdash>
