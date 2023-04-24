@@ -12,9 +12,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HomeComponent implements OnInit {
   userCount!: number;
-  loggedInUser: User = new User();
+  loggedInUser: User | null = null;
   skill: Userskill | undefined;
-  firstname: string = this.loggedInUser.firstname
   logInbool: boolean = false;
 
   skillsAvailable = {
@@ -77,9 +76,12 @@ export class HomeComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private authService: AuthService
-  ) {}
+  ) {
+
+  }
 
   ngOnInit() {
+    this.authService.getLoggedIn.subscribe(user => this.loggedInUser = user)
     this.verifyUser();
     this.getCountOfUser();
   }

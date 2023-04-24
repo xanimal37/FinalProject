@@ -15,6 +15,7 @@ export class UserListComponent implements OnInit {
 users:User[] = [];
 showList: boolean = false;
 loggedInUser: User| null = null;
+accountStatus: string = '';
 
 
   constructor(
@@ -54,4 +55,12 @@ loggedInUser: User| null = null;
 
   }
 
+  setAccountStatus(){
+    if (this.loggedInUser?.enabled === true) {
+      this.accountStatus = 'enabled'
+    } else {
+      this.accountStatus = 'disabled'
+    }
+    this.loadUsers()
+  }
 }

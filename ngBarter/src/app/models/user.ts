@@ -1,4 +1,5 @@
 import { Address } from "./address";
+import { Ranking } from "./ranking";
 import { Skill } from "./skill";
 import { Task } from "./task";
 import { Userskill } from "./userskill";
@@ -11,7 +12,7 @@ export class User {
   role: string;
   imageURL: string;
   email: string;
-  // ranking: Ranking;
+  ranking: Ranking | null;
   friends: User[];
   // userSkills: UserSkill[];
   // address: Address;
@@ -40,6 +41,7 @@ export class User {
     password:string = '',
     role: string = '',
     email:string = '',
+    ranking: Ranking | null = null,
     availability:string ='',
     biography:string ='',
     enabled:boolean= false,
@@ -72,6 +74,7 @@ export class User {
     this.role = role ;
     this.enabled=enabled;
     this.email =email;
+    this.ranking=ranking;
     this.imageURL = imageUrl;
     this.firstname = firstname;
     this.lastname = lastname;
