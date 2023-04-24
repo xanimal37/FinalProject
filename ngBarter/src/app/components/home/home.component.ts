@@ -14,6 +14,8 @@ export class HomeComponent implements OnInit {
   userCount!: number;
   loggedInUser: User = new User();
   skill: Userskill | undefined;
+  firstname: string = this.loggedInUser.firstname
+  logInbool: boolean = false;
 
   skillsAvailable = {
 	  animationEnabled: true,
@@ -78,6 +80,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.verifyUser();
     this.getCountOfUser();
     console.log(this.loggedInUser.role);
   }
@@ -92,6 +95,21 @@ export class HomeComponent implements OnInit {
       }
     })
 }
+
+verifyUser(): void{
+  this.authService.getLoggedInUser().subscribe({
+    next: (user: User) => {
+      this.loggedInUser = user;
+      if(this.loggedInUser !=null) {
+        this.logInbool = true;
+      }
+    },
+    error: (nojoy) => {
+      console.log(nojoy);
+    }
+
+   });
+  }
 
 
 }

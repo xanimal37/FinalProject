@@ -73,6 +73,7 @@ export class MytasksComponent implements OnInit{
       this.taskService.delete(id).subscribe({
         next:(updatedTask)=>{
           //things we want to do on success
+          this.selectedTask=null;
           this.loadUserTasks();
         },
         error: (fail) => {
