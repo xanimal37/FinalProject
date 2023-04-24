@@ -1,6 +1,5 @@
 <div *ngIf="loggedInUser">
-  <button (click)="showList = true" *ngIf="!showList">Show User List</button>
-  <div *ngIf="showList">
+  <div >
     <div *ngFor="let user of users">
       <table>
         <tr id="userList">
