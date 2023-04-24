@@ -3,8 +3,8 @@
 <!-- LIST OF ALL TASKS ** no authorization required -->
 <!-- may add authorization later for a detail view and/or user info -->
 <nav id="taskMenu">
-  <button class="btn btn-dark m-1" (click)="setView('default')">view all</button>
-  <button *ngIf="loggedInUser" class="btn btn-dark m-1"(click)="setView('adding')">create task</button>
+  <button class="btn btn-dark m-1">view all</button>
+  <button *ngIf="loggedInUser" class="btn btn-dark m-1" (click)="setView('adding')">create task</button>
 </nav>
 <div id="Tasks" *ngIf="!selectedTask && views[0].visible">
   <nav>
@@ -15,6 +15,7 @@
   <div *ngFor="let task of tasks | taskbyskill:selectedSkillName">
     <h3>{{task.name}}</h3>
     <p>{{task.description}}</p>
+    <p>requested start date: {{task.startDate |date:'shortDate'}}</p>
     <h4>skills required</h4>
     <ul>
       <li *ngFor="let skill of task.skills">{{skill.name}}</li>
@@ -43,19 +44,6 @@
   <!-- ADD A TASK VIEW ** must be authorized -->
   <div id="add_task" *ngIf="views[1].visible && loggedInUser">
     <h3>add task</h3>
-<form>
-    name: <input type="text" name="name" placeholder="name" [(ngModel)]="newTask.name"/><br />
-    description: <input type="text" name="description" placeholder="description" [(ngModel)]="newTask.description"/><br />
-    <h4>select required skills</h4>
-    <li *ngFor="let box of skillsCheckBoxes">
-      <input type="checkbox" value="box.name" name="box.name" [(ngModel)]="box.checked"/>
-      <label>{{box.name}}</label>
-    </li>
-    requested start date: <input type="date" name="name" [(ngModel)]="newTask.startDate"/>
 
-
-    <input class="btn btn-dark m-1" type="submit" value="create task!" (click)="addTask(newTask)"/>
-    <input class="btn btn-dark m-1" type="submit" value="cancel" (click)="setView('default')"/>
-
-  </form>
+    <app-newtask (closeChild)=closeChild()></app-newtask>
 </div>

@@ -1,0 +1,41 @@
+ <!-- ADD A TASK ** must be authorized -->
+ <div id="add_task">
+  <h3>add task</h3>
+<form [formGroup]="newTaskForm" (ngSubmit)="onSubmit()">
+  <div>
+  <label for="name">name: </label>
+  <input type="text" id="name" formControlName="name">
+</div>
+<div>
+  <label for="description"> description: </label>
+  <input type="text" id="description" formControlName="description"><br />
+</div>
+<div>
+  <label for="estimatedHours"> estimated hours: </label>
+  <input type="number" id="estimatedHours" formControlName="estimatedHours"><br />
+</div>
+<input type="radio" id="materialsYes" name="materialsProvided" formControlName="materialsProvided" value=true>
+<label for="materialsYes"> yes, materials will be provided</label><br>
+<input type="radio" id="materialsNo" name="materialsProvided" formControlName="materialsProvided" value=false>
+<label for="materialsNo">no, materials will not be provided</label><br>
+<!-- checkboxes for skill -->
+
+<div *ngFor="let skill of newTaskForm.controls['skills'].controls, let i=index">
+  <label><input type="checkbox" [formControl]="skill"/>
+    {{ skills[i].name}}
+  </label>
+</div>
+
+<!-- dates -->
+<div>
+<label for="startDate">requested start date: </label>
+<input type="date" id="startDate" formControlName="startDate">
+</div>
+  <input class ="btn btn-dark" type="submit" value="create task!">
+
+</form>
+</div>
+
+
+<input *ngFor="let skill of newTaskForm.controls['skills'].controls" [formControl]="skill" type="checkbox" id="skill.id" value="skill.id">
+

@@ -26,6 +26,9 @@ import { AcceptedTaskComponent } from './components/accepted-task/accepted-task.
 import { TaskdashComponent } from './components/taskdash/taskdash.component';
 import * as CanvasJSAngularChart from '../assets/canvasjs.angular.component';
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
+import { NewtaskComponent } from './components/newtask/newtask.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NewTaskMessageComponent } from './components/new-task-message/new-task-message.component';
 
 
 @NgModule({
@@ -48,7 +51,10 @@ var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
     TaskbyskillPipe,
     AcceptedTaskComponent,
     TaskdashComponent,
-    CanvasJSChart
+    CanvasJSChart,
+    NewtaskComponent,
+    NewTaskMessageComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -56,7 +62,7 @@ var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
     FormsModule,
     HttpClientModule,
     NgbModule,
-
+    ReactiveFormsModule
   ],
   providers: [ DatePipe],
   bootstrap: [AppComponent]

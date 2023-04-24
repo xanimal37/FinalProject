@@ -3,7 +3,7 @@ import { TaskStatus } from './../../models/task-status';
 import { TaskService } from './../../services/task.service';
 import { SkillService } from 'src/app/services/skill.service';
 import { TaskStatusService } from 'src/app/services/task-status.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Task } from 'src/app/models/task';
 import { DatePipe } from '@angular/common';
@@ -12,12 +12,15 @@ import { User } from 'src/app/models/user';
 import { AcceptedTaskService } from 'src/app/services/accepted-task.service';
 import { AcceptedTask } from 'src/app/models/accepted-task';
 import { AcceptedTaskId } from 'src/app/models/accepted-task-id';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { NewtaskComponent } from '../newtask/newtask.component';
 
 
 @Component({
   selector: 'app-tasklist',
   templateUrl: './tasklist.component.html',
   styleUrls: ['./tasklist.component.css']
+
 })
 
 export class TasklistComponent implements OnInit {
@@ -30,8 +33,6 @@ export class TasklistComponent implements OnInit {
   //properties of task
   skills: Skill[] =[];
   taskStatuses: TaskStatus[] =[];
-  skillsCheckBoxes:CheckBoxItem[] =[];
-  requestedSkills: Skill[]=[];
   loggedInUser: User | undefined;
   //what the user is looking at
   //see TaskView class below
@@ -63,6 +64,11 @@ export class TasklistComponent implements OnInit {
         view.visible=true;
       }
     }
+  }
+
+  closeChild(){
+    this.loadTasks();
+    this.setView('default');
   }
 
   //set up the views and which are active
@@ -107,7 +113,6 @@ export class TasklistComponent implements OnInit {
           {
             next: (skills) => {
               this.skills = skills;
-              this.createSkillsCheckboxes();
             },
             error: (problem) => {
               console.error('TaskListHttpComponent.loadSkills(): error retreiving skills:');
@@ -131,49 +136,6 @@ export class TasklistComponent implements OnInit {
           );
         }
 
-
-        //methods and extra class for adding a checklist
-
-    addTask(task: Task){
-      this.setSelectedSkillsList(task);
-      task.taskStatus=this.taskStatuses[0]; //pending
-      console.log(task);
-      this.taskService.create(task).subscribe({
-        next: (createdTask)=>{
-        //coming back from post method in controller
-        //anything depending on asynchronous operations (needs server response)
-        this.newTask=new Task(); //reset
-        this.requestedSkills=[]; //reset
-        this.loadTasks();
-        },
-        error: (fail) => {
-          console.error('Error creating task.');
-          console.error(fail);
-        }
-      });
-    }
-
-      setSelectedSkillsList(task:Task) {
-        let selectedBoxes = this.skillsCheckBoxes.filter(item => item.checked);
-        for(let box of selectedBoxes){
-          for(let skill of this.skills){
-            if(skill.id === box.id){
-              task.skills?.push(skill);
-            }
-          }
-        }
-      }
-
-       //check box objects to represent skills
-       createSkillsCheckboxes(){
-      for(let skill of this.skills){
-      let checkbox = new CheckBoxItem();
-      checkbox.id = skill.id;
-      checkbox.name = skill.name;
-      this.skillsCheckBoxes.push(checkbox);
-    }
-  }
-
   acceptTask(task: Task){
     let aTaskId = new AcceptedTaskId();
     if(this.loggedInUser && this.selectedTask){
@@ -194,23 +156,7 @@ export class TasklistComponent implements OnInit {
       });
     }
   }
-}
-//anything can use this class
-//probably should be refactored to an interface
-class CheckBoxItem {
-  id:number;
-  name:string;
-  checked?:boolean;
 
-  constructor(
-    id:number = 0,
-    name:string='',
-    checked:boolean = false
-    ){
-    this.id=id;
-    this.name = name;
-    this.checked=checked;
-  }
 }
 
 //classes for view types (easier to turn on and off at once)

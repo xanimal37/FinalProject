@@ -107,6 +107,8 @@ Front end was broken up into several sub-directories:
 #### Lisa Zeeb
 1. to use dynamic checkboxes in angular, generate from database using `*ngFor`. Two-way binding can be accomplished by creating a class called clickable, binding each checkbox property to that class (checked?:boolean) and then grabbing the objects from a list by name. This could probably be done better using an interface.
 
+2. Reactive forms allow for modifying data before being added to a new object. For instance, it is easier to create dates because they can be formatted differently from plain HTML values. Also dynamically generating forms and getting input is more flexible.
+
 #### Rob Tisdale:
 1. When doing entity mapping,for something such as comment (which can have sub-comments), you can reference the actual entity with an "inReplyTo" attribute inside the entity. 
 
