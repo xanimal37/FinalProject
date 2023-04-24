@@ -28,7 +28,9 @@ export class LoginComponent {
           this.router.navigateByUrl('/admin');
         }
         console.log(loggedInUser);
-        this.router.navigateByUrl('/home');
+
+
+         this.router.navigateByUrl('/userAccount');
 
       },
       error: (problem) => {
