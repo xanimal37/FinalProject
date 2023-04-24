@@ -1,9 +1,13 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 
-
+div {
+  align-content: center;
+  line-height: 1.6;
+  background-image: linear-gradient( #333333, #555555);
+}
 
 h1 {
   font-weight: bold;
-  color: rgb(222, 212, 19);
+  color: #fbc912;
   font-size: 95px;
 }

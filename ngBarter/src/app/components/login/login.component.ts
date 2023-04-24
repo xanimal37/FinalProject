@@ -24,9 +24,12 @@ export class LoginComponent {
 
     this.auth.login(user.username, user.password).subscribe({
       next: (loggedInUser) => {
+        if(loggedInUser.role === 'admin') {
+          this.router.navigateByUrl('/admin');
+        }
         console.log(loggedInUser);
+        this.router.navigateByUrl('/home');
 
-        this.router.navigateByUrl('/usersList');
       },
       error: (problem) => {
         console.error('RegisterComponent.register(): Error logging in user:');
