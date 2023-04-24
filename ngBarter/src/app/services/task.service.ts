@@ -63,6 +63,18 @@ export class TaskService {
     );
   };
 
+   //GET "users/tasks"
+   getTaskById(id: number): Observable<Task> {
+    return this.http.get<Task>(environment.baseUrl+"api/users/tasks/"+id, this.getHttpOptions()).pipe(
+      catchError((err:any)=>{
+        console.log(err);
+        return throwError(
+          ()=> new Error('TaskService.index(): error retrieving user tasks: '+ err)
+        );
+      })
+    );
+  };
+
   update(task: Task):Observable<Task> {
     return this.http.put<Task>(this.url + "/" + task.id, task,this.getHttpOptions()).pipe(
       catchError((err:any)=> {

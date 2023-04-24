@@ -2,7 +2,6 @@ import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
-import { AuthService } from 'src/app/services/auth.service';
 import { SkillService } from 'src/app/services/skill.service';
 import { TaskStatusService } from 'src/app/services/task-status.service';
 import { TaskService } from 'src/app/services/task.service';
@@ -10,6 +9,7 @@ import { Task } from 'src/app/models/task';
 import { FormArray,FormControl,FormGroup } from '@angular/forms';
 import { Skill } from 'src/app/models/skill';
 import { formatDate } from '@angular/common';
+import { TaskStatus } from 'src/app/models/task-status';
 
 @Component({
   selector: 'app-mytasks',
@@ -20,6 +20,7 @@ export class MytasksComponent implements OnInit{
 
   @Input() loggedInUser: User | null = null;
   myTasks : Task[] =[];
+  taskStatuses : TaskStatus[] = [];
   selectedTask : Task | null = null;
   updateTaskForm : FormGroup | any;
   skills: Skill[] = [];
@@ -28,7 +29,6 @@ export class MytasksComponent implements OnInit{
     private taskService:TaskService,
     private skillService:SkillService,
     private taskStatusService: TaskStatusService,
-    private authService: AuthService,
     private datePipe: DatePipe,
     private route: ActivatedRoute,
     private router: Router
@@ -37,6 +37,7 @@ export class MytasksComponent implements OnInit{
   ngOnInit(): void {
 
     this.loadUserTasks();
+    this.loadTaskStatuses();
     this.loadSkills();
 
   }
@@ -68,6 +69,20 @@ export class MytasksComponent implements OnInit{
           }
         );
       }
+
+      loadTaskStatuses():void {
+        this.taskStatusService.index().subscribe(
+            {
+              next: (taskStatuses) => {
+                this.taskStatuses = taskStatuses;
+              },
+              error: (problem) => {
+                console.error('TaskListHttpComponent.loadTaskStatuses(): error retreiving task statuses:');
+                console.error(problem);
+              }
+            }
+          );
+        }
 
     delete(id: number){
       this.taskService.delete(id).subscribe({
@@ -177,5 +192,4 @@ export class MytasksComponent implements OnInit{
         }
       });
     }
-
 }
