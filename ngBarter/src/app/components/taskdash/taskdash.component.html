@@ -10,9 +10,13 @@
   <div class="row">
     <div class="col">
       <!-- accpeted task list -->
-      <app-accepted-task *ngIf="dashboard==='all' || dashboard==='accepted'"></app-accepted-task>
+      <app-accepted-task *ngIf="dashboard==='all' || dashboard==='accepted'" [loggedInUser]=loggedInUser>
+
+      </app-accepted-task>
       <!-- offered task list -->
-      <app-mytasks *ngIf="dashboard==='all' || dashboard==='offered'"></app-mytasks>
+      <app-mytasks *ngIf="dashboard==='all' || dashboard==='offered'" [loggedInUser]=loggedInUser>
+
+      </app-mytasks>
     </div>
 
   </div>
