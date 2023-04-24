@@ -84,7 +84,6 @@ export class HomeComponent implements OnInit {
     this.authService.getLoggedIn.subscribe(user => this.loggedInUser = user)
     this.verifyUser();
     this.getCountOfUser();
-    console.log(this.loggedInUser.role);
   }
 
   getCountOfUser():void {

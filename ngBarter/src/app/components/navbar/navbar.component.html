@@ -26,16 +26,18 @@
       <li class="nav-item">
         <a class="nav-link" *ngIf="loggedInUser && loggedInUser?.role === 'admin'" [routerLink]="['/complaints']">complaints</a>
       </li>
-      <li class="nav-item dropdown" *ngIf="loggedInUser">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <li>
+      <div class="dropdown" *ngIf="loggedInUser">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <img src="../../../assets/images/bell.png" width="25"
-          height="25" alt="Profile Pic" style="border-radius: 50%;" alt="">
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+          height="25" alt="notification">
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
+          <ul *ngFor="let notify of notifications">
+            <li>{{notify.message}}</li>
+          </ul>
         </div>
+      </div>
       </li>
       <li class="nav-item" *ngIf="!loggedIn()">
         <a class="nav-link" [routerLink]="['/register']">register</a>
