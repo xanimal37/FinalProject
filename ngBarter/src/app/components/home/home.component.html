@@ -20,9 +20,14 @@
       <canvasjs-chart [options]="skillsAvailable" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>
     </div>
     <div id="chartDiv" class="col-5">
+
       <canvasjs-chart [options]="numberOfTasks" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>
     </div>
 </div>
 </div>
 
-<app-taskdash *ngIf="loggedInUser?.role==='user'"></app-taskdash>
+
+  <app-taskdash ></app-taskdash>
+
+
+

@@ -29,7 +29,6 @@ export class LoginComponent {
         if(loggedInUser.role === 'admin') {
           this.router.navigateByUrl('/admin');
         }
-
       },
       error: (problem) => {
         console.error('RegisterComponent.register(): Error logging in user:');

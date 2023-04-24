@@ -1,0 +1,27 @@
+.Pending {
+  background-color: #222222;
+  color:#fbc912;
+  padding:.6em;
+  text-align: center;
+}
+
+.Accepted {
+  background-color: #222222;
+  color:#fbc912;
+  padding:.6em;
+  text-align: center;
+}
+
+.Complete {
+  background-color: #222222;
+  color:orange;
+  padding:.6em;
+  text-align: center;
+}
+
+.Verified {
+  background-color: #222222;
+  color:greenyellow;
+  padding:.6em;
+  text-align: center;
+}

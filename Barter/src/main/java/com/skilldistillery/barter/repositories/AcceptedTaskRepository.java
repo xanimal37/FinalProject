@@ -12,4 +12,6 @@ public interface AcceptedTaskRepository extends JpaRepository<AcceptedTask, Acce
 	List<AcceptedTask> findByAcceptedTaskId(AcceptedTaskId id);
 	
 	List<AcceptedTask> findByAcceptedTaskId_AcceptorId(int id);
+	
+	List<AcceptedTask> findByAcceptedTaskId_TaskId(int id);
 }

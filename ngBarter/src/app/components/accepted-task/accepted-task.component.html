@@ -1,11 +1,19 @@
 <h2>accepted tasks</h2>
+<div class="container-fluid">
+  <h2>my accepted tasks</h2>
+  <div class="row">
+  <div *ngFor="let aTask of acceptedTasks" class="borderBox col-4 p-3">
+    <h3>{{aTask.id?.taskId}}</h3>
+    <p>rating by requestor: {{aTask.ratingByRequestor}}</p>
+    <p>rating by acceptor: {{aTask.ratingByAcceptor}}</p>
+    <p>remarks by requestor: {{aTask.remarksByRequestor}}</p>
+    <p>remarks by acceptor: {{aTask.remarksByAcceptor}}</p>
 
-<div *ngFor="let aTask of acceptedTasks" class="borderBox">
-  <h3>{{aTask.id?.taskId}}</h3>
-  <p>rating by requestor: {{aTask.ratingByRequestor}}</p>
-  <p>rating by acceptor: {{aTask.ratingByAcceptor}}</p>
-  <p>remarks by requestor: {{aTask.remarksByRequestor}}</p>
-  <p>remarks by acceptor: {{aTask.remarksByAcceptor}}</p>
+        <div class="col-12 text-align-center">
+          <button (click)='selectAcceptedTask(aTask)' class="btn btn-dark m-1" type="button">update</button>
+        </div>
+      </div>
+      </div>
+      </div>
 
-</div>
 

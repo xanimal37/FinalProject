@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.barter.entities.AcceptedTask;
 import com.skilldistillery.barter.entities.Task;
 import com.skilldistillery.barter.entities.User;
+import com.skilldistillery.barter.repositories.AcceptedTaskRepository;
 import com.skilldistillery.barter.repositories.TaskRepository;
 import com.skilldistillery.barter.repositories.TaskStatusRepository;
 import com.skilldistillery.barter.repositories.UserRepository;
@@ -20,6 +22,8 @@ public class TaskServiceImpl implements TaskService {
 	private UserRepository userRepo;
 	@Autowired
 	private TaskStatusRepository taskStatusRepo;
+	@Autowired
+	private AcceptedTaskRepository acceptedTaskRepo;
 
 	@Override
 	public Task createTask(Task task, String username) {
@@ -41,8 +45,24 @@ public class TaskServiceImpl implements TaskService {
 			original.setScheduleDate(task.getScheduleDate());
 			original.setCompleteDate(task.getCompleteDate());
 			original.setAddress(task.getAddress());
-			original.setTaskStatus(task.getTaskStatus());
 			original.setSkills(task.getSkills());
+			//task status will change depending on other factors
+			//check if accepted
+			List<AcceptedTask> acceptedTasksReferencingThisTask = acceptedTaskRepo.findByAcceptedTaskId_TaskId(task.getId());
+			
+			if (acceptedTasksReferencingThisTask==null) {
+				task.setTaskStatus(taskStatusRepo.findById(1)); //pending - not accepted
+			}
+			else if(acceptedTasksReferencingThisTask!=null && task.getScheduleDate()==null) {
+				task.setTaskStatus(taskStatusRepo.findById(2));
+			}
+			else if(task.getScheduleDate()!=null && task.getCompleteDate()==null) {
+				task.setTaskStatus(taskStatusRepo.findById(3));
+			}
+			else if(task.getCompleteDate()!=null) {
+				task.setTaskStatus(taskStatusRepo.findById(4));
+			}
+			
 			//this method will see the id and know to update
 			return taskRepo.saveAndFlush(original);
 		}
