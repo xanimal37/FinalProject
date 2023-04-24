@@ -21,6 +21,7 @@ export class LoginComponent {
   loginUser : User = new User;
 
   login(user:User){
+console.log(user);
 
     this.auth.login(user.username, user.password).subscribe({
       next: (loggedInUser) => {

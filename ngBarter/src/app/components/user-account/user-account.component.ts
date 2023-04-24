@@ -26,10 +26,13 @@ export class UserAccountComponent {
     ){
 
     }
+    loggedInUser:User |undefined ;
     editUser: User | null = null;
-    isEditEmail: boolean = true;
+    isEditEmail: boolean = false;
+    isEditName: boolean = false;
+    isEditBio: boolean = false;
     selectedSkillName:string='all';
-    user: User = new User();
+    user: User | null = null;
     skills: Skill[] =[];
     skillLevels: SkillLevel[] =[];
     newUserSkill: Userskill = new Userskill();
@@ -89,23 +92,30 @@ export class UserAccountComponent {
       // this.reload();
     }
     updateAccount(user: User, Id: number) {
+      console.log(user);
+
       this.userService.updateUser(user).subscribe( {
-        next: (user) => {
-          this.user = user;
+        next: (updatedUser) => {
+          this.isEditEmail = false;
+          this.isEditBio = false;
+          this.isEditName = false;
+
+          this.user = updatedUser;
           this.reload();
+
         },
         error: (fail) => {
           console.error('Error editing post');
           console.error(fail);
         }
       });
-      this.reload();
+
     }
 
     getLoggedInUser(){
       this.auth.getLoggedInUser().subscribe({
         next:(user:User)=>{
-          this.user = user;
+          this.loggedInUser = user;
         },
         error: (nojoy) => {
           console.log(nojoy);
@@ -117,34 +127,29 @@ export class UserAccountComponent {
       this.getLoggedInUser();
     }
 
-    editUsername() {
-      if (this.editedUsername) {
-        this.user.username = this.editedUsername;
-        this.userService.updateUser(this.user);
-        this.editedUsername = '';
-      }
-    }
+    // editUsername() {
+    //   if (this.editedUsername) {
+    //     this.user.username = this.editedUsername;
+    //     this.userService.updateEmail(this.user);
+    //     this.editedUsername = '';
+    //   }
+    // }
     editEmail() {
-      if (this.editedEmail) {
-        this.isEditEmail = true;
-        this.editedEmail = this.user.email;
+      // Set isEditEmail to true to display the form
+      this.isEditEmail = true;
+    }
+    editBio() {
+      // Set isEditEmail to true to display the form
+      this.isEditBio = true;
+    }
+    editName() {
+      // Set isEditEmail to true to display the form
+      this.isEditName = true;
+    }
 
-      }
-    }
-    saveEmail(){
-      this.userService.updateUser(this.user).subscribe(() => {
-        this.editedEmail = this.user.email
-        this.isEditEmail = false;
-      });
-    }
 
-    editBiography() {
-      if (this.editedBiography) {
-        this.user.biography = this.editedBiography;
-        this.userService.updateUser(this.user);
-        this.editedBiography = '';
-      }
-    }
+
+
 
 
 }
