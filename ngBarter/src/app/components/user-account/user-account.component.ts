@@ -26,16 +26,25 @@ export class UserAccountComponent {
     ){
 
     }
+    editUser: User | null = null;
+    isEditEmail: boolean = true;
     selectedSkillName:string='all';
     user: User = new User();
     skills: Skill[] =[];
     skillLevels: SkillLevel[] =[];
     newUserSkill: Userskill = new Userskill();
+    editedUsername: string |null = null;
+    editedEmail: string |null = null;
+    editedBiography: string |null = null;
 
     ngOnInit(): void {
       this.getLoggedInUser()
       this.loadSkills();
       this.loadSkillLevels();
+    }
+    setItem(user: User) {
+      this.editUser = user;
+
     }
   loadSkills():void {
     this.skillService.index().subscribe(
@@ -79,6 +88,19 @@ export class UserAccountComponent {
 
       // this.reload();
     }
+    updateAccount(user: User, Id: number) {
+      this.userService.updateUser(user).subscribe( {
+        next: (user) => {
+          this.user = user;
+          this.reload();
+        },
+        error: (fail) => {
+          console.error('Error editing post');
+          console.error(fail);
+        }
+      });
+      this.reload();
+    }
 
     getLoggedInUser(){
       this.auth.getLoggedInUser().subscribe({
@@ -95,8 +117,34 @@ export class UserAccountComponent {
       this.getLoggedInUser();
     }
 
+    editUsername() {
+      if (this.editedUsername) {
+        this.user.username = this.editedUsername;
+        this.userService.updateUser(this.user);
+        this.editedUsername = '';
+      }
+    }
+    editEmail() {
+      if (this.editedEmail) {
+        this.isEditEmail = true;
+        this.editedEmail = this.user.email;
 
+      }
+    }
+    saveEmail(){
+      this.userService.updateUser(this.user).subscribe(() => {
+        this.editedEmail = this.user.email
+        this.isEditEmail = false;
+      });
+    }
 
+    editBiography() {
+      if (this.editedBiography) {
+        this.user.biography = this.editedBiography;
+        this.userService.updateUser(this.user);
+        this.editedBiography = '';
+      }
+    }
 
 
 }
