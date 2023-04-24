@@ -1,1 +1,66 @@
-<h2>my tasks</h2>
+<div class="container-fluid">
+  <h2>my tasks</h2>
+  <div class="row" *ngIf="!selectedTask">
+    <div *ngFor='let task of myTasks' class="col-4 borderBox p-3">
+      <h3>{{task.name}}</h3>
+      <p>{{task.description}}</p>
+      <p>estimated hours: {{task.estimatedHours}}</p>
+      <p>requested start: {{task.startDate | date: 'shortDate'}}</p>
+
+      <h4>skills required</h4>
+      <ul>
+        <li *ngFor="let skill of task.skills">
+          {{skill.name}}
+        </li>
+
+      </ul>
+      <p [ngClass]="task.taskStatus?.name"> {{task.taskStatus?.name}}</p>
+      <div class="row">
+        <div class="col-12 text-align-center">
+          <button (click)='selectTask(task)' class="btn btn-dark m-1" type="button">update</button>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+  <div class="row" *ngIf="selectedTask">
+    <div class="col-12">
+      <h3>update task: {{selectedTask.name}}</h3>
+      <form [formGroup]="updateTaskForm" (ngSubmit)="updateTask(selectedTask)">
+
+      <div>
+        <label for="description"> description: </label>
+        <input type="text" id="description" formControlName="description"><br />
+      </div>
+      <div>
+        <label for="estimatedHours"> estimated hours: </label>
+        <input type="number" id="estimatedHours" formControlName="estimatedHours"><br />
+      </div>
+      <input type="checkbox" id="materialsProvided" name="materialsProvided" formControlName="materialsProvided">
+      <label for="materialsProvided"> materials will be provided</label><br>
+      <!-- checkboxes for skill -->
+
+      <div *ngFor="let skill of updateTaskForm.controls['skills'].controls, let i=index">
+        <label><input type="checkbox" [formControl]="skill"/>
+          {{ skills[i].name}}
+        </label>
+      </div>
+
+      <!-- dates -->
+      <div>
+      <label for="startDate">requested start date: </label>
+      <input type="date" id="startDate" formControlName="startDate">
+      </div>
+        <input class ="btn btn-dark m-1" type="submit" value="update task!">
+        <button (click)="delete(selectedTask.id)" class="btn btn-dark m-1" type="button">delete</button>
+        <button (click)='selectedTask=null' class="btn btn-dark m-1" type="button">cancel</button>
+
+      </form>
+    </div>
+  </div>
+
+</div>
+
+

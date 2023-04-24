@@ -50,4 +50,38 @@ export class TaskService {
       })
     );
     };
+
+   //GET "users/tasks"
+   getAllUsersTasks(): Observable<Task[]> {
+    return this.http.get<Task[]>(environment.baseUrl+"api/users/tasks", this.getHttpOptions()).pipe(
+      catchError((err:any)=>{
+        console.log(err);
+        return throwError(
+          ()=> new Error('TaskService.index(): error retrieving user tasks: '+ err)
+        );
+      })
+    );
+  };
+
+  update(task: Task):Observable<Task> {
+    return this.http.put<Task>(this.url + "/" + task.id, task,this.getHttpOptions()).pipe(
+      catchError((err:any)=> {
+        console.log(err);
+        return throwError(
+          ()=>new Error("TaskService.update(): error updating todo: "+err)
+        );
+      })
+    );
+  };
+
+  delete(taskId: number):Observable<void> {
+    return this.http.delete<void>(this.url + "/" + taskId,this.getHttpOptions()).pipe(
+      catchError((err:any)=> {
+        console.log(err);
+        return throwError(
+          ()=>new Error("TaskService.delete(): error deleting task: "+err)
+        );
+      })
+    );
+  }
 }
