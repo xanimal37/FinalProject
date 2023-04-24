@@ -55,6 +55,7 @@ export class NotificationComponent implements OnInit{
 
   ngOnInit(): void {
     this.verifyUser();
+
    }
 
    verifyUser(): void{
@@ -75,6 +76,7 @@ export class NotificationComponent implements OnInit{
     this.notificationService.indexNotificationsByUser(uId).subscribe({
       next: (notificationList) => {
         this.notifications = notificationList;
+        this.notificationService.refreshNotifications.emit(this.notifications)
       },
       error: (err) => {
         console.error('Error getting complaints list');

@@ -1,16 +1,55 @@
 <div *ngIf="loggedInUser">
   <div >
-    <div *ngFor="let user of users">
+    <div >
       <table>
-        <tr id="userList">
-          <td class="miniProfilePic" ><img src="{{user.imageURL}}" width="50"
-            height="50" alt="Profile Pic" style="border-radius: 50%;"></td>
+        <thead *ngIf="loggedInUser.role === 'admin'">
+          <tr style="text-align: center;">
+            <th></th>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Account ID</th>
+            <th>Role</th>
+            <th>Address</th>
+            <th>Contact</th>
+            <th>Ranking</th>
+            <th>Active Complaints</th>
+          </tr>
+        </thead>
+        <tr id="userList" *ngFor="let user of users">
+          <td class="miniProfilePic" ><img src="{{user.imageURL}}" width="75"
+            height="75" alt="Profile Pic" (click)="viewUserProfile(user)" style="border-radius: 50%;"></td>
           <td>{{ user.username }}</td>
-          <td><button class="btn btn-dark m-1" (click)="viewUserProfile(user)">View Profile</button></td>
+          <td *ngIf="loggedInUser.role === 'admin'">{{user.firstname}}<br> {{user.lastname}}</td>
+          <td *ngIf="loggedInUser.role === 'admin'">{{user.id}}</td>
+          <td *ngIf="loggedInUser.role === 'admin'">{{user.role}}</td>
+          <td *ngIf="loggedInUser.role === 'admin'">
+            <ul>
+              <li>{{user.address?.street1}}</li>
+              <li>{{user.address?.city}}</li>
+              <li>{{user.address?.state}}</li>
+              <li>{{user.address?.zipcode}}</li>
+            </ul>
+          </td>
+          <td *ngIf="loggedInUser.role === 'admin'">
+            <ul>
+              <li>{{user.phone}}</li>
+              <li>{{user.email}}</li>
+            </ul>
+          </td>
+          <td *ngIf="user.ranking?.id === 1"><img src="../../../assets/images/poop.png" width="75"
+            height="75"  alt=""></td>
+          <td *ngIf="user.ranking?.id === 2"><img src="../../../assets/images/bronze.png" width="75"
+            height="75" alt=""></td>
+          <td *ngIf="user.ranking?.id === 3"><img src="../../../assets/images/silver.png" width="75"
+            height="75" alt=""></td>
+          <td *ngIf="user.ranking?.id === 4"><img src="../../../assets/images/gold.png" width="75"
+            height="75" alt=""></td>
+          <td *ngIf="user.ranking?.id === 5"><img src="../../../assets/images/platinum.png" width="75"
+            height="75" alt=""></td>
+          <td *ngIf="loggedInUser.role === 'admin' && user.enabled"><button class="btn btn-danger m-1" >Deactivate</button></td>
+          <td *ngIf="loggedInUser.role === 'admin' && !user.enabled"><button class="btn btn-success m-1" >Activate</button></td>
         </tr>
       </table>
-
-
 
     </div>
   </div>
