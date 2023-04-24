@@ -75,7 +75,18 @@ private url =environment.baseUrl;
   }
 
   updateUser(user:User): Observable<User> {
-    return this.http.put<User>("http://localhost:8088/api/users/"+ user.id, user, this.getHttpOptions()).pipe(
+    return this.http.put<User>(this.url+"api/users/"+ user.id, user, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.error(err);
+        return throwError(
+          () =>
+            new Error('TodoService.create(): error creating Product: ' + err)
+        );
+      })
+    );
+    }
+  updateEmail(user:User,email:string): Observable<User> {
+    return this.http.put<User>(this.url+"api/users/"+ user.id+"/"+"email", email, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error(err);
         return throwError(
