@@ -27,7 +27,7 @@ export class LoginComponent {
       next: (loggedInUser) => {
         console.log(loggedInUser);
 
-         this.router.navigateByUrl('/usersList');
+         this.router.navigateByUrl('/userAccount');
       },
       error: (problem) => {
         console.error('RegisterComponent.register(): Error logging in user:');

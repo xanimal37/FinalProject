@@ -29,6 +29,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'usersList', component: UserListComponent },
   { path: 'user-profile/:id', component: OtherUserProfileComponent },
+  { path: 'userAccount', component: UserAccountComponent },
 
   //goes at the end
   {path:'**',component:PageNotFoundComponent}

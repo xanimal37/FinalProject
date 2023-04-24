@@ -42,29 +42,10 @@
       <label for="zip">Zip:</label>
       <input type="text" name="zip" id="zip" [(ngModel)]="newUser.address.zip">
     </div> -->
-    <h3>Skills:</h3>
-    <h4>select required skills</h4>
 
-    <li *ngFor="let box of skillsCheckBoxes">
-      <input type="checkbox" value="box.name" name="box.name" [(ngModel)]="newUser.userSkills"/>
-      <label>{{box.name}}</label>
-    </li>
   <div>
 
 
-      <!-- name: <input type="text" name="name" placeholder="name" [(ngModel)]="newTask.name"/><br />
-      description: <input type="text" name="description" placeholder="description" [(ngModel)]="newTask.description"/><br />
-      <h4>select required skills</h4>
-      <li *ngFor="let box of skillsCheckBoxes">
-        <input type="checkbox" value="box.name" name="box.name" [(ngModel)]="box.checked"/>
-        <label>{{box.name}}</label>
-      </li>
-      requested start date: <input type="date" name="name" [(ngModel)]="newTask.startDate"/>
-
-
-      <input class="btn btn-dark m-1" type="submit" value="create task!" (click)="addTask(newTask)"/>
-      <input class="btn btn-dark m-1" type="submit" value="cancel" (click)="setView('default')"/>
-   -->
 
 
     <ul>
