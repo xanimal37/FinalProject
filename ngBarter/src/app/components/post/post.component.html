@@ -1,7 +1,29 @@
 <h1>POSTS</h1>
-<p>Currently enabled to display only enabled posts</p>
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-6" id="keywordSearch">
+    <h3>Search Posts</h3>
+    <p>Query through all posts content</p>
+    <form>
+        <input type="text" id="keyword" size="100" name="keyword"[(ngModel)]="keyword"/>
+        <button class="btn btn-primary" type="submit" value="Search" (click)="postSearch(keyword)">Search</button>
+      </form>
+  </div>
+  <div class="col-3"></div>
+</div>
+<div id="postSearchResults" *ngIf="keywordPosts">
+  <div id="posts" *ngFor="let post of keywordPosts" >
+    <div *ngIf="post.enabled">
+      <h4>{{post.title}}</h4>
+      <p>{{post.createDate}}</p>
+      <p>{{post.content}}</p>
+      <p><img src="{{post.user?.imageURL}}" alt="">{{post.user?.username}}</p>
+    </div>
+  </div>
 
-<div id="editPost" *ngIf="editPost">
+</div>
+
+<div id="editPost" *ngIf="editPost && !keywordPosts">
   <h3>Edit Post</h3>
   <form>
       Topic: <input type="text" name="topic" [(ngModel)]="editPost.title"/><br />
@@ -12,7 +34,7 @@
 
     </form>
 </div >
-<div >
+<div *ngIf="!editPost && !keywordPosts">
 <div id="posts" *ngFor="let post of posts" >
   <div *ngIf="post.enabled">
     <h4>{{post.title}}</h4>
@@ -46,24 +68,3 @@
     </form>
 </div>
 
-
-<div id="keywordSearch">
-  <h3>Search Posts</h3>
-  <p>Query through all posts content</p>
-  <form>
-      <input type="text" id="keyword" name="keyword"[(ngModel)]="keyword"/><br>
-      <input class="btn btn-primary" type="submit" value="Search" (click)="postSearch(keyword)"/>
-    </form>
-</div>
-
-<div id="postSearchResults" *ngIf="keywordPosts">
-  <div id="posts" *ngFor="let post of keywordPosts" >
-    <div *ngIf="post.enabled">
-      <h4>{{post.title}}</h4>
-      <p>{{post.createDate}}</p>
-      <p>{{post.content}}</p>
-      <p>{{post.user?.username}}</p>
-    </div>
-  </div>
-
-</div>
