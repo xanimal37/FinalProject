@@ -74,14 +74,6 @@ getLoggedInUser(){
   })
 }
 
-isFriend(): boolean {
-  if (!this.loggedInUser.friends || !this.user) {
-    return false;
-  }
-
-  const friendIds = this.loggedInUser.friends.map(friend => friend.id);
-  return friendIds.includes(this.user.id);
-}
 
 goBack() {
   this.router.navigate(['/usersList']);
