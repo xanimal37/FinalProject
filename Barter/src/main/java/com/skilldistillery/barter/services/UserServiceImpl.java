@@ -94,15 +94,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public String addFriend(User user, User friend) {
-		if (user.getFriends().contains(friend)) {
-			return friend.getUsername() + " is already a friend of " + user.getUsername();
-		}
-		user.getFriends().add(friend);
+//		if (user.getFriends().contains(friend)) {
+//			return friend.getUsername() + " is already a friend of " + user.getUsername();
+//		}
+//		user.getFriends().add(friend);
 		friend.getFriends().add(user);
 		userRepo.saveAndFlush(user);
 		userRepo.saveAndFlush(friend);
 		return friend.getUsername() + " has been added as a friend of " + user.getUsername();
-
 	}
 
 	@Override
