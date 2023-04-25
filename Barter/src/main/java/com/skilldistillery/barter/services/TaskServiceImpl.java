@@ -62,7 +62,13 @@ public class TaskServiceImpl implements TaskService {
 			else if(task.getCompleteDate()!=null) {
 				task.setTaskStatus(taskStatusRepo.findById(4));
 			}
-			
+			//if accepted task ratings and comments are fulled it in is verified
+			else if (
+				acceptedTasksReferencingThisTask.get(0)!=null && 
+						acceptedTasksReferencingThisTask.get(0).getRemarksByRequestor()!=null &&
+						acceptedTasksReferencingThisTask.get(0).getRatingByRequestor()!=null) {
+				task.setTaskStatus(taskStatusRepo.findById(5));
+			}
 			//this method will see the id and know to update
 			return taskRepo.saveAndFlush(original);
 		}

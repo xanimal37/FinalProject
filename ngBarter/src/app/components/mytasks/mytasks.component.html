@@ -17,14 +17,19 @@
       <p [ngClass]="task.taskStatus?.name"> {{task.taskStatus?.name}}</p>
       <div class="row">
         <div class="col-12 text-align-center">
-          <button *ngIf="task.taskStatus?.name!='Verified'" (click)='selectTask(task)' class="btn btn-dark m-1" type="button">update</button>
+          <button *ngIf="task.taskStatus?.id==1" (click)='selectTask(task)' class="btn btn-dark m-1" type="button">update</button>
         </div>
 
       </div>
+      <div class="row">
+          <!-- if task has been accepted by someone else -->
+          <app-single-accepted-task [acceptedTasks]="acceptedTasks" [task]="task"  *ngIf="task.taskStatus?.id!=1"></app-single-accepted-task>
+
+      </div>
     </div>
-
-
   </div>
+<!-- updating a task -->
+
   <div class="row" *ngIf="selectedTask">
     <div class="col-12">
       <h3>update task: {{selectedTask.name}}</h3>

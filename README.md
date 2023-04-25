@@ -109,6 +109,10 @@ Front end was broken up into several sub-directories:
 
 2. Reactive forms allow for modifying data before being added to a new object. For instance, it is easier to create dates because they can be formatted differently from plain HTML values. Also dynamically generating forms and getting input is more flexible.
 
+3. Angular function calls are made on every update. So an `*ngIF` that has a function can get called 300+ times just on loading a component. Avoid by using property.
+
+4. @Output, @Input for communication between parent/child components. More efficient than functions, which get called on every update.
+
 #### Rob Tisdale:
 1. When doing entity mapping,for something such as comment (which can have sub-comments), you can reference the actual entity with an "inReplyTo" attribute inside the entity. 
 
