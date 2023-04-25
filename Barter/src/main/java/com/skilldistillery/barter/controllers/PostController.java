@@ -55,9 +55,9 @@ public class PostController {
 		
 	} 
 	
-	@GetMapping("posts/comments/{pId}")
-	public List<Comment> indexByPostId(Principal principal, HttpServletRequest req, HttpServletResponse res, @PathVariable String keyword, @PathVariable int pId) {
-		return postService.postComments(principal.getName(), pId );
+	@GetMapping("posts/comments/")
+	public List<Comment> indexByPostId(Principal principal, HttpServletRequest req, HttpServletResponse res, @PathVariable String keyword) {
+		return postService.postComments(principal.getName());
 	} 
 	
 	@PostMapping("posts")
