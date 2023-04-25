@@ -3,6 +3,7 @@ import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { Notification } from 'src/app/models/notification';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -17,7 +18,8 @@ export class NavbarComponent implements OnInit{
 
   constructor(
     private auth: AuthService,
-    private notification: NotificationService
+    private notification: NotificationService,
+    private router: Router
 
     ){
     }
@@ -44,6 +46,10 @@ export class NavbarComponent implements OnInit{
         console.error(err);
       }
     });
+  }
+  viewUserProfile(user:User) {
+    this.router.navigate(['/user-profile', this.loggedInUser!.id]);
+
   }
 
   verifyUser(): void{
