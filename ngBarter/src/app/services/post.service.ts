@@ -78,8 +78,8 @@ export class PostService {
   };
 
   //All Comments for specific posts
-  postComments(pId: number): Observable<Post[]> {
-    return this.http.get<Post[]>(this.url + "/comments/" + pId, this.getHttpOptions()).pipe(
+  postComments(): Observable<Comment[]> {
+    return this.http.get<Comment[]>(this.url + "/comments/", this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -124,12 +124,23 @@ export class PostService {
     );
   };
 
-  disable(id: Number): Observable<void> {
+  disable(id: number): Observable<void> {
     return this.http.put<void>(this.url + "/" + id, this.getHttpOptions()). pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
-          () => new Error('TodoService.create(): error deletingtodo: ' + err)
+          () => new Error('PostService.disable(): error disabling post: ' + err)
+        );
+      })
+    )
+  }
+
+  enable(id: number): Observable<void> {
+    return this.http.put<void>(this.url + "/" + id, this.getHttpOptions()). pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error('PostService.enable(): error enabling post: ' + err)
         );
       })
     )

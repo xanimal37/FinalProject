@@ -39,6 +39,10 @@ div {
   padding-right: 120px;
 }
 
+.testBorder {
+  border:1px solid orange;
+}
+
 
 .borderBox {
   border-radius:8px;
