@@ -7,6 +7,8 @@ import { User } from 'src/app/models/user';
 import { AcceptedTaskService } from 'src/app/services/accepted-task.service';
 import { Task } from 'src/app/models/task';
 import { TaskService } from 'src/app/services/task.service';
+import { TaskMessage } from 'src/app/models/task-message';
+import { TaskMessageService } from 'src/app/services/task-message.service';
 
 @Component({
   selector: 'app-accepted-task',
@@ -21,8 +23,13 @@ export class AcceptedTaskComponent implements OnInit {
   selectedTask:Task | null = null;
   selectedAcceptedTask: AcceptedTask | null = null;
 
+  newTaskMessage: TaskMessage = new TaskMessage();
+  creatingTaskMessage: boolean = false;
+  refTask: Task | null =null;
+
   constructor(
     private acceptedTaskService: AcceptedTaskService,
+    private taskMessageService: TaskMessageService,
     private taskService: TaskService,
     private datePipe: DatePipe,
     private route: ActivatedRoute,
@@ -126,5 +133,47 @@ export class AcceptedTaskComponent implements OnInit {
             }
           });
         }
+
+        createTaskMessage(tmsg: TaskMessage){
+          let tid = this.refTask?.id;
+          if(typeof tid == 'number'){
+          this.taskMessageService.create(tmsg,tid).subscribe( {
+            next: (tmsg) => {
+              this.newTaskMessage = new TaskMessage();
+            this.creatingTaskMessage= false;
+            this.refTask= null;
+            this.loadAcceptedTasks();
+            },
+            error: (fail) => {
+              console.error('Error creating task');
+              console.error(fail);
+            }
+          });
+        }
+      }
+
+  setReferenceTask(aTask: AcceptedTask){
+    if(aTask.id!=null){
+      for(let task of this.tasks){
+        if(task.id == aTask.id.taskId){
+          this.refTask=task;
+          break;
+        }
+      }
+  }
+  }
+
+  getTaskMessages(aTask:AcceptedTask){
+    let thisTask = null;
+    if(aTask!=null){
+      for(let task of this.tasks){
+        if(task.id == aTask.id?.taskId){
+          thisTask=task;
+          break;
+        }
+      }
+    }
+    return thisTask?.taskMessages;
+  }
 }
 
