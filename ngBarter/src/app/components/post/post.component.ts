@@ -120,14 +120,14 @@ export class PostComponent implements OnInit{
       this.postService.update(post,pId).subscribe( {
         next: (updatedPost) => {
           this.post = updatedPost;
-          this.reload();
+          this.ngOnInit()
         },
         error: (fail) => {
           console.error('Error editing post');
           console.error(fail);
         }
       });
-      this.reload();
+      this.ngOnInit()
     }
 
     postSearch(keyword: string) {
