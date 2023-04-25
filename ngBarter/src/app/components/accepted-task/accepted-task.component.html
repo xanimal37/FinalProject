@@ -1,8 +1,20 @@
 <div class="container-fluid">
   <h2>my accepted tasks</h2>
+  <div class="row borderBox" *ngIf="creatingTaskMessage">
+    <form>
+      <h6>message for: {{refTask?.name}}</h6>
+      <label>title: </label><br>
+      <input type="text" name="title" [(ngModel)]="newTaskMessage.title"><br>
+      <label>content: </label><br>
+      <input type="text" name="content" [(ngModel)]="newTaskMessage.content"><br>
+      <button class="btn btn-dark m-1" (click)="createTaskMessage(newTaskMessage)">submit</button>
+      <button class="btn btn-dark m-1" (click)="creatingTaskMessage=false">cancel</button>
+    </form>
+
+  </div>
   <div class="row" *ngIf="!selectedAcceptedTask">
-  <div *ngFor="let aTask of acceptedTasks" class="borderBox col-4 p-3">
-    <p *ngIf="checkVerifiedTask(aTask)">this task is awaiting a rating and comments!</p>
+  <div *ngFor="let aTask of acceptedTasks" class="borderBox col-12 p-3">
+    <p *ngIf="!checkVerifiedTask(aTask)">this task is awaiting a rating and comments!</p>
     <h3>{{getTaskName(aTask)}}</h3>
     <p>rating by requestor: {{aTask.ratingByRequestor}}</p>
     <p>rating by acceptor: {{aTask.ratingByAcceptor}}</p>
@@ -10,6 +22,19 @@
     <p>remarks by acceptor: {{aTask.remarksByAcceptor}}</p>
     <p>accept date: {{aTask.acceptDate | date: 'shortDate'}}</p>
 
+    <!-- task messages-->
+    <div class="row borderBox">
+      <h4>messages</h4>
+      <button *ngIf="!creatingTaskMessage" class="btn btn-dark m-1" (click)="creatingTaskMessage=true;setReferenceTask(aTask)">add message</button>
+      <div>
+        <div *ngFor="let tmsg of getTaskMessages(aTask)" class="col-12">
+            <h5>{{tmsg.title}}</h5>
+            <p>{{tmsg.createDate | date:'shortDate'}}</p>
+            <p>{{tmsg.content}}</p>
+        </div>
+
+      </div>
+    </div>
         <div class="col-12 text-align-center">
 
           <button *ngIf="checkVerifiedTask(aTask)" (click)='selectAcceptedTask(aTask)' class="btn btn-dark m-1" type="button">update</button>
@@ -21,9 +46,9 @@
         <h3>{{selectedTask?.name}}</h3>
         <form>
           <label>My rating on this task: </label>
-          <input type="number" id="requestorRating" name="requestorRating" [(ngModel)]="selectedAcceptedTask.ratingByRequestor"/>
+          <input type="number" id="requestorRating" name="requestorRating" [(ngModel)]="selectedAcceptedTask.ratingByAcceptor"/>
           <label>My comments on this task: </label>
-          <input type="text" id="requestorRemarks" name="requestorRemarks" [(ngModel)]="selectedAcceptedTask.remarksByRequestor"/><br>
+          <input type="text" id="requestorRemarks" name="requestorRemarks" [(ngModel)]="selectedAcceptedTask.remarksByAcceptor"/><br>
           <button class="btn btn-dark" (click)="update(selectedAcceptedTask)">submit rating and comment</button>
           <button class="btn btn-dark" (click)="selectedAcceptedTask=null; selectedTask=null">cancel</button>
         </form>

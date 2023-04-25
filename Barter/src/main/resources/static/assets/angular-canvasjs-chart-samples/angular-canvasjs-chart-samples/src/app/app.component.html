@@ -1,0 +1,551 @@
+<div class="app">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 bg-dark p-2">
+                <a routerLink="/" class="text-white text-decoration-none">
+                    <span class="fs-4 title">CANVASJS ANGULAR CHARTS</span>
+                </a>
+            </div>
+        </div>
+        <div class="row flex-nowrap">
+            <div class="col-auto col-md-3 col-xl-2 bg-dark">
+                <div class="d-flex flex-column text-white min-vh-100">
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center" id="menu">
+                        <li class="divider" role="separator"></li>
+                        <li>
+                            <a href="#keyfeatures" data-bs-toggle="collapse" class="nav-link align-middle" >
+                                <i class="fa fa-star"  aria-hidden="true"></i>
+                                <span class="d-none d-sm-inline"> KEY FEATURES </span>
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <ul class="collapse nav flex-column submenu collapse" id="keyfeatures" data-bs-parent="#menu"  (isActiveChange)="activeChange($event)" routerLinkActive="show" #menuLinks>
+                                <li class="w-100">
+                                    <a routerLink="/chart-index-data-label/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Chart with Indexlabel</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a routerLink="/chart-zoom-pan/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Chart with Zoom/Pan</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a routerLink="/multiseries-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Multiseries Chart</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a routerLink="/multiple-axis/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Mulitple Axis</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a routerLink="/combination-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Combination Chart</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a routerLink="/chart-with-animation/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Chart with Animation</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a routerLink="/chart-logarithmic-axis/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Chart with Logarithmic Axis</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a routerLink="/line-chart-data-ajax-json/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Chart with Data from AJAX</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a routerLink="/dynamic-realtime-charts/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Dynamic Chart</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a routerLink="/drilldown-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Drilldown Chart</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a routerLink="/responsive-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Responsive Chart</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a routerLink="/synchronized-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Synchronized Chart</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="divider" role="separator"></li>
+                        <li>
+                            <a href="#linechart" data-bs-toggle="collapse" class="nav-link align-middle">
+                                <i class="fa fa-line-chart"  aria-hidden="true"></i>
+                                <span class="d-none d-sm-inline"> LINE CHARTS </span>
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <ul class="collapse nav flex-column submenu" id="linechart" data-bs-parent="#menu"  routerLinkActive="show" (isActiveChange)="activeChange($event)" #menuLinks>
+                                <li class="w-100">
+                                    <a routerLink="/line-chart-with-date-time-axis/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Line Chart with Date-Time Axis</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a routerLink="/dashed-line-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Dashed Line Chart</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a routerLink="/multi-series-line-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Multi Series Line Chart</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a routerLink="/spline-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Spline Chart</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a routerLink="/multi-series-spline-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Multi Series Spline Chart</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a routerLink="/step-line-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Step Line Chart</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a routerLink="/multi-series-step-line-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Multi Series Step Line Chart</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="divider" role="separator"></li>
+                        <li>
+                            <a href="#barchart" data-bs-toggle="collapse" class="nav-link align-middle">
+                                <i class="fa fa-align-left"  aria-hidden="true"></i>
+                                <span class="d-none d-sm-inline"> BAR CHARTS </span>
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <ul class="collapse nav flex-column submenu" id="barchart" data-bs-parent="#menu"  routerLinkActive="show" (isActiveChange)="activeChange($event)" #menuLinks>
+                                <li class="w-100">
+                                    <a routerLink="/bar-chart-category-axis/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Bar Chart with Category Axis</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/multi-series-bar-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Multi Series Bar Chart</span>
+                                    </a>
+                                </li>
+                               <li class="w-100">
+                                    <a routerLink="/stacked-bar-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Stacked Bar Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/stacked-bar-100-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Stacked Bar 100% Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/stacked-bar-100-chart-indexlabel/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Stacked Bar 100% Chart with Indexlabels</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="divider" role="separator"></li>
+                        <li>
+                            <a href="#columnchart" data-bs-toggle="collapse" class="nav-link align-middle">
+                                <i class="fa fa-bar-chart"  aria-hidden="true"></i>
+                                <span class="d-none d-sm-inline"> COLUMN CHARTS </span>
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <ul class="collapse nav flex-column submenu" id="columnchart" data-bs-parent="#menu"  routerLinkActive="show" (isActiveChange)="activeChange($event)" #menuLinks>
+                                <li class="w-100">
+                                    <a routerLink="/column-with-numeric-axis/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Column Chart with Numeric Axis</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/multiseries-column-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Multi Series Column Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/stacked-column-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Stacked Column Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/stacked-column100-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Stacked Column 100% Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/stacked-column100-indexlabel-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Stacked Column 100% Chart with Indexlabel</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/waterfall-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Waterfall Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/waterfall-chart-index-data-labels/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Waterfall Chart with Indexlabel</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/multi-series-waterfall-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Multi Series Waterfall Chart</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="divider" role="separator"></li>
+                        <li>
+                            <a href="#piechart" data-bs-toggle="collapse" class="nav-link align-middle">
+                                <i class="fa fa-pie-chart"  aria-hidden="true"></i>
+                                <span class="d-none d-sm-inline"> PIE & DOUGHNUT CHARTS </span>
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <ul class="collapse nav flex-column submenu" id="piechart" data-bs-parent="#menu"  routerLinkActive="show" (isActiveChange)="activeChange($event)" #menuLinks>
+                                <li class="w-100">
+                                    <a routerLink="/pie-chart-index-data-label/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Pie Chart with Indexlabel</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/pie-chart-dark-theme/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Pie Chart in Dark Theme</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/doughnut-chart-index-data-label/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Doughnut Chart with Indexlabel</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/doughnut-chart-dark-theme/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Doughnut Chart in Dark Theme</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="divider" role="separator"></li>
+
+                        <li>
+                            <a href="#areachart" data-bs-toggle="collapse" class="nav-link align-middle">
+                                <i class="fa fa-area-chart"  aria-hidden="true"></i>
+                                <span class="d-none d-sm-inline"> AREA CHARTS </span>
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <ul class="collapse nav flex-column submenu" id="areachart" data-bs-parent="#menu"  routerLinkActive="show" (isActiveChange)="activeChange($event)" #menuLinks>
+                                <li class="w-100">
+                                    <a routerLink="/area-chart-index-data-labels/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Area Chart with Indexlabel</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/multi-series-area-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Multi Series Area Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/spline-area-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Spline Area Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/multi-series-spline-area-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Multi Series Spline Area Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/step-area-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Step Area Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/stacked-area-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Stacked Area Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/stacked-area-100-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Stacked Area 100% Chart</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="divider" role="separator"></li>
+
+                        <li>
+                            <a href="#rangechart" data-bs-toggle="collapse" class="nav-link align-middle">
+                                <i class="fa fa-align-center"  aria-hidden="true"></i>
+                                <span class="d-none d-sm-inline"> RANGE CHARTS </span>
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <ul class="collapse nav flex-column submenu" id="rangechart" data-bs-parent="#menu"  routerLinkActive="show" (isActiveChange)="activeChange($event)" #menuLinks>
+                                <li class="w-100">
+                                    <a routerLink="/range-column-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Range Column Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/multi-series-range-column-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Multi Series Range Column Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/range-bar-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Range Bar Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/multi-series-range-bar-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Multi Series Range Bar Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/range-area-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Range Area Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/multi-series-range-area-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Multi Series Range Area Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/range-spline-area-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Range Spline Area Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/multi-series-range-spline-area-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Multi Series Range Spline Area Chart</span>
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                        <li class="divider" role="separator"></li>
+
+                        <li>
+                            <a href="#scatterchart" data-bs-toggle="collapse" class="nav-link align-middle">
+                                <i class="fa fa-dot-circle-o"  aria-hidden="true"></i>
+                                <span class="d-none d-sm-inline"> BUBBLE & SCATTER CHARTS </span>
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <ul class="collapse nav flex-column submenu" id="scatterchart" data-bs-parent="#menu"  routerLinkActive="show" (isActiveChange)="activeChange($event)" #menuLinks>
+                                <li class="w-100">
+                                    <a routerLink="/bubble-chart-index-data-label/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Bubble Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/multi-series-scatter-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Multi Series Scatter Chart</span>
+                                    </a>
+                                </li>                                
+                            </ul>
+                        </li>
+                        <li class="divider" role="separator"></li>
+
+                        <li>
+                            <a href="#rangechart" data-bs-toggle="collapse" class="nav-link align-middle">
+                                <i class="fa fa-align-center"  aria-hidden="true"></i>
+                                <span class="d-none d-sm-inline"> RANGE CHARTS </span>
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <ul class="collapse nav flex-column submenu" id="rangechart" data-bs-parent="#menu"  routerLinkActive="show" (isActiveChange)="activeChange($event)" #menuLinks>
+                                <li class="w-100">
+                                    <a routerLink="/range-column-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Range Column Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/multi-series-range-column-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Multi Series Range Column Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/range-bar-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Range Bar Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/multi-series-range-bar-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Multi Series Range Bar Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/range-area-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Range Area Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/multi-series-range-area-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Multi Series Range Area Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/range-spline-area-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Range Spline Area Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/multi-series-range-spline-area-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Multi Series Range Spline Area Chart</span>
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                        <li class="divider" role="separator"></li>
+
+                        <li>
+                            <a href="#funnelchart" data-bs-toggle="collapse" class="nav-link align-middle">
+                                <i class="fa fa-filter"  aria-hidden="true"></i>
+                                <span class="d-none d-sm-inline"> FUNNEL & PYRAMID CHARTS </span>
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <ul class="collapse nav flex-column submenu" id="funnelchart" data-bs-parent="#menu"  routerLinkActive="show" (isActiveChange)="activeChange($event)" #menuLinks>
+                                <li class="w-100">
+                                    <a routerLink="/funnel-chart-index-labels/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Funnel Chart with Indexlabel</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/funnel-chart-without-neck/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Funnel Chart without Neck</span>
+                                    </a>
+                                </li> 
+                                <li class="w-100">
+                                    <a routerLink="/pyramid-chart-index-labels/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Pyramid Chart</span>
+                                    </a>
+                                </li>                                
+                            </ul>
+                        </li>
+                        <li class="divider" role="separator"></li>
+
+                        <li>
+                            <a href="#financialchart" data-bs-toggle="collapse" class="nav-link align-middle">
+                                <i class="fa fa-line-chart"  aria-hidden="true"></i>
+                                <span class="d-none d-sm-inline"> FINANCIAL & ADVANCED CHARTS </span>
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <ul class="collapse nav flex-column submenu" id="financialchart" data-bs-parent="#menu"  routerLinkActive="show" (isActiveChange)="activeChange($event)" #menuLinks>
+                                <li class="w-100">
+                                    <a routerLink="/candlestick-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Candlestick Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/multi-series-candlestick-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Multi Series Candlestick Chart</span>
+                                    </a>
+                                </li> 
+                                <li class="w-100">
+                                    <a routerLink="/ohlc-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">OHLC Chart</span>
+                                    </a>
+                                </li> 
+                                <li class="w-100">
+                                    <a routerLink="/ohlc-chart-json-data/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">OHLC Chart with JSON Data</span>
+                                    </a>
+                                </li> 
+                                <li class="w-100">
+                                    <a routerLink="/box-whisker-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Box & Whisker Chart</span>
+                                    </a>
+                                </li>                                
+                            </ul>
+                        </li>
+                        <li class="divider" role="separator"></li>
+
+                        <li>
+                            <a href="#combinationchart" data-bs-toggle="collapse" class="nav-link align-middle">
+                                <i class="fa fa-industry"  aria-hidden="true"></i>
+                                <span class="d-none d-sm-inline"> COMBINATION CHARTS </span>
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <ul class="collapse nav flex-column submenu" id="combinationchart" data-bs-parent="#menu"  routerLinkActive="show" (isActiveChange)="activeChange($event)" #menuLinks>
+                                <li class="w-100">
+                                    <a routerLink="/error-bar-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Error Bar Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/pareto-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Pareto Chart</span>
+                                    </a>
+                                </li> 
+                                <li class="w-100">
+                                    <a routerLink="/range-area-line-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Range Area & Line Chart</span>
+                                    </a>
+                                </li> 
+                                <li class="w-100">
+                                    <a routerLink="/candlestick-line-combo-charts/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Candlestick & Line Chart</span>
+                                    </a>
+                                </li> 
+                                <li class="w-100">
+                                    <a routerLink="/ohlc-chart-trend/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">OHLC Chart with Trend</span>
+                                    </a>
+                                </li>                                
+                            </ul>
+                        </li>
+                        <li class="divider" role="separator"></li>
+
+                        <li>
+                            <a href="#dynamicchart" data-bs-toggle="collapse" class="nav-link align-middle">
+                                <i class="fa fa-rocket"  aria-hidden="true"></i>
+                                <span class="d-none d-sm-inline"> DYNAMIC CHARTS </span>
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <ul class="collapse nav flex-column submenu" id="dynamicchart" data-bs-parent="#menu"  routerLinkActive="show" (isActiveChange)="activeChange($event)" #menuLinks>
+                                <li class="w-100">
+                                    <a routerLink="/dynamic-line-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Dynamic Line Chart</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a routerLink="/dynamic-column-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Dynamic Column Chart</span>
+                                    </a>
+                                </li> 
+                                <li class="w-100">
+                                    <a routerLink="/multi-series-dyanmic-chart/" class="nav-link px-0" routerLinkActive="active">
+                                        <span class="d-none d-sm-inline">Multi Series Dynamic Chart</span>
+                                    </a>
+                                </li>                                
+                            </ul>
+                        </li>
+                        <li class="divider" role="separator"></li>
+                    </ul>
+                    <hr>
+                </div>
+            </div>
+            <div class="col py-3 mt-5">
+                <div class="container">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

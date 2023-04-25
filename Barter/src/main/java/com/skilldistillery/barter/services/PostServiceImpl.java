@@ -120,7 +120,7 @@ public class PostServiceImpl implements PostService {
 
 	public List<Comment> postComments(String username) {
 		User user = userRepo.findByUsername(username);
-		if (user.getRole() == "user" || user.getRole() == "admin") {
+		if (user != null) {
 			return commentRepo.findAll();
 		} else {
 			return null;

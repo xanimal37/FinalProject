@@ -28,7 +28,7 @@ export class PostComponent implements OnInit{
   keywordPosts: Post[] | null = null;
   keyword: string = "";
   loggedInUser: User | undefined;
-  comment: Comment | null = null;
+  comment: Comment = new Comment;
   newComment: Comment = new Comment;
   comments: Comment[] = [];
 

@@ -24,12 +24,9 @@
   </nav>
 </div>
 </div>
-<div class="row">
-  <div class="col-3"></div>
-  <div class="col-6" id="keywordSearch">
-  </div>
-  <div class="col-3"></div>
-</div>
+
+
+<!-- search results by keyword -->
 <div class="d-flex justify-content-center">
 <div id="postSearchResults" *ngIf="keywordPosts">
   <div id="posts" *ngFor="let post of keywordPosts" >
@@ -37,6 +34,13 @@
       <h4>{{post.title}}</h4 >
       <p>{{post.createDate}}</p>
       <p>{{post.content}}</p>
+      <div *ngIf="post.comments">
+        <h4>Comments</h4>
+      <div *ngFor="let comms of post.comments">
+        <p>{{comms.createDate}}</p>
+        <p>{{comms.content}}</p>
+        </div>
+      </div>
       <p><img src="{{post.user?.imageURL}}" width="30"
         height="30" alt="Profile Pic" style="border-radius: 50%;" alt="">{{post.user?.username}}</p>
     </div>
@@ -50,29 +54,34 @@
 <div *ngIf="!editPost && !keywordPosts">
 <div id="posts" *ngFor="let post of posts" >
   <div *ngIf="post.enabled">
+    <div class="postBackground">
     <h4>{{post.title}}</h4>
     <p>{{post.createDate}}</p>
     <p>{{post.content}}</p>
     <p><img src="{{post.user?.imageURL}}" width="30"
       height="30" alt="Profile Pic" style="border-radius: 50%;" alt="">{{post.user?.username}}</p>
-    <div *ngIf="comments">
-      Comments
-    <div *ngFor="let comms of comments">
-      <p>{{comms.createDate}}</p>
-      <p>{{comms.content}}</p>
+    </div>
+      <div *ngIf="post.comments">
+        <h6>Comments</h6>
+        <hr>
+      <div *ngFor="let comms of post.comments">
+        <p style="text-align: right;">{{comms.createDate}}<br> {{comms.user?.username}} <img src="{{comms.user?.imageURL}}" width="30"
+          height="30" alt="Profile Pic" style="border-radius: 50%;" alt=""></p>
+        <p>{{comms.content}}</p>
+        <hr>
 
+        </div>
       </div>
     </div>
-  </div>
     <button class = "btn btn-success" *ngIf="post?.user?.id === loggedInUser?.id" (click)="setEditPost(post)">Edit</button>
     <button class = "btn btn-outline-danger" *ngIf="loggedInUser?.role === 'admin' && post.enabled" (click)="disablePost(post.id)">Disable</button>
     <button class = "btn btn-outline-success" *ngIf="loggedInUser?.role === 'admin' && !post.enabled" (click)="enablePost(post.id)">Enable</button>
     <div id="postComment">
       <form *ngIf="loggedInUser && loggedInUser?.role != 'admin'">
-        <textarea type="text" id="comment" name="comment" placeholder="Reply Here" rows="5" cols="74"  ></textarea><br>
+        <textarea type="text" id="comment" name="comment" placeholder="Reply Here" rows="3
+      " cols="74"  ></textarea><br>
 
-        <input class="btn btn-dark m-1" type="submit" value="reply"/>
-        <input class="btn btn-danger" type="submit" value="cancel" (click)="cancelEditPost()"/>
+        <input class="btn btn-dark m-1" type="submit" (click)="createComment(post.id, newComment)"value="reply"/>
 
       </form>
     </div>

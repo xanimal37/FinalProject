@@ -1,7 +1,7 @@
 import { User } from 'src/app/models/user';
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 
@@ -51,7 +51,7 @@ private url =environment.baseUrl;
     );
   }
   getUserCount(): Observable<number> {
-    return this.http.get<number>(this.url + "api/users/count",  this.getHttpOptions()).pipe(
+    return this.http.get<number>(this.url + "api/users/count").pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
