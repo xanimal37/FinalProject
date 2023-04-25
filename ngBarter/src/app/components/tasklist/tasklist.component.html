@@ -15,6 +15,7 @@
   <div *ngFor="let task of tasks | taskbyskill:selectedSkillName" class="borderBox">
     <h3>{{task.name}}</h3>
     <p>{{task.description}}</p>
+    <p>posted by: {{task.user?.username}}</p>
     <p>requested start date: {{task.startDate |date:'shortDate'}}</p>
     <h4>skills required</h4>
     <ul>
@@ -29,6 +30,12 @@
 <div *ngIf="selectedTask" class="borderBox">
   <h3>{{selectedTask.name | titlecase}}</h3>
   <p>{{selectedTask.description}}</p>
+  <p>posted by: {{selectedTask.user?.username}}</p>
+  <img *ngIf="selectedTask.user?.ranking?.id === 1" width="75" height="75" src="assets/images/poop.png">
+  <img *ngIf="selectedTask.user?.ranking?.id === 2" width="75" height="75" src="assets/images/bronze.png">
+  <img *ngIf="selectedTask.user?.ranking?.id === 3" width="75" height="75" src="assets/images/silver.png">
+  <img *ngIf="selectedTask.user?.ranking?.id === 4" width="75" height="75" src="assets/images/gold.png">
+  <img *ngIf="selectedTask.user?.ranking?.id === 5" width="75" height="75" src="assets/images/platinum.png">
   <p>location: {{selectedTask.address?.city}}, {{selectedTask.address?.state}}</p>
   <p>estimated hours: {{selectedTask.estimatedHours}}</p>
   <p>posted on: {{selectedTask.startDate | date:'shortDate'}}</p>
@@ -38,13 +45,12 @@
       <li *ngFor="let skill of selectedTask.skills">{{skill.name}}</li>
     </ul>
 <button class="btn btn-dark m-1" (click) = "selectedTask=null">close</button>
-<button class="btn btn-dark m-1" *ngIf="loggedInUser && selectedTask.taskStatus?.id==1" (click)="acceptTask(selectedTask)">accept task</button>
+<button class="btn btn-dark m-1" *ngIf="loggedInUser && selectedTask.taskStatus?.id==1 && selectedTask.user?.username!=loggedInUser.username" (click)="acceptTask(selectedTask)">accept task</button>
 <p *ngIf="selectedTask.taskStatus?.id!=1">task has been accepted</p>
 </div>
 
   <!-- ADD A TASK VIEW ** must be authorized -->
-  <div id="add_task" *ngIf="views[1].visible && loggedInUser">
-    <h3>add task</h3>
+  <div id="add_task" class="container-fluid" *ngIf="views[1].visible && loggedInUser">
 
     <app-newtask (closeChild)=closeChild()></app-newtask>
 </div>
