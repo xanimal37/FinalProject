@@ -55,17 +55,20 @@
     <p>{{post.content}}</p>
     <p><img src="{{post.user?.imageURL}}" width="30"
       height="30" alt="Profile Pic" style="border-radius: 50%;" alt="">{{post.user?.username}}</p>
-    <p *ngIf="post.comments">Comments </p>
-    <div *ngFor="let comms of post.comments">
+    <div *ngIf="comments">
+      Comments
+    <div *ngFor="let comms of comments">
       <p>{{comms.createDate}}</p>
       <p>{{comms.content}}</p>
 
       </div>
     </div>
+  </div>
     <button class = "btn btn-success" *ngIf="post?.user?.id === loggedInUser?.id" (click)="setEditPost(post)">Edit</button>
-    <button class = "btn btn-success" *ngIf="loggedInUser?.role === 'admin'" (click)="setEditPost(post)">Disable</button>
+    <button class = "btn btn-outline-danger" *ngIf="loggedInUser?.role === 'admin' && post.enabled" (click)="disablePost(post.id)">Disable</button>
+    <button class = "btn btn-outline-success" *ngIf="loggedInUser?.role === 'admin' && !post.enabled" (click)="enablePost(post.id)">Enable</button>
     <div id="postComment">
-      <form>
+      <form *ngIf="loggedInUser && loggedInUser?.role != 'admin'">
         <textarea type="text" id="comment" name="comment" placeholder="Reply Here" rows="5" cols="74"  ></textarea><br>
 
         <input class="btn btn-dark m-1" type="submit" value="reply"/>

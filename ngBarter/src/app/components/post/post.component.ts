@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/services/user.service';
 import { Post } from './../../models/post';
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
@@ -6,6 +7,7 @@ import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 import { Comment } from 'src/app/models/comment';
+import { UserListComponent } from '../user-list/user-list.component';
 
 @Component({
   selector: 'app-post',
@@ -28,6 +30,7 @@ export class PostComponent implements OnInit{
   loggedInUser: User | undefined;
   comment: Comment | null = null;
   newComment: Comment = new Comment;
+  comments: Comment[] = [];
 
 
 
@@ -37,6 +40,7 @@ export class PostComponent implements OnInit{
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
+
     ) {
     }
 
@@ -59,6 +63,7 @@ export class PostComponent implements OnInit{
 
     ngOnInit(): void {
       this.verifyUser();
+
      }
 
      verifyUser(): void{
@@ -120,14 +125,14 @@ export class PostComponent implements OnInit{
       this.postService.update(post,pId).subscribe( {
         next: (updatedPost) => {
           this.post = updatedPost;
-          this.ngOnInit()
+          this.reload();
         },
         error: (fail) => {
           console.error('Error editing post');
           console.error(fail);
         }
       });
-      this.ngOnInit()
+      this.reload();
     }
 
     postSearch(keyword: string) {
@@ -147,6 +152,34 @@ export class PostComponent implements OnInit{
 
 
     disablePost(id: number) {
-      this.postService.disable
+      this.postService.disable(id).subscribe({
+        next: () => {
+          this.reload();
+        },
+        error: (fail) => {
+          console.error('Error disabling post');
+          console.error(fail);
+        }
+      });
+      this.reload();
+    }
+
+    enablePost(id: number) {
+      this.postService.enable(id).subscribe({
+        next: () => {
+          this.reload();
+        },
+        error: (fail) => {
+          console.error('Error disabling post');
+          console.error(fail);
+        }
+      });
+      this.reload();
+    }
+
+    allComments() {
+      this.postService.postComments().subscribe({
+
+      })
     }
 }
