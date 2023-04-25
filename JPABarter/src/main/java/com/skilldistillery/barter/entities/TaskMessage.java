@@ -14,6 +14,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="task_message")
 public class TaskMessage {
@@ -28,10 +30,14 @@ public class TaskMessage {
 	@Column(name="create_date")
 	@CreationTimestamp
 	private LocalDateTime createDate;
+	
 	//relationship
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="task_id")
 	private Task task;
+	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;

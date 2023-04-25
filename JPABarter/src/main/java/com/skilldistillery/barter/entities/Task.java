@@ -53,8 +53,8 @@ public class Task {
 	@JoinColumn(name="task_status_id")
 	private TaskStatus taskStatus;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy="task")
+	@OneToMany
+	@JoinColumn(name="task_id")
 	private List<TaskMessage> taskMessages;
 	
 	@JsonIgnore

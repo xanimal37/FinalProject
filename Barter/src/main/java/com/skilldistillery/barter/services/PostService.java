@@ -22,7 +22,7 @@ public interface PostService {
     
     List<Post> postKeywordSearch(String username, String keyword);
     
-    List<Comment> postComments(String username, int pId);
+    List<Comment> postComments(String username);
     
     Comment createComment(String username, int pId, Comment comment);
     
