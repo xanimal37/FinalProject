@@ -41,6 +41,18 @@ export class AcceptedTaskService {
     );
   };
 
+  //GET api/acceptedTasks
+  indexAll(): Observable<AcceptedTask[]> {
+    return this.http.get<AcceptedTask[]>(environment.baseUrl+"api/acceptedTasks", this.getHttpOptions()).pipe(
+      catchError((err:any)=>{
+        console.log(err);
+        return throwError(
+          ()=> new Error('AcceptedTaskService.index(): error retrieving accepted tasks: '+ err)
+        );
+      })
+    );
+  };
+
   //POST api/users/acceptedTasks
   create(acceptedTask: AcceptedTask): Observable<AcceptedTask> {
     return this.http.post<AcceptedTask>(environment.baseUrl+"api/users/acceptedTasks", acceptedTask, this.getHttpOptions()).pipe(
@@ -65,6 +77,8 @@ export class AcceptedTaskService {
         })
       );
     };
+
+
 
 
 }

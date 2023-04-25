@@ -1,3 +1,4 @@
+import { AcceptedTaskService } from 'src/app/services/accepted-task.service';
 import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,6 +11,7 @@ import { FormArray,FormControl,FormGroup } from '@angular/forms';
 import { Skill } from 'src/app/models/skill';
 import { formatDate } from '@angular/common';
 import { TaskStatus } from 'src/app/models/task-status';
+import { AcceptedTask } from 'src/app/models/accepted-task';
 
 @Component({
   selector: 'app-mytasks',
@@ -24,11 +26,13 @@ export class MytasksComponent implements OnInit{
   selectedTask : Task | null = null;
   updateTaskForm : FormGroup | any;
   skills: Skill[] = [];
+  acceptedTasks: AcceptedTask[] =[];
 
   constructor(
     private taskService:TaskService,
     private skillService:SkillService,
     private taskStatusService: TaskStatusService,
+    private acceptedTaskService : AcceptedTaskService,
     private datePipe: DatePipe,
     private route: ActivatedRoute,
     private router: Router
@@ -37,6 +41,7 @@ export class MytasksComponent implements OnInit{
   ngOnInit(): void {
 
     this.loadUserTasks();
+    this.loadAcceptedTasks();
     this.loadTaskStatuses();
     this.loadSkills();
 
@@ -83,6 +88,20 @@ export class MytasksComponent implements OnInit{
             }
           );
         }
+        loadAcceptedTasks():void {
+          console.log("loading accepted tasks");
+          this.acceptedTaskService.indexAll().subscribe(
+              {
+                next: (accTasks) => {
+                  this.acceptedTasks = accTasks;
+                },
+                error: (problem) => {
+                  console.error('AcceptedTaskHttpComponent.loadTasks(): error retreiving accepted tasks:');
+                  console.error(problem);
+                }
+              }
+            );
+          }
 
     delete(id: number){
       this.taskService.delete(id).subscribe({
@@ -192,4 +211,5 @@ export class MytasksComponent implements OnInit{
         }
       });
     }
+
 }

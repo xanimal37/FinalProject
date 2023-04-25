@@ -24,6 +24,7 @@ export class Task {
 	user: User | null;
 	skills: Skill[] | null;
 
+
   constructor(
     id: number = 0,
     name: string = '',
@@ -35,6 +36,7 @@ export class Task {
     completeDate: string = '',
     createDate: string='',
     updateDate='',
+
 
     address: Address | null = null,
     taskStatus: TaskStatus | null = null,

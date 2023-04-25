@@ -41,7 +41,13 @@ div {
 
 
 .borderBox {
-  border:1px solid #666666;
+  border-radius:8px;
+  border:1px solid #999999;
+  padding:.6em;
+  margin-left:.2em;
+  margin-right:.2em;
+  margin-top:.6em;
+  margin-bottom:.6em;
 }
 
 .notifyBell {
