@@ -26,9 +26,10 @@ console.log(user);
     this.auth.login(user.username, user.password).subscribe({
       next: (loggedInUser) => {
         console.log(loggedInUser);
-        this.router.navigateByUrl('/userAccount');
         if(loggedInUser.role === 'admin') {
           this.router.navigateByUrl('/admin');
+        } else {
+          this.router.navigateByUrl('/userAccount');
         }
       },
       error: (problem) => {

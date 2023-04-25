@@ -46,11 +46,10 @@
             height="75" alt=""></td>
           <td *ngIf="user.ranking?.id === 5"><img src="../../../assets/images/platinum.png" width="75"
             height="75" alt=""></td>
-          <td *ngIf="loggedInUser.role === 'admin' && user.enabled"><button class="btn btn-danger m-1" >Deactivate</button></td>
-          <td *ngIf="loggedInUser.role === 'admin' && !user.enabled"><button class="btn btn-success m-1" >Activate</button></td>
+          <td *ngIf="loggedInUser.role === 'admin' && loggedInUser.id != user.id && user.enabled"><button class="btn btn-danger m-1"  (click)="verifyDeactivation(user)">Deactivate</button></td>
+          <td *ngIf="loggedInUser.role === 'admin' && !user.enabled"><button class="btn btn-success m-1" (click)="verifyActivation(user)">Activate</button></td>
         </tr>
       </table>
-
     </div>
   </div>
 </div>

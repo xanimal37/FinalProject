@@ -138,14 +138,16 @@ public class UserController {
 	}
 	
 	@PutMapping("users/{id}/archive")
-	public User archiveUser(@PathVariable int id) {
-		User archivedUser = userService.archiveUser(id);
+	public User archiveUser(@PathVariable int id, Principal principal, @RequestBody User user) {
+		String uName = principal.getName();
+		User archivedUser = userService.archiveUser(uName, id);
 		return archivedUser;
 	
 	}
 	@PutMapping("users/{id}/unarchive")
-	public User unarchiveUser(@PathVariable int id) {
-		User archivedUser = userService.unarchiveUser(id);
+	public User unarchiveUser(@PathVariable int id, Principal principal, @RequestBody User user) {
+		String uName = principal.getName();
+		User archivedUser = userService.unarchiveUser(uName, id);
 		return archivedUser;
 		
 	}
