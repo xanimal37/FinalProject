@@ -1,12 +1,12 @@
 <!-- menu items in BOLD and red outline are there for testing purposes only -->
-
-  <nav class="navbar navbar-expand-lg">
+<div style="color: darkgoldenrod;">
+  <nav class="navbar bg-warning navbar-expand-lg" >
     <a class="navbar-brand" *ngIf="loggedInUser?.role != 'admin'" [routerLink]="['/home']">barterBee</a>
     <a class="navbar-brand" *ngIf="loggedInUser?.role === 'admin'" [routerLink]="['/home']">barterBee-ADMIN</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNav" >
+  <div class="collapse navbar-collapse bg-warning" id="navbarNav" >
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" *ngIf="loggedInUser?.role === 'admin'" [routerLink]="['/admin']">admin</a>
@@ -23,33 +23,64 @@
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/contact']">contact us</a>
       </li>
+      <div class="contactUs">
+      </div>
       <li class="nav-item">
         <a class="nav-link" *ngIf="loggedInUser && loggedInUser?.role === 'admin'" [routerLink]="['/complaints']">complaints</a>
       </li>
-      <li>
-      <div class="dropdown" *ngIf="loggedInUser">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img src="../../../assets/images/bell.png" width="25"
-          height="25" alt="notification">
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
-          <ul *ngFor="let notify of notifications">
-            <li>{{notify.message}}</li>
-          </ul>
-        </div>
-      </div>
-      </li>
+
       <li class="nav-item" *ngIf="!loggedIn()">
         <a class="nav-link" [routerLink]="['/register']">register</a>
       </li>
       <li class="nav-item" *ngIf="!loggedIn()">
         <a class="nav-link" [routerLink]="['/login']">login</a>
-      </li>
-      <li class="nav-item" *ngIf="loggedIn()"><app-logout></app-logout>
-      </li>
+    </ul>
+    <ul class="navbar-nav">
+    </ul>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarNav" class="pull-right">
+    <ul class="navbar-nav">
+      <li>
+        <div class="dropdown" *ngIf="loggedInUser" >
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="../../../assets/images/bell.png" width="30"
+            height="30" alt="notification">
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
+            <div *ngIf="notifications">
+            <ul *ngFor="let notify of notifications">
+              <li class="nav-item" *ngIf="notify">{{notify.message}}</li>
+            </ul>
+          </div>
+          <div *ngIf="!notifications">
+            <ul>
+              <li>No Notifications</li>
+            </ul>
+          </div>
+          </div>
+        </div>
+        </li>
+      <li class="nav-item">
+        <div class="dropdown" *ngIf="loggedInUser" bg-warning>
+          <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Account <img src="{{loggedInUser?.imageURL}}" width="30"
+            height="30" style="border-radius: 50%;" alt="Profile Picture">
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" [routerLink]="['/userAccount']">Account Settings</a>
+            <a class="dropdown-item" (click)="viewUserProfile(loggedInUser)">Profile</a>
+            <a class="dropdown-item" *ngIf="loggedIn()"><app-logout></app-logout></a>
+          </div>
+        </div>
+
+
+
+
+    </li>
     </ul>
   </div>
 
 </nav>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>

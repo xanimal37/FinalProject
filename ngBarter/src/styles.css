@@ -34,6 +34,12 @@ div {
   color:#222222;
 }
 
+.navbarNav {
+  padding-left: 120px;
+  padding-right: 120px;
+}
+
+
 .borderBox {
   border-radius:8px;
   border:1px solid #999999;
@@ -49,12 +55,6 @@ div {
   height: 30px;
 }
 
-/* TESTING STYLES */
- .test {
-  font-weight: bold;
-  border:1px dotted red;
-}
-
 .profilePic {
   width: 200px;
   height: 200px;
@@ -64,20 +64,17 @@ div {
 
 }
 
-/* .miniProfilePic {
-  width: 75px;
-  height: 75px;
-  border-radius: 50%;
-  padding:.15em;
-  background-color: rgb(222, 212, 19);
-
-} */
-
-
+/* TESTING STYLES */
+ .test {
+  font-weight: bold;
+  border:1px dotted red;
+}
 
 .ranking {
   width: 50px;
   height: 50px;
 }
+
+
 
 

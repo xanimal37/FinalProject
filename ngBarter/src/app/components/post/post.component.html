@@ -1,40 +1,52 @@
-<h1>POSTS</h1>
+<div class="container-fluid" >
+  <div class="row">
+<h1 id="postTitle" style="text-align: center;">POSTS</h1>
+
+<h4 style="text-align: center;">Create Post</h4>
+<form style="text-align: center;">
+        <input type="text" name="topic" placeholder="Topic" size="75" [(ngModel)]="newPost.title"/><br />
+        <textarea style="align-items: center;" type="text" name="description" placeholder="Post Content" rows="5" cols="74"[(ngModel)]="newPost.content"></textarea><br>
+
+        <input class="btn btn-dark m-1" type="submit" value="add post" (click)="createPost(newPost)"/>
+        <input class="btn btn-dark m-1" type="submit" value="cancel"/>
+      </form>
+      <hr>
+      <h4 style="text-align: center;" >Search Posts</h4>
+      <p style="text-align: center;"> Query through all posts content</p>
+  <form style="text-align: center;">
+    <input type="text" id="keyword" size="80" name="keyword"[(ngModel)]="keyword"/>
+    <button class="btn btn-primary" type="submit" value="Search" (click)="postSearch(keyword)">Search</button>
+  </form>
+  <nav class="d-flex justify-content-center">
+    <button (click)="reload()"class="btn btn-outline-dark m-1" name="all" value="all">all posts</button>
+    <button class="btn btn-outline-dark m-1" name="dateFilter" value="dateFilter" >oldest</button>
+    <button class="btn btn-outline-dark m-1" name="dateFilter" value="dateFilter" >newest</button>
+  </nav>
+</div>
+</div>
 <div class="row">
   <div class="col-3"></div>
   <div class="col-6" id="keywordSearch">
-    <h3>Search Posts</h3>
-    <p>Query through all posts content</p>
-    <form>
-        <input type="text" id="keyword" size="100" name="keyword"[(ngModel)]="keyword"/>
-        <button class="btn btn-primary" type="submit" value="Search" (click)="postSearch(keyword)">Search</button>
-      </form>
   </div>
   <div class="col-3"></div>
 </div>
+<div class="d-flex justify-content-center">
 <div id="postSearchResults" *ngIf="keywordPosts">
   <div id="posts" *ngFor="let post of keywordPosts" >
     <div *ngIf="post.enabled">
-      <h4>{{post.title}}</h4>
+      <h4>{{post.title}}</h4 >
       <p>{{post.createDate}}</p>
       <p>{{post.content}}</p>
       <p><img src="{{post.user?.imageURL}}" width="30"
         height="30" alt="Profile Pic" style="border-radius: 50%;" alt="">{{post.user?.username}}</p>
     </div>
   </div>
+</div>
 
 </div>
 
-<div id="editPost" *ngIf="editPost && !keywordPosts">
-  <h3>Edit Post</h3>
-  <form>
-      Topic: <input type="text" name="topic" [(ngModel)]="editPost.title"/><br />
-      <textarea type="text" name="description" placeholder="Post Content" [(ngModel)]="editPost.content"></textarea><br>
 
-      <input class="btn btn-dark m-1" type="submit" value="update" (click)="updatePost(editPost,editPost.id)"/>
-      <input class="btn btn-danger" type="submit" value="cancel" (click)="cancelEditPost()"/>
-
-    </form>
-</div >
+<div class="d-flex justify-content-center">
 <div *ngIf="!editPost && !keywordPosts">
 <div id="posts" *ngFor="let post of posts" >
   <div *ngIf="post.enabled">
@@ -43,30 +55,37 @@
     <p>{{post.content}}</p>
     <p><img src="{{post.user?.imageURL}}" width="30"
       height="30" alt="Profile Pic" style="border-radius: 50%;" alt="">{{post.user?.username}}</p>
+    <p *ngIf="post.comments">Comments </p>
+    <div *ngFor="let comms of post.comments">
+      <p>{{comms.createDate}}</p>
+      <p>{{comms.content}}</p>
+
+      </div>
+    </div>
     <button class = "btn btn-success" *ngIf="post?.user?.id === loggedInUser?.id" (click)="setEditPost(post)">Edit</button>
-    <!-- <button class = "btn btn-success" *ngIf="loggedInUser" (click)="postComment">Comment</button>
+    <button class = "btn btn-success" *ngIf="loggedInUser?.role === 'admin'" (click)="setEditPost(post)">Disable</button>
     <div id="postComment">
       <form>
-        <textarea type="text" id="commnet" name="comment" placeholder="Reply Here" ></textarea><br>
+        <textarea type="text" id="comment" name="comment" placeholder="Reply Here" rows="5" cols="74"  ></textarea><br>
 
-        <input class="btn btn-dark m-1" type="submit" value="submit-WIP"/>
+        <input class="btn btn-dark m-1" type="submit" value="reply"/>
         <input class="btn btn-danger" type="submit" value="cancel" (click)="cancelEditPost()"/>
 
       </form>
-    </div> -->
+    </div>
   </div>
 </div>
 </div>
-
-<div id="createPost" >
-  <h3>Create Post</h3>
+<div id="editPost" *ngIf="editPost && !keywordPosts">
+  <h3 style="text-align: center;">Edit Post</h3>
   <form>
-      Topic: <input type="text" name="topic" placeholder="" [(ngModel)]="newPost.title"/><br />
-      <textarea type="text" name="description" placeholder="Post Content" [(ngModel)]="newPost.content"></textarea><br>
+      <input type="text" name="topic" size="75" [(ngModel)]="editPost.title"/><br />
+      <textarea type="text" name="description" placeholder="Post Content" rows="5" cols="74" [(ngModel)]="editPost.content"></textarea><br>
 
-      <input class="btn btn-dark m-1" type="submit" value="add post" (click)="createPost(newPost)"/>
-      <input class="btn btn-dark m-1" type="submit" value="cancel"/>
+      <input class="btn btn-dark m-1" type="submit" value="update" (click)="updatePost(editPost,editPost.id)"/>
+      <input class="btn btn-danger" type="submit" value="cancel" (click)="cancelEditPost()"/>
 
     </form>
-</div>
+</div >
+
 

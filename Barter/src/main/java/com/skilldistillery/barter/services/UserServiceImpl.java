@@ -170,9 +170,10 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public User archiveUser(int id) {
+	public User archiveUser(String username, int id) {
 		User user = userRepo.findById(id);
-		if (user!=null) {
+		User admin = userRepo.findByUsername(username);
+		if (user!=null && admin.getRole().equals("admin")){
 			user.setEnabled(false);
 
 		}
@@ -181,9 +182,10 @@ public class UserServiceImpl implements UserService {
 
 	}
 	@Override
-	public User unarchiveUser(int id) {
+	public User unarchiveUser(String username, int id) {
 		User user = userRepo.findById(id);
-		if (user!=null) {
+		User admin = userRepo.findByUsername(username);
+		if (user!=null && admin.getRole().equals("admin")) {
 			user.setEnabled(true);
 
 		}

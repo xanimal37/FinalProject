@@ -1,33 +1,55 @@
 <div class="container-fluid">
 
-<div id="welcome">
+<div id="welcome" class="d-flex justify-content-center">
   <div class="row">
-    <div class="col-4"></div>
-  <div class="col-6" >
+  <div class="col-12" >
   <h1 *ngIf="loggedInUser"> Welcome back {{loggedInUser.firstname}} !</h1>
   <h1 *ngIf="!loggedInUser"> Welcome to Barter !</h1>
   <h3>Your friendly skills exchange!</h3>
 </div>
-<div class="col-3"></div>
 </div>
 </div>
+<hr>
+
 
 
 
 <div  class="row" >
+    <div id="chartDiv" class="col-8">
+      <app-taskdash ></app-taskdash>
+    </div>
+    <div id="chartDiv" class="col-4">
+      <br>
+      <br>
+      <canvasjs-chart [options]="skillsAvailable" [styles]="{width: '75%', height:'360px'}"></canvasjs-chart> <br>
+      <canvasjs-chart [options]="numberOfTasks" [styles]="{width: '75%', height:'360px'}"></canvasjs-chart>
+    </div>
+</div>
+<br>
+<div  class="row" >
     <div class="col-1"></div>
     <div id="chartDiv" class="col-5">
-      <canvasjs-chart [options]="skillsAvailable" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>
     </div>
     <div id="chartDiv" class="col-5">
-
-      <canvasjs-chart [options]="numberOfTasks" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>
     </div>
 </div>
+<hr>
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+
+    </div>
+    <div class="col-8">
+  <app-post></app-post>
+</div>
+<div class="col-2">
+
+</div>
+</div>
+</div>
 </div>
 
 
-  <app-taskdash ></app-taskdash>
 
 
 
