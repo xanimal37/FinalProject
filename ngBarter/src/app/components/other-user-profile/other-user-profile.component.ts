@@ -8,109 +8,113 @@ import { AcceptedTaskService } from 'src/app/services/accepted-task.service';
 @Component({
   selector: 'app-other-user-profile',
   templateUrl: './other-user-profile.component.html',
-  styleUrls: ['./other-user-profile.component.css']
+  styleUrls: ['./other-user-profile.component.css'],
 })
 export class OtherUserProfileComponent implements OnInit {
-
   user: User = new User();
-  loggedInUser: User = new User();
-  words:string[]=[];
+  loggedInUser: User | null = null;
+  words: string[] = [];
   currentUser: any;
 
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
-    private authService :AuthService,
+    private authService: AuthService,
     private router: Router,
-    private acceptedTaskService: AcceptedTaskService,
+    private acceptedTaskService: AcceptedTaskService
+  ) {}
 
-    ) { }
+  ngOnInit() {
+    this.userService.refreshUsers.subscribe((id) => this.reloadEmit(id));
 
+    this.reload();
+  }
 
-ngOnInit() {
-   this.userService.refreshUsers.subscribe(id => this.reloadEmit(id));
+  reloadEmit(id: number) {
+    this.userService.getUserById(id).subscribe({
+      next: (user: User) => {
+        this.user = user;
+        this.getLoggedInUser();
+        window.location.reload();
+      },
+      error: (nojoy) => {
+        console.log(nojoy);
+      },
+    });
+  }
+  reload() {
+    const userId = this.route.snapshot.params['id'];
+    this.userService.getUserById(userId).subscribe({
+      next: (user: User) => {
+        this.user = user;
+        this.getLoggedInUser();
+      },
+      error: (nojoy) => {
+        console.log(nojoy);
+      },
+    });
+  }
 
+  getLoggedInUser() {
+    this.authService.getLoggedInUser().subscribe({
+      next: (user: User) => {
+        this.loggedInUser = user;
+        console.log(this.loggedInUser);
 
-  this.reload();
-}
+      },
+      error: (nojoy) => {
+        console.log(nojoy);
+      },
+    });
+  }
 
-reloadEmit(id:number) {
-  this.userService.getUserById(id).subscribe({
-    next: (user: User) => {
-      this.user = user;
-      this.getLoggedInUser();
-      window.location.reload();
-
-    },
-    error: (nojoy) => {
-      console.log(nojoy);
-    }
-  });
-
-}
-reload() {
-  const userId = this.route.snapshot.params['id'];
-  this.userService.getUserById(userId).subscribe({
-    next: (user: User) => {
-      this.user = user;
-      this.getLoggedInUser();
-
-    },
-    error: (nojoy) => {
-      console.log(nojoy);
-    }
-  });
-
-}
-
-getLoggedInUser(){
-  this.authService.getLoggedInUser().subscribe({
-    next:(user:User)=>{
-      this.loggedInUser = user;
-    },
-    error: (nojoy) => {
-      console.log(nojoy);
-    }
-  })
-}
-
-
-goBack() {
-  this.router.navigate(['/usersList']);
-}
-addFriend() {
-
-this.userService.addFriend( this.user.id,this.user).subscribe({
-
-    next: (response) => {
+  goBack() {
+    this.router.navigate(['/usersList']);
+  }
+  addFriend() {
+    this.userService.addFriend(this.user.id, this.user).subscribe({
+      next: (response) => {
         console.log(response);
         this.reload();
-
       },
       error: (nojoy) => {
         console.log(nojoy);
 
         this.reload();
-        }
-
- });
-
+      },
+    });
 
 
-      // this.userService.updateUser(this.loggedInUser).subscribe({
-      //   next:(joy)=>{
-      //       console.log(joy);
+  }
 
-      //     },
-      //     error:(nojoy)=>{
-      //         console.log(nojoy);
+  isAlreadyFriend(user:User){
+    console.log(this.loggedInUser);
+    let isFriend = false;
+    console.log(isFriend);
+    if(this.loggedInUser){
+    let friend =this.loggedInUser.friends.find((u)=>u.id===user.id)
 
-      //       }
+    console.log(friend);
+    isFriend=friend?true:false;
+    }
 
-      //     })
 
 
 
+    return isFriend;
+
+
+  }
+
+    // this.userService.updateUser(this.loggedInUser).subscribe({
+    //   next:(joy)=>{
+    //       console.log(joy);
+
+    //     },
+    //     error:(nojoy)=>{
+    //         console.log(nojoy);
+
+    //       }
+
+    //     })
 }
-}
-

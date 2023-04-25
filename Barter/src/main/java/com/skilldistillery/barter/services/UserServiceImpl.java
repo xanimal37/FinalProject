@@ -98,9 +98,9 @@ public class UserServiceImpl implements UserService {
 //			return friend.getUsername() + " is already a friend of " + user.getUsername();
 //		}
 //		user.getFriends().add(friend);
-		friend.getFriends().add(user);
+//		friend.getFriends().add(user);
+		user.addFriend(friend);
 		userRepo.saveAndFlush(user);
-		userRepo.saveAndFlush(friend);
 		return friend.getUsername() + " has been added as a friend of " + user.getUsername();
 	}
 
