@@ -16,27 +16,52 @@
           alt="ranking"
         />
       </h2>
-      <p>{{ loggedInUser?.firstname }} {{ loggedInUser?.lastname }} <button type="button" class="btn btn-link" (click)="editName()">Edit</button></p>
+      <p>
+        {{ loggedInUser?.firstname }} {{ loggedInUser?.lastname }}
+        <button type="button" class="btn btn-link" (click)="editName()">
+          Edit
+        </button>
+      </p>
       <div *ngIf="isEditName === true">
         <form>
           <div class="form-group">
             <label for="firstName">First:</label>
-            <input type="text"  class="form-control" name="firstName" [(ngModel)]="loggedInUser!.firstname" />
+            <input
+              type="text"
+              class="form-control"
+              name="firstName"
+              [(ngModel)]="loggedInUser!.firstname"
+            />
             <label for="firstName">Last:</label>
-            <input type="text"  class="form-control" name="lastName" [(ngModel)]="loggedInUser!.lastname" />
+            <input
+              type="text"
+              class="form-control"
+              name="lastName"
+              [(ngModel)]="loggedInUser!.lastname"
+            />
             <button (click)="updateAccount(loggedInUser!, loggedInUser!.id)">
               Save
             </button>
           </div>
         </form>
       </div>
-      <p>Bio: {{ loggedInUser?.biography }}  <button type="button" class="btn btn-link" (click)="editBio()">Edit</button></p>
+      <p>
+        Bio: {{ loggedInUser?.biography }}
+        <button type="button" class="btn btn-link" (click)="editBio()">
+          Edit
+        </button>
+      </p>
 
       <div *ngIf="isEditBio === true">
         <form>
           <div class="form-group">
             <label for="firstName">Bio:</label>
-            <input type="text"  class="form-control" name="firstName" [(ngModel)]="loggedInUser!.biography" />
+            <input
+              type="text"
+              class="form-control"
+              name="firstName"
+              [(ngModel)]="loggedInUser!.biography"
+            />
             <button (click)="updateAccount(loggedInUser!, loggedInUser!.id)">
               Save
             </button>
@@ -45,7 +70,30 @@
       </div>
 
       <h5>Contact Information</h5>
-      <p>{{ loggedInUser?.phone }}</p>
+      <p>
+        {{ loggedInUser?.phone }}
+        <button type="button" class="btn btn-link" (click)="editPhone()">
+          Edit
+        </button>
+      </p>
+
+      <div *ngIf="isEditPhone === true">
+        <form>
+          <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input
+              type="text"
+              class="form-control"
+              name="phone"
+              [(ngModel)]="loggedInUser!.phone"
+            />
+            <button (click)="updateAccount(loggedInUser!, loggedInUser!.id)">
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+
       <p>
         Email: {{ loggedInUser?.email }}
         <button type="button" class="btn btn-link" (click)="editEmail()">
@@ -69,8 +117,25 @@
         </form>
       </div>
 
-      <p>Availability: {{ loggedInUser?.availability }}</p>
-
+      <p>Availability: {{ loggedInUser?.availability }}  <button type="button" class="btn btn-link" (click)="editAvailability()">
+        Edit
+      </button> </p>
+      <div *ngIf="isEditAvailability === true">
+        <form>
+          <div class="form-group">
+            <label for="firstName">Availability:</label>
+            <input
+              type="text"
+              class="form-control"
+              name="firstName"
+              [(ngModel)]="loggedInUser!.availability"
+            />
+            <button (click)="updateAccount(loggedInUser!, loggedInUser!.id)">
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
       <h3>Tasks:</h3>
       <ul>
         <li *ngFor="let task of loggedInUser?.tasks">{{ task.name }}</li>
