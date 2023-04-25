@@ -23,9 +23,9 @@
           <label>My rating on this task: </label>
           <input type="number" id="requestorRating" name="requestorRating" [(ngModel)]="selectedAcceptedTask.ratingByRequestor"/>
           <label>My comments on this task: </label>
-          <input type="text" id="requestorRemarks" name="requestorRemarks" [(ngModel)]="selectedAcceptedTask.remarksByRequestor"/>
-          <button (click)="update(selectedAcceptedTask)">submit rating and comments</button>
-          <button (click)="selectedAcceptedTask=null; selectedTask=null">cancel</button>
+          <input type="text" id="requestorRemarks" name="requestorRemarks" [(ngModel)]="selectedAcceptedTask.remarksByRequestor"/><br>
+          <button class="btn btn-dark" (click)="update(selectedAcceptedTask)">submit rating and comment</button>
+          <button class="btn btn-dark" (click)="selectedAcceptedTask=null; selectedTask=null">cancel</button>
         </form>
       </div>
       </div>

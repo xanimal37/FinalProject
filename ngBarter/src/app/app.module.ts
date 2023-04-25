@@ -31,6 +31,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NewTaskMessageComponent } from './components/new-task-message/new-task-message.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MytasksComponent } from './components/mytasks/mytasks.component';
+import { SingleAcceptedTaskComponent } from './components/single-accepted-task/single-accepted-task.component';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { MytasksComponent } from './components/mytasks/mytasks.component';
     NewTaskMessageComponent,
     HeaderComponent,
     MytasksComponent,
+    SingleAcceptedTaskComponent,
 
   ],
   imports: [
