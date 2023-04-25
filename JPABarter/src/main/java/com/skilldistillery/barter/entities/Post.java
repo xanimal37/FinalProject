@@ -1,6 +1,7 @@
 package com.skilldistillery.barter.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -42,9 +43,10 @@ public class Post {
 	
 	private boolean enabled;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties({"post", "inReplyTo"})
+	
 	@OneToMany(mappedBy="post")
-	private Set<Comment> comments;
+	private List<Comment> comments;
 	
 	@JsonIgnoreProperties({"user"})
 	@ManyToOne
@@ -61,11 +63,11 @@ public class Post {
 		this.enabled = enabled;
 	}
 
-	public Set<Comment> getComments() {
+	public List<Comment> getComments() {
 		return comments;
 	}
 
-	public void setComments(Set<Comment> comments) {
+	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
 

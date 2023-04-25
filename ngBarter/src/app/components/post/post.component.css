@@ -1,2 +1,7 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 
+.postBackground {
+  border-color: black;
+  background-color: lightgoldenrodyellow;
+}
+
