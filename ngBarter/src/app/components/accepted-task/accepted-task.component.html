@@ -13,7 +13,7 @@
 
   </div>
   <div class="row" *ngIf="!selectedAcceptedTask">
-  <div *ngFor="let aTask of acceptedTasks" class="borderBox col-4 p-3">
+  <div *ngFor="let aTask of acceptedTasks" class="borderBox col-12 p-3">
     <p *ngIf="!checkVerifiedTask(aTask)">this task is awaiting a rating and comments!</p>
     <h3>{{getTaskName(aTask)}}</h3>
     <p>rating by requestor: {{aTask.ratingByRequestor}}</p>
