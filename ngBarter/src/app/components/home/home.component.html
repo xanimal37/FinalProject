@@ -12,7 +12,7 @@
 <hr>
 
 <div class="d-flex justify-content-center testBorder" >
- <app-taskdash ></app-taskdash>
+ <app-taskdash *ngIf="loggedIn()"></app-taskdash>
  </div>
   <div class="container">
   <div class="row">
@@ -36,18 +36,18 @@
       <br>
       <br>
       <h3 class="d-flex justify-content-center" >Awards</h3>
-        <img src="../../../assets/images/award.png" width="300"
+        <img src="assets/images/award.png" width="300"
         height="300" style="text-align: left; background-color: #fbc912;" alt=""> <br> <br>
 
-        <img src="../../../assets/images/award2.png" width="300"
+        <img src="assets/images/award2.png" width="300"
         height="300" style="text-align: left; background-color: #fbc912;" alt=""> <br> <br>
 
-        <img src="../../../assets/images/award3.png" width="300"
+        <img src="assets/images/award3.png" width="300"
         height="300" style="background-color: #fbc912;" alt=""> <br>
     </div>
     <div class="col-8">
       <div>
-  <app-post></app-post>
+  <app-post *ngIf="loggedIn()"></app-post>
 </div>
 </div>
 <div class="col-1">
@@ -56,9 +56,9 @@
   <br>
   <br>
   <br>
-  <img src="../../../assets/images/farmersonlyAd.png" width="300"
+  <img src="assets/images/farmersonlyAd.png" width="300"
   height="300"alt=""><br><br>
-  <img src="../../../assets/images/electricianAd.png" width="300"
+  <img src="assets/images/electricianAd.png" width="300"
   height="300"alt="">
 </div>
 </div>

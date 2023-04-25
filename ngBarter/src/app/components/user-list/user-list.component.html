@@ -36,15 +36,15 @@
               <li>{{user.email}}</li>
             </ul>
           </td>
-          <td *ngIf="user.ranking?.id === 1"><img src="../../../assets/images/poop.png" width="75"
+          <td *ngIf="user.ranking?.id === 1"><img src="assets/images/poop.png" width="75"
             height="75"  alt=""></td>
-          <td *ngIf="user.ranking?.id === 2"><img src="../../../assets/images/bronze.png" width="75"
+          <td *ngIf="user.ranking?.id === 2"><img src="assets/images/bronze.png" width="75"
             height="75" alt=""></td>
-          <td *ngIf="user.ranking?.id === 3"><img src="../../../assets/images/silver.png" width="75"
+          <td *ngIf="user.ranking?.id === 3"><img src="assets/images/silver.png" width="75"
             height="75" alt=""></td>
-          <td *ngIf="user.ranking?.id === 4"><img src="../../../assets/images/gold.png" width="75"
+          <td *ngIf="user.ranking?.id === 4"><img src="assets/images/gold.png" width="75"
             height="75" alt=""></td>
-          <td *ngIf="user.ranking?.id === 5"><img src="../../../assets/images/platinum.png" width="75"
+          <td *ngIf="user.ranking?.id === 5"><img src="assets/images/platinum.png" width="75"
             height="75" alt=""></td>
           <td *ngIf="loggedInUser.role === 'admin' && loggedInUser.id != user.id && user.enabled"><button class="btn btn-danger m-1"  (click)="verifyDeactivation(user)">Deactivate</button></td>
           <td *ngIf="loggedInUser.role === 'admin' && !user.enabled"><button class="btn btn-success m-1" (click)="verifyActivation(user)">Activate</button></td>
