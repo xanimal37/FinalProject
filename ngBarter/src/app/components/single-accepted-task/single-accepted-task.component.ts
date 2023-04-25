@@ -19,9 +19,6 @@ export class SingleAcceptedTaskComponent implements OnChanges{
   ngOnChanges() {
     if(this.task!=null){
     this.acceptedTask=this.getAcceptedTask(this.task);
-    console.log("on changes called!");
-    console.log(this.task.id);
-    console.log(this.acceptedTask?.id?.taskId);
   }
   }
 
@@ -30,7 +27,6 @@ export class SingleAcceptedTaskComponent implements OnChanges{
 
   getAcceptedTask(task: Task): AcceptedTask | null
   {
-    console.log("getting accepted task");
   for(let aTask of this.acceptedTasks){
     if(task.id==aTask.id?.taskId){
       return aTask;
