@@ -53,5 +53,18 @@ export class AcceptedTaskService {
     );
     };
 
+    //put
+    update(aTask: AcceptedTask):Observable<AcceptedTask> {
+      let taskid = aTask.id?.taskId;
+      return this.http.put<AcceptedTask>(environment.baseUrl + "api/users/acceptedTasks/"+ taskid, aTask,this.getHttpOptions()).pipe(
+        catchError((err:any)=> {
+          console.log(err);
+          return throwError(
+            ()=>new Error("AcceptedTaskService.update(): error updating accepted task: "+err)
+          );
+        })
+      );
+    };
+
 
 }

@@ -29,6 +29,7 @@ export class AcceptedTaskComponent implements OnInit {
     private router: Router){}
 
     ngOnInit(): void {
+      this.loadTasks();
       this.loadAcceptedTasks();
     }
 
@@ -61,13 +62,17 @@ export class AcceptedTaskComponent implements OnInit {
         );
       }
 
-    getTaskName(id: number):string{
-      let taskname = '';
-      for(let i=0;i<this.tasks.length;i++){
-        if(this.tasks[i].id == id){
-          taskname = this.tasks[i].name;
+    getTaskName(aTask: AcceptedTask):string{
+      let taskname = 'unk';
+      if(aTask.id!=null){
+        for(let task of this.tasks){
+          if(task.id === aTask.id.taskId){
+            taskname = task.name;
+            break;
+          }
         }
       }
+
       return taskname;
     }
 
@@ -75,9 +80,10 @@ export class AcceptedTaskComponent implements OnInit {
 
       let taskId = aTask.id?.taskId;
       this.selectedTask=null;
+      console.log(aTask.id?.taskId);
       if(typeof taskId=='number'){
       for(let i=0;i<this.tasks.length;i++){
-        if(this.tasks[i].id = taskId){
+        if(this.tasks[i].id == taskId){
           this.selectedTask=this.tasks[i];
           break;
         }
@@ -89,4 +95,36 @@ export class AcceptedTaskComponent implements OnInit {
         this.selectedAcceptedTask=aTask;
         this.setSelectedTask(aTask);
       }
+
+      checkVerifiedTask(aTask: AcceptedTask):boolean{
+        let verified=false;
+      if(aTask.id!=null){
+        for(let task of this.tasks){
+          if(task.id === aTask.id.taskId){
+            if(task.taskStatus?.name=='Verified'){
+              verified=true;
+            }
+            break;
+          }
+        }
+      }
+
+      return verified;
+      }
+
+      update(aTask:AcceptedTask){
+          this.acceptedTaskService.update(aTask).subscribe({
+            next:(updatedATask)=>{
+              //things we want to do on success
+              this.selectedTask=null;
+              this.selectedAcceptedTask=null;
+              this.loadAcceptedTasks();
+            },
+            error: (fail) => {
+              console.error('Error updating task.');
+              console.error(fail);
+            }
+          });
+        }
 }
+

@@ -9,13 +9,17 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.barter.entities.AcceptedTask;
+import com.skilldistillery.barter.entities.User;
 import com.skilldistillery.barter.services.AcceptedTaskService;
+import com.skilldistillery.barter.services.UserService;
 
 @RestController
 @RequestMapping("api")
@@ -54,4 +58,20 @@ public class AcceptedTaskController {
 		return acceptedTask;
 	}
 
+	// update task
+		// only for logged in users task
+		@PutMapping(path = "users/acceptedTasks/{taskid}")
+		public AcceptedTask updateAcceptedTask(@PathVariable int taskid, Principal principal, @RequestBody AcceptedTask acceptedTask, HttpServletResponse res) {
+			try {
+				acceptedTask = acceptedTaskService.updateAcceptedTask(acceptedTask, taskid, principal.getName());
+				if (acceptedTask == null) {
+					res.setStatus(404);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				res.setStatus(400);
+				acceptedTask = null;
+			}
+			return acceptedTask;
+		}
 }
