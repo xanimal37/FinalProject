@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
+import { AcceptedTaskService } from 'src/app/services/accepted-task.service';
 
 @Component({
   selector: 'app-other-user-profile',
@@ -20,26 +21,33 @@ export class OtherUserProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private authService :AuthService,
-    private router: Router
+    private router: Router,
+    private acceptedTaskService: AcceptedTaskService,
 
     ) { }
 
 
 ngOnInit() {
-  const userId = this.route.snapshot.params['id'];
-  this.userService.getUserById(userId).subscribe({
+   this.userService.refreshUsers.subscribe(id => this.reloadEmit(id));
+
+
+  this.reload();
+}
+
+reloadEmit(id:number) {
+  this.userService.getUserById(id).subscribe({
     next: (user: User) => {
       this.user = user;
       this.getLoggedInUser();
+      window.location.reload();
 
     },
     error: (nojoy) => {
       console.log(nojoy);
     }
   });
-  this.reload();
-}
 
+}
 reload() {
   const userId = this.route.snapshot.params['id'];
   this.userService.getUserById(userId).subscribe({

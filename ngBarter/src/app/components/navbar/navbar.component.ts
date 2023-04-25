@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
@@ -19,7 +20,8 @@ export class NavbarComponent implements OnInit{
   constructor(
     private auth: AuthService,
     private notification: NotificationService,
-    private router: Router
+    private router: Router,
+    private userService:UserService
 
     ){
     }
@@ -29,6 +31,7 @@ export class NavbarComponent implements OnInit{
     this.verifyUser();
     this.auth.getLoggedIn.subscribe(user => this.loggedInUser = user)
     this.notification.refreshNotifications.subscribe(notifications => this.notifications = notifications)
+    this.userService.refreshUsers.subscribe(user => this.loggedInUser = user)
 
    }
 
@@ -49,7 +52,7 @@ export class NavbarComponent implements OnInit{
   }
   viewUserProfile(user:User) {
     this.router.navigate(['/user-profile', this.loggedInUser!.id]);
-
+    this.userService.refreshUsers.emit(this.loggedInUser!.id);
   }
 
   verifyUser(): void{
@@ -64,4 +67,5 @@ export class NavbarComponent implements OnInit{
 
      });
     }
+
 }

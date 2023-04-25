@@ -159,9 +159,4 @@ export class UserAccountComponent {
       this.isEditAvailability = true;
     }
 
-
-
-
-
-
 }
