@@ -1,4 +1,4 @@
-<h1>my task dashboard</h1>
+<h1 id="dashId">my task dashboard</h1>
 <div class="container-fluid">
   <nav class="row">
     <div class="col-12">
@@ -8,12 +8,12 @@
     </div>
    </nav>
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 myBox" >
       <!-- accpeted task list -->
       <app-accepted-task *ngIf="dashboard==='all' || dashboard==='accepted'" [loggedInUser]=loggedInUser>
       </app-accepted-task>
       </div>
-      <div class="col-12">
+      <div class="col-12 myBox">
       <!-- offered task list -->
       <app-mytasks *ngIf="dashboard==='all' || dashboard==='offered'" [loggedInUser]=loggedInUser>
 

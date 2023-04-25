@@ -21,15 +21,19 @@ height: 12px;
 }
 
 ::-webkit-scrollbar-track {
-border: 1px solid #fbc912;
+border: 1px solid black;
 border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-background: #fbc912;
+background: orange;
 border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-background: #fbc912;
+background: orange;
+}
+
+#title {
+  font-size: 65px;
 }

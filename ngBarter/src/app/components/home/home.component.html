@@ -3,17 +3,17 @@
 <div id="welcome" class="d-flex justify-content-center ">
   <div class="row">
   <div class="col-12" >
-  <h1 *ngIf="loggedInUser"> Welcome back {{loggedInUser.firstname}} !</h1>
-  <h1 *ngIf="!loggedInUser"> Welcome to Barter !</h1>
-  <h3>Your friendly skills exchange!</h3>
+  <h1 id="title" *ngIf="loggedInUser"> Welcome back {{loggedInUser.firstname}} !</h1>
+  <h1 id="title" *ngIf="!loggedInUser"> Welcome to Barter !</h1>
+  <h3 *ngIf="!loggedInUser">Your friendly skills exchange!</h3>
 </div>
 </div>
 </div>
 <hr>
 
-<div class="d-flex justify-content-center" >
+
  <app-taskdash *ngIf="loggedIn()"></app-taskdash>
- </div>
+
   <div class="container-fluid">
   <div class="row">
     <div class="col-6" >
