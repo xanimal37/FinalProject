@@ -1,6 +1,7 @@
 package com.skilldistillery.barter.entities;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -24,84 +25,97 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class User {
-	
+
 	// PARAMS
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String username;
-	
+
 	private String password;
-	
+
 	private boolean enabled;
-	
+
 	private String role;
-	
-	@Column(name="image_url")
+
+	@Column(name = "image_url")
 	private String imageURL;
-	
+
 	private String email;
 
 	@OneToOne
-	@JoinColumn(name="ranking_id")
+	@JoinColumn(name = "ranking_id")
 	private Ranking ranking;
 //	@JsonIgnore
 //	@JsonBackReference
 	@JsonIgnoreProperties("friends")
 	@ManyToMany
-	@JoinTable(name = "user_has_friends", 
-	joinColumns = @JoinColumn(name = "user_id"),
-	inverseJoinColumns = @JoinColumn(name = "friend_id"))
-	private List<User> friends; 
-	
-	@JsonIgnoreProperties({"user"})
-	@OneToMany(mappedBy="user")
-	private List<UserSkill> userSkills; 
-	
- 
-	
+	@JoinTable(name = "user_has_friends", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "friend_id"))
+	private Set<User> friends;
 
+	@JsonIgnoreProperties({ "user" })
+	@OneToMany(mappedBy = "user")
+	private List<UserSkill> userSkills;
 
 	@OneToOne
-	@JoinColumn(name="address_id")
+	@JoinColumn(name = "address_id")
 	private Address address;
-	
+
 	@JsonIgnore
 	@OneToMany
-	@JoinColumn(name="user_id")
-	private List <Comment> comments;
+	@JoinColumn(name = "user_id")
+	private List<Comment> comments;
+
+	public void addFriend(User newFriend) {
+		if (friends == null) {
+			friends = new HashSet<User>();
+		}
+		if (!friends.contains(newFriend)) {
+			friends.add(newFriend);
+			newFriend.addFriend(this);
+		}
+
+	}
+
+	public void removeFriend(User oldFriend) {
+		if (friends != null && friends.contains(oldFriend)) {
+			friends.remove(oldFriend);
+			oldFriend.removeFriend(this);
+		}
+
+	}
 
 //	@JsonIgnore
 //	@OneToMany
 //	@JoinColumn(name="user_id")
 //	private List <UserSkill> userSkill;
-	
+
 //	@JsonIgnoreProperties()
 	@OneToMany
-	@JoinColumn(name="user_id")
-	private List <Task> tasks;
-	
+	@JoinColumn(name = "user_id")
+	private List<Task> tasks;
+
 	@OneToMany
-	@JoinColumn(name="user_id")
-	private List <TaskMessage> taskMessages;
-	
+	@JoinColumn(name = "user_id")
+	private List<TaskMessage> taskMessages;
+
 	@JsonIgnore
 	@OneToMany
-	@JoinColumn(name="user_id")
-	private List <Notification> notifications;
-	
+	@JoinColumn(name = "user_id")
+	private List<Notification> notifications;
+
 	@JsonIgnore
 	@OneToMany
-	@JoinColumn(name="user_id")
-	private List <Complaint> complaints;
-	
+	@JoinColumn(name = "user_id")
+	private List<Complaint> complaints;
+
 	@JsonIgnore
 	@OneToMany
-	@JoinColumn(name="user_id")
-	private List <Post> posts;
-	
+	@JoinColumn(name = "user_id")
+	private List<Post> posts;
+
 	private String firstname;
 
 	private String lastname;
@@ -111,35 +125,28 @@ public class User {
 	private String phone;
 
 	private String biography;
-	
+
 	@CreationTimestamp
-	@Column(name="create_date")
+	@Column(name = "create_date")
 	private LocalDateTime createdDate;
 
 	@UpdateTimestamp
-	@Column(name="update_date")
+	@Column(name = "update_date")
 	private LocalDateTime updatedDate;
-	
-	
-	
-	
-	
 
-	//CTOR
-	public User () {}
-	
-	//GETTERS/SETTERS
+	// CTOR
+	public User() {
+	}
 
+	// GETTERS/SETTERS
 
 	public int getId() {
 		return id;
 	}
 
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	public List<Post> getPosts() {
 		return posts;
@@ -152,19 +159,18 @@ public class User {
 	public List<UserSkill> getUserSkills() {
 		return userSkills;
 	}
-	
+
 	public void setUserSkills(List<UserSkill> skills) {
 		this.userSkills = skills;
 	}
+
 	public String getUsername() {
 		return username;
 	}
 
-
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
 
 //	public List<UserSkill> getUserSkill() {
 //		return userSkill;
@@ -178,21 +184,17 @@ public class User {
 		return password;
 	}
 
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 
 	public boolean isEnabled() {
 		return enabled;
 	}
 
-
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-
 
 	public List<Task> getTasks() {
 		return tasks;
@@ -206,11 +208,9 @@ public class User {
 		return role;
 	}
 
-
 	public void setRole(String role) {
 		this.role = role;
 	}
-
 
 	public List<TaskMessage> getTaskMessages() {
 		return taskMessages;
@@ -324,16 +324,13 @@ public class User {
 		this.ranking = ranking;
 	}
 
-
-	public List<User> getFriends() {
+	public Set<User> getFriends() {
 		return friends;
 	}
 
-	public void setFriends(List<User> friends) {
+	public void setFriends(Set<User> friends) {
 		this.friends = friends;
 	}
-
-
 
 	public List<Comment> getComments() {
 		return comments;
@@ -348,7 +345,6 @@ public class User {
 		return Objects.hash(id);
 	}
 
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -361,13 +357,10 @@ public class User {
 		return id == other.id;
 	}
 
-
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled
 				+ ", role=" + role + "]";
 	}
-	
-	
 
 }
