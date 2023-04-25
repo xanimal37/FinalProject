@@ -22,10 +22,11 @@
       <button  *ngIf="loggedInUser.id!==user.id " class="btn btn-primary"  (click)="addFriend()">Follow</button>
     </div>
     <div class="col-md-8">
-      <h3 class="mb-3">Tasks:</h3>
+      <h3 class="mb-3">Tasks Offering:</h3>
       <ul class="list-group mb-3">
-        <li class="list-group-item" *ngFor="let task of user.tasks">{{ task.name }}</li>
+        <li class="list-group-item" *ngFor="let task of user.tasks">{{ task.name }} </li>
       </ul>
+
       <div *ngIf="user.userSkills">
         <h3 class="mb-3" *ngIf="user.userSkills">Certifications:</h3>
         <ul class="list-group mb-3">

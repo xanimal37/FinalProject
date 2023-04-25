@@ -1,5 +1,5 @@
 import { User } from 'src/app/models/user';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { HttpClient } from '@angular/common/http';
@@ -12,7 +12,7 @@ export class UserService {
    // Set port number to server's port
 //  private baseUrl = 'http://localhost:8087/';
 private url =environment.baseUrl;
-
+@Output() refreshUsers: EventEmitter<any> = new EventEmitter();
   constructor(private http: HttpClient, private auth:AuthService) { }
   getHttpOptions() {
     // console.log(this.auth.getCredentials());

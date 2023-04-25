@@ -126,6 +126,8 @@ public class UserServiceImpl implements UserService {
 		originalUser.setEmail(user.getEmail());
 		originalUser.setImageURL(user.getImageURL());
 		originalUser.setBiography(user.getBiography());
+		originalUser.setAvailability(user.getAvailability());
+		originalUser.setPhone(user.getPhone());
 		if (user.getUsername() != null) {
 			originalUser.setUsername(user.getUsername());
 		}
