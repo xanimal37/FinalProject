@@ -29,8 +29,10 @@ export class UserAccountComponent {
     loggedInUser:User |undefined ;
     editUser: User | null = null;
     isEditEmail: boolean = false;
+    isEditAvailability: boolean = false;
     isEditName: boolean = false;
     isEditBio: boolean = false;
+    isEditPhone: boolean = false;
     selectedSkillName:string='all';
     user: User | null = null;
     skills: Skill[] =[];
@@ -56,7 +58,7 @@ export class UserAccountComponent {
             this.skills = skills;
           },
           error: (problem) => {
-            console.error('TaskListHttpComponent.loadSkills(): error retreiving skills:');
+            console.error('HttpComponent.loadSkills(): error retreiving skills:');
             console.error(problem);
           }
         }
@@ -99,6 +101,8 @@ export class UserAccountComponent {
           this.isEditEmail = false;
           this.isEditBio = false;
           this.isEditName = false;
+          this.isEditPhone = false;
+          this.isEditAvailability = false;
 
           this.user = updatedUser;
           this.reload();
@@ -145,6 +149,14 @@ export class UserAccountComponent {
     editName() {
       // Set isEditEmail to true to display the form
       this.isEditName = true;
+    }
+    editPhone() {
+      // Set isEditEmail to true to display the form
+      this.isEditPhone = true;
+    }
+    editAvailability() {
+      // Set isEditEmail to true to display the form
+      this.isEditAvailability = true;
     }
 
 
