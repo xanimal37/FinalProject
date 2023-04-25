@@ -68,10 +68,12 @@
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" [routerLink]="['/userAccount']">Account Settings</a>
-            <a class="dropdown-item" [routerLink]="['/user-profile/:id']">Profile</a>
+            <a class="dropdown-item" (click)="viewUserProfile(loggedInUser)">Profile</a>
             <a class="dropdown-item" *ngIf="loggedIn()"><app-logout></app-logout></a>
           </div>
         </div>
+
+
 
 
     </li>
