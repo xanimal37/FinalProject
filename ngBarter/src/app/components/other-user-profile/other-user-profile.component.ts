@@ -15,8 +15,14 @@ export class OtherUserProfileComponent implements OnInit {
   loggedInUser: User = new User();
   words:string[]=[];
   currentUser: any;
-  constructor(private route: ActivatedRoute, private userService: UserService,private authService :AuthService,private router: Router) { }
 
+  constructor(
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private authService :AuthService,
+    private router: Router
+
+    ) { }
 
 
 ngOnInit() {

@@ -15,7 +15,7 @@ private url =environment.baseUrl;
 
   constructor(private http: HttpClient, private auth:AuthService) { }
   getHttpOptions() {
-    console.log(this.auth.getCredentials());
+    // console.log(this.auth.getCredentials());
 
     let options = {
       headers: {
@@ -96,5 +96,32 @@ private url =environment.baseUrl;
       })
     );
     }
+
+    disableUser(user: User): Observable<User> {
+      console.log(user)
+      return this.http.put<User>(this.url + "api/users/" + user.id + "/archive", user, this.getHttpOptions()).pipe(
+        catchError((err: any) => {
+          console.error(err);
+          return throwError(
+            () =>
+              new Error('UserService.disableUser(): error disabling User: ' + err)
+          );
+        })
+      );
+      }
+
+      enableUser(user: User): Observable<User>{
+        console.log(user)
+        return this.http.put<User>(this.url + "api/users/"+ user.id + "/unarchive", user, this.getHttpOptions()).pipe(
+          catchError((err: any) => {
+            console.error(err);
+            return throwError(
+              () =>
+                new Error('UserService.enableUser(): error enabling User: ' + err)
+            );
+          })
+        );
+        }
+
 
 }

@@ -33,6 +33,11 @@ div {
   background-color: #ffffff;
   color:#222222;
 }
+.navbarNav {
+  padding-left: 120px;
+  padding-right: 120px;
+}
+
 
 .borderBox {
   border:1px solid #666666;
