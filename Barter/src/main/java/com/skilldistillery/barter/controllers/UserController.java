@@ -95,15 +95,12 @@ public class UserController {
 	@PostMapping("users/friends/{friendId}")
 	public String addFriend(HttpServletRequest req, HttpServletResponse res, Principal principal,
 			@PathVariable int friendId) {
-		System.out.println("**********************************************");
-		System.out.println("*************************************************");
+
 		String username = principal.getName();
 		User user = userService.findByUsername(username);
 		User friend = userService.findById(friendId);
 		String message = userService.addFriend(user, friend);
 		
-		System.out.println(user+"**********************************************");
-		System.out.println(friend+"*************************************************");
 		return message;
 	}
 
