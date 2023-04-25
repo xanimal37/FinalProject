@@ -76,6 +76,12 @@ public class TaskController {
 	public List<Task> getAllTasksOwnedByUser(Principal principal) {
 		return taskService.getTasksOwnedByUser(principal.getName());
 	}
+	
+	//get task by id
+	@GetMapping(path="tasks/{id}")
+	Task getTaskById(@PathVariable int id, Principal principal) {
+		return taskService.getTaskById(id);
+	}
 
 	// get all tasks by status
 	@GetMapping(path = "tasks/{statusname}")

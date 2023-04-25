@@ -1,26 +1,27 @@
 <h1>my task dashboard</h1>
 <div class="container-fluid">
   <nav class="row">
-    <div class="col">
+    <div class="col-12">
       <button (click)= "dashboard = 'all'" class="btn btn-outline-dark m-1">view all</button>
       <button (click)= "dashboard = 'accepted'" class="btn btn-outline-dark m-1">view tasks I have accepted</button>
-      <button (click)= "dashboard = 'offered'" class="btn btn-outline-dark m-1">view my open tasks</button>
+      <button (click)= "dashboard = 'offered'" class="btn btn-outline-dark m-1">view my tasks</button>
     </div>
    </nav>
   <div class="row">
-    <div class="col">
+    <div class="col-12">
       <!-- accpeted task list -->
       <app-accepted-task *ngIf="dashboard==='all' || dashboard==='accepted'" [loggedInUser]=loggedInUser>
-
       </app-accepted-task>
+      </div>
+      <div class="col-12">
       <!-- offered task list -->
       <app-mytasks *ngIf="dashboard==='all' || dashboard==='offered'" [loggedInUser]=loggedInUser>
 
       </app-mytasks>
     </div>
+    </div>
 
   </div>
 
-  </div>
 
 
