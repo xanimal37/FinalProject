@@ -29,8 +29,8 @@
 <div *ngIf="selectedTask" class="borderBox">
   <h3>{{selectedTask.name | titlecase}}</h3>
   <p>{{selectedTask.description}}</p>
+  <p>location: {{selectedTask.address?.city}}, {{selectedTask.address?.state}}</p>
   <p>estimated hours: {{selectedTask.estimatedHours}}</p>
-  <p>posted by: {{selectedTask.user?.username}}</p>
   <p>posted on: {{selectedTask.startDate | date:'shortDate'}}</p>
   <p>requested start date: </p>
   <h4>skills required</h4>
@@ -38,7 +38,8 @@
       <li *ngFor="let skill of selectedTask.skills">{{skill.name}}</li>
     </ul>
 <button class="btn btn-dark m-1" (click) = "selectedTask=null">close</button>
-<button class="btn btn-dark m-1" *ngIf="loggedInUser" (click)="acceptTask(selectedTask)">accept task</button>
+<button class="btn btn-dark m-1" *ngIf="loggedInUser && selectedTask.taskStatus?.id==1" (click)="acceptTask(selectedTask)">accept task</button>
+<p *ngIf="selectedTask.taskStatus?.id!=1">task has been accepted</p>
 </div>
 
   <!-- ADD A TASK VIEW ** must be authorized -->

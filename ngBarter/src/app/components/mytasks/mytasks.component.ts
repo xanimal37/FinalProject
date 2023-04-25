@@ -12,6 +12,8 @@ import { Skill } from 'src/app/models/skill';
 import { formatDate } from '@angular/common';
 import { TaskStatus } from 'src/app/models/task-status';
 import { AcceptedTask } from 'src/app/models/accepted-task';
+import { TaskMessage } from 'src/app/models/task-message';
+import { TaskMessageService } from 'src/app/services/task-message.service';
 
 @Component({
   selector: 'app-mytasks',
@@ -27,12 +29,16 @@ export class MytasksComponent implements OnInit{
   updateTaskForm : FormGroup | any;
   skills: Skill[] = [];
   acceptedTasks: AcceptedTask[] =[];
+  newTaskMessage: TaskMessage = new TaskMessage();
+  creatingTaskMessage: boolean = false;
+  taskMessageRefTask: Task | null = null;
 
   constructor(
     private taskService:TaskService,
     private skillService:SkillService,
     private taskStatusService: TaskStatusService,
     private acceptedTaskService : AcceptedTaskService,
+    private taskMessageService:TaskMessageService,
     private datePipe: DatePipe,
     private route: ActivatedRoute,
     private router: Router
@@ -211,5 +217,25 @@ export class MytasksComponent implements OnInit{
         }
       });
     }
+
+    createTaskMessage(tmsg: TaskMessage){
+      let tid = this.taskMessageRefTask?.id;
+      if(typeof tid == 'number'){
+      this.taskMessageService.create(tmsg,tid).subscribe( {
+        next: (tmsg) => {
+          this.newTaskMessage = new TaskMessage();
+        this.creatingTaskMessage= false;
+        this.taskMessageRefTask= null;
+        this.loadUserTasks();
+        },
+        error: (fail) => {
+          console.error('Error creating task');
+          console.error(fail);
+        }
+      });
+    }
+  }
+
+
 
 }

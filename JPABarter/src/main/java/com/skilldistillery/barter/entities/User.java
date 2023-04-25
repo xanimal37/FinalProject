@@ -83,7 +83,6 @@ public class User {
 	@JoinColumn(name="user_id")
 	private List <Task> tasks;
 	
-	@JsonIgnore
 	@OneToMany
 	@JoinColumn(name="user_id")
 	private List <TaskMessage> taskMessages;
