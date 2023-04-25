@@ -35,7 +35,7 @@
       <p>{{post.createDate}}</p>
       <p>{{post.content}}</p>
       <div *ngIf="post.comments">
-        <h4>Comments</h4>
+        <h6>Comments</h6>
       <div *ngFor="let comms of post.comments">
         <p>{{comms.createDate}}</p>
         <p>{{comms.content}}</p>
@@ -51,7 +51,7 @@
 
 
 <div class="d-flex justify-content-center">
-<div *ngIf="!editPost && !keywordPosts">
+<div *ngIf="!editPost && !keywordPosts || !loggedInUser">
 <div id="posts" *ngFor="let post of posts" >
   <div *ngIf="post.enabled">
     <div class="postBackground">
@@ -60,6 +60,7 @@
     <p>{{post.content}}</p>
     <p><img src="{{post.user?.imageURL}}" width="30"
       height="30" alt="Profile Pic" style="border-radius: 50%;" alt="">{{post.user?.username}}</p>
+      <button class = "btn btn-success" *ngIf="post?.user?.id === loggedInUser?.id" (click)="setEditPost(post)">Edit</button>
     </div>
       <div *ngIf="post.comments">
         <h6>Comments</h6>
@@ -73,7 +74,6 @@
         </div>
       </div>
     </div>
-    <button class = "btn btn-success" *ngIf="post?.user?.id === loggedInUser?.id" (click)="setEditPost(post)">Edit</button>
     <button class = "btn btn-outline-danger" *ngIf="loggedInUser?.role === 'admin' && post.enabled" (click)="disablePost(post.id)">Disable</button>
     <button class = "btn btn-outline-success" *ngIf="loggedInUser?.role === 'admin' && !post.enabled" (click)="enablePost(post.id)">Enable</button>
     <div id="postComment">
