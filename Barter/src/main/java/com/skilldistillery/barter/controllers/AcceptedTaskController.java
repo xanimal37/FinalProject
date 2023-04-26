@@ -60,10 +60,10 @@ public class AcceptedTaskController {
 
 	// update task
 		// only for logged in users task
-		@PutMapping(path = "users/acceptedTasks/{taskid}")
-		public AcceptedTask updateAcceptedTask(@PathVariable int taskid, Principal principal, @RequestBody AcceptedTask acceptedTask, HttpServletResponse res) {
+		@PutMapping(path = "users/acceptedTasks/{taskid}/{acceptorid}")
+		public AcceptedTask updateAcceptedTask(@PathVariable int taskid,@PathVariable int acceptorid, Principal principal, @RequestBody AcceptedTask acceptedTask, HttpServletResponse res) {
 			try {
-				acceptedTask = acceptedTaskService.updateAcceptedTask(acceptedTask, taskid, principal.getName());
+				acceptedTask = acceptedTaskService.updateAcceptedTask(acceptedTask, taskid,acceptorid);
 				if (acceptedTask == null) {
 					res.setStatus(404);
 				}

@@ -21,6 +21,7 @@ export class AcceptedTaskComponent implements OnInit {
   @Input() loggedInUser: User | null =null;
   selectedTask:Task | null = null;
   selectedAcceptedTask: AcceptedTask | null = null;
+  ratingRequestor: boolean = false;
 
   newTaskMessage: TaskMessage = new TaskMessage();
   creatingTaskMessage: boolean = false;

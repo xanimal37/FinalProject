@@ -13,6 +13,6 @@ public interface AcceptedTaskService {
 	
 	AcceptedTask createAcceptedTask(AcceptedTask acceptedTask);
 	
-	AcceptedTask updateAcceptedTask(AcceptedTask atask, int taskid, String username);
+	AcceptedTask updateAcceptedTask(AcceptedTask atask, int taskid,int acceptorid);
 
 }
