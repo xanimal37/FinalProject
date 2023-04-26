@@ -1,5 +1,6 @@
-<div class="container-fluid">
+<div class="container-fluid pt-3 pb-3">
   <h1 style="color: #fbc912;">my tasks</h1>
+
   <div class="row borderBox" *ngIf="creatingTaskMessage">
     <form>
       <h6>message for: {{taskMessageRefTask?.name}}</h6>
@@ -17,7 +18,8 @@
       <p>{{task.description}}</p>
       <p>estimated hours: {{task.estimatedHours}}</p>
       <p>requested start: {{task.startDate | date: 'shortDate'}}</p>
-
+      <p *ngIf="task.scheduleDate!=''">scheduled date: {{task.scheduleDate | date: 'shortDate'}}</p>
+      <p *ngIf="task.completeDate!=''">completed date: {{task.completeDate | date: 'shortDate'}}</p>
       <h4>skills required</h4>
       <ul>
         <li *ngFor="let skill of task.skills">
@@ -82,7 +84,9 @@
       <!-- dates -->
       <div>
       <label for="startDate">requested start date: </label>
-      <input type="date" id="startDate" formControlName="startDate">
+      <input type="date" id="startDate" formControlName="startDate"><br>
+      <label for="scheduleDate">schedule date: </label>
+      <input type="date" id="scheduleDate" formControlName="scheduleDate">
       </div>
         <input class ="btn btn-dark m-1" type="submit" value="update task!">
         <button (click)="delete(selectedTask.id)" class="btn btn-dark m-1" type="button">delete</button>
