@@ -12,19 +12,14 @@
         <a class="nav-link" *ngIf="loggedInUser?.role === 'admin'" [routerLink]="['/admin']">admin</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/usersList']">users</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" [routerLink]="['/tasks']">tasks</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/posts']">posts</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/contact']">contact us</a>
+        <a class="nav-link" [routerLink]="['/usersList']">users</a>
       </li>
-      <div class="contactUs">
-      </div>
       <li class="nav-item">
         <a class="nav-link" *ngIf="loggedInUser && loggedInUser?.role === 'admin'" [routerLink]="['/complaints']">complaints</a>
       </li>
