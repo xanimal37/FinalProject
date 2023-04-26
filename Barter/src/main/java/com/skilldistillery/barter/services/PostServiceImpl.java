@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.barter.entities.Comment;
@@ -27,7 +28,8 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public List<Post> indexAll() {
-		return postRepo.findAll();
+		List<Post> posts = postRepo.findAll(Sort.by(Sort.Direction.DESC, "updateDate"));
+		return posts;
 	}
 
 	@Override
@@ -92,11 +94,16 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public Post disablePost(String username, int pId) { 
+	public Post disablePost(String username, int pId, Post post) { 
 		User user = userRepo.findByUsername(username);
 		Post disablePost = postRepo.findById(pId);
 		if (user != null) {
+			disablePost.setId(pId);
+			disablePost.setTitle(post.getTitle());
 			disablePost.setEnabled(false);
+			disablePost.setContent(post.getContent());
+			disablePost.setComments(post.getComments());
+			postRepo.saveAndFlush(disablePost);
 			
 			if (disablePost.isEnabled() == false) {
 				return disablePost;

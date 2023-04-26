@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { AuthService } from './auth.service';
 import { environment } from 'src/environments/environment';
 import { Observable, catchError, throwError } from 'rxjs';
@@ -13,6 +13,7 @@ import { Comment} from '../models/comment';
 export class PostService {
 
   private url = environment.baseUrl + 'api/posts';
+  @Output() refreshPosts: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private http: HttpClient,
@@ -31,7 +32,7 @@ export class PostService {
 
   //All posts
   indexAll(): Observable<Post[]> {
-    return this.http.get<Post[]>(this.url, this.getHttpOptions()).pipe(
+    return this.http.get<Post[]>(this.url).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -40,6 +41,7 @@ export class PostService {
       })
     );
   };
+
 
 //Post by Post Id
   indexByPostId(pId: number): Observable<Post> {
@@ -124,8 +126,8 @@ export class PostService {
     );
   };
 
-  disable(id: number): Observable<void> {
-    return this.http.put<void>(this.url + "/" + id, this.getHttpOptions()). pipe(
+  disable(post: Post, id: number): Observable<void> {
+    return this.http.put<void>(this.url + "/disabled/" + id, post, this.getHttpOptions()). pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(

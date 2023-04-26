@@ -110,10 +110,12 @@ public class PostController {
 	} 
 	
     @PutMapping("posts/disabled/{pId}")
-	public Post disablePost(Principal principal, HttpServletRequest req, HttpServletResponse res, @PathVariable int pId) {
+	public Post disablePost(Principal principal, HttpServletRequest req, HttpServletResponse res, @PathVariable int pId, @RequestBody Post post) {
     	Post disabledPost = null;
+    	System.out.println(pId + "and " + post);
     	 try {
-    		 disabledPost = postService.disablePost(principal.getName(), pId);
+    		 disabledPost = postService.disablePost(principal.getName(), pId, post);
+    		 System.out.println(disabledPost);
     		 if (disabledPost != null) {
     			 res.setStatus(201);
     			 return disabledPost;

@@ -13,11 +13,13 @@ import { RegisterComponent } from './components/register/register.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { OtherUserProfileComponent } from './components/other-user-profile/other-user-profile.component';
+import { ChartComponent } from './components/chart/chart.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
   { path: 'tasks',component: TasklistComponent},
+  { path: 'chart',component: ChartComponent},
   { path: 'useraccount',component: UserAccountComponent},
   { path: 'posts',component: PostComponent},
   { path: 'notifications',component: NotificationComponent},
