@@ -149,6 +149,7 @@ export class MytasksComponent implements OnInit{
         'estimatedHours': new FormControl(0),
         'materialsProvided':new FormControl(false),
         'startDate':new FormControl('2023-04-01'),
+        'scheduleDate': new FormControl('2023-04-26'),
         'skills':new FormArray([])
 
       });
@@ -195,6 +196,10 @@ export class MytasksComponent implements OnInit{
       let dateString = this.updateTaskForm.controls['startDate'].value;
       dateString+='T01:00:00';
       task.startDate=dateString;
+
+      let dateString2 = this.updateTaskForm.controls['scheduleDate'].value;
+      dateString2+='T01:00:00';
+      task.scheduleDate=dateString2;
 
       task.skills=[]; //clear tasks
 

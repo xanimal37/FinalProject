@@ -1,6 +1,5 @@
+<div class="container-fluid pt-3 pb-3">
 <div *ngIf="loggedInUser">
-  <div >
-    <div >
       <table>
         <thead *ngIf="loggedInUser.role === 'admin'">
           <tr style="text-align: center;">
@@ -50,8 +49,6 @@
           <td *ngIf="loggedInUser.role === 'admin' && !user.enabled"><button class="btn btn-success m-1" (click)="verifyActivation(user)">Activate</button></td>
         </tr>
       </table>
-    </div>
-  </div>
 </div>
-
+</div>
 
