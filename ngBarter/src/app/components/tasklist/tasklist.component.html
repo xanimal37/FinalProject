@@ -28,6 +28,8 @@
 <!-- detail view -->
 <!-- must be authorized to accept -->
 <div *ngIf="selectedTask" class="borderBox">
+  <p class="mytask" *ngIf="loggedInUser!=null && selectedTask.user?.username==loggedInUser?.username">this is my task!</p>
+  <p class="accepted" *ngIf="selectedTask.taskStatus?.id!=1">task has been accepted</p>
   <h3>{{selectedTask.name | titlecase}}</h3>
   <p>{{selectedTask.description}}</p>
   <p>posted by: {{selectedTask.user?.username}}</p>
@@ -46,7 +48,7 @@
     </ul>
 <button class="btn btn-dark m-1" (click) = "selectedTask=null">close</button>
 <button class="btn btn-dark m-1" *ngIf="loggedInUser && selectedTask.taskStatus?.id==1 && selectedTask.user?.username!=loggedInUser.username" (click)="acceptTask(selectedTask)">accept task</button>
-<p *ngIf="selectedTask.taskStatus?.id!=1">task has been accepted</p>
+
 </div>
 
   <!-- ADD A TASK VIEW ** must be authorized -->

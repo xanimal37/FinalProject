@@ -35,7 +35,7 @@ body {
     display: block;
     height: 0.4em;
     width: 0%;
-    background-color: #ff4081;
+    background-color: #D2691E;
     bottom: 0em;
     transition: all ease-in-out 250ms;
   }
@@ -45,7 +45,7 @@ body {
   }
 
   li a:hover {
-    color: #ff4081;
+    color: #D2691E;
   }
 
 
