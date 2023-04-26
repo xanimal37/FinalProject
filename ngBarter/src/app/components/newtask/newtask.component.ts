@@ -103,6 +103,8 @@ export class NewtaskComponent implements OnInit {
         next: (createdTask) => {
           this.newTask = new Task();
           this.closeChild.emit();
+          location.reload();
+
         },
         error: (fail) => {
           console.error('Error creating task');

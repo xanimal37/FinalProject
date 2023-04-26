@@ -9,7 +9,7 @@
     <p>remarks by acceptor: {{acceptedTask?.remarksByAcceptor}}</p>
     <p>accepted on: {{acceptedTask?.acceptDate | date:'shortDate'}}</p>
 
-    <button *ngIf="task?.taskStatus?.id==4" type="button" (click)="rateAcceptedTask(acceptedTask)">rate work</button>
+    <button class="btn btn-dark m-1" *ngIf="task?.taskStatus?.id==4" type="button" (click)="rateAcceptedTask(acceptedTask)">rate work</button>
   </div>
 </div>
 

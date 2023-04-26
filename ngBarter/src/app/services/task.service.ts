@@ -80,7 +80,7 @@ export class TaskService {
       catchError((err:any)=> {
         console.log(err);
         return throwError(
-          ()=>new Error("TaskService.update(): error updating todo: "+err)
+          ()=>new Error("TaskService.update(): error updating task: "+err)
         );
       })
     );

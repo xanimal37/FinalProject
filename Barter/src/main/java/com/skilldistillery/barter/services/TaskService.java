@@ -15,7 +15,7 @@ public interface TaskService {
 	//authenticated
 	Task createTask(Task task, String username);
 
-	Task updateTask(Task task, int id, String username);
+	Task updateTask(Task task, int id);
 	
 	boolean deleteTask(int id);
 	

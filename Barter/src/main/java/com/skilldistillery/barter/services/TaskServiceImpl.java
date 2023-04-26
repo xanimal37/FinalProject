@@ -35,9 +35,9 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public Task updateTask(Task task, int id,String username) {
+	public Task updateTask(Task task, int id) {
 		Task original = taskRepo.findById(id);
-		if(original!=null && task!=null && original.getUser().getUsername().equals(username)) {
+		if(original!=null && task!=null) {
 			original.setName(task.getName());
 			original.setDescription(task.getDescription());
 			original.setMaterialsProvided(task.getMaterialsProvided());
@@ -51,23 +51,23 @@ public class TaskServiceImpl implements TaskService {
 			List<AcceptedTask> acceptedTasksReferencingThisTask = acceptedTaskRepo.findByAcceptedTaskId_TaskId(task.getId());
 			
 			if (acceptedTasksReferencingThisTask==null) {
-				task.setTaskStatus(taskStatusRepo.findById(1)); //pending - not accepted
+				original.setTaskStatus(taskStatusRepo.findById(1)); //pending - not accepted
 			}
 			else if(acceptedTasksReferencingThisTask!=null && task.getScheduleDate()==null) {
-				task.setTaskStatus(taskStatusRepo.findById(2));
+				original.setTaskStatus(taskStatusRepo.findById(2));
 			}
 			else if(task.getScheduleDate()!=null && task.getCompleteDate()==null) {
-				task.setTaskStatus(taskStatusRepo.findById(3));
+				original.setTaskStatus(taskStatusRepo.findById(3));
 			}
 			else if(task.getCompleteDate()!=null) {
-				task.setTaskStatus(taskStatusRepo.findById(4));
+				original.setTaskStatus(taskStatusRepo.findById(4));
 			}
 			//if accepted task ratings and comments are fulled it in is verified
 			else if (
 				acceptedTasksReferencingThisTask.get(0)!=null && 
 						acceptedTasksReferencingThisTask.get(0).getRemarksByRequestor()!=null &&
 						acceptedTasksReferencingThisTask.get(0).getRatingByRequestor()!=null) {
-				task.setTaskStatus(taskStatusRepo.findById(5));
+				original.setTaskStatus(taskStatusRepo.findById(5));
 			}
 			//this method will see the id and know to update
 			return taskRepo.saveAndFlush(original);
