@@ -1,0 +1,39 @@
+
+/* Force scrollbars onto browser window */
+body {
+margin-bottom: 200%;
+}
+
+/* Box styles */
+.myBox {
+border: none;
+padding: 5px;
+font: 24px/36px sans-serif;
+width: 65%;
+height: 1000px;
+overflow: scroll;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+width: 12px;
+height: 12px;
+}
+
+::-webkit-scrollbar-track {
+border: 1px solid black;
+border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+background: orange;
+border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+background: orange;
+}
+
+#title {
+  font-size: 65px;
+}

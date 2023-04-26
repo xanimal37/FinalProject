@@ -31,6 +31,8 @@ export class PostComponent implements OnInit{
   comment: Comment = new Comment;
   newComment: Comment = new Comment;
   comments: Comment[] = [];
+  disabled: Post[] | undefined;
+
 
 
 
@@ -61,8 +63,14 @@ export class PostComponent implements OnInit{
       this.editPost = null;
     }
 
+    nullKeywordPost(): void {
+      this.keywordPosts = null;
+    }
+
     ngOnInit(): void {
       this.verifyUser();
+      this.loggedIn();
+
 
      }
 
@@ -83,6 +91,24 @@ export class PostComponent implements OnInit{
       this.postService.indexAll().subscribe({
         next: (postList) => {
           this.posts = postList;
+        },
+        error: (err) => {
+          console.error('Error getting Post Lists:');
+          console.error(err);
+        }
+      });
+    }
+
+    loadDisabledPosts() {
+      this.postService.indexAll().subscribe({
+        next: (postList) => {
+          this.posts = postList;
+          for (let post of this.posts) {
+            if(post.enabled === false) {
+              this.disabled?.push(post);
+              console.log(this.disabled)
+            }
+          }
         },
         error: (err) => {
           console.error('Error getting Post Lists:');
@@ -125,14 +151,16 @@ export class PostComponent implements OnInit{
       this.postService.update(post,pId).subscribe( {
         next: (updatedPost) => {
           this.post = updatedPost;
-          this.reload();
+          this.editPost = null
+          this.reload()
+          // this.postService.refreshPosts.emit(this.posts)
+
         },
         error: (fail) => {
           console.error('Error editing post');
           console.error(fail);
         }
       });
-      this.reload();
     }
 
     postSearch(keyword: string) {
@@ -151,10 +179,12 @@ export class PostComponent implements OnInit{
 
 
 
-    disablePost(id: number) {
-      this.postService.disable(id).subscribe({
+    disablePost(post: Post, id: number) {
+      console.log(post, id)
+      this.postService.disable(post, id).subscribe({
         next: () => {
-          this.reload();
+        this.postService.refreshPosts.emit(this.posts)
+
         },
         error: (fail) => {
           console.error('Error disabling post');
@@ -177,9 +207,9 @@ export class PostComponent implements OnInit{
       this.reload();
     }
 
-    allComments() {
-      this.postService.postComments().subscribe({
-
-      })
+    loggedIn(){
+      return this.authService.checkLogin();
     }
+
+
 }

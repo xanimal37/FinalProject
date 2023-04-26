@@ -1,7 +1,7 @@
 <div class="container-fluid" >
   <div class="row">
-<h1 id="postTitle" style="text-align: center;">POSTS</h1>
-
+    <h1 id="postTitle" style="text-align: center;">POSTS</h1>
+    <div *ngIf="loggedInUser">
 <h4 style="text-align: center;">Create Post</h4>
 <form style="text-align: center;">
         <input type="text" name="topic" placeholder="Topic" size="75" [(ngModel)]="newPost.title"/><br />
@@ -11,17 +11,22 @@
         <input class="btn btn-dark m-1" type="submit" value="cancel"/>
       </form>
       <hr>
+    </div >
+    <div *ngIf="loggedInUser">
       <h4 style="text-align: center;" >Search Posts</h4>
       <p style="text-align: center;"> Query through all posts content</p>
   <form style="text-align: center;">
     <input type="text" id="keyword" size="80" name="keyword"[(ngModel)]="keyword"/>
     <button class="btn btn-primary" type="submit" value="Search" (click)="postSearch(keyword)">Search</button>
   </form>
+
   <nav class="d-flex justify-content-center">
-    <button (click)="reload()"class="btn btn-outline-dark m-1" name="all" value="all">all posts</button>
+    <button (click)="reload()" class="btn btn-outline-dark m-1" name="all" value="all">all posts</button>
+    <button (click)="loadDisabledPosts()" class="btn btn-outline-dark m-1" name="dateFilter" value="dateFilter" >disabled</button>
     <button class="btn btn-outline-dark m-1" name="dateFilter" value="dateFilter" >oldest</button>
     <button class="btn btn-outline-dark m-1" name="dateFilter" value="dateFilter" >newest</button>
   </nav>
+</div>
 </div>
 </div>
 
@@ -35,7 +40,7 @@
       <p>{{post.createDate}}</p>
       <p>{{post.content}}</p>
       <div *ngIf="post.comments">
-        <h4>Comments</h4>
+        <h6>Comments</h6>
       <div *ngFor="let comms of post.comments">
         <p>{{comms.createDate}}</p>
         <p>{{comms.content}}</p>
@@ -46,12 +51,13 @@
     </div>
   </div>
 </div>
-
 </div>
 
 
+
+
 <div class="d-flex justify-content-center">
-<div *ngIf="!editPost && !keywordPosts">
+<div *ngIf="!editPost && !keywordPosts ">
 <div id="posts" *ngFor="let post of posts" >
   <div *ngIf="post.enabled">
     <div class="postBackground">
@@ -60,6 +66,9 @@
     <p>{{post.content}}</p>
     <p><img src="{{post.user?.imageURL}}" width="30"
       height="30" alt="Profile Pic" style="border-radius: 50%;" alt="">{{post.user?.username}}</p>
+      <button class = "btn btn-success" *ngIf="post?.user?.id === loggedInUser?.id && post.enabled" (click)="setEditPost(post)">Edit</button>
+      <button class = "btn btn-outline-danger" *ngIf="loggedInUser?.role === 'admin' && post.enabled" (click)="disablePost(post,post.id)">Delete</button>
+      <button class = "btn btn-outline-success" *ngIf="loggedInUser?.role === 'admin' && !post.enabled" (click)="enablePost(post.id)">Enable</button>
     </div>
       <div *ngIf="post.comments">
         <h6>Comments</h6>
@@ -73,9 +82,6 @@
         </div>
       </div>
     </div>
-    <button class = "btn btn-success" *ngIf="post?.user?.id === loggedInUser?.id" (click)="setEditPost(post)">Edit</button>
-    <button class = "btn btn-outline-danger" *ngIf="loggedInUser?.role === 'admin' && post.enabled" (click)="disablePost(post.id)">Disable</button>
-    <button class = "btn btn-outline-success" *ngIf="loggedInUser?.role === 'admin' && !post.enabled" (click)="enablePost(post.id)">Enable</button>
     <div id="postComment">
       <form *ngIf="loggedInUser && loggedInUser?.role != 'admin'">
         <textarea type="text" id="comment" name="comment" placeholder="Reply Here" rows="3
@@ -90,14 +96,18 @@
 </div>
 <div id="editPost" *ngIf="editPost && !keywordPosts">
   <h3 style="text-align: center;">Edit Post</h3>
-  <form>
-      <input type="text" name="topic" size="75" [(ngModel)]="editPost.title"/><br />
-      <textarea type="text" name="description" placeholder="Post Content" rows="5" cols="74" [(ngModel)]="editPost.content"></textarea><br>
+  <div class="d-flex justify-content-center">
+  <form >
+      <input type="text" name="topic" size="75" [(ngModel)]="editPost.title"/><br>
+      <textarea type="text" name="description" placeholder="Post Content" rows="5" cols="74" [(ngModel)]="editPost.content"></textarea> <br>
 
       <input class="btn btn-dark m-1" type="submit" value="update" (click)="updatePost(editPost,editPost.id)"/>
       <input class="btn btn-danger" type="submit" value="cancel" (click)="cancelEditPost()"/>
 
     </form>
+  </div>
 </div >
+
+
 
 

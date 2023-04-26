@@ -18,7 +18,7 @@ public interface PostService {
 
     public Post updatePost(String username, int pId, Post post);
 
-    Post disablePost(String username, int pId);
+    Post disablePost(String username, int pId, Post post);
     
     List<Post> postKeywordSearch(String username, String keyword);
     
