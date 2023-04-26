@@ -5,7 +5,7 @@
   <div class="col-12" >
   <h1 id="title" *ngIf="loggedInUser"> Welcome back {{loggedInUser.firstname}} !</h1>
   <h1 id="title" *ngIf="!loggedInUser"> Welcome to Barter !</h1>
-  <h3 *ngIf="!loggedInUser">Your friendly skills exchange!</h3>
+  <h3 *ngIf="!loggedInUser" style="text-align: center;">Your friendly skills exchange!</h3>
 </div>
 </div>
 </div>
@@ -30,12 +30,7 @@
 <div class="container-fluid ">
   <div class="row">
     <div class="col-2 " >
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <h3 class="d-flex justify-content-center" >Awards</h3>
+      <h3 class="d-flex justify-content-center" >Barter Bee Awards</h3>
         <img src="assets/images/award.png" width="300"
         height="300" style="text-align: left; background-color: #fbc912;" alt=""> <br> <br>
 
@@ -47,15 +42,10 @@
     </div>
     <div class="col-8 testBorder myBox" >
       <div>
-  <app-post *ngIf="loggedIn()"></app-post>
+  <app-post></app-post>
 </div>
 </div>
 <div class="col-2 " >
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
   <img src="assets/images/farmersonlyAd.png" width="300"
   height="300"alt=""><br><br>
   <img src="assets/images/electricianAd.png" width="300"

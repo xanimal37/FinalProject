@@ -32,6 +32,7 @@ import { NewTaskMessageComponent } from './components/new-task-message/new-task-
 import { HeaderComponent } from './components/header/header.component';
 import { MytasksComponent } from './components/mytasks/mytasks.component';
 import { SingleAcceptedTaskComponent } from './components/single-accepted-task/single-accepted-task.component';
+import { ChartComponent } from './components/chart/chart.component';
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import { SingleAcceptedTaskComponent } from './components/single-accepted-task/s
     HeaderComponent,
     MytasksComponent,
     SingleAcceptedTaskComponent,
+    ChartComponent,
 
   ],
   imports: [
