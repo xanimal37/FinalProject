@@ -127,5 +127,19 @@ Front end was broken up into several sub-directories:
 ```
 In this case I am using the existing table column
 
+2. When needing to go back and add sorting to particular lists, you can a. update the query which if you are confident with repo queries its no problem, but I used the following method after. 
+```java
+		@Override
+	public List<Post> indexAll() {
+		List<Post> posts = postRepo.findAll(Sort.by(Sort.Direction.DESC, "updateDate"));
+		return posts;
+```
+Everything remains the same, except the sort is done afterwards.
+
+3. Ensure in your .ts when reaching back to the service for queries, to verify that ```.subscribe``` is added to the call. That was a lot of time wasted. 
+
+4. Angular charts are not as intimidating as they sound. It just requires some slight directory modifications but other that that it works great. The following is a great example.
+[Angular Charts](https://canvasjs.com/angular-charts/)
+
 
 
