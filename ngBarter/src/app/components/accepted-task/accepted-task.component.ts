@@ -2,7 +2,6 @@ import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AcceptedTask } from 'src/app/models/accepted-task';
-import { AcceptedTaskId } from 'src/app/models/accepted-task-id';
 import { User } from 'src/app/models/user';
 import { AcceptedTaskService } from 'src/app/services/accepted-task.service';
 import { Task } from 'src/app/models/task';
@@ -143,6 +142,7 @@ export class AcceptedTaskComponent implements OnInit {
             this.creatingTaskMessage= false;
             this.refTask= null;
             this.loadAcceptedTasks();
+            location.reload();
             },
             error: (fail) => {
               console.error('Error creating task');
@@ -153,6 +153,7 @@ export class AcceptedTaskComponent implements OnInit {
       }
 
   setReferenceTask(aTask: AcceptedTask){
+
     if(aTask.id!=null){
       for(let task of this.tasks){
         if(task.id == aTask.id.taskId){

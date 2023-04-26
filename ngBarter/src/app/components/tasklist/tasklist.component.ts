@@ -6,14 +6,12 @@ import { TaskStatusService } from 'src/app/services/task-status.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Task } from 'src/app/models/task';
-import { DatePipe } from '@angular/common';
 import { Skill } from 'src/app/models/skill';
 import { User } from 'src/app/models/user';
 import { AcceptedTaskService } from 'src/app/services/accepted-task.service';
 import { AcceptedTask } from 'src/app/models/accepted-task';
 import { AcceptedTaskId } from 'src/app/models/accepted-task-id';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { NewtaskComponent } from '../newtask/newtask.component';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -27,6 +25,7 @@ export class TasklistComponent implements OnInit {
 
   title='Task List';
   tasks: Task[]=[];
+  users: User[]=[];
   newTask: Task = new Task();
   selectedSkillName:string='all';
   selectedTask: Task | null = null;
@@ -43,18 +42,19 @@ export class TasklistComponent implements OnInit {
   private skillService:SkillService,
   private taskStatusService: TaskStatusService,
   private acceptedTaskService: AcceptedTaskService,
+  private userService: UserService,
   private authService: AuthService,
-  private datePipe: DatePipe,
-  private route: ActivatedRoute,
-  private router: Router)
+  )
   {}
 
   ngOnInit(): void {
+    this.loadUsers();
     this.initializeViews();
     this.checkUserLoggedIn();
     this.loadTasks();
     this.loadSkills();
     this.loadTaskStatuses();
+
   }
 
   setView(viewname:string){
@@ -102,6 +102,31 @@ export class TasklistComponent implements OnInit {
           },
           error: (problem) => {
             console.error('TaskListHttpComponent.loadTasks(): error retreiving tasks:');
+            console.error(problem);
+          }
+        }
+      );
+    }
+
+    loadUsers():void {
+      this.userService.getUsers().subscribe(
+        {
+          next: (users) => {
+            this.users=users;
+            for(let task of this.tasks){
+              for(let user of this.users){
+                if(user.tasks !=null){
+                  for(let utask of user.tasks){
+                    if(task.id ==utask.id){
+                      task.user = user;
+                    }
+                  }
+                }
+              }
+            }
+          },
+          error: (problem) => {
+            console.error('TaskListHttpComponent.loadusers(): error retreiving users:');
             console.error(problem);
           }
         }
