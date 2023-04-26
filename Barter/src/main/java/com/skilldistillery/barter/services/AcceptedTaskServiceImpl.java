@@ -43,9 +43,9 @@ public class AcceptedTaskServiceImpl implements AcceptedTaskService{
 	}
 
 	@Override
-	public AcceptedTask updateAcceptedTask(AcceptedTask atask, int taskId, String username) {
-		User user = userRepo.findByUsername(username);
-		AcceptedTask original = acceptedTaskRepo.findByAcceptedTaskId_TaskIdAndAcceptedTaskId_AcceptorId(taskId,user.getId());
+	public AcceptedTask updateAcceptedTask(AcceptedTask atask, int taskId, int acceptorid) {
+	
+		AcceptedTask original = acceptedTaskRepo.findByAcceptedTaskId_TaskIdAndAcceptedTaskId_AcceptorId(taskId,acceptorid);
 		
 		if(original!=null && atask!=null) {
 			

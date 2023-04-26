@@ -68,6 +68,7 @@ export class TasklistComponent implements OnInit {
 
   closeChild(){
     this.loadTasks();
+    this.loadTaskStatuses();
     this.setView('default');
   }
 
@@ -161,6 +162,20 @@ export class TasklistComponent implements OnInit {
           );
         }
 
+        updateTask(task: Task):void {
+          this.taskService.update(task).subscribe(
+              {
+                next: (task) => {
+
+                },
+                error: (problem) => {
+                  console.error('TaskListHttpComponent.update task after accept(): error updating:');
+                  console.error(problem);
+                }
+              }
+            );
+          }
+
   acceptTask(task: Task){
     let aTaskId = new AcceptedTaskId();
     if(this.loggedInUser && this.selectedTask){
@@ -172,7 +187,12 @@ export class TasklistComponent implements OnInit {
 
       this.acceptedTaskService.create(aTask).subscribe({
         next: (createdATask)=>{
-          this.selectedTask=null;
+          if(this.selectedTask!=null){
+            this.updateTask(this.selectedTask);
+            }
+
+            this.selectedTask=null;
+            location.reload();
         },
         error: (fail)=>{
           console.error('Error creating accepted task.');
@@ -180,6 +200,9 @@ export class TasklistComponent implements OnInit {
         }
       });
     }
+
+
+
   }
 
 }

@@ -148,8 +148,8 @@ export class MytasksComponent implements OnInit{
         'description': new FormControl(),
         'estimatedHours': new FormControl(0),
         'materialsProvided':new FormControl(false),
-        'startDate':new FormControl('2023-04-01'),
-        'scheduleDate': new FormControl('2023-04-26'),
+        'startDate':new FormControl(),
+        'scheduleDate': new FormControl(),
         'skills':new FormArray([])
 
       });
@@ -167,6 +167,8 @@ export class MytasksComponent implements OnInit{
       }
 
       this.updateTaskForm.controls['startDate'].setValue(formatDate(task.startDate, 'yyyy-MM-dd', 'en'));
+      this.updateTaskForm.controls['scheduleDate'].setValue(formatDate(task.scheduleDate, 'yyyy-MM-dd', 'en'));
+
 
       if(task.skills!=null){
       for(let i=0;i<this.updateTaskForm.controls['skills'].controls.length;i++){
@@ -241,6 +243,25 @@ export class MytasksComponent implements OnInit{
     }
   }
 
+
+  markComplete(task:Task){
+    let dateString = (new Date()).toLocaleDateString('fr-CA');
+      dateString+='T01:00:00';
+      task.completeDate=dateString;
+
+      console.log(dateString);
+
+      this.taskService.update(task).subscribe( {
+        next: (task) => {
+          this.selectedTask=null;
+          location.reload();
+        },
+        error: (fail) => {
+          console.error('Error creating task');
+          console.error(fail);
+        }
+      });
+  }
 
 
 }

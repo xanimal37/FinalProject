@@ -58,7 +58,7 @@ public class TaskController {
 	@PutMapping(path = "tasks/{id}")
 	public Task updateTask(@PathVariable int id, Principal principal, @RequestBody Task task, HttpServletResponse res) {
 		try {
-			task = taskService.updateTask(task, id, principal.getName());
+			task = taskService.updateTask(task, id);
 			if (task == null) {
 				res.setStatus(404);
 			}

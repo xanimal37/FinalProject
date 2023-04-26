@@ -30,7 +30,7 @@
       <p [ngClass]="task.taskStatus?.name"> {{task.taskStatus?.name}}</p>
       <div class="row">
         <div class="col-12 text-align-center">
-          <button *ngIf="task.taskStatus?.id==1" (click)='selectTask(task)' class="btn btn-dark m-1" type="button">update</button>
+          <button *ngIf="task.taskStatus?.id!=4 && task.taskStatus?.id!=5" (click)='selectTask(task)' class="btn btn-dark m-1" type="button">update</button>
 
         </div>
 
@@ -86,8 +86,10 @@
       <label for="startDate">requested start date: </label>
       <input type="date" id="startDate" formControlName="startDate"><br>
       <label for="scheduleDate">schedule date: </label>
-      <input type="date" id="scheduleDate" formControlName="scheduleDate">
+      <input type="date" id="scheduleDate" formControlName="scheduleDate"><br>
+
       </div>
+      <button class="btn btn-dark m-1" (click)="markComplete(selectedTask)">work complete!</button>
         <input class ="btn btn-dark m-1" type="submit" value="update task!">
         <button (click)="delete(selectedTask.id)" class="btn btn-dark m-1" type="button">delete</button>
         <button (click)='selectedTask=null' class="btn btn-dark m-1" type="button">cancel</button>

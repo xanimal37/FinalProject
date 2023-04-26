@@ -9,16 +9,16 @@
     <p>remarks by acceptor: {{acceptedTask?.remarksByAcceptor}}</p>
     <p>accepted on: {{acceptedTask?.acceptDate | date:'shortDate'}}</p>
 
-    <button *ngIf="task?.taskStatus?.id==4" type="button" (click)="rateAcceptedTask(acceptedTask)">rate work</button>
+    <button class="btn btn-dark m-1" *ngIf="task?.taskStatus?.id==4" type="button" (click)="rateAcceptedTask(acceptedTask)">rate work</button>
   </div>
 </div>
 
 <div class="row" *ngIf="acceptedTaskBeingRated">
   <form>
 <label>rating: </label>
-<input type="number" min="1" max="5" [(ngModel)]="acceptedTaskBeingRated.ratingByRequestor">
+<input type="number" name="ratingByRequestor" min="1" max="5" [(ngModel)]="acceptedTaskBeingRated.ratingByRequestor">
 <label>remarks: </label>
-<input type="text" [(ngModel)]="acceptedTaskBeingRated.remarksByRequestor">
+<input type="text" name="remarksByRequestor" [(ngModel)]="acceptedTaskBeingRated.remarksByRequestor">
 <button class="btn btn-dark m-1" (click)="submitRating(acceptedTaskBeingRated)">submit rating and comment</button>
 <button class="btn btn-dark m-1" (click)="acceptedTaskBeingRated=null">cancel</button>
 </form>

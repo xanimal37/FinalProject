@@ -22,6 +22,7 @@
     <p>remarks by acceptor: {{aTask.remarksByAcceptor}}</p>
     <p>accept date: {{aTask.acceptDate | date: 'shortDate'}}</p>
 
+
     <!-- task messages-->
     <div class="row borderBox">
       <h4>messages</h4>
@@ -49,8 +50,8 @@
           <input type="number" id="requestorRating" name="requestorRating" [(ngModel)]="selectedAcceptedTask.ratingByAcceptor"/>
           <label>My comments on this task: </label>
           <input type="text" id="requestorRemarks" name="requestorRemarks" [(ngModel)]="selectedAcceptedTask.remarksByAcceptor"/><br>
-          <button class="btn btn-dark" (click)="update(selectedAcceptedTask)">submit rating and comment</button>
-          <button class="btn btn-dark" (click)="selectedAcceptedTask=null; selectedTask=null">cancel</button>
+          <button class="btn btn-dark m-1" (click)="update(selectedAcceptedTask)">submit rating and comment</button>
+          <button class="btn btn-dark m-1" (click)="selectedAcceptedTask=null; selectedTask=null">cancel</button>
         </form>
       </div>
       </div>
