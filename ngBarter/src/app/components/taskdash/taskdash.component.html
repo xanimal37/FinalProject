@@ -8,20 +8,20 @@
     </div>
    </nav>
   <div class="row">
-    <div class="col-12 myBox" >
+    <div class="col-12 myBox" *ngIf="dashboard==='all' || dashboard==='accepted'" >
       <!-- accpeted task list -->
-      <app-accepted-task *ngIf="dashboard==='all' || dashboard==='accepted'" [loggedInUser]=loggedInUser>
+      <app-accepted-task >
       </app-accepted-task>
       </div>
-      <div class="col-12 myBox">
+      <div class="col-12 myBox" *ngIf="dashboard==='all' || dashboard==='offered'">
       <!-- offered task list -->
-      <app-mytasks *ngIf="dashboard==='all' || dashboard==='offered'" [loggedInUser]=loggedInUser>
+      <app-mytasks >
 
       </app-mytasks>
     </div>
     </div>
+</div>
 
-  </div>
 
 
 
