@@ -68,6 +68,11 @@ div {
 
 }
 
+.badge {
+  width:75px;
+  height:75px;
+}
+
 /* TESTING STYLES */
  .test {
   font-weight: bold;

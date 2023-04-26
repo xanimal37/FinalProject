@@ -33,8 +33,7 @@ register(user: User): void {
         next: (loggedInUser) => {
           console.log(loggedInUser);
 
-          //Rob add url here:
-          // this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/userAccount');
 
         },
         error: (problem) => {

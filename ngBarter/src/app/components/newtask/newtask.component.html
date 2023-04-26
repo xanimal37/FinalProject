@@ -1,5 +1,6 @@
  <!-- ADD A TASK ** must be authorized -->
- <div id="add_task">
+ <div class="row">
+  <div class="col-12 borderBox">
   <h3>add task</h3>
 <form [formGroup]="newTaskForm" (ngSubmit)="onSubmit()">
   <div>
@@ -31,11 +32,10 @@
 <label for="startDate">requested start date: </label>
 <input type="date" id="startDate" formControlName="startDate">
 </div>
-  <input class ="btn btn-dark" type="submit" value="create task!">
+  <input class ="btn btn-dark m-1" type="submit" value="create task!">
+  <button class ="btn btn-dark m-1" (click)="closeChild.emit()">cancel</button>
 
 </form>
 </div>
-
-
-<input *ngFor="let skill of newTaskForm.controls['skills'].controls" [formControl]="skill" type="checkbox" id="skill.id" value="skill.id">
+</div>
 
